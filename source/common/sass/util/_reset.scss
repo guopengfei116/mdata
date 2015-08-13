@@ -1,0 +1,47 @@
+/**
+*  补充normalize
+*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,img,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td{
+    margin:0;padding:0;outline:none;
+}
+address,caption,cite,code,dfn,em,th,var{
+    font-style:normal;font-weight:normal
+}
+ol,ul{
+    list-style:none
+}
+caption,th{
+    text-align:left
+}
+
+q:before,q:after{
+    content:''
+}
+abbr,acronym{
+    border:0;font-variant:normal
+}
+legend{
+    color:#000;
+}
+i, em{
+    font-style: normal;
+}
+input,textarea,select,button{
+    outline: none;
+    border:none;
+}
+input,textarea,select{
+    *font-size:100%;
+}
+input:-webkit-autofill {
+    background-color: #FFFFFF;
+}
+textarea {
+    resize: none;
+    word-break: break-all;
+}
+/* touch浮现的半透明层 */
+a, button, input{
+    -webkit-tap-highlight-color: rgba(255,255,255,0);
+}
+

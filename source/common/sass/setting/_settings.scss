@@ -1,0 +1,38 @@
+//browser
+//------------------------------------------------
+$prefix-for-webkit:    true  !default;
+$prefix-for-mozilla:   true  !default;
+$prefix-for-microsoft: true  !default;
+$prefix-for-opera:     true  !default;
+$prefix-for-spec:      true  !default;
+$prefix-for-lte7 :     false !default;  //是否兼容IE6、7
+$PcBrowser : true            !default;  //区分移动端
+
+//font
+//------------------------------------------------
+$BaseFontSize :     14px       !default;
+$BaseLineHeight :   1.5        !default;
+$BaseFontFamily :   "Microsoft Yahei", SimHei, SimSun, "Helvetica Neue", Helvetica, Tahoma, sans-serif !default;
+$BaseFontColor :    #000       !default;
+
+//相对单位计算基准
+//------------------------------------------------
+$em-base: 16px !default;
+
+//link
+//------------------------------------------------
+$LinkColor : #000  !default;
+
+//radius
+//------------------------------------------------
+$BaseRadiusSize : 4px  !default;
+
+//opacity
+//------------------------------------------------
+$base-opacity-size : 0.4  !default;
+
+//遮盖层index
+//------------------------------------------------
+$BaseMaskIndex : 10          !default;
+$BaseMaskOpacitySize : 0.4   !default;
+

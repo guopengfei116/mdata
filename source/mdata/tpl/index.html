@@ -1,0 +1,29 @@
+<!doctype html>
+<html ng-app="main">
+<head>
+    <script src="../js/mdata/angular-1.4.3.js"></script>
+</head>
+    <body ng-controller="PhoneListCtrl">
+        <ul>
+            <li ng-repeat="phone in phones">
+                {{ phone.name }}
+                <p>{{ phone.snippet }}</p>
+            </li>
+        </ul>
+    </body>
+    <script>
+
+        var main = angular.module('main', []);
+
+        main.controller('PhoneListCtrl', function ($scope) {
+            $scope.phones = [
+                {"name": "Nexus S",
+                    "snippet": "Fast just got faster with Nexus S."},
+                {"name": "Motorola XOOM™ with Wi-Fi",
+                    "snippet": "The Next, Next Generation tablet."},
+                {"name": "MOTOROLA XOOM™",
+                    "snippet": "The Next, Next Generation tablet."}
+            ];
+        });
+    </script>
+</html>

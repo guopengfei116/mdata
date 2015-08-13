@@ -1,0 +1,36 @@
+@charset "utf-8";   //必须设置了这个才能编译有中文的注释
+
+@import "setting/_font-family";
+@import "setting/_settings";
+
+@import "util/_normalize";
+@import "util/_reset";
+@import "util/_base";
+
+@import "function/_px-to-rem";
+@import "function/_strip-units";
+@import "function/_unpack";
+
+@import "mixin/_arrow";
+@import "mixin/_directional_values";
+@import "mixin/_ellipsis";
+@import "mixin/_hide_text";
+@import "mixin/_inline_block";
+@import "mixin/_mask";
+@import "mixin/_media-queries";
+@import "mixin/_opacity";
+@import "mixin/_position";
+@import "mixin/_prefix";
+@import "mixin/_radius";
+@import "mixin/_word_wrap";
+
+@import "placeholder/_clear_childrens";
+@import "placeholder/_ellipsis";
+@import "placeholder/_inline_block";
+@import "placeholder/_mask";
+@import "placeholder/_opacity";
+@import "placeholder/_radius";
+
+main {
+    @include radius(10px 20px);
+}

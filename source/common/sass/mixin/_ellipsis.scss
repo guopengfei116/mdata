@@ -1,0 +1,10 @@
+@mixin ellipsis($width: 100%) {
+    //display: inline-block;
+    max-width: $width;
+    white-space: nowrap;
+    @if $prefix-for-lte7{
+        _white-space:normal;
+    }
+    overflow:hidden;
+    text-overflow:ellipsis;
+}

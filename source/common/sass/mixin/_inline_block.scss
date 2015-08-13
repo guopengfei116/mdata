@@ -1,0 +1,8 @@
+@mixin inline-block {
+	display : inline-block;
+	vertical-align: baseline;
+	@if $PcBrowser and $lte7{
+		*display : inline;
+		*zoom : 1;
+	}
+}

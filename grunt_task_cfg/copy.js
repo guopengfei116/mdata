@@ -23,7 +23,7 @@ if(!gruntProject.debug){
         expand: true,
         flatten: false,
         cwd: gruntProject.prd,
-        src: ['*/tpl/*.html', '*/img/*.*','!*/img/*.{png,jpg,jpeg}'],
+        src: ['*/tpl/*.html', '*/img/*.*', '!*/img/*.{png,jpg,jpeg}'],
         dest: gruntProject.dest
     };
 }

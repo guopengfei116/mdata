@@ -1,0 +1,7 @@
+@mixin radius ($radiusSize:$BaseRadiusSize) {
+	@if type-of($radiusSize) == 'string' or type-of($radiusSize) == 'list'{
+		@include prefix('border-radius', $radiusSize);
+	}@else {
+		@include prefix('border-radius', $BaseRadiusSize);
+	}
+}

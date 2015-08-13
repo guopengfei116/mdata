@@ -1,0 +1,10 @@
+%opacity {
+    @if $prefix-for-mozilla {
+        -moz-opacity : $base-opacity-size;
+    }
+    @if $PcBrowser {
+        $size : $base-opacity-size * 100;
+        filter : alpha(opacity=#{$size});
+    }
+    opacity : $base-opacity-size;
+}

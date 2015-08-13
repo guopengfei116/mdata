@@ -1,0 +1,5 @@
+@import "../../common/sass/common";
+
+main {
+    @include radius(10px 20px);
+}

@@ -1,0 +1,61 @@
+body {
+    font:14px/1.5 Tahoma,Helvetica,"Microsoft YaHei",arial,sans-serif;
+    color:#000000;
+    background:#fff;
+}
+
+a {
+    text-decoration:none;
+    &:hover {
+        text-decoration:underline;
+    }
+}
+
+.cf {
+    *zoom:1;
+    &:after {
+        content:'';
+        display:block;
+        clear:both;
+        height:0;
+        overflow:hidden;
+        visibility:hidden;
+    }
+}
+
+/* ghost element style vertical middle align */
+.v-align-middle {
+    &:after {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        margin-right: -0.25em; /* Adjusts for spacing */
+    }
+}
+
+/* 灰色图片过滤器 */
+.img-gray {
+    -ms-filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale");
+    filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale")
+}
+
+.no-wrap {
+    white-space: nowrap;
+    word-break: keep-all;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+.hidden {
+    display:none;
+}
+.fixed {
+    position: fixed !important;
+    top:0 !important;
+}

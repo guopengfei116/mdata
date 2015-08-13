@@ -1,0 +1,28 @@
+@mixin arrowMixin ($direction:left, $width:0, $height:0, $color:#fff) {
+    width: 0;
+    height: 0;
+    content: "";
+    font-size: 0;
+    line-height: 0;
+    $directions: ("left", "right", "top", "bottom");
+    @each $item in $directions {
+        //外层区分$width和$height，里层区分箭头方向
+        @if $item == 'left' or $item == "right" {
+            @if $item != $direction {
+                border-#{$item}: $width solid transparent;
+            }@else {
+                border-#{$item}: $width solid $color;
+            }
+        }@else {
+            @if $item != $direction {
+                border-#{$item}: $height solid transparent;
+            }@else {
+                border-#{$item}: $height solid $color;
+            }
+        }
+    }    
+}
+
+@mixin arrow ($direction:left, $width:10px, $height:10px, $color:#000) {
+    @include arrowMixin($direction, $width, $height, $color);
+}

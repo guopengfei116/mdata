@@ -1,0 +1,13 @@
+/*   占位符里面使用的变量，只会按照默认值或者第一次定义的值来计算(中途修改无效)；
+ *   如若有差异性需要，使用@mixin
+ *   判断鸡肋代码只是为了对关键属性做提示
+ */ 
+
+%ellipsis {
+    white-space: nowrap;
+    @if $PcBrowser and $prefix-for-lte7{
+        _white-space:normal;
+    }
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
