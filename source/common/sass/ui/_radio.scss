@@ -1,0 +1,8 @@
+// radio
+.radio {
+    @include inline-block();
+    @include sprite($radio--false);
+    &--active {
+        @include sprite($radio--true);
+    }
+}

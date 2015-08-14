@@ -1,0 +1,80 @@
+// dialog
+.dialog {
+    position:fixed;
+    display:none;
+    &--active {
+        display:block;
+        z-index: 101;
+    }
+    &--modeless {
+        position:absolute;
+        .mask {
+            display:none;
+        }
+        .dialog__wrapper {
+            position:absolute;
+        }
+    }
+    &--red .dialog__content {
+        color:$red;
+    }
+    &--confirm .dialog__button, &--interaction .dialog__wrapper--interaction {
+        display:block;
+    }
+    &__wrapper {
+        position:fixed;
+        top:50%;
+        left:50%;
+        border:solid 1px #d1d1d1;
+        background:#fff;
+        z-index:101;
+        &--interaction {
+            display: none;
+            width:320px;
+            height: 182px;
+            padding:15px;
+        }
+        &__title {
+            line-height: 26px;
+        }
+        &__textarea {
+            border:solid 1px $bg-grey;
+            width:307px;
+            height:106px;
+            padding:5px;
+            margin-top:4px;
+        }
+        &__footer {
+            margin-top:6px;
+            .btn {
+                float: right;
+                margin-left: 6px;
+            }
+        }
+    }
+    &__close {
+        position:absolute;
+        right:0;
+        top:0;
+        background:#d1d1d1;
+        color:#fff;
+        padding:1px 4px;
+        line-height:1;
+        &:hover {
+            text-decoration:none;
+        }
+    }
+    &__content {
+        padding:20px 60px;
+        color:$blue;
+    }
+    &__button {
+        display:none;
+        margin:0 auto;
+        width:140px;
+        margin-bottom:15px;
+        .btn--grey {
+            margin-left:10px;
+        }
+    }
+}

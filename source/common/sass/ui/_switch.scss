@@ -1,0 +1,34 @@
+// switch
+.switch {
+    @include inline-block();
+    position:relative;
+    height:20px;
+    width:36px;
+    &__line {
+        position:absolute;
+        width:100%;
+        top:10px;
+        left:0;
+        border-bottom:solid 1px $grey;
+    }
+    &__button {
+        position:absolute;
+        top:1px;
+        left:0;
+        right:auto;
+        height:18px;
+        width:18px;
+        background:$grey;
+        @include box-radius(9px, 9px);
+    }
+    &--active {
+        .switch__line {
+            border-color:$green;
+        }
+        .switch__button {
+            left:auto;
+            right:0;
+            background:$green;
+        }
+    }
+}

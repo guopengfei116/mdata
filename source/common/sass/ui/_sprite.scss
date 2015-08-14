@@ -1,0 +1,143 @@
+// sprite
+@import '../sprite/_icon';
+@import '../sprite/_iconfont';
+.icon {
+    @include inline-block();
+    _font-size:0;
+    &--select-arrow {
+        @include sprite($select-arrow);
+    }
+    &--arrow {
+        @include sprite($arrow);
+    }
+    &--return-arrow {
+        @include sprite($return-arrow);
+    }
+    &--notice {
+        @include sprite($notice);
+    }
+    &--nav1 {
+        @include sprite($nav1);
+        &.hover {
+            @include sprite($nav1--hover);
+        }
+    }
+    &--nav2 {
+        @include sprite($nav2);
+        &.hover {
+            @include sprite($nav2--hover);
+        }
+    }
+    &--nav3 {
+        @include sprite($nav3);
+        &.hover {
+            @include sprite($nav3--hover);
+        }
+    }
+    &--nav4 {
+        @include sprite($nav4);
+        &.hover {
+            @include sprite($nav4--hover);
+        }
+    }
+    &--nav5 {
+        @include sprite($nav5);
+        &.hover {
+            @include sprite($nav5--hover);
+        }
+    }
+    &--nav6 {
+        @include sprite($nav6);
+        &.hover {
+            @include sprite($nav6--hover);
+        }
+    }
+    &--nav7 {
+        @include sprite($nav7);
+        &.hover {
+            @include sprite($nav7--hover);
+        }
+    }
+    &--nav8 {
+        @include sprite($nav8);
+        &.hover {
+            @include sprite($nav8--hover);
+        }
+    }
+    &--nav9 {
+        @include sprite($nav9);
+        &.hover {
+            @include sprite($nav9--hover);
+        }
+    }
+    &--nav10 {
+        @include sprite($nav10);
+        &.hover {
+            @include sprite($nav10--hover);
+        }
+    }
+    &--nav11 {
+        @include sprite($nav11);
+        &.hover {
+            @include sprite($nav11--hover);
+        }
+    }
+    &--star {
+        @include sprite($star);
+    }
+    &--praise {
+        @include sprite($praise);
+    }
+    &--lightning {
+        @include sprite($lightning);
+    }
+    &--clinic-logo {
+        @include sprite($clinic-logo);
+    }
+    &--step1-blue {
+        @include sprite($step1-blue);
+    }
+    &--step-KO {
+        @include sprite($step-KO);
+    }
+    &--step2-grey {
+        @include sprite($step2-grey);
+    }
+    &--step2-blue {
+        @include sprite($step2-blue);
+    }
+    &--calendar {
+        @include sprite($calendar);
+    }
+    &--share {
+        @include sprite($share);
+    }
+    &--reply {
+        @include sprite($reply);
+    }
+    &--left-arrow {
+        @include sprite($left-arrow);
+    }
+    &--right-arrow {
+        @include sprite($right-arrow);
+    }
+    &--download-clinic {
+        @include sprite($clinic-download);
+    }
+    &--download-doctor {
+        @include sprite($download_doctor);
+    }
+    &--loading {
+        display:block;
+        margin:250px auto 0;
+        height:74px;
+        width:70px;
+        background:url('../img/loading.gif') 0 0 no-repeat;
+    }
+    &--content-null {
+        @include sprite($content_null);
+    }
+    &--default-avatar {
+        @include sprite($default_login_avatar);
+    }
+}

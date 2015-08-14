@@ -2,14 +2,29 @@
 // eg. for a relational value of 12px write rem(12)
 // Assumes $em-base is the font-size of <html>
 
-@function rem($pxval) {
-  @if not unitless($pxval) {
-      $pxval: strip-units($pxval);
-  }
+@function rem($values) {
+    $base: $em-base;
+    $values-new : ();
+    $rems : ();
 
-  $base: $em-base;
-  @if not unitless($base) {
-      $base: strip-units($base);
-  }
-  @return ($pxval / $base) * 1rem;
+    @if(type_of($values) == 'string') {
+        $values-new : append($rems, $values);
+    }@else if(type_of($values) == 'list') {
+        $values-new : $values;
+    }@else {
+        @warn "px-to-rem收到一个不合法的数值";
+    }
+
+    @if not unitless($base) {
+        $base: strip-units($base);
+    }
+
+    @each $value in $values-new {
+        @if not unitless($value) {
+            $value: strip-units($value) / $base * 1rem;
+        }
+        $rems : append($rems, $value);
+    }
+
+    @return $rems;
 }

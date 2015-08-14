@@ -1,0 +1,12 @@
+// checkbox
+.checkbox {
+    @include inline-block();
+    @include sprite($checkbox--false);
+    &--active {
+        @include sprite($checkbox--true);
+    }
+    &--disabled {
+        background-color: $grey-dark;
+        @include box-radius();
+    }
+}

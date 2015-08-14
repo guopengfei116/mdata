@@ -1,0 +1,122 @@
+// form
+%label {
+    vertical-align: middle;
+    margin-right: 10px;
+    width: 90px;
+    line-height: 18px;
+    font-size: 15px;
+}
+
+%text {
+    vertical-align: middle;
+    width: 220px;
+    height: 18px;
+    padding-left: 8px;
+    padding-top:5px;
+    padding-bottom: 5px;
+    font-size: 15px;
+    line-height: 18px;
+    @include box-radius(4px, 4px);
+    border:1px solid $grey;
+    &:focus{
+        box-shadow:0 0 6px 0 rgba(55,162,225,0.4);
+        transition:box-shadow 0.2s linear 0s;
+        -moz-box-shadow:0 0 4px $blue-light;
+        border:1px solid $blue;
+    }
+}
+
+%textarea {
+    width: 360px;
+    height: 110px;
+    padding:5px 10px;
+    font-size: 15px;
+    line-height: 18px;
+    @include box-radius(4px, 4px);
+    border:1px solid $grey;
+    &:focus{
+        box-shadow:0 0 6px 0 rgba(55,162,225,0.4);
+        transition:box-shadow 0.2s linear 0s;
+        -moz-box-shadow:0 0 4px $blue-light;
+        border:1px solid $blue;
+    }
+}
+
+%select {
+    box-sizing: content-box;
+    vertical-align: middle;
+    width: 220px;
+    height: 20px;
+    padding-left: 8px;
+    padding-top:4px;
+    padding-bottom: 4px;
+    font-size: 15px;
+    line-height: 18px;
+    @include box-radius(4px, 4px);
+    border:1px solid $grey;
+}
+
+.label {
+    @extend %label;
+}
+
+.text {
+    @extend %text;
+    &--small {
+        width: 160px;
+    }
+}
+
+.textarea {
+    @extend %textarea;
+}
+
+.select {
+    @extend %select;
+    &__option {
+        line-height: 18px;
+    }
+    &--small {
+        width: 160px;
+    }
+}
+
+.fieldset {
+    margin-top: 40px;
+    &__label {
+        float:left;
+        @extend %label;
+        i {
+            color: $grey;
+        }
+    }
+    &__text {
+        float: left;
+        @extend %text;
+    }
+    &__textarea {
+        float: left;
+        @extend %textarea;
+    }
+    &__error {
+        float: left;
+        padding-left: 28px;
+        color: #DF3F3F;
+
+    }
+    &__affix {
+        clear:both;
+        color: $grey;
+        padding-top: 10px;
+        padding-left: 90px;
+    }
+    &__btn {
+        width: 230px;
+        margin-left: 90px;
+        padding:0;
+        @include box-radius(4px, 4px);
+        height: 38px;
+        line-height: 38px;
+        font-size: 16px;
+    }
+}

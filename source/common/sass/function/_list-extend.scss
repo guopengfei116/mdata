@@ -1,0 +1,215 @@
+
+/*
+    $list: a, b, c, d, e, f;
+    $last: last($list);   // f
+*/
+@function first ($value) {
+    @if type_of($value) == 'string' or type_of($value) == 'list' {
+        @return nth($value, 1);
+    }
+}
+
+
+/*
+    $list: a, b, c, d, e, f;
+    $last: last($list);   // f
+*/
+@function last () {
+    @if type_of($value) == 'string' or type_of($value) == 'list' {
+        @return nth($value, length($value));
+    }
+}
+
+
+/*
+    $list: a, b, c, d z, e, a, f;
+    $first-index: index($list, a);     // 1
+    $last-index: last-index($list, a); // 6
+    $last-index: last-index($list, z); // null
+*/
+@function last-index ($list, $value) {
+    @if type_of($list) != 'list' {
+        @return nth($list, 1);
+    }
+
+    @if(type_of($list) == 'list') {
+        @for $i from length($list) * -1 through -1 {
+            @if nth($list, abs($i)) == $value {
+                @return abs($i);
+            }
+        }
+    }
+
+    @return null;
+}
+
+
+/*
+    $list: b, c, d, e, f;
+    $new-list: prepend($list, a);               // a, b, c, d, e, f
+    $new-list: prepend($list, now i know my a); // now, i, know, my, a, b, c, d, e, f
+*/
+@function prepend ($list, $value, $separator:auto) {
+    @return join($value, $list, $separator);
+}
+
+
+/*
+    $list: a, b, r, a, c a, d a, b, r, a;
+    $new-list: replace($list, a, u);       // u, b, r, u, c a, d a, b, r, u;
+    $new-list: replace($list, a, u, true); // u, b, r, u, c u, d u, b, r, u;
+*/
+@function replace ($list, $old-value, $new-value, $recursive:false) {
+    $result: ();
+    $item: null;
+
+    @for $i from 1 through length($list) {
+        $item: nth($list, $i);
+        @if type_of($item) == list and $recursive {
+            $result: append($result, replace($item, $old-value, $new-value, $recursive));
+        }
+
+        @else {
+            @if $item == $old-value {
+                $result: append($result, $new-value);
+            }
+
+            @else {
+                $result: append($result, $item);
+            }
+        }
+    }
+
+    @return $result;
+}
+
+
+/*
+    $list: a, b z, c, z, d, z, e, f;
+    $new-list: remove($list, z);       // a, b z, c, d, e, f;
+    $new-list: remove($list, z, true); // a, b, c, d, e, f
+*/
+@function remove ($list, $value, $recursive:false) {
+    $result: ();
+    $item: null;
+
+    @for $i from 1 through length($list) {
+        $item: nth($list, $i);
+        @if type_of($item) == list and $recursive {
+            $result: append($result, remove($item, $value, $recursive));
+        }
+
+        @else if $item != $value {
+            $result: append($result, $item);
+        }
+    }
+
+    @return $result;
+}
+
+
+/*
+    $list: a, b, c, d, e, f;
+    $new-list: slice($list, 3, 5);   // c, d, e
+    $new-list: slice($list, 4, 4);   // d
+    $new-list: slice($list, 5, 3);   // e, d, c
+    $new-list: slice($list, -1, 10); // error
+*/
+@function slice ($list, $start: 1, $end: length($list)) {
+    $result: null;
+    $temp: null;
+
+    @if type_of($start) != number or type_of($end) != number {
+        @warn "$start and $end 应该是number类型";
+    }
+
+    @else if $start < 1 or $end < 1 {
+        @warn "$start and $end 最小值为1"
+    }
+
+    @else if start > length($list) or $end > length($list) {
+        @warn "$start and $end 超过最大值";
+    }
+
+    @else if $start > $end {
+        $temp: $start;
+        $start: $end;
+        $end: $temp;
+    }
+
+    @else {
+        $result: ();
+        @for $i from $start through $end {
+            $result: append($result, nth($list, $i));
+        }
+    }
+
+    @if $temp != null{
+        $result: reverse($result);
+    }
+    @return $result;
+}
+
+
+/*
+    $list: a, b, c d e, f, g, h;
+    $new-list: reverse($list);       // h, g, f, c d e, b, a
+    $new-list: reverse($list, true); // h, g, f, e d c, b, a
+*/
+@function reverse ($list, $recursive: false) {
+    $result: ();
+    $temp: null;
+
+    @for $i from length($list) * -1 through -1 {
+        $temp: nth($list, abs($i));
+        @if type_of($temp) == list and $recursive {
+            $result: append($result, reverse($temp, $recursive));
+        }
+
+        @else {
+            $result: append($result, $temp);
+        }
+    }
+
+    @return $result;
+}
+
+
+/*
+    $list: a, b, c d e, f, g, h;
+    $new-list: to-string($list);      // abcdefgh
+    $new-list: to-string($list, '-'); // a-b-c-d-e-f-g-h
+*/
+@function to-string ($list, $glue: '', $is-nested: false) {
+    $result: null;
+    $temp: null;
+
+    @for $i from 1 through length($list) {
+        $temp: nth($list, $i);
+        @if type_of($temp) == list {
+            $result: $result#{to-string($temp, $glue, true)};
+        }
+
+        @else {
+            $result: if($i != length($list) or $is-nested, #{$result}#{$temp}#{$glue}, #{$result}#{$temp});
+        }
+    }
+
+    @return $result;
+}
+
+
+/*
+    $list: a, b, c, d, e, f;
+    $new-list: loop($list, 2);  // e, f, a, b, c, d
+    $new-list: loop($list, -2); // c, d, e, f, a, b
+*/
+@function loop ($list:1 2 3 4, $value: 1) {
+    $result: ();
+
+    @for $i from 0 to length($list) {
+        $result: append($result, ($i - $value) % length($list) + 1);
+    }
+
+    @return $result;
+}

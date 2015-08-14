@@ -1,0 +1,36 @@
+// tab
+.tab {
+    &__nav {
+        border-bottom:1px solid $form-border;
+        li {
+            float:left;
+        }
+        a {
+            position:relative;
+            display:block;
+            color:#aac5d4;
+            padding-bottom:5px;
+            text-align:center;
+            &:hover {
+                color:$text-link;
+                text-decoration:none;
+            }
+        }
+        &__tip {
+            position:absolute;
+            left:75%;
+            color:#aac5d4;
+        }
+        .current {
+            color:$text-link;
+            padding-bottom:0;
+            border-bottom:5px solid $blue;
+        }
+    }
+    &__sheet {
+        display:none;
+    }
+    .current {
+        display:block;
+    }
+}

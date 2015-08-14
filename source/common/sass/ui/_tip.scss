@@ -1,0 +1,16 @@
+// tip
+.tip {
+    @include box-radius();
+    background:$blue;
+    color:#fff;
+    padding:1px 4px;
+    &--yellow {
+        background:$yellow;
+    }
+    &--red {
+        background:$red;
+    }
+    &--green {
+        background:$green;
+    }
+}
