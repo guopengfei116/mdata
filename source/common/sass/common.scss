@@ -1,17 +1,29 @@
 @charset "utf-8";   //必须设置了这个才能编译有中文的注释
 
+/*
+    settings
+*/
 @import "setting/_font-family";
 @import "setting/_settings";
 
+/*
+    base-style
+*/
 @import "util/_normalize";
 @import "util/_reset";
 @import "util/_base";
 
+/*
+    functions
+*/
 @import "function/_list-extend";
 @import "function/_px-to-rem";
 @import "function/_strip-units";
 @import "function/_unpack";
 
+/*
+    mixins
+*/
 @import "mixin/_arrow";
 @import "mixin/_directional-values";
 @import "mixin/_ellipsis";
@@ -27,9 +39,30 @@
 @import "mixin/_radius";
 @import "mixin/_word-wrap";
 
+/*
+    placeholders
+*/
 @import "placeholder/_clear-childrens-float";
 @import "placeholder/_ellipsis";
 @import "placeholder/_inline-block";
 @import "placeholder/_mask";
 @import "placeholder/_opacity";
 @import "placeholder/_radius";
+
+/*
+    component-ui
+*/
+@import "ui/_button";
+@import "ui/_checkbox";
+@import "ui/_dialog";
+@import "ui/_dialog-wap";
+@import "ui/_dropdown";
+@import "ui/_form";
+@import "ui/_mask";
+@import "ui/_panel";
+@import "ui/_radio";
+@import "ui/_select";
+@import "ui/_switch";
+@import "ui/_tab";
+@import "ui/_tip";
+@import "ui/_tooltip";

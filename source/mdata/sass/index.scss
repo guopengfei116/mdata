@@ -1,18 +1,2 @@
+@import "../../common/sass/common";
 
-
-@function loop ($list:1 2 3 4, $value: 1) {
-    $result: ();
-
-    @for $i from 0 to length($list) {
-        $result: append($result, nth($list, ($i - $value) % length($list) + 1));
-    }
-
-    @return $result;
-}
-
-a {
-    $list: a, b, c, d, e, f;
-    padding: loop($list, 1);  // f, a, b, c, d, e
-    padding: loop($list, 2); // d, e, f, a, b, c
-    padding: loop($list, -4); // d, e, f, a, b, c
-}

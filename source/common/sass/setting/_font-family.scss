@@ -1,5 +1,18 @@
+/*
+    familys
+*/
 $georgia: Georgia, Cambria, "Times New Roman", Times, serif;
 $helvetica: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
 $lucida-grande: "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
 $monospace: "Bitstream Vera Sans Mono", Consolas, Courier, monospace;
 $verdana: Verdana, Geneva, sans-serif;
+$china: "Microsoft Yahei", SimHei, SimSun, "Helvetica Neue", Helvetica, Tahoma, sans-serif;
+
+
+/*
+    font
+*/
+$base-font-size :     14px       !default;
+$base-line-height :   1.5        !default;
+$base-font-family :   $china     !default;
+$base-font-color :    #000       !default;
