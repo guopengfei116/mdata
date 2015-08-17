@@ -5,7 +5,7 @@
 
 %ellipsis {
     white-space: nowrap;
-    @if $PcBrowser and $prefix-for-lte7{
+    @if $browser-pc and $prefix-for-lte7{
         _white-space:normal;
     }
     overflow:hidden;

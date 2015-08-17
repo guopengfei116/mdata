@@ -1,122 +1,50 @@
-// form
-%label {
-    vertical-align: middle;
-    margin-right: 10px;
-    width: 90px;
-    line-height: 18px;
-    font-size: 15px;
-}
+.input-text {
 
-%text {
-    vertical-align: middle;
-    width: 220px;
-    height: 18px;
-    padding-left: 8px;
-    padding-top:5px;
-    padding-bottom: 5px;
-    font-size: 15px;
-    line-height: 18px;
-    @include box-radius(4px, 4px);
-    border:1px solid $grey;
-    &:focus{
-        box-shadow:0 0 6px 0 rgba(55,162,225,0.4);
-        transition:box-shadow 0.2s linear 0s;
-        -moz-box-shadow:0 0 4px $blue-light;
-        border:1px solid $blue;
-    }
-}
-
-%textarea {
-    width: 360px;
-    height: 110px;
-    padding:5px 10px;
-    font-size: 15px;
-    line-height: 18px;
-    @include box-radius(4px, 4px);
-    border:1px solid $grey;
-    &:focus{
-        box-shadow:0 0 6px 0 rgba(55,162,225,0.4);
-        transition:box-shadow 0.2s linear 0s;
-        -moz-box-shadow:0 0 4px $blue-light;
-        border:1px solid $blue;
-    }
-}
-
-%select {
-    box-sizing: content-box;
-    vertical-align: middle;
-    width: 220px;
-    height: 20px;
-    padding-left: 8px;
-    padding-top:4px;
-    padding-bottom: 4px;
-    font-size: 15px;
-    line-height: 18px;
-    @include box-radius(4px, 4px);
-    border:1px solid $grey;
-}
-
-.label {
-    @extend %label;
-}
-
-.text {
-    @extend %text;
-    &--small {
-        width: 160px;
-    }
-}
-
-.textarea {
-    @extend %textarea;
-}
-
-.select {
-    @extend %select;
-    &__option {
-        line-height: 18px;
-    }
-    &--small {
-        width: 160px;
-    }
 }
 
 .fieldset {
-    margin-top: 40px;
-    &__label {
-        float:left;
-        @extend %label;
-        i {
-            color: $grey;
+    margin-top: rem(36);
+    border: 2px solid $fieldset-border-color;
+    color: $fieldset-font-color;
+    &-group {
+        position: relative;
+        padding-left: rem(42);
+    }
+    &_label {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: rem(42);
+        height: rem(42);
+        line-height: rem(42);
+        text-align: center;
+    }
+    &_text {
+        @include prefix(box-sizing, border-box);
+        display: block;
+        padding: rem(12) 1px;
+        width: 100%;
+        line-height: rem(16);
+        &-focus {
+            border-left: none;
         }
     }
-    &__text {
-        float: left;
-        @extend %text;
+    &_button {
+        @include prefix(box-sizing, border-box);
+        display: block;
+        width: 100%;
+        height: rem(46);
+        background-color: $fieldset-border-color;
+        line-height: rem(46);
+        font-size: rem(20);
+        text-align: center;
+        color: #fff;
     }
-    &__textarea {
-        float: left;
-        @extend %textarea;
-    }
-    &__error {
-        float: left;
-        padding-left: 28px;
-        color: #DF3F3F;
+}
 
-    }
-    &__affix {
-        clear:both;
-        color: $grey;
-        padding-top: 10px;
-        padding-left: 90px;
-    }
-    &__btn {
-        width: 230px;
-        margin-left: 90px;
-        padding:0;
-        @include box-radius(4px, 4px);
-        height: 38px;
-        line-height: 38px;
-        font-size: 16px;
-    }
+.form {
+    margin: rem(300) auto 0;
+    max-width: 480px;
+    width: rem(480);
+    border: 1px solid transparent;
 }

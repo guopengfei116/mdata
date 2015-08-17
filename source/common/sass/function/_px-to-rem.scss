@@ -3,11 +3,11 @@
 // Assumes $em-base is the font-size of <html>
 
 @function rem($values) {
-    $base: $em-base;
+    $base: $rem-base;
     $values-new : ();
     $rems : ();
 
-    @if(type_of($values) == 'string') {
+    @if(type_of($values) == 'number') {
         $values-new : append($rems, $values);
     }@else if(type_of($values) == 'list') {
         $values-new : $values;
@@ -22,6 +22,10 @@
     @each $value in $values-new {
         @if not unitless($value) {
             $value: strip-units($value) / $base * 1rem;
+        }
+
+        @else {
+            $value: $value / $base * 1rem;
         }
         $rems : append($rems, $value);
     }

@@ -3,8 +3,10 @@
 /*
     settings
 */
+@import "setting/_browser";
 @import "setting/_font-family";
 @import "setting/_settings";
+@import "setting/_ui";
 
 /*
     base-style
@@ -52,17 +54,17 @@
 /*
     component-ui
 */
-@import "ui/_button";
-@import "ui/_checkbox";
-@import "ui/_dialog";
-@import "ui/_dialog-wap";
-@import "ui/_dropdown";
+//@import "ui/_button";
+//@import "ui/_checkbox";
+//@import "ui/_dialog";
+//@import "ui/_dialog-wap";
+//@import "ui/_dropdown";
 @import "ui/_form";
-@import "ui/_mask";
-@import "ui/_panel";
-@import "ui/_radio";
-@import "ui/_select";
-@import "ui/_switch";
-@import "ui/_tab";
-@import "ui/_tip";
-@import "ui/_tooltip";
+//@import "ui/_mask";
+//@import "ui/_panel";
+//@import "ui/_radio";
+//@import "ui/_select";
+//@import "ui/_switch";
+//@import "ui/_tab";
+//@import "ui/_tip";
+//@import "ui/_tooltip";
