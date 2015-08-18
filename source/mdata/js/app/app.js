@@ -2,24 +2,43 @@
 
 var oasgames = {};
 
+/*
+* 注册app主模块
+* */
 oasgames.mdataPanelApp = angular.module('mdataPanelApp', [
     'ngRoute',
-    'mdataPanelControllers'
+    'mdataPanelControllers',
+    'mdataPanelServices'
 ]);
 
+/*
+* 配置页面路由规则
+* */
 oasgames.mdataPanelApp.config([
     '$routeProvider',
     function ($routeProvider) {
-        $routeProvider.when('/login', {
-            templateUrl: '/mdata/tpl/login.html',
-            controller: 'mdataLogin'
+        $routeProvider.when('/', {
+            redirectTo: '/login'
         })
-        .when('/application', {
-            templateUrl: '/mdata/tpl/applications',
-            controller: 'applicationListCtrl'
+        .when('/login', {
+            templateUrl: '/mdata/tpl/login.html',
+            controller: 'MdataLoginCtrl'
+        })
+        .when('/applications', {
+            templateUrl: '/mdata/tpl/applications.html',
+            controller: 'ApplicationListCtrl'
+        })
+        .when('/applications:applicationId', {
+            templateUrl: '/mdata/tpl/applications.html',
+            controller: 'ApplicationListCtrl'
+        })
+        .when('/notfound', {
+            templateUrl: '/mdata/tpl/404.html',
+            controller: 'notfoundCtrl'
         })
         .otherwise({
-            redirectTo: '/login'
+            redirectTo: '/notfound'
         });
     }
 ]);
+

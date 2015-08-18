@@ -1,7 +1,11 @@
+html,body {
+    min-height: 100%;
+}
+
 body {
-    font:14px/1.5 Tahoma,Helvetica,"Microsoft YaHei",arial,sans-serif;
-    color:#000000;
-    background:#fff;
+    font: $base-font-size/$base-line-height $base-font-family;
+    color: $base-font-color;
+    background-color: $base-background-color;
 }
 
 a {

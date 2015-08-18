@@ -1,0 +1,42 @@
+.main {
+    padding-left: rem(200);
+    min-height: 100%;
+    .nav {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: rem(200);
+        height: 100%;
+        background-color: $nav-background-color;
+    }
+    .page {
+        &_header {
+            height: rem(90);
+            background-color: #e9edf2;
+        }
+        &_content {
+            padding: rem(30) rem(30) 0;
+            &-wrap {
+                padding: rem(20);
+            }
+        }
+    }
+    &-login {
+        padding-left: 0;
+        background-img: url("");
+        .nav {
+            display: none;
+        }
+        .page {
+            &_header {
+                display: none;
+            }
+            &_content {
+                padding: 0;
+                &-wrap {
+                    padding: 0;
+                }
+            }
+        }
+    }
+}

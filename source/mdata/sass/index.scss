@@ -1,3 +1,7 @@
 @import "../../common/sass/common";
 
-@import "_login";
+@import "components/_base";
+@import "components/_header";
+@import "components/_main";
+
+@import "pages/_login";

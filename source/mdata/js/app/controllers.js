@@ -1,8 +1,73 @@
 'use strict';
 
+/*
+ * 注册控制器
+ * */
 oasgames.mdataPanelControllers = angular.module('mdataPanelControllers', []);
 
-oasgames.mdataPanelControllers.controller('mdataLogin', [
+
+/*
+ * 页面框架控制器，
+ * 根据hash值判断页面框架的展示
+ * */
+oasgames.mdataPanelControllers.controller('PageFrameCtrl', [
+    '$scope',
+    'PageOutlineBlacklist',
+    function ($scope, PageOutlineBlacklist) {
+
+        var blackList = PageOutlineBlacklist.getBlackList();
+
+        //查询hash值是否匹配黑名单
+        function matchBlackList(hash) {
+            var matched = false;
+            for(var i = blackList.length - 1; i >= 0; i--) {
+                if(new RegExp('^' + blackList[i] + '$').test(hash)) {
+                    matched = true;
+                    break;
+                }else {
+                    matched = false;
+                }
+            }
+            return matched;
+        }
+
+        $scope.outlineHide = matchBlackList(location.hash);
+
+        $(window).bind('hashchange', function () {
+            var hash = location.hash;
+            $scope.outlineHide = matchBlackList(hash);
+            console.log($scope.outlineHide);
+        });
+    }
+]);
+
+
+/*
+ * 页面header控制器
+ * */
+oasgames.mdataPanelControllers.controller('HeaderCtrl', [
+    '$scope',
+    function ($scope, PageOutline) {
+
+    }
+]);
+
+
+/*
+ * 页面nav控制器
+ * */
+oasgames.mdataPanelControllers.controller('MainFrameCtrl', [
+    '$scope',
+    function ($scope, PageOutline) {
+
+    }
+]);
+
+
+/*
+ * login模块控制器
+ * */
+oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
     '$scope',
     '$http',
     function ($scope, $http) {
@@ -11,7 +76,7 @@ oasgames.mdataPanelControllers.controller('mdataLogin', [
         $scope.submit = function (target) {
             if(/^[\w]{6,18}$/.test($scope.account) && /^[\w]{6,18}$/.test($scope.password)) {
                 $http.get('/mdata/js/login.json').success(function (data) {
-                    location.hash = '#/application';
+                    location.hash = '#/applications';
                 });
             }else {
                 console.log('请输入正确账号密码！');
@@ -20,10 +85,14 @@ oasgames.mdataPanelControllers.controller('mdataLogin', [
     }
 ]);
 
-oasgames.mdataPanelControllers.controller('applicationListCtrl', [
-    '$scope',
-    '$http',
-    function ($scope, $http) {
 
+/*
+ * application模块控制器
+ * */
+oasgames.mdataPanelControllers.controller('ApplicationListCtrl', [
+    '$scope',
+    'Applications',
+    function ($scope, Applications) {
+        $scope.applications = Applications.query();
     }
 ]);

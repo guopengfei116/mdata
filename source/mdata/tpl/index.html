@@ -2,19 +2,22 @@
 <html ng-app="mdataPanelApp">
     <head>
         <link href="/mdata/sass/index.css" rel="stylesheet"/>
-        <script src="/mdata/js/angular.js"></script>
-        <script src="/mdata/js/app.js"></script>
+        <script src="/mdata/js/frame.js"></script>
+
     </head>
-    <body>
-        <header></header>
-        <article>
-            <nav></nav>
-            <div>
-                <section></section>
-                <section>
-                    <div class="ng-view"></div>
+    <body ng-controller="PageFrameCtrl">
+        <header class="header" ng-controller="HeaderCtrl" ng-hide="{{ outlineHide }}">
+
+        </header>
+        <article class="main img-cover {{ outlineHide? 'main-login' : '' }}" ng-controller="MainFrameCtrl">
+            <nav class="nav"></nav>
+            <div class="page">
+                <section class="page_header"></section>
+                <section class="page_content">
+                    <div class="page_content-wrap ng-view"></div>
                 </section>
             </div>
         </article>
+        <script src="/mdata/js/app.js"></script>
     </body>
 </html>

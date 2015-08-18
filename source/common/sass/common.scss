@@ -8,12 +8,13 @@
 @import "setting/_settings";
 @import "setting/_ui";
 
+
 /*
     base-style
 */
 @import "util/_normalize";
 @import "util/_reset";
-@import "util/_base";
+
 
 /*
     functions
@@ -22,6 +23,7 @@
 @import "function/_px-to-rem";
 @import "function/_strip-units";
 @import "function/_unpack";
+
 
 /*
     mixins
@@ -41,6 +43,7 @@
 @import "mixin/_radius";
 @import "mixin/_word-wrap";
 
+
 /*
     placeholders
 */
@@ -50,6 +53,7 @@
 @import "placeholder/_mask";
 @import "placeholder/_opacity";
 @import "placeholder/_radius";
+
 
 /*
     component-ui
