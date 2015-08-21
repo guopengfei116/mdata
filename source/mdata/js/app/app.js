@@ -28,13 +28,12 @@ oasgames.mdataPanelApp.config([
             templateUrl: '/mdata/tpl/applications.html',
             controller: 'ApplicationListCtrl'
         })
-        .when('/applications:applicationId', {
+        .when('/applications/:applicationId', {
             templateUrl: '/mdata/tpl/applications.html',
             controller: 'ApplicationListCtrl'
         })
         .when('/notfound', {
-            templateUrl: '/mdata/tpl/404.html',
-            controller: 'notfoundCtrl'
+            templateUrl: '/mdata/tpl/404.html'
         })
         .otherwise({
             redirectTo: '/notfound'

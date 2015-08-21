@@ -1,4 +1,4 @@
-@mixin panel ($width, $height, $boxHeight:null, $index:100, $X:0, $Y:0) {
+@mixin panel ($index: 100, $width: 100px, $height: 100px, $boxHeight:null, $X:0, $Y:0) {
     z-index: $index;
     position: fixed;
     left: 50%;

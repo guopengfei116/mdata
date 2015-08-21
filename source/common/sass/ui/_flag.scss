@@ -1,0 +1,17 @@
+.flag {
+    @include inline-block();
+    @include radius();
+    @include padding(2px 4px);
+    background-color: #e4ecf3;
+    font-size: 12px;
+    color: #2498d0;
+    &-icon {
+        @include padding(5px 10px);
+        background-color: #12afcb;
+        color: #fff;
+        &_delete {
+            cursor: pointer;
+            padding-left: 6px;
+        }
+    }
+}

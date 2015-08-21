@@ -1,97 +1,43 @@
-// button
-.btn {
+.button {
+    @include prefix(transition, all 1s );
     cursor: pointer;
     @include inline-block();
-    height:30px;
-    line-height:30px;
-    padding:0 18px;
-    background:$green;
-    color:#fff;
-    @include box-radius();
-    &:hover {
-        background:$green-light;
-        text-decoration:none;
-    }
-    &:active {
-        background:$green-dark;
-    }
-    &--grey {
-        background:$grey;
-        &:hover {
-            background:$grey-light;
-        }
+    padding: 7px 12px;
+    border: 1px solid $button-color;
+    background-color: $button-color;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #fff;
+    &-plus {
+        border-color: #109db6;
+        background-color: #109db6;
         &:active {
-            background:$grey-dark;
+            border-color: darken(#109db6, 10%);
+            background-color: darken(#109db6, 10%);
         }
     }
-    &--blue {
-        background:$blue;
-        &:hover {
-            background:$blue-light;
-        }
+    &-minus {
+        border-color: #868686;
+        background-color: #868686;
         &:active {
-            background:$blue-dark;
+            border-color: darken(#868686, 10%);
+            background-color: darken(#868686, 10%);
         }
     }
-    &--small {
-        height: 20px;
-        line-height: 20px;
-        padding: 0 2px;
-    }
-    &--large {
-        width:130px;
-        text-align:center;
-        padding:0;
-    }
-    &--hollow {
-        background:transparent;
-        border:1px solid $green;
-        color:$green;
-        &:hover {
-            background:transparent;
-            border-color:$green-light;
-            color:$green-light;
-        }
+    &-save {
+        border-color: #12afcb;
+        background-color: #12afcb;
         &:active {
-            background:transparent;
-            border-color:$green-dark;
-            color:$green-dark;
-        }
-        &.btn--grey {
-            border-color:$grey;
-            color:$grey;
-            &:hover {
-                border-color:$grey-light;
-            }
-            &:active {
-                border-color:$grey-dark;
-            }
-        }
-        &.btn--blue {
-            border-color:$blue;
-            color:$blue;
-            &:hover {
-                border-color:$blue-light;
-            }
-            &:active {
-                border-color:$blue-dark;
-            }
+            border-color: darken(#12afcb, 10%);
+            background-color: darken(#12afcb, 10%);
         }
     }
-    &--disabled {
-        cursor: default;
-        background:$grey;
-        color: #fff;
-        border:none;
-        &:hover {
-            border-color:$grey-light;
-            background:transparent;
-            color: $grey-light;
-        }
+    &-cancel {
+        border-color: #999999;
+        background-color: #999999;
         &:active {
-            border-color:$grey-dark;
-            background:transparent;
-            color: $grey-dark;
+            border-color: darken(#999999, 10%);
+            background-color: darken(#999999, 10%);
         }
     }
 }

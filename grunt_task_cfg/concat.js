@@ -42,7 +42,7 @@ function buildCig (concatDir) {
 
     //build config
     exports[baseName + taskNameId++] = {
-        src: path.join(concatDir, '/*.js'),
+        src: path.join(concatDir, '**/*.js'),
         //把src路径部分替换为dest
         dest: (concatDir + '.js').replace(new RegExp(pattern), gruntProject.prd)
     };

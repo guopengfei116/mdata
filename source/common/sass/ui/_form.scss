@@ -1,5 +1,11 @@
-.input-text {
 
+.form {
+    position: relative;
+    top: rem(300);
+    margin: 0 auto;
+    max-width: 480px;
+    width: rem(480);
+    border: 1px solid transparent;
 }
 
 .fieldset {
@@ -9,15 +15,15 @@
     &-group {
         position: relative;
         padding-left: rem(42);
-    }
-    &_label {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: rem(42);
-        height: rem(42);
-        line-height: rem(42);
-        text-align: center;
+        &-group_label {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: rem(42);
+            height: rem(42);
+            line-height: rem(42);
+            text-align: center;
+        }
     }
     &_text {
         @include prefix(box-sizing, border-box);
@@ -40,13 +46,4 @@
         text-align: center;
         color: #fff;
     }
-}
-
-.form {
-    position: relative;
-    top: rem(300);
-    margin: 0 auto;
-    max-width: 480px;
-    width: rem(480);
-    border: 1px solid transparent;
 }

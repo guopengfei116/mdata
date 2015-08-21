@@ -19,6 +19,7 @@
 /*
     functions
 */
+@import "function/_direction-reverse";
 @import "function/_list-extend";
 @import "function/_px-to-rem";
 @import "function/_strip-units";
@@ -38,6 +39,7 @@
 @import "mixin/_mask";
 @import "mixin/_media-queries";
 @import "mixin/_opacity";
+@import "mixin/_panel";
 @import "mixin/_position";
 @import "mixin/_prefix";
 @import "mixin/_radius";
@@ -58,13 +60,15 @@
 /*
     component-ui
 */
-//@import "ui/_button";
+@import "ui/_alert";
+@import "ui/_button";
 //@import "ui/_checkbox";
-//@import "ui/_dialog";
-//@import "ui/_dialog-wap";
+//@import "ui/_dialog_old";
 //@import "ui/_dropdown";
+@import "ui/_flag";
 @import "ui/_form";
-//@import "ui/_mask";
+@import "ui/_input";
+@import "ui/_mask";
 //@import "ui/_panel";
 //@import "ui/_radio";
 //@import "ui/_select";

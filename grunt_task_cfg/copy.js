@@ -9,7 +9,7 @@ exports.common = {
     expand: true,
     flatten: false,
     cwd: gruntProject.src,
-    src: ['*/js/*.*', '*/css/*.css', '*/img/*.*'],
+    src: ['*/js/*.*', '*/css/*.css', '*/img/*.*', '*/ui_guide/**/*'],
     dest: gruntProject.prd
 };
 

@@ -1,7 +1,7 @@
 
 /*
     $list: a, b, c, d, e, f;
-    $last: last($list);   // f
+    $last: first($list);   // a
 */
 @function first ($value) {
     @if type_of($value) == 'string' or type_of($value) == 'list' {

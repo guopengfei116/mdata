@@ -6,28 +6,13 @@
 oasgames.mdataPanelServices = angular.module('mdataPanelServices', ['ngResource']);
 
 /*
- * 该服务用来判断页面是否需要显示轮廓，
- * 不需要显示轮廓的页面在pageOutlineBlacklist配置即可。
+ * 用来配置哪些页面不需要基本的轮廓显示，
+ * 提供getBlackList方法用来获取列表
  * */
-oasgames.mdataPanelServices.factory('PageOutline', [
-   function () {
-       var pageOutlineBlacklist = [ '', '#\\/login' ];
-       var hash = location.hash;
-       console.log(hash);
-       var isOutline = false;
-       for(var i = pageOutlineBlacklist.length - 1; i >= 0; i--) {
-           isOutline = !new RegExp('^' + pageOutlineBlacklist[i] + '$').test(hash);
-           if(!isOutline) {
-               break;
-           }
-       }
-       return isOutline;
-   }
-]);
 oasgames.mdataPanelServices.factory('PageOutlineBlacklist', [
     function () {
         return {
-            blacklist : [ '', '#\\/login' ],
+            blacklist : [ '', '#\\/login', '#\\/notfound' ],
             getBlackList : function () {
                 return this.blacklist;
             }

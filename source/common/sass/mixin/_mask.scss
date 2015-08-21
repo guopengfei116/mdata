@@ -6,5 +6,5 @@
     right : 0;
     bottom : 0;
     background-color : #000000;
-    opacity : $opacity;
+    @include opacity($opacity);
 }

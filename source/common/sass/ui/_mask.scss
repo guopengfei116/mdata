@@ -1,12 +1,5 @@
 // mask
 .mask {
-    position:fixed;
+    @include mask();
     _position:absolute;
-    top:0;
-    left:0;
-    height:100%;
-    width:100%;
-    background-color:#000;
-    z-index:50;
-    @include opacity(0.1);
 }

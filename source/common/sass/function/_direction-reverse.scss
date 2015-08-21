@@ -1,0 +1,13 @@
+/*
+    $direction: left;
+    $reverse: direction-reverse($direction);   // right
+*/
+@function direction-reverse ($direction) {
+    $table: (
+            left: right,
+            right: left,
+            top: bottom,
+            bottom: top
+    );
+    @return map-get($table, $direction);
+}

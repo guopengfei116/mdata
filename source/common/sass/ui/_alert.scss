@@ -1,0 +1,28 @@
+.alert {
+    &_mask {
+        @include mask(99);
+    }
+    &_panel {
+        @include panel(101, 12rem, 7rem);
+        @include radius(4px 4px);
+        &_info {
+            z-index: 101;
+            position: relative;
+            line-height: 4rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #505050;
+        }
+        &_btn {
+            z-index: 101;
+            position: relative;
+            border-top: 1px solid #d9d9d9;
+            line-height: 2.8rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #f6644e;
+        }
+    }
+}
+
+

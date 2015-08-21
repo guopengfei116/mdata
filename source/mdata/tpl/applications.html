@@ -1,3 +1,26 @@
+<div>
+    <span class="flag">nihao</span>
+    <span class="flag flag-icon">
+        很好
+        <i class="flag-icon_delete">+</i>
+    </span>
+    <span class="flag flag-icon">
+        不好
+        <i class="flag-icon_delete" data-delete-info="删除成功">+</i>
+    </span>
+    <span class="flag flag-icon">
+        不好啊！
+        <i class="flag-icon_delete" data-delete-info="哈哈哈">+</i>
+    </span>
+</div>
+<div>
+    <input class="input input-text input-warn" type="text">
+    <button class="button">add</button>
+    <ul>
+        <li><button class="button button-plus">+</button><button class="button button-save">save</button></li>
+        <li><button class="button button-minus">+</button><button class="button button-cancel">save</button></li>
+    </ul>
+</div>
 <ul>
     <li ng-repeat="application in applications">{{ application.name }}</li>
     <li>{{ yes }}</li>

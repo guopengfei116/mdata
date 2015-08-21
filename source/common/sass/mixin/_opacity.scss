@@ -2,7 +2,7 @@
     @if $prefix-for-mozilla {
         -moz-opacity : $opacity-size;
     }
-    @if $PcBrowser {
+    @if $browser-pc {
         $size : $opacity-size * 100;
         filter : alpha(opacity=#{$size});
     }
