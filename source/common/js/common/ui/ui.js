@@ -49,7 +49,92 @@ Ui.prototype = {
             }
         }
     })(),
-    position: (function () {
+    setPosition:  function (target, self, position, offset) {
+        if(arguments.length != 4) {
+            return;
+        }
+        var $target = $(target);
+        var $self = $(self);
 
-    })()
+        var targetPosition = $target.offset(),
+            targetHeight = $target.outerHeight(),
+            targetWidth = $target.outerWidth(),
+            selfHeight = $self.outerHeight(),
+            selfWidth = $self.outerWidth();
+
+        switch (position) {
+            case 'tl':
+                $self.css({
+                    left: targetPosition.left,
+                    top: targetPosition.top - offset - selfHeight
+                });
+                break;
+            case 'tc':
+                $self.css({
+                    left: targetPosition.left + targetWidth / 2 - selfWidth / 2,
+                    top: targetPosition.top - offset - selfHeight
+                });
+                break;
+            case 'tr':
+                $self.css({
+                    left: targetPosition.left + targetWidth - selfWidth,
+                    top: targetPosition.top - offset - selfHeight
+                });
+                break;
+            case 'rt':
+                $self.css({
+                    left: targetPosition.left + targetWidth + offset,
+                    top: targetPosition.top
+                });
+                break;
+            case 'rc':
+                $self.css({
+                    left: targetPosition.left + targetWidth + offset,
+                    top: targetPosition.top + targetHeight / 2 - selfHeight / 2
+                });
+                break;
+            case 'rb':
+                $self.css({
+                    left: targetPosition.left + targetWidth + offset,
+                    top: targetPosition.top + targetHeight - selfHeight
+                });
+                break;
+            case 'br':
+                $self.css({
+                    left: targetPosition.left + targetWidth - selfWidth,
+                    top: targetPosition.top + targetHeight + offset
+                });
+                break;
+            case 'bc':
+                $self.css({
+                    left: targetPosition.left + targetWidth / 2 - selfWidth / 2,
+                    top: targetPosition.top + targetHeight + offset
+                });
+                break;
+            case 'bl':
+                $self.css({
+                    left: targetPosition.left,
+                    top: targetPosition.top + targetHeight + offset
+                });
+                break;
+            case 'lb':
+                $self.css({
+                    left: targetPosition.left - selfWidth - offset,
+                    top: targetPosition.top + targetHeight - selfHeight
+                });
+                break;
+            case 'lc':
+                $self.css({
+                    left: targetPosition.left - selfWidth - offset,
+                    top: targetPosition.top + targetHeight / 2 - selfHeight / 2
+                });
+                break;
+            case 'lt':
+                $self.css({
+                    left: targetPosition.left - selfWidth - offset,
+                    top: targetPosition.top
+                });
+                break;
+        }
+    }
 };

@@ -1,9 +1,11 @@
 $(function () {
-    var initializeList = ['Flag'];
+    setTimeout(function () {
+        var initializeList = ['Flag', 'Tooltip'];
 
-    var leng = initializeList.length;
+        var leng = initializeList.length;
 
-    while(leng--) {
-        (new window[initializeList[leng]]).init();
-    }
+        while(leng--) {
+            (new window[initializeList[leng]]).init();
+        }
+    }, 500);
 });
