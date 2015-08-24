@@ -1,7 +1,7 @@
 
 var Tooltip = function (trigger, position) {
     this.trigger = trigger ? trigger : 'body';
-    this.position = position ? position : 'bc';
+    this.position = position ? position : 'br';
 };
 
 $(function () {
