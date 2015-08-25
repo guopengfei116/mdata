@@ -12,6 +12,7 @@
 /*
     base-style
 */
+@import "util/_base";
 @import "util/_normalize";
 @import "util/_reset";
 
@@ -20,6 +21,7 @@
     functions
 */
 @import "function/_direction-reverse";
+@import "function/_get-index";
 @import "function/_list-extend";
 @import "function/_px-to-rem";
 @import "function/_strip-units";
@@ -64,16 +66,13 @@
 @import "ui/_button";
 //@import "ui/_checkbox";
 //@import "ui/_dialog_old";
-//@import "ui/_dropdown";
+@import "ui/_dropdown";
 @import "ui/_flag";
 @import "ui/_form";
 @import "ui/_input";
-@import "ui/_mask";
 //@import "ui/_panel";
 //@import "ui/_radio";
 //@import "ui/_select";
 //@import "ui/_switch";
 //@import "ui/_tab";
-//@import "ui/_tip";
 @import "ui/_tooltip";
-//@import "ui/_tooltip_old";

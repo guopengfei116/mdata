@@ -1,6 +1,6 @@
 $(function () {
     setTimeout(function () {
-        var initializeList = ['Flag', 'Tooltip'];
+        var initializeList = ['Flag', 'Tooltip', 'Dropdown'];
 
         var leng = initializeList.length;
 

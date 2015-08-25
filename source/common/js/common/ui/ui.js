@@ -49,7 +49,7 @@ Ui.prototype = {
             }
         }
     })(),
-    setPosition:  function (target, self, position, offset) {
+    uSetPosition:  function (target, self, position, offset) {
         if(arguments.length != 4) {
             return;
         }

@@ -8,23 +8,12 @@ body {
     background-color: $base-background-color;
 }
 
-a {
-    text-decoration:none;
-    &:hover {
-        text-decoration:underline;
-    }
+.mask {
+    @extend %mask;
 }
 
 .cf {
-    *zoom:1;
-    &:after {
-        content:'';
-        display:block;
-        clear:both;
-        height:0;
-        overflow:hidden;
-        visibility:hidden;
-    }
+    @extend %cf;
 }
 
 /* ghost element style vertical middle align */
