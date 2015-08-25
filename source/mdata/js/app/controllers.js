@@ -73,8 +73,14 @@ oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
     function ($scope, $http) {
         $scope.account = '';
         $scope.password = '';
+        $scope.blur = function ($error) {
+            console.log($error);
+            if($error.required) {
+                
+            }
+        };
         $scope.submit = function (target) {
-            if(/^[\w]{6,18}$/.test($scope.account) && /^[\w]{6,18}$/.test($scope.password)) {
+            if($scope['loginForm'].$valid) {
                 $http.get('/mdata/js/login.json').success(function (data) {
                     location.hash = '#/applications';
                 });
