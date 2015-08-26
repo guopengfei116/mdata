@@ -1,5 +1,11 @@
 
 .form {
+    .fieldset {
+        @include prefix(transform, all 0.3s);
+        &_text {
+            @include prefix(transform, all 0.3s);
+        }
+    }
     &-panel {
         position: relative;
         top: rem(300);
@@ -12,6 +18,15 @@
             margin-top: rem(36);
             border: 2px solid $fieldset-border-color;
             color: $fieldset-font-color;
+            &-error {
+                border-color: rgba(255, 0, 0, 0.4);
+                .fieldset_text {
+                    //background-color: rgba(255, 0, 0, 0.4);
+                }
+                .fieldset_warn {
+                    display: block;
+                }
+            }
             &-group {
                 position: relative;
                 padding-left: rem(42);
@@ -66,15 +81,6 @@
                     }
                 }
             }
-            &-error {
-                border-color: rgba(255, 0, 0, 0.4);
-                .fieldset_text {
-                    //background-color: rgba(255, 0, 0, 0.4);
-                }
-                .fieldset_warn {
-                    display: block;
-                }
-            }
         }
     }
     &-list {
@@ -84,15 +90,38 @@
             }
             &_text {
                 display: block;
+                padding: 7px;
+                width: 270px;
                 border: 1px solid #dce1e4;
                 font-size: 12px;
                 line-height: 1.5;
-                &-text {
-                    padding: 7px;
-                    width: 270px;
-                }
-                &-search {
+            }
+            &_textarea {
 
+            }
+        }
+    }
+    &-tool {
+        .fieldset {
+            &_text {
+                padding: 6px 5px;
+                width: 240px;
+                border: 1px solid #e5e5e5;
+                font-size: 12px;
+                line-height: 16px;
+                &:focus {
+                    border-color: #c9c9c9;
+                }
+            }
+            &_button {
+                @include inline-block();
+                margin-left: 8px;
+                width: 30px;
+                background-color: #22baa0;
+                line-height: 30px;
+                text-align: center;
+                &:hover {
+                    background-color: #1db198;
                 }
             }
         }

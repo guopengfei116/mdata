@@ -30,8 +30,6 @@
         }
     }
     &-bl {
-        left: 0;
-        botton: -10px;
         .dropdown_arrow {
             @include arrow(bottom, 8px, 8px, #d8dee4);
             top: -8px;
@@ -43,8 +41,6 @@
         }
     }
     &-br {
-        right: 0;
-        botton: -10px;
         .dropdown_arrow {
             @include arrow(bottom, 8px, 8px, #d8dee4);
             top: -8px;

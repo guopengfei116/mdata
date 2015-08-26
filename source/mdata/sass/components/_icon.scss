@@ -1,0 +1,18 @@
+@import "../sprites/_sprite_icons";
+
+@mixin sprites($sprites) {
+    @each $sprite in $sprites {
+        $sprite-name: nth($sprite, 10);
+        &-#{$sprite-name} {
+            @include sprite($sprite);
+        }
+    }
+}
+
+$icons: ($mdata-logo, );
+
+.sprite {
+    @include inline-block();
+    @include sprites($icons);
+}
+

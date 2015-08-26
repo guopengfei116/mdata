@@ -56,7 +56,18 @@ oasgames.mdataPanelControllers.controller('HeaderCtrl', [
 /*
  * 页面nav控制器
  * */
-oasgames.mdataPanelControllers.controller('MainFrameCtrl', [
+oasgames.mdataPanelControllers.controller('NavCtrl', [
+    '$scope',
+    function ($scope, PageOutline) {
+
+    }
+]);
+
+
+/*
+ * 页面nav控制器
+ * */
+oasgames.mdataPanelControllers.controller('MainCtrl', [
     '$scope',
     function ($scope, PageOutline) {
 
@@ -71,8 +82,10 @@ oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
     '$scope',
     '$http',
     function ($scope, $http) {
+
         $scope.account = '';
         $scope.password = '';
+        $scope.tooltip = new Tooltip({'position':'rc'}).getNewTooltip();
         $scope.blur = function (type, $errors) {
             var errorInfo = {
                 account: {
@@ -84,23 +97,26 @@ oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
                     pattern: '密码格式错误'
                 }
             };
-            var warnInfo = null;
 
             for(var $error in $errors) {
                 if($errors[$error]) {
-                    warnInfo =  errorInfo[type][$error];
                     $scope[type + 'Error'] = true;
-                    break;
+                    $scope.tooltip.errorType = type;
+                    $scope.tooltip.setContent(errorInfo[type][$error]);
+                    $scope.tooltip.setPosition('.fieldset-' + type, $scope.tooltip.toolTipLooks);
+                    $scope.tooltip.toolTipLooks.css({'color': 'rgba(255, 0, 0, 0.7)'});
+                    $scope.tooltip.show();
+                    return;
                 }
             }
 
-            if(!warnInfo) {
-                $scope[type + 'Error'] = false;
-            }
-            console.log(warnInfo);
+            $scope[type + 'Error'] = false;
         };
-        $scope.clearErrorWarn = function (errorCtl) {
-            $scope[errorCtl] = false;
+        $scope.focus = function (type) {
+            $scope[type + 'Error'] = false;
+            if($scope.tooltip.errorType == type) {
+                $scope.tooltip.hide();
+            }
         };
         $scope.clearErrors = function () {
             var errorCtl = ['accountError', 'passwordError'];
@@ -108,8 +124,8 @@ oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
                 $scope[errorCtl[i]] = false;
             }
         };
-        $scope.submit = function (target) {
-            if($scope['loginForm'].$valid) {
+        $scope.submit = function () {
+            if($scope['ndForm'].$valid) {
                 $http.get('/mdata/js/login.json').success(function (data) {
                     location.hash = '#/applications';
                 });

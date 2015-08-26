@@ -6,16 +6,26 @@
     </head>
     <body ng-controller="PageFrameCtrl">
         <header class="header" ng-controller="HeaderCtrl" ng-hide="outlineHide">
-
+            <h1 class="header_logo sprite sprite-mdata_logo"></h1>
+            <menu class="header_user dropdown-host">
+                <a class="dropdown-target" href="javascript:void(0);">guopengfei</a>
+                <i class="icon icon-arrow-small-down"></i>
+                <ul class="dropdown dropdown-bl">
+                    <li class="dropdown_arrow"></li>
+                    <li class="dropdown_arrow dropdown_arrow-mask"></li>
+                    <li class="dropdown_list"><span class="iconfont icon-wrench"></span><a>123</a></li>
+                    <li class="dropdown_list"><span class="iconfont icon-goout"></span><a>log out</a></li>
+                </ul>
+            </menu>
         </header>
-        <article class="main img-cover" ng-class="{'main-login': outlineHide}" ng-controller="MainFrameCtrl">
-            <nav class="nav"></nav>
-            <div class="page">
-                <section class="page_header"></section>
-                <section class="page_content">
-                    <div class="page_content-wrap ng-view"></div>
-                </section>
-            </div>
+        <nav class="nav" ng-controller="NavCtrl" ng-hide="outlineHide">
+
+        </nav>
+        <article class="main img-cover" ng-class="{'main-login': outlineHide}" ng-controller="MainCtrl">
+            <section class="main_header"></section>
+            <section class="main_content">
+                <div class="main_content-wrap ng-view"></div>
+            </section>
         </article>
         <script src="/mdata/js/app.js"></script>
     </body>

@@ -99,7 +99,7 @@ module.exports = function (grunt) {
     *  5、解析sass --> 调试目录
     *  6、剩余未操作文件复制 --> 调试目录
     * */
-    grunt.registerTask('production', ['clean', 'concat', 'string-replace', 'sprite', 'sass', 'copy']);
+    grunt.registerTask('production', ['clean', 'concat', 'string-replace', 'sass', 'copy']);
 
     /**
      * 开发模式调试任务，通过运行 grunt 或 grunt production-debug 命令调用。构建流程：

@@ -1,8 +1,9 @@
 
-var Tooltip = function (trigger, position, offset) {
-    this.trigger = trigger || 'body';
-    this.position = position || 'br';
-    this.offset = offset || 12;
+var Tooltip = function (options) {
+    var options = options || {};
+    this.trigger = options['trigger'] || 'body';
+    this.position = options['position'] || 'br';
+    this.offset = options['offset'] || 12;
 };
 
 $(function () {
@@ -14,32 +15,42 @@ $(function () {
         selector: '.tooltip',
         target: '.tooltip-host',
         init: function () {
-            if(!Tooltip.prototype.initialized) {
-                var tooltipTpl =
-                    '<span class="tooltip' + ' tooltip-' + this.position + '">' +
-                    '<span class="tooltip_content"></span>' +
-                    '<i class="tooltip_arrow"></i>' +
-                    '<i class="tooltip_arrow tooltip_arrow-mask"></i>' +
-                    '</span>';
-                this.toolTipLooks = $(tooltipTpl).appendTo('body');
-                Tooltip.prototype.initialized = true;
+            if(Tooltip.prototype.initialized) {
+                return;
             }
-            this.bind();
+
+            Tooltip.prototype.toolTipLooks = $(this.getTooltipTpl()).appendTo('body');
+            Tooltip.prototype.initialized = true;
+            this._bind();
         },
-        bind: function () {
+        getTooltipTpl: function () {
+            return '<span class="tooltip' + ' tooltip-' + this.position + '">' +
+                        '<span class="tooltip_content"></span>' +
+                        '<i class="tooltip_arrow"></i>' +
+                        '<i class="tooltip_arrow tooltip_arrow-mask"></i>' +
+                    '</span>';
+        },
+        getNewTooltip: function () {
+            this.toolTipLooks = $(this.getTooltipTpl()).appendTo('body');
+            return this;
+        },
+        _bind: function () {
             self = this;
-            $(this.trigger).on('mouseenter', self.target, function () {
+
+            $(this.trigger).on('mouseenter', Tooltip.prototype.target, function () {
                 var $this = $(this);
+                Tooltip.prototype.targetLooks = $this;
+
                 var position = $this.data('tooltip-position') || self.position;
-                self.targetLooks = $this;
                 self.setContent($this.data('tooltip-info'));
-                self.setPosition(position);
+                self.setPosition(Tooltip.prototype.targetLooks, Tooltip.prototype.toolTipLooks, position);
                 self.show(position);
-            }).on('mouseleave', self.target, function () {
+            }).on('mouseleave', Tooltip.prototype.target, function () {
                 self.hide();
             });
         },
         show: function (position) {
+            var position = position || this.position;
             var baseClass = 'tooltip',
                 positionClass = 'tooltip-' + position,
                 showClass = 'tooltip-active';
@@ -49,8 +60,9 @@ $(function () {
         hide: function () {
             this.toolTipLooks.removeClass('tooltip-active');
         },
-        setPosition: function (position) {
-            this.uSetPosition(this.targetLooks, this.toolTipLooks, position, this.offset);
+        setPosition: function (target, looks, position) {
+            var position = position || this.position;
+            this.uSetPosition(target, looks, position, this.offset);
         },
         setContent: function (content) {
             this.toolTipLooks.children('.tooltip_content').html(content);
