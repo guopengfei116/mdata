@@ -5,10 +5,10 @@
         <script src="/common/js/common.js"></script>
     </head>
     <body ng-controller="PageFrameCtrl">
-        <header class="header" ng-controller="HeaderCtrl" ng-hide="{{ outlineHide }}" ng-show="{{ !outlineHide }}">
+        <header class="header" ng-controller="HeaderCtrl" ng-hide="outlineHide">
 
         </header>
-        <article class="main img-cover {{ outlineHide? 'main-login' : '' }}" ng-controller="MainFrameCtrl">
+        <article class="main img-cover" ng-class="{'main-login': outlineHide}" ng-controller="MainFrameCtrl">
             <nav class="nav"></nav>
             <div class="page">
                 <section class="page_header"></section>

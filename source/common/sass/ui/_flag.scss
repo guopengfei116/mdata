@@ -4,14 +4,21 @@
     @include padding(2px 4px);
     background-color: #e4ecf3;
     font-size: 12px;
+    line-height: 14px;
     color: #2498d0;
     &-icon {
-        @include padding(5px 10px);
+        @include padding(5px 6px);
         background-color: #12afcb;
         color: #fff;
         &_delete {
+            @include prefix(transition, all 0.3s );
             cursor: pointer;
-            padding-left: 6px;
+            margin-left: 4px;
+            font-size: 14px !important;
+            line-height: 14px;
+            &:hover {
+                background-color: #109eb7;
+            }
         }
     }
 }

@@ -1,15 +1,17 @@
-<form class="form" name="loginForm" novalidate>
-    <fieldset class="fieldset fieldset-group">
-        <label class="fieldset_label icon"></label>
+<form class="form form-panel" name="loginForm" novalidate>
+    <fieldset class="fieldset fieldset-group" ng-class="{'fieldset-error':accountError}">
+        <label class="fieldset-group_label iconfont icon-user"></label>
         <input ng-model="account" class="fieldset_text" type="text"
                placeholder="Email" required ng-pattern="/^\w{6,16}$/"
-               name="loginAccount" ng-blur="blur(loginForm.loginAccount.$error)">
+               name="loginAccount" ng-blur="blur('account', loginForm.loginAccount.$error)"
+               ng-focus="clearErrorWarn('accountError')" >
     </fieldset>
-    <fieldset class="fieldset fieldset-group">
-        <label class="fieldset_label icon"></label>
-        <input ng-model="password" class="fieldset_text" type="text"
+    <fieldset class="fieldset fieldset-group" ng-class="{'fieldset-error':passwordError}">
+        <label class="fieldset-group_label iconfont icon-key"></label>
+        <input ng-model="password" class="fieldset_text" type="password"
                placeholder="Password" required ng-pattern="/^\w{6,16}$/"
-               name="loginPassword" ng-blur="blur(loginForm.loginPassword.$error)">
+               name="loginPassword" ng-blur="blur('password', loginForm.loginPassword.$error)"
+               ng-focus="clearErrorWarn('passwordError')" >
     </fieldset>
     <fieldset class="fieldset">
         <button ng-click="submit()" class="fieldset_button" type="button">log in</button>

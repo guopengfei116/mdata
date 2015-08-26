@@ -1,49 +1,101 @@
 
 .form {
-    position: relative;
-    top: rem(300);
-    margin: 0 auto;
-    max-width: 480px;
-    width: rem(480);
-    border: 1px solid transparent;
+    &-panel {
+        position: relative;
+        top: rem(300);
+        margin: 0 auto;
+        max-width: 480px;
+        width: rem(480);
+        border: 1px solid transparent;
+        .fieldset {
+            position: relative;
+            margin-top: rem(36);
+            border: 2px solid $fieldset-border-color;
+            color: $fieldset-font-color;
+            &-group {
+                position: relative;
+                padding-left: rem(42);
+                &_label {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: rem(42);
+                    height: rem(42);
+                    line-height: rem(42);
+                    text-align: center;
+                    color: $fieldset-border-color;
+                }
+            }
+            &_text {
+                @include prefix(box-sizing, border-box);
+                display: block;
+                padding: rem(12) 1px;
+                width: 100%;
+                line-height: rem(16);
+                &-focus {
+                    border-left: none;
+                }
+            }
+            &_button {
+                @include prefix(box-sizing, border-box);
+                display: block;
+                width: 100%;
+                height: rem(46);
+                background-color: $fieldset-border-color;
+                line-height: rem(46);
+                font-size: rem(20);
+                text-align: center;
+                color: #fff;
+            }
+            &_warn {
+                display: none;
+                position: absolute;
+                padding: 8px 12px;
+                border: 1px solid #d8dee4;
+                background-color: #fff;
+                font-size: 12px;
+                color: #d8dee4;
+                &-arrow {
+                    @include arrow(right, 8px, 8px, #d8dee4);
+                    left:-8px;
+                    top:50%;
+                    margin-top:-8px;
+                    &-mask {
+                        left:-7px;
+                        border-right-color: #fff;
+                    }
+                }
+            }
+            &-error {
+                border-color: rgba(255, 0, 0, 0.4);
+                .fieldset_text {
+                    //background-color: rgba(255, 0, 0, 0.4);
+                }
+                .fieldset_warn {
+                    display: block;
+                }
+            }
+        }
+    }
+    &-list {
+        .fieldset {
+            &_label {
+                display: block;
+            }
+            &_text {
+                display: block;
+                border: 1px solid #dce1e4;
+                font-size: 12px;
+                line-height: 1.5;
+                &-text {
+                    padding: 7px;
+                    width: 270px;
+                }
+                &-search {
+
+                }
+            }
+        }
+    }
 }
 
-.fieldset {
-    margin-top: rem(36);
-    border: 2px solid $fieldset-border-color;
-    color: $fieldset-font-color;
-    &-group {
-        position: relative;
-        padding-left: rem(42);
-        &-group_label {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: rem(42);
-            height: rem(42);
-            line-height: rem(42);
-            text-align: center;
-        }
-    }
-    &_text {
-        @include prefix(box-sizing, border-box);
-        display: block;
-        padding: rem(12) 1px;
-        width: 100%;
-        line-height: rem(16);
-        &-focus {
-            border-left: none;
-        }
-    }
-    &_button {
-        @include prefix(box-sizing, border-box);
-        display: block;
-        width: 100%;
-        height: rem(46);
-        background-color: $fieldset-border-color;
-        line-height: rem(46);
-        font-size: rem(20);
-        text-align: center;
-        color: #fff;
-    }
-}

@@ -73,10 +73,39 @@ oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
     function ($scope, $http) {
         $scope.account = '';
         $scope.password = '';
-        $scope.blur = function ($error) {
-            console.log($error);
-            if($error.required) {
-                
+        $scope.blur = function (type, $errors) {
+            var errorInfo = {
+                account: {
+                    required: '请输入账号',
+                    pattern: '账号格式错误'
+                },
+                password: {
+                    required: '请输入密码',
+                    pattern: '密码格式错误'
+                }
+            };
+            var warnInfo = null;
+
+            for(var $error in $errors) {
+                if($errors[$error]) {
+                    warnInfo =  errorInfo[type][$error];
+                    $scope[type + 'Error'] = true;
+                    break;
+                }
+            }
+
+            if(!warnInfo) {
+                $scope[type + 'Error'] = false;
+            }
+            console.log(warnInfo);
+        };
+        $scope.clearErrorWarn = function (errorCtl) {
+            $scope[errorCtl] = false;
+        };
+        $scope.clearErrors = function () {
+            var errorCtl = ['accountError', 'passwordError'];
+            for(var i = 0; i < types.length; i++) {
+                $scope[errorCtl[i]] = false;
             }
         };
         $scope.submit = function (target) {
@@ -84,8 +113,6 @@ oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
                 $http.get('/mdata/js/login.json').success(function (data) {
                     location.hash = '#/applications';
                 });
-            }else {
-                console.log('请输入正确账号密码！');
             }
         }
     }

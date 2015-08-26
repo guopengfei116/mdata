@@ -13,9 +13,13 @@ $.extend(Dropdown.prototype, {
         var self = this;
         $('.dropdown').each(function () {
             var $looks = $(this);
+            if($looks.attr('init')) {
+                return;
+            }
             var $host = $looks.parent(self.host);
             var position = $looks.data('dropdown-position') || self.position;
             self.initPosition($host, $looks, position);
+            $looks.attr('init', true);
         });
         this.bind();
     },

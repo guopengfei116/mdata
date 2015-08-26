@@ -9,12 +9,31 @@ var Flag = function (trigger) {
 $(function () {
     Flag.extends(Ui);
     $.extend(Flag.prototype, {
+        initialized : false,
         selector: '.flag',
         targets: {
             '.flag-icon_delete' : 'delete'
         },
         init: function () {
+            if(this.initialized) {
+                return;
+            }
             this.bind();
+            this.initialized = true;
+        },
+        getFlag: function (info, type) {
+            if(!info) {
+                return;
+            }
+            var type = type || 'delete';
+            var typeIcon = {
+                delete : '<i class="flag-icon_delete iconfont icon-close"></i>'
+            };
+            var flag = '<span class="flag flag-icon tooltip-host">' +
+                            info +
+                            typeIcon[type] +
+                        '</span>';
+            return $(flag);
         },
         /*
          * 给flag子类绑定事件，
