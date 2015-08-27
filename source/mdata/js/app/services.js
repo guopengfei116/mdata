@@ -20,6 +20,28 @@ oasgames.mdataPanelServices.factory('PageOutlineBlacklist', [
     }
 ]);
 
+/*
+ * 用来配置哪些页面不需要基本的轮廓显示，
+ * 提供getBlackList方法用来获取列表
+ * */
+oasgames.mdataPanelServices.factory('GetApi', [
+    function () {
+        var api = {
+            'login' : '/mdata/js/login.json',
+            'logout' : '/mdata/js/logout.json'
+        };
+        function getApi(name) {
+            var matchApi = api[name];
+            if(!matchApi) {
+                console.log('api--' + name + '不存在');
+                return '';
+            }
+            return matchApi;
+        }
+        return getApi;
+    }
+]);
+
 oasgames.mdataPanelServices.factory('Applications', [
     '$resource',
     function ($resource) {

@@ -1,8 +1,30 @@
 .nav {
+    @include border-box();
     position: absolute;
     left: 0;
     top: 0;
+    padding-top: rem(60);
     width: rem(200);
-    height: 100%;
-    background-color: $nav-background-color;
+    min-height: 100%;
+    background-color: #34425a;
+    &_list {
+        &_item {
+            @include prefix(transition, all 0.4s);
+            padding: rem(18) 0;
+            font-size: 14px;
+            text-align: center;
+            color: #899dc1;
+            &-active {
+                background-color: #2b384e;
+                color: #fff;
+            }
+            &:hover {
+                background-color: #2b384e;
+                color: #fff;
+            }
+            .iconfont {
+                font-size: 26px;
+            }
+        }
+    }
 }

@@ -1,10 +1,14 @@
-@font-face {
-    font-family: "iconfont";
-    src: url('/mdata/media/iconfont.woff') format('woff'),
-    url('/mdata/media/iconfont.ttf') format('truetype');
+
+@font-face {font-family: "iconfont";
+    src: url('/mdata/media/iconfont.eot'); /* IE9*/
+    src: url('/mdata/media/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/mdata/media/iconfont.woff') format('woff'), /* chrome銆乫irefox */
+    url('/mdata/media/iconfont.ttf') format('truetype'), /* chrome銆乫irefox銆乷pera銆丼afari, Android, iOS 4.2+*/
+    url('/mdata/media/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {
+    @include inline-block();
     font-family:"iconfont" !important;
     font-size:16px;
     font-style:normal;
@@ -17,7 +21,8 @@
 .icon-arrow-right:before { content: "\e601"; }
 .icon-date:before { content: "\e602"; }
 .icon-check:before { content: "\e603"; }
-.icon-arrow-small-down:before { content: "\e604"; }
+.icon-arrow-small-up:before { content: "\e61a"; }
+.icon-arrow-small-down:before { content: "\e61b"; }
 .icon-close:before { content: "\e605"; }
 .icon-application:before { content: "\e606"; }
 .icon-channel:before { content: "\e607"; }

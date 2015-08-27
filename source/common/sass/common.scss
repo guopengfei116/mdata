@@ -32,6 +32,8 @@
     mixins
 */
 @import "mixin/_arrow";
+@import "mixin/_background-cover";
+@import "mixin/_border-box";
 @import "mixin/_directional-values";
 @import "mixin/_ellipsis";
 @import "mixin/_flex-box";
@@ -51,7 +53,9 @@
 /*
     placeholders
 */
-@import "placeholder/_clear-childrens-float";
+@import "placeholder/_align-middle";
+@import "placeholder/_background-cover";
+@import "placeholder/_clear-childrens";
 @import "placeholder/_ellipsis";
 @import "placeholder/_inline-block";
 @import "placeholder/_mask";

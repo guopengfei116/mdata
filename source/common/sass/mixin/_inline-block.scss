@@ -1,6 +1,6 @@
-@mixin inline-block {
+@mixin inline-block($vertical:baseline) {
 	display : inline-block;
-	vertical-align: baseline;
+	vertical-align: $vertical;
 	@if $browser-pc and $prefix-for-lte7{
 		*display : inline;
 		*zoom : 1;

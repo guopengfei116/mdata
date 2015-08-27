@@ -47,8 +47,21 @@ oasgames.mdataPanelControllers.controller('PageFrameCtrl', [
  * */
 oasgames.mdataPanelControllers.controller('HeaderCtrl', [
     '$scope',
-    function ($scope, PageOutline) {
-
+    '$http',
+    'GetApi',
+    function ($scope, $http, GetApi) {
+        $scope.isshow = false;
+        $scope.show = function () {
+            $scope.isshow = !$scope.isshow;
+        };
+        $scope.logout = function () {
+            var api = GetApi('logout');
+            if(api) {
+                $http.get(api).success(function () {
+                    location.hash = '#/login';
+                });
+            }
+        };
     }
 ]);
 
@@ -58,7 +71,7 @@ oasgames.mdataPanelControllers.controller('HeaderCtrl', [
  * */
 oasgames.mdataPanelControllers.controller('NavCtrl', [
     '$scope',
-    function ($scope, PageOutline) {
+    function ($scope) {
 
     }
 ]);
@@ -69,7 +82,7 @@ oasgames.mdataPanelControllers.controller('NavCtrl', [
  * */
 oasgames.mdataPanelControllers.controller('MainCtrl', [
     '$scope',
-    function ($scope, PageOutline) {
+    function ($scope) {
 
     }
 ]);
@@ -81,7 +94,8 @@ oasgames.mdataPanelControllers.controller('MainCtrl', [
 oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
     '$scope',
     '$http',
-    function ($scope, $http) {
+    'GetApi',
+    function ($scope, $http, GetApi) {
 
         $scope.account = '';
         $scope.password = '';
@@ -125,7 +139,8 @@ oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
             }
         };
         $scope.submit = function () {
-            if($scope['ndForm'].$valid) {
+            var api = GetApi(login);
+            if($scope['ndForm'].$valid && api) {
                 $http.get('/mdata/js/login.json').success(function (data) {
                     location.hash = '#/applications';
                 });

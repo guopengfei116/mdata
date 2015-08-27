@@ -5,22 +5,38 @@
     top: 0;
     width: 100%;
     height: rem(60);
+    line-height: rem(60);
     background-color: $header-background-color;
     &_logo {
-        float: left;
-        width: 200px;
-        line-height: rem(60);
-        text-align: center;
+        margin-left: 18px;
     }
-    &_user {
+    &_settings {
         float: right;
-        width: 160px;
+        @include inline-block(middle);
+        margin-right: 30px;
         font-size: 12px;
-        text-align: center;
         color: #fff;
-        .icon {
+        &:hover {
+            .header_settings_arrow {
+                @include prefix(transform, rotate(180deg));
+            }
+        }
+        &_user {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+        &_arrow {
+            @include prefix(transition, all 0.5s);
             margin-left: 8px;
             color: #fff;
+        }
+        .dropdown {
+            &_list {
+                .iconfont {
+                    font-size: inherit;
+                }
+            }
         }
     }
 }

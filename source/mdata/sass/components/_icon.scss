@@ -12,7 +12,7 @@
 $icons: ($mdata-logo, );
 
 .sprite {
-    @include inline-block();
+    @include inline-block(middle);
     @include sprites($icons);
 }
 

@@ -1,27 +1,61 @@
 .main {
     padding-left: rem(200);
     min-height: 100%;
-    &_header {
-        height: rem(90);
-        background-color: #e9edf2;
-    }
-    &_content {
-        padding: rem(30) rem(30) 0;
-        &-wrap {
-            padding: rem(20);
-        }
-    }
     &-login {
+        display: table;
         padding-left: 0;
-        background-img: url("");
+        width: 100%;
         .main_header {
             display: none;
         }
         .main_content {
+            vertical-align: middle;
+            display: table-cell;
             padding: 0;
+            @include background-cover('/mdata/img/login_bg.jpg');
             &-wrap {
                 padding: 0;
+                background-color: transparent;
             }
+        }
+    }
+    &_header {
+        padding-top: rem(80);
+        padding-left: rem(30);
+        border-bottom: 1px solid #dee2e8;
+        height: rem(69);
+        background-color: #e9edf2;
+        &_title {
+            line-height: 1.5;
+            font-size: 24px;
+            font-weight: 400;
+            color: #666666;
+        }
+        .history {
+            font-size: 12px;
+            color: #999999;
+            &_list {
+                @include inline-block();
+                &_item {
+                    @include inline-block();
+                    &-url {
+                        cursor: pointer;
+                        @include prefix(transition, all 0.4s);
+                        &:hover {
+                            font-size: 14px;
+                            color: #262626;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &_content {
+        padding: rem(30) rem(30) 0;
+        background-color: #f1f4f9;
+        &-wrap {
+            padding: rem(20);
+            background-color: #fff;
         }
     }
 }

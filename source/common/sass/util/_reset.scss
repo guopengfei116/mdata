@@ -1,7 +1,7 @@
 /**
 *  补充normalize
 */
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,img,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td{
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,img,pre,code,form,fieldset,legend,input,menu,button,textarea,p,blockquote,th,td{
     margin:0;padding:0;outline:none;
 }
 address,caption,cite,code,dfn,em,th,var{
@@ -43,5 +43,12 @@ textarea {
 /* touch浮现的半透明层 */
 a, button, input{
     -webkit-tap-highlight-color: rgba(255,255,255,0);
+}
+
+a {
+    text-decoration: none;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
 }
 
