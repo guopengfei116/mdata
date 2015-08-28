@@ -54,8 +54,8 @@
                 </li>
             </ul>
         </nav>
-        <article class="main img-cover" ng-class="{'main-login': outlineHide}" ng-controller="MainCtrl">
-            <section class="main_header">
+        <article class="main img-cover" ng-class="{'main-login': islogin, 'main-other': outlineHide}" ng-controller="MainCtrl">
+            <section class="main_header" ng-hide="outlineHide">
                 <h2 class="main_header_title">Application</h2>
                 <nav class="history">
                     <em class="iconfont icon-coords"></em>

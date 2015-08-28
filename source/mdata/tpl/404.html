@@ -1,3 +1,78 @@
-<article>
-    <h1>您要找的页面不存在！</h1>
-</article>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Example</title>
+        <link href="/mdata/sass/index.css" rel="stylesheet"/>
+    </head>
+<body>
+    <input type="text" id="checkDate" gldp-id="checkDate" />
+    <input type="text" id="leaveDate" gldp-id="leaveDate" />
+    <div gldp-el="checkDate"
+         style="width:340px; height:300px; position:absolute; top:70px; left:100px;">
+    </div>
+    <div gldp-el="leaveDate"
+         style="width:340px; height:300px; position:absolute; top:70px; left:100px;">
+    </div>
+
+    <script src="/common/js/common.js"></script>
+
+    <script type="text/javascript">
+        $(window).load(function () {
+            var current = new Date();
+            var startYear = current.getFullYear(), startMonth = current.getMonth() + 1, startDay = current.getDate();
+            var selectedDate = new Date(startYear, startMonth, startDay);
+            var checkDate, leaveDate;
+            checkDate = $('#checkDate').glDatePicker({
+                showAlways: true,
+                cssName: 'flatwhite',
+                allowMonthSelect: false,
+                allowYearSelect: false,
+                selectedDate: selectedDate,
+                selectableYears: [startYear, startYear + 1, startYear + 2],
+                selectableDateRange: [
+                    { from: new Date(startYear, startMonth, startDay),
+                        to: new Date(startYear + 2, startMonth, startDay) }
+                ],
+                onClick: function(target, cell, date, data) {
+                    target.val(date.getFullYear() + '-' +
+                            date.getMonth() + '-' +
+                            date.getDate());
+
+                    if(data != null) {
+                        alert(data.message + '\n' + date);
+                    }
+
+                    $.extend(leaveDate.options,{
+                        selectedDate: new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1),
+                        selectableDateRange: [
+                            { from: new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1),
+                                to: new Date(date.getFullYear() + 2, date.getMonth(), date.getDate()) }
+                        ]
+                    });
+                    leaveDate.render();
+                }
+            }).glDatePicker(true);
+            leaveDate = $('#leaveDate').glDatePicker({
+                showAlways: false,
+                cssName: 'flatwhite',
+                allowMonthSelect: false,
+                allowYearSelect: false,
+                selectableYears: [startYear, startYear + 1, startYear + 2],
+                selectableDateRange: [
+                    { from: new Date(startYear, startMonth, startDay),
+                        to: new Date(startYear + 2, startMonth, startDay) }
+                ],
+                onClick: function(target, cell, date, data) {
+                    target.val(date.getFullYear() + '-' +
+                            date.getMonth() + '-' +
+                            date.getDate());
+
+                    if(data != null) {
+                        alert(data.message + '\n' + date);
+                    }
+                }
+            }).glDatePicker(true);
+        });
+    </script>
+</body>
+</html>

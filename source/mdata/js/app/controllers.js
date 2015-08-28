@@ -14,6 +14,8 @@ oasgames.mdataPanelControllers.controller('PageFrameCtrl', [
     '$scope',
     'PageOutlineBlacklist',
     function ($scope, PageOutlineBlacklist) {
+        $scope.outlineHide = true;
+        $scope.islogin = true;
 
         var blackList = PageOutlineBlacklist.getBlackList();
 
@@ -36,7 +38,8 @@ oasgames.mdataPanelControllers.controller('PageFrameCtrl', [
         $(window).bind('hashchange', function () {
             var hash = location.hash;
             $scope.outlineHide = matchBlackList(hash);
-            console.log($scope.outlineHide);
+            $scope.islogin = /^#\/login$/.test(hash);
+            console.log(当前页面为 + hash.match(/^#\/([a-z]*)$/)[1]);
         });
     }
 ]);
@@ -139,7 +142,7 @@ oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
             }
         };
         $scope.submit = function () {
-            var api = GetApi(login);
+            var api = GetApi('login');
             if($scope['ndForm'].$valid && api) {
                 $http.get('/mdata/js/login.json').success(function (data) {
                     location.hash = '#/applications';

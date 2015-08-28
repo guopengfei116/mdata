@@ -5,14 +5,21 @@
         display: table;
         padding-left: 0;
         width: 100%;
-        .main_header {
-            display: none;
-        }
         .main_content {
             vertical-align: middle;
             display: table-cell;
             padding: 0;
             @include background-cover('/mdata/img/login_bg.jpg');
+            &-wrap {
+                padding: 0;
+                background-color: transparent;
+            }
+        }
+    }
+    &-other {
+        padding-left: 0;
+        .main_content {
+            padding: 0;
             &-wrap {
                 padding: 0;
                 background-color: transparent;
