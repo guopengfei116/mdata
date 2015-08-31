@@ -1,0 +1,34 @@
+.select {
+    @include inline-block();
+    position: relative;
+    background-color: $select-background-color;
+    &-disable {
+        color:#999;
+        background-color: #f1f1f1;
+    }
+    &_main {
+        cursor: pointer;
+        padding-right: rem(32);
+        border: 1px solid $select-color;
+        line-height: rem(32);
+        &-active {
+            background-color: #f1f1f1;
+        }
+        &_p {
+            padding: 0 6px;
+            @include ellipsis();
+        }
+        &_icon {
+            position: absolute;
+            top: 14px;
+            right: 12px;
+            @include arrow(top, 4px, 4px, #333333);
+        }
+    }
+    &_content {
+        //@extend .dropdown__content;
+        a {
+            @include ellipsis();
+        }
+    }
+}

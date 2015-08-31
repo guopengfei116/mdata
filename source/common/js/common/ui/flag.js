@@ -1,6 +1,10 @@
-
-var Flag = function (trigger) {
-    this.trigger = trigger ? trigger : 'body';
+/**
+ * @param {Object} options
+ * @param {Selector} options.trigger 事件委托者
+ */
+var Flag = function (options) {
+    var options = options || {};
+    this.trigger = options.trigger || 'body';
     this.unbind = {
         'delete' : false
     };
@@ -15,11 +19,11 @@ $(function () {
             '.flag-icon_delete' : 'delete'
         },
         init: function () {
-            if(this.initialized) {
+            if(Flag.prototype.initialized) {
                 return;
             }
             this.bind();
-            this.initialized = true;
+            Flag.prototype.initialized = true;
         },
         getFlag: function (info, type) {
             if(!info) {

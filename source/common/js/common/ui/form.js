@@ -1,4 +1,7 @@
-
+/**
+ * @param {Object} options
+ * @param {Selector} options.trigger 事件委托者
+ */
 var Form = function (options) {
     this.o = {
 

@@ -1,4 +1,7 @@
-
+/**
+ * 扩展Function.prototype继承方法
+ * @param {Function || Object} father
+ */
 if(!Function.prototype.extends) {
     Function.prototype.extends = function (father) {
         var type = Object.prototype.toString.call(father);
@@ -14,8 +17,7 @@ if(!Function.prototype.extends) {
         }
 
         smriti.prototype = fatherInstance;
-        this.prototype = new smriti();
-        this.prototype.constructor = this;
+        this.prototype = $.extend(new smriti(), this.prototype);
     }
 }
 

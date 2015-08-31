@@ -1,4 +1,9 @@
-
+/**
+ * @param {Object} options
+ * @param {Selector} options.trigger 事件委托者
+ * @param {Direction} options.position 定位方向
+ * @param {Number} options.offset 定位偏移量
+ */
 var Tooltip = function (options) {
     var options = options || {};
     this.trigger = options['trigger'] || 'body';
@@ -8,21 +13,23 @@ var Tooltip = function (options) {
 
 $(function () {
     Tooltip.extends(Ui);
+
     $.extend(Tooltip.prototype, {
         initialized : false,
         toolTipLooks : null,
-        targetLooks: null,
         selector: '.tooltip',
         target: '.tooltip-host',
+
         init: function () {
             if(Tooltip.prototype.initialized) {
                 return;
             }
 
             Tooltip.prototype.toolTipLooks = $(this.getTooltipTpl()).appendTo('body');
-            Tooltip.prototype.initialized = true;
             this._bind();
+            Tooltip.prototype.initialized = true;
         },
+
         getTooltipTpl: function () {
             return '<span class="tooltip' + ' tooltip-' + this.position + '">' +
                         '<span class="tooltip_content"></span>' +
@@ -30,25 +37,26 @@ $(function () {
                         '<i class="tooltip_arrow tooltip_arrow-mask"></i>' +
                     '</span>';
         },
+
         getNewTooltip: function () {
             this.toolTipLooks = $(this.getTooltipTpl()).appendTo('body');
             return this;
         },
+
         _bind: function () {
             self = this;
 
             $(this.trigger).on('mouseenter', Tooltip.prototype.target, function () {
                 var $this = $(this);
-                Tooltip.prototype.targetLooks = $this;
-
                 var position = $this.data('tooltip-position') || self.position;
                 self.setContent($this.data('tooltip-info'));
-                self.setPosition(Tooltip.prototype.targetLooks, Tooltip.prototype.toolTipLooks, position);
+                self.setPosition($this, Tooltip.prototype.toolTipLooks, position);
                 self.show(position);
             }).on('mouseleave', Tooltip.prototype.target, function () {
                 self.hide();
             });
         },
+
         show: function (position) {
             var position = position || this.position;
             var baseClass = 'tooltip',
@@ -57,13 +65,16 @@ $(function () {
 
             this.toolTipLooks.attr('class', baseClass + ' ' + positionClass + ' ' + showClass);
         },
+
         hide: function () {
             this.toolTipLooks.removeClass('tooltip-active');
         },
+
         setPosition: function (target, looks, position) {
             var position = position || this.position;
             this.uSetPosition(target, looks, position, this.offset);
         },
+
         setContent: function (content) {
             this.toolTipLooks.children('.tooltip_content').html(content);
         }

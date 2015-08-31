@@ -26,7 +26,7 @@
                 </ul>
             </menu>
         </header>
-        <nav class="nav" ng-controller="NavCtrl" ng-hide="outlineHide">
+        <nav class="nav" ng-controller="appNavCtrl" ng-hide="outlineHide">
             <ul class="nav_list">
                 <li class="nav_list_item">
                     <i class="iconfont icon-application"></i>
@@ -54,14 +54,14 @@
                 </li>
             </ul>
         </nav>
-        <article class="main img-cover" ng-class="{'main-login': islogin, 'main-other': outlineHide}" ng-controller="MainCtrl">
-            <section class="main_header" ng-hide="outlineHide">
-                <h2 class="main_header_title">Application</h2>
+        <article class="main img-cover" ng-class="{'main-login': islogin, 'main-other': outlineHide}">
+            <section class="main_header" ng-hide="outlineHide" ng-controller="historyNavCtrl">
+                <h2 class="main_header_title">{{ pageTitle }}</h2>
                 <nav class="history">
                     <em class="iconfont icon-coords"></em>
                     <dl class="history_list">
                         <dt class="history_list_item">Locations:</dt>
-                        <dd class="history_list_item history_list_item-url">Application</dd>
+                        <dd class="history_list_item history_list_item-url" ng-repeat="history in pageHistory">{{history}}</dd>
                         <dd class="history_list_item">&gt;</dd>
                         <dd class="history_list_item history_list_item-url">Create</dd>
                     </dl>

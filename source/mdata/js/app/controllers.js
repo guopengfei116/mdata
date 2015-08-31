@@ -12,15 +12,17 @@ oasgames.mdataPanelControllers = angular.module('mdataPanelControllers', []);
  * */
 oasgames.mdataPanelControllers.controller('PageFrameCtrl', [
     '$scope',
+    '$location',
     'PageOutlineBlacklist',
-    function ($scope, PageOutlineBlacklist) {
+    function ($scope, $location, PageOutlineBlacklist) {
         $scope.outlineHide = true;
         $scope.islogin = true;
-
-        var blackList = PageOutlineBlacklist.getBlackList();
+        $scope.pageTitle = 'Application';
+        $scope.pageHistorys = ['Application', 'Create'];
 
         //查询hash值是否匹配黑名单
         function matchBlackList(hash) {
+            var blackList = PageOutlineBlacklist.getBlackList();
             var matched = false;
             for(var i = blackList.length - 1; i >= 0; i--) {
                 if(new RegExp('^' + blackList[i] + '$').test(hash)) {
@@ -33,13 +35,29 @@ oasgames.mdataPanelControllers.controller('PageFrameCtrl', [
             return matched;
         }
 
-        $scope.outlineHide = matchBlackList(location.hash);
+        ($scope.pageInit = function () {
+            $scope.outlineHide = matchBlackList(location.hash);
+            $scope.islogin = /^\/login$/.test($location.path());
+
+            //分隔页面路径
+            var paths = $location.path().split('/');
+            for(var i = 0; i < paths.length; i++) {
+                if(paths[i]) {
+                    $scope.pageHistorys.push(paths[i]);
+                }
+            }
+
+            //取第一个path作为页面title
+            $scope.pageTitle = $scope.pageHistorys[0];
+
+            //初始化Ui
+            var ui = new Ui();
+            ui.init();
+            console.log('当前页面为' + $location.path());
+        })();
 
         $(window).bind('hashchange', function () {
-            var hash = location.hash;
-            $scope.outlineHide = matchBlackList(hash);
-            $scope.islogin = /^#\/login$/.test(hash);
-            console.log(当前页面为 + hash.match(/^#\/([a-z]*)$/)[1]);
+            $scope.pageInit();
         });
     }
 ]);
@@ -70,23 +88,25 @@ oasgames.mdataPanelControllers.controller('HeaderCtrl', [
 
 
 /*
- * 页面nav控制器
+ * 页面appNav控制器
  * */
-oasgames.mdataPanelControllers.controller('NavCtrl', [
+oasgames.mdataPanelControllers.controller('appNavCtrl', [
     '$scope',
     function ($scope) {
-
+        console.log(this);
+        this.name = 'pengfei';
+        console.log(this);
     }
 ]);
 
 
 /*
- * 页面nav控制器
+ * 页面historyNav控制器
  * */
-oasgames.mdataPanelControllers.controller('MainCtrl', [
+oasgames.mdataPanelControllers.controller('historyNavCtrl', [
     '$scope',
     function ($scope) {
-
+        console.log(this);
     }
 ]);
 

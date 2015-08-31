@@ -1,9 +1,27 @@
-var Ui = function () {
-
+/**
+ * @param {Object} options
+ * @param {Array} options.initializeList 初始化列表
+ */
+var Ui = function (options) {
+    this._o = {
+        initializeList : ['Flag', 'Tooltip', 'Dropdown', 'Select']
+    }
 };
 
 Ui.prototype = {
     constructor: Ui,
+    init: function () {
+        var self = this;
+        $(function () {
+            setTimeout(function () {
+                var leng = self._o.initializeList.length;
+
+                while(leng--) {
+                    (new window[self._o.initializeList[leng]]).init();
+                }
+            }, 500);
+        });
+    },
     alert: (function () {
         var Alert = {
             initialized: false,
