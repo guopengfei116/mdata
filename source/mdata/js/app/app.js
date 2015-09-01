@@ -24,14 +24,83 @@ oasgames.mdataPanelApp.config([
             templateUrl: '/mdata/tpl/login.html',
             controller: 'MdataLoginCtrl'
         })
-        .when('/applications', {
-            templateUrl: '/mdata/tpl/applications.html',
+
+        //application
+        .when('/application', {
+            redirectTo: '/application/manage'
+        })
+        .when('/application/manage', {
+            templateUrl: '/mdata/tpl/partials/application_manage.html',
             controller: 'ApplicationListCtrl'
         })
-        .when('/applications/:applicationId', {
-            templateUrl: '/mdata/tpl/applications.html',
+        .when('/application/manage/create', {
+            templateUrl: '/mdata/tpl/partials/application_create.html',
             controller: 'ApplicationListCtrl'
         })
+        .when('/application/manage/edit/:applicationId', {
+            templateUrl: '/mdata/tpl/partials/application_edit.html',
+            controller: 'ApplicationListCtrl'
+        })
+
+        //channel
+        .when('/channel', {
+            redirectTo: '/channel/manage'
+        })
+        .when('/channel/manage', {
+            templateUrl: '/mdata/tpl/partials/channel_manage.html',
+            controller: 'ApplicationListCtrl'
+        })
+        .when('/channel/manage/create', {
+            templateUrl: '/mdata/tpl/partials/channel_create.html',
+            controller: 'ApplicationListCtrl'
+        })
+        .when('/channel/manage/edit:channelId', {
+            templateUrl: '/mdata/tpl/partials/channel_edit.html',
+            controller: 'ApplicationListCtrl'
+        })
+
+        //account
+        .when('/account', {
+            redirectTo: '/account/manage'
+        })
+        .when('/account/manage', {
+            templateUrl: '/mdata/tpl/partials/account_manage.html',
+            controller: 'ApplicationListCtrl'
+        })
+        .when('/account/manage/create', {
+            templateUrl: '/mdata/tpl/partials/account_create.html',
+            controller: 'ApplicationListCtrl'
+        })
+        .when('/account/manage/edit:accountId', {
+            templateUrl: '/mdata/tpl/partials/account_edit.html',
+            controller: 'ApplicationListCtrl'
+        })
+
+        //system log
+        .when('/system/log', {
+            templateUrl: '/mdata/tpl/partials/system_log.html',
+            controller: 'ApplicationListCtrl'
+        })
+
+        //report
+        .when('/report/:appName/:reportId', {
+            templateUrl: '/mdata/tpl/partials/report.html',
+            controller: 'ApplicationListCtrl'
+        })
+        .when('/report/manage', {
+            templateUrl: '/mdata/tpl/partials/report_manage.html',
+            controller: 'ApplicationListCtrl'
+        })
+        .when('/report/manage/create', {
+            templateUrl: '/mdata/tpl/partials/report_create.html',
+            controller: 'ApplicationListCtrl'
+        })
+        .when('/report/manage/edit', {
+            templateUrl: '/mdata/tpl/partials/report_edit.html',
+            controller: 'ApplicationListCtrl'
+        })
+
+        //notfound
         .when('/notfound', {
             templateUrl: '/mdata/tpl/404.html'
         })

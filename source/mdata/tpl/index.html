@@ -5,68 +5,10 @@
         <script src="/common/js/common.js"></script>
     </head>
     <body ng-controller="PageFrameCtrl">
-        <header class="header" ng-controller="HeaderCtrl" ng-hide="outlineHide">
-            <h1 class="header_logo sprite sprite-mdata_logo"></h1>
-            <menu class="header_settings dropdown-host">
-                <a class="header_settings_user dropdown-target" href="javascript:void(0);"
-                    ng-click="show()">guopengfei</a>
-                <i class="header_settings_arrow iconfont"
-                   ng-class="{'icon-arrow-small-down': !isshow, 'icon-arrow-small-up': isshow}"></i>
-                <ul class="dropdown dropdown-br" data-dropdown-position="br">
-                    <li class="dropdown_arrow"></li>
-                    <li class="dropdown_arrow dropdown_arrow-mask"></li>
-                    <li class="dropdown_list dropdown_list-group">
-                        <span class="dropdown_list-group_iconfont iconfont icon-wrench"></span>
-                        <a href="#/change_password">Change&nbsp;password</a>
-                    </li>
-                    <li class="dropdown_list dropdown_list-group">
-                        <span class="dropdown_list-group_iconfont iconfont icon-goout"></span>
-                        <a href="javascript:void(0);" ng-click="logout()">Log&nbsp;out</a>
-                    </li>
-                </ul>
-            </menu>
-        </header>
-        <nav class="nav" ng-controller="appNavCtrl" ng-hide="outlineHide">
-            <ul class="nav_list">
-                <li class="nav_list_item">
-                    <i class="iconfont icon-application"></i>
-                    <p>Application</p>
-                </li>
-                <li class="nav_list_item">
-                    <i class="iconfont icon-channel"></i>
-                    <p>Channel</p>
-                </li>
-                <li class="nav_list_item">
-                    <i class="iconfont icon-account"></i>
-                    <p>Account</p>
-                </li>
-                <li class="nav_list_item">
-                    <i class="iconfont icon-system"></i>
-                    <p>System log</p>
-                </li>
-                <li class="nav_list_item">
-                    <i class="iconfont icon-report"></i>
-                    <p>Report</p>
-                </li>
-                <li class="nav_list_item">
-                    <i class="iconfont icon-shortcuts"></i>
-                    <p>Shortcuts</p>
-                </li>
-            </ul>
-        </nav>
+        <!-- @import /mdata/tpl/component/header.tpl -->
+        <!-- @import /mdata/tpl/component/nav.tpl -->
         <article class="main img-cover" ng-class="{'main-login': islogin, 'main-other': outlineHide}">
-            <section class="main_header" ng-hide="outlineHide" ng-controller="historyNavCtrl">
-                <h2 class="main_header_title">{{ pageTitle }}</h2>
-                <nav class="history">
-                    <em class="iconfont icon-coords"></em>
-                    <dl class="history_list">
-                        <dt class="history_list_item">Locations:</dt>
-                        <dd class="history_list_item history_list_item-url" ng-repeat="history in pageHistory">{{history}}</dd>
-                        <dd class="history_list_item">&gt;</dd>
-                        <dd class="history_list_item history_list_item-url">Create</dd>
-                    </dl>
-                </nav>
-            </section>
+            <!-- @import /mdata/tpl/component/main_header.tpl -->
             <section class="main_content">
                 <div class="main_content-wrap ng-view"></div>
             </section>

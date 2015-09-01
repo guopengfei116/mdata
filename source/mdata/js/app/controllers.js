@@ -13,51 +13,31 @@ oasgames.mdataPanelControllers = angular.module('mdataPanelControllers', []);
 oasgames.mdataPanelControllers.controller('PageFrameCtrl', [
     '$scope',
     '$location',
-    'PageOutlineBlacklist',
-    function ($scope, $location, PageOutlineBlacklist) {
+    'PageOutline',
+    'Breadcrumb',
+    function ($scope, $location, PageOutline, Breadcrumb) {
         $scope.outlineHide = true;
         $scope.islogin = true;
         $scope.pageTitle = 'Application';
-        $scope.pageHistorys = ['Application', 'Create'];
+        $scope.breadcrumb = ['Application', 'Create'];
 
-        //查询hash值是否匹配黑名单
-        function matchBlackList(hash) {
-            var blackList = PageOutlineBlacklist.getBlackList();
-            var matched = false;
-            for(var i = blackList.length - 1; i >= 0; i--) {
-                if(new RegExp('^' + blackList[i] + '$').test(hash)) {
-                    matched = true;
-                    break;
-                }else {
-                    matched = false;
-                }
-            }
-            return matched;
-        }
-
+        //页面初始化
         ($scope.pageInit = function () {
-            $scope.outlineHide = matchBlackList(location.hash);
-            $scope.islogin = /^\/login$/.test($location.path());
+            var path = $location.path();
+            $scope.outlineHide = PageOutline.outlineHide(path);
+            $scope.islogin = /^\/login$/.test(path);
 
-            //分隔页面路径
-            var paths = $location.path().split('/');
-            for(var i = 0; i < paths.length; i++) {
-                if(paths[i]) {
-                    $scope.pageHistorys.push(paths[i]);
-                }
-            }
-
-            //取第一个path作为页面title
-            $scope.pageTitle = $scope.pageHistorys[0];
+            //初始化breadcrumb
 
             //初始化Ui
             var ui = new Ui();
             ui.init();
-            console.log('当前页面为' + $location.path());
         })();
 
+        //hashchange
         $(window).bind('hashchange', function () {
             $scope.pageInit();
+            console.log('当前页面为' + $location.path());
         });
     }
 ]);
@@ -101,24 +81,14 @@ oasgames.mdataPanelControllers.controller('appNavCtrl', [
 
 
 /*
- * 页面historyNav控制器
- * */
-oasgames.mdataPanelControllers.controller('historyNavCtrl', [
-    '$scope',
-    function ($scope) {
-        console.log(this);
-    }
-]);
-
-
-/*
  * login模块控制器
  * */
 oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
     '$scope',
     '$http',
+    '$location',
     'GetApi',
-    function ($scope, $http, GetApi) {
+    function ($scope, $http, $location, GetApi) {
 
         $scope.account = '';
         $scope.password = '';
@@ -165,7 +135,8 @@ oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
             var api = GetApi('login');
             if($scope['ndForm'].$valid && api) {
                 $http.get('/mdata/js/login.json').success(function (data) {
-                    location.hash = '#/applications';
+                    $location.path('application');
+                    //location.hash = '#/application';
                 });
             }
         }
