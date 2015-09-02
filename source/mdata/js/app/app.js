@@ -58,7 +58,7 @@ oasgames.mdataPanelApp.config([
             templateUrl: '/mdata/tpl/partials/channel_create.html',
             controller: 'ApplicationListCtrl'
         })
-        .when('/channel/manage/edit:channelId', {
+        .when('/channel/manage/edit/:channelId', {
             templateUrl: '/mdata/tpl/partials/channel_edit.html',
             controller: 'ApplicationListCtrl'
         })
@@ -75,7 +75,7 @@ oasgames.mdataPanelApp.config([
             templateUrl: '/mdata/tpl/partials/account_create.html',
             controller: 'ApplicationListCtrl'
         })
-        .when('/account/manage/edit:accountId', {
+        .when('/account/manage/edit/:accountId', {
             templateUrl: '/mdata/tpl/partials/account_edit.html',
             controller: 'ApplicationListCtrl'
         })
@@ -103,7 +103,7 @@ oasgames.mdataPanelApp.config([
             templateUrl: '/mdata/tpl/partials/report_create.html',
             controller: 'ApplicationListCtrl'
         })
-        .when('/report/manage/edit', {
+        .when('/report/manage/edit/:reportId', {
             templateUrl: '/mdata/tpl/partials/report_edit.html',
             controller: 'ApplicationListCtrl'
         })
