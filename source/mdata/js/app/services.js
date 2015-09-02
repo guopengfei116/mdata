@@ -34,67 +34,110 @@ oasgames.mdataPanelServices.factory('PageOutline', [
 ]);
 
 /*
- * 用来配置哪些页面不需要基本的轮廓显示，
- * 提供getBlackList方法用来获取列表
- * @return {Array}
+ * @provider {String} breadcrumbSeparator 分隔符
+ * @provider {Array} endSign 结束路径
+ * @provider {Object} parseMethod 自定义生成breadcrumb，key为正值，value为处理方法
+ * @return {Function} 解析path为breadcrumb
  * */
-oasgames.mdataPanelServices.factory('Breadcrumb', [
-    '$location',
-    function ($location) {
-        var breadcrumb = {
-            '/application/manage' : ['Application', 'Application&nbsp;Manage'],
-            '/application/manage/create' : ['Application', 'Application&nbsp;Manage', 'Create'],
-            '/application/manage/edit' : ['Application', 'Application&nbsp;Manage', 'Edit'],
-            '/channel/manage' : ['Channel', 'Channel&nbsp;Manage'],
-            '/channel/manage/create' : ['Channel', 'Channel&nbsp;Manage', 'Create'],
-            '/channel/manage/edit' : ['Channel', 'Channel&nbsp;Manage', 'Edit'],
-            '/account/manage' : ['Account', 'Account&nbsp;Manage'],
-            '/account/manage/create' : ['Account', 'Account&nbsp;Manage', 'Create'],
-            '/account/manage/edit' : ['Account', 'Account&nbsp;Manage', 'Edit'],
-            '/system/log' : ['System&nbsp;log'],
-            '/report/([\w]+)/([\w]+)' : function (match, $1, $2) {
-                var result = ['Report'];
-                result.push($1.substr(0, 1).toUpperCase + $1.substr(1));
-                result.push($2.substr(0, 1).toUpperCase + $2.substr(1));
+oasgames.mdataPanelServices.provider('Breadcrumb', [
+    function () {
+        return {
+            breadcrumbSeparator : '&nbsp;&gt;&nbsp;',
+            endSign : ['edit'],
+            parseMethod : {
+                '^\\/system\\/log$' : function () {
+                    return ['systemLog'];
+                }
             },
-            '/report/manage' : ['Report', 'Report&nbsp;Manage'],
-            '/report/manage/create' : ['Report', 'Report&nbsp;Manage', 'Create'],
-            '/report/manage/edit' : ['Report', 'Report&nbsp;Manage', 'Edit'],
-        };
-        var breadcrumbList = [];
+            setApi : function (reg, fn) {
+                this.parseMethod[reg] = fn;
+            },
+            $get : [
+                '$location',
+                function ($location) {
+                    var self = this;
+                    return {
+                        getBreadcrumb : function (path) {
+                            var path = path || $location.path();
 
-        //分隔页面路径
-        var paths = $location.path().split('/');
-        for(var i = 0; i < paths.length; i++) {
-            if(paths[i]) {
-                breadcrumbList.push(paths[i]);
-            }
-        }
-        //取第一个path作为页面title
-        var pageTitle = breadcrumbList[0];
-        return pageTitle;
+                            //优先使用自定义的解析方法
+                            for(var reg in self.parseMethod) {
+                                if(new RegExp(reg).test(path)) {
+                                    return self.parseMethod[reg]();
+                                }
+                            }
+
+                            //breadcrumb解析
+                            var breadcrumbs = [];
+                            var pathChildren = path.split('/');
+
+                            outerloop:
+                            for(var i = 0; i < pathChildren.length; i++) {
+
+                                // pathChildren[i] == ''
+                                if (!pathChildren[i]) {
+                                    continue;
+                                }
+
+                                if(breadcrumbs.length % 2 == 1) {
+                                    breadcrumbs.push(self.breadcrumbSeparator);
+                                }
+
+                                //如果是path为manage，则添加前缀
+                                if(breadcrumbs.length == 2 && pathChildren[i] == 'manage') {
+                                    breadcrumbs.push(breadcrumbs[0] + 'Manage');
+                                }else {
+                                    breadcrumbs.push(pathChildren[i]);
+                                }
+
+                                //结束标记
+                                for(var j = 0; j < self.endSign.length; j++) {
+                                    if(pathChildren[i] == self.endSign[j]) {
+                                        break outerloop;
+                                    }
+                                }
+                            }
+
+                            //添加分隔符
+                            //breadcrumbs = breadcrumbs.join(self.breadcrumbSeparator).split('');
+                            return breadcrumbs;
+                        },
+                        getPath : function () {
+
+                        }
+                    }
+                }
+            ]
+        };
     }
 ]);
 
 /*
- * 用来获取接口url
- * @return {Function}
+ * @provider {Object} API 接口url
+ * @return {Function} 获取接口url
  * */
-oasgames.mdataPanelServices.factory('GetApi', [
+oasgames.mdataPanelServices.provider('GetApi', [
     function () {
-        var api = {
-            'login' : '/mdata/js/login.json',
-            'logout' : '/mdata/js/logout.json'
-        };
-        function getApi(name) {
-            var matchApi = api[name];
-            if(!matchApi) {
-                console.log('api--' + name + '不存在');
-                return '';
+        return {
+            API : {
+                'login' : '/mdata/js/login.json',
+                'logout' : '/mdata/js/logout.json'
+            },
+            setApi : function (name, url) {
+                this.API[name] = url;
+            },
+            $get : function () {
+                var self = this;
+                return function (name) {
+                    var url = self.API[name];
+                    if(!url) {
+                        console.log('api--' + name + '不存在');
+                        return '';
+                    }
+                    return url;
+                }
             }
-            return matchApi;
-        }
-        return getApi;
+        };
     }
 ]);
 

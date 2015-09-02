@@ -11,40 +11,33 @@ oasgames.mdataPanelControllers = angular.module('mdataPanelControllers', []);
  * 根据hash值判断页面框架的展示
  * */
 oasgames.mdataPanelControllers.controller('PageFrameCtrl', [
+    '$rootScope',
     '$scope',
     '$location',
     'PageOutline',
     'Breadcrumb',
-    function ($scope, $location, PageOutline, Breadcrumb) {
+    function ($rootScope, $scope, $location, PageOutline, Breadcrumb) {
         $scope.outlineHide = true;
         $scope.islogin = true;
         $scope.pageTitle = 'Application';
         $scope.breadcrumb = ['Application', 'Create'];
 
-        //页面初始化
-        ($scope.pageInit = function () {
-            var path = $location.path();
-            $scope.outlineHide = PageOutline.outlineHide(path);
-            $scope.islogin = /^\/login$/.test(path);
+        //初始化Ui
+        var ui = new Ui();
+        ui.init();
 
-            //初始化breadcrumb
-
-            //初始化Ui
-            var ui = new Ui();
-            ui.init();
-        })();
-
-        //hashchange
-        $(window).bind('hashchange', function () {
-            $scope.pageInit();
-            console.log('当前页面为' + $location.path());
+        $scope.$on('$routeChangeSuccess', function () {
+            $rootScope.path = $location.path();
+            $scope.outlineHide = PageOutline.outlineHide($rootScope.path);
+            $scope.islogin = /^\/login$/.test($rootScope.path);
+            console.log('当前页面为' + $rootScope.path);
         });
     }
 ]);
 
 
 /*
- * 页面header控制器
+ * header控制器
  * */
 oasgames.mdataPanelControllers.controller('HeaderCtrl', [
     '$scope',
@@ -68,14 +61,44 @@ oasgames.mdataPanelControllers.controller('HeaderCtrl', [
 
 
 /*
- * 页面appNav控制器
+ * navigation控制器
  * */
-oasgames.mdataPanelControllers.controller('appNavCtrl', [
+oasgames.mdataPanelControllers.controller('navigationCtrl', [
     '$scope',
     function ($scope) {
-        console.log(this);
         this.name = 'pengfei';
-        console.log(this);
+    }
+]);
+
+
+/*
+ * breadcrumb控制器
+ * */
+oasgames.mdataPanelControllers.controller('breadcrumbCtrl', [
+    '$rootScope',
+    '$scope',
+    '$location',
+    'Breadcrumb',
+    function ($rootScope, $scope, $location, Breadcrumb) {
+        $rootScope.$watch('path', function (newPath) {
+            $scope.breadcrumb = Breadcrumb.getBreadcrumb(newPath);
+            console.log($scope.breadcrumb);
+        });
+        $scope.setHref = function (index) {
+            //最后路径指向当前页
+            if(index == $scope.breadcrumb.length - 1) {
+                return;
+            }
+
+            var childrenPaths = $rootScope.path.match(/\w+/g);
+            var path = [], i = 0, j = 0;
+            while(i <= index) {
+                path.push(childrenPaths[j]);
+                i += 2;
+                j++;
+            }
+            $location.path(path.join('/'));
+        };
     }
 ]);
 

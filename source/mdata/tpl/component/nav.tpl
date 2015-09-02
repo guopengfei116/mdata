@@ -1,4 +1,4 @@
-<nav class="nav" ng-controller="appNavCtrl" ng-hide="outlineHide">
+<nav class="nav" ng-controller="navigationCtrl" ng-if="!outlineHide">
     <ul class="nav_list">
         <li class="nav_list_item">
             <a href="#/application/manage">
@@ -19,7 +19,7 @@
             </a>
         </li>
         <li class="nav_list_item">
-            <a href="#/system/log">
+            <a href="#/systemLog">
                 <i class="iconfont icon-system"></i>
                 <p>System log</p>
             </a>

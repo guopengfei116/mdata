@@ -6,22 +6,26 @@ var oasgames = {};
 * 注册app主模块
 * */
 oasgames.mdataPanelApp = angular.module('mdataPanelApp', [
+    'ngSanitize',
     'ngRoute',
     'mdataPanelControllers',
-    'mdataPanelServices'
+    'mdataPanelServices',
+    'mdataPanelFilter',
 ]);
 
 /*
-* 配置页面路由规则
+* 配置页面路由
 * */
 oasgames.mdataPanelApp.config([
     '$routeProvider',
     function ($routeProvider) {
-        $routeProvider.when('/', {
+        $routeProvider
+        //login
+        .when('/', {
             redirectTo: '/login'
         })
         .when('/login', {
-            templateUrl: '/mdata/tpl/login.html',
+            templateUrl: '/mdata/tpl/partials/login.html',
             controller: 'MdataLoginCtrl'
         })
 
@@ -77,7 +81,7 @@ oasgames.mdataPanelApp.config([
         })
 
         //system log
-        .when('/system/log', {
+        .when('/systemLog', {
             templateUrl: '/mdata/tpl/partials/system_log.html',
             controller: 'ApplicationListCtrl'
         })
@@ -85,6 +89,10 @@ oasgames.mdataPanelApp.config([
         //report
         .when('/report/:appName/:reportId', {
             templateUrl: '/mdata/tpl/partials/report.html',
+            controller: 'ApplicationListCtrl'
+        })
+        .when('/report', {
+            templateUrl: '/mdata/tpl/partials/report_manage.html',
             controller: 'ApplicationListCtrl'
         })
         .when('/report/manage', {
