@@ -1,0 +1,13 @@
+@mixin clear-float {
+    @if ($prefix-for-lte7) {
+        *zoom:1;
+    }
+    &:after {
+        content:'';
+        display:block;
+        clear:both;
+        height:0;
+        overflow:hidden;
+        visibility:hidden;
+    }
+}

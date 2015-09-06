@@ -34,6 +34,7 @@
 @import "mixin/_arrow";
 @import "mixin/_background-cover";
 @import "mixin/_border-box";
+@import "mixin/_clear-float";
 @import "mixin/_directional-values";
 @import "mixin/_ellipsis";
 @import "mixin/_flex-box";
@@ -55,7 +56,7 @@
 */
 @import "placeholder/_align-middle";
 @import "placeholder/_background-cover";
-@import "placeholder/_clear-childrens";
+@import "placeholder/_clear-float";
 @import "placeholder/_ellipsis";
 @import "placeholder/_inline-block";
 @import "placeholder/_mask";
@@ -78,4 +79,5 @@
 @import "ui/_select";
 //@import "ui/_switch";
 //@import "ui/_tab";
+@import "ui/_table";
 @import "ui/_tooltip";
