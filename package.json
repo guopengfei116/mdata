@@ -6,7 +6,7 @@
      "type": "git",
      "url": "https://github.com/guopengfei1992/mdata.git"
   },
-  "license": "guopengfei",
+  "license": "BSD-3-Clause",
   "projectCfg": {
     "taskCfgPath": "grunt_task_cfg",
     "src": "source",
