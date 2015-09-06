@@ -49,8 +49,9 @@ $(function () {
             $(this.trigger).on('mouseenter', Tooltip.prototype.target, function () {
                 var $this = $(this);
                 var position = $this.data('tooltip-position') || self.position;
+                var offset = $this.data('tooltip-offset') || self.offset;
                 self.setContent($this.data('tooltip-info'));
-                self.setPosition($this, Tooltip.prototype.toolTipLooks, position);
+                self.setPosition($this, Tooltip.prototype.toolTipLooks, position, offset);
                 self.show(position);
             }).on('mouseleave', Tooltip.prototype.target, function () {
                 self.hide();
@@ -70,9 +71,10 @@ $(function () {
             this.toolTipLooks.removeClass('tooltip-active');
         },
 
-        setPosition: function (target, looks, position) {
+        setPosition: function (target, looks, position, offset) {
             var position = position || this.position;
-            this.uSetPosition(target, looks, position, this.offset);
+            var offset = offset || this.offset;
+            this.uSetPosition(target, looks, position, offset);
         },
 
         setContent: function (content) {
