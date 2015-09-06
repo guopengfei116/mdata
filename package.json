@@ -6,6 +6,7 @@
      "type": "git",
      "url": "https://github.com/guopengfei1992/mdata.git"
   },
+  "license": "guopengfei",
   "projectCfg": {
     "taskCfgPath": "grunt_task_cfg",
     "src": "source",
