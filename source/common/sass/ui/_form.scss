@@ -1,11 +1,11 @@
+.fieldset {
+    @include prefix(transition, all 0.3s);
+    &_text {
+        @include prefix(transition, all 0.3s);
+    }
+}
 
 .form {
-    .fieldset {
-        @include prefix(transition, all 0.3s);
-        &_text {
-            @include prefix(transition, all 0.3s);
-        }
-    }
     &-panel {
         margin: 0 auto;
         max-width: 480px;

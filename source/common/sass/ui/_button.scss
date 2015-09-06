@@ -8,22 +8,6 @@
     font-size: 12px;
     line-height: 1.5;
     color: #fff;
-    &-plus {
-        border-color: #109db6;
-        background-color: #109db6;
-        &:active {
-            border-color: darken(#109db6, 10%);
-            background-color: darken(#109db6, 10%);
-        }
-    }
-    &-minus {
-        border-color: #868686;
-        background-color: #868686;
-        &:active {
-            border-color: darken(#868686, 10%);
-            background-color: darken(#868686, 10%);
-        }
-    }
     &-save {
         border-color: #12afcb;
         background-color: #12afcb;
@@ -38,6 +22,38 @@
         &:active {
             border-color: darken(#999999, 10%);
             background-color: darken(#999999, 10%);
+        }
+    }
+    &-save-plus {
+        border-color: #109db6;
+        background-color: #109db6;
+        &:active {
+            border-color: darken(#109db6, 10%);
+            background-color: darken(#109db6, 10%);
+        }
+    }
+    &-cancel-minus {
+        border-color: #868686;
+        background-color: #868686;
+        &:active {
+            border-color: darken(#868686, 10%);
+            background-color: darken(#868686, 10%);
+        }
+    }
+    &-create {
+        border-color: #22baa0;
+        background-color: #22baa0;
+        &:active {
+            border-color: darken(#22baa0, 10%);
+            background-color: darken(#22baa0, 10%);
+        }
+    }
+    &-create-plus {
+        border-color: #1ea78f;
+        background-color: #1ea78f;
+        &:active {
+            border-color: darken(#1ea78f, 10%);
+            background-color: darken(#1ea78f, 10%);
         }
     }
 }

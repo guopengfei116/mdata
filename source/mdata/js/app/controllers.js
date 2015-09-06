@@ -30,7 +30,6 @@ oasgames.mdataPanelControllers.controller('PageFrameCtrl', [
             $rootScope.path = $location.path();
             $scope.outlineHide = PageOutline.outlineHide($rootScope.path);
             $scope.islogin = /^\/login$/.test($rootScope.path);
-            console.log('当前页面为' + $rootScope.path);
         });
     }
 ]);
@@ -64,9 +63,13 @@ oasgames.mdataPanelControllers.controller('HeaderCtrl', [
  * navigation控制器
  * */
 oasgames.mdataPanelControllers.controller('navigationCtrl', [
+    '$rootScope',
     '$scope',
-    function ($scope) {
-        this.name = 'pengfei';
+    function ($rootScope, $scope) {
+        $rootScope.$watch('path', function (newPath) {
+            $scope.page = newPath.match(/\w+/)[0];
+            console.log($scope.page);
+        });
     }
 ]);
 

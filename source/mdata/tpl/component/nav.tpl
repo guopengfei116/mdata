@@ -1,30 +1,30 @@
 <nav class="nav" ng-controller="navigationCtrl" ng-if="!outlineHide">
     <ul class="nav_list">
-        <li class="nav_list_item">
+        <li class="nav_list_item" ng-class="{'nav_list_item-active' : page == 'application'}">
             <a href="#/application/manage">
                 <i class="iconfont icon-application"></i>
                 <p>Application</p>
             </a>
         </li>
-        <li class="nav_list_item">
+        <li class="nav_list_item" ng-class="{'nav_list_item-active' : page == 'channel'}">
             <a href="#/channel/manage">
                 <i class="iconfont icon-channel"></i>
                 <p>Channel</p>
             </a>
         </li>
-        <li class="nav_list_item">
+        <li class="nav_list_item" ng-class="{'nav_list_item-active' : page == 'account'}">
             <a href="#/account/manage">
                 <i class="iconfont icon-account"></i>
                 <p>Account</p>
             </a>
         </li>
-        <li class="nav_list_item">
+        <li class="nav_list_item" ng-class="{'nav_list_item-active' : page == 'systemLog'}">
             <a href="#/systemLog">
                 <i class="iconfont icon-system"></i>
                 <p>System log</p>
             </a>
         </li>
-        <li class="nav_list_item">
+        <li class="nav_list_item" ng-class="{'nav_list_item-active' : page == 'report'}">
             <a href="#/report/manage">
                 <i class="iconfont icon-report"></i>
                 <p>Report</p>

@@ -2,6 +2,10 @@
   "name": "osagames",
   "version": "0.1.0",
   "description": "香港绿洲",
+  "repository": {
+     "type": "git",
+     "url": "https://github.com/guopengfei1992/mdata.git"
+  },
   "projectCfg": {
     "taskCfgPath": "grunt_task_cfg",
     "src": "source",

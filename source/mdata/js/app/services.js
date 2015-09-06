@@ -97,9 +97,6 @@ oasgames.mdataPanelServices.provider('Breadcrumb', [
                                     }
                                 }
                             }
-
-                            //添加分隔符
-                            //breadcrumbs = breadcrumbs.join(self.breadcrumbSeparator).split('');
                             return breadcrumbs;
                         },
                         getPath : function () {

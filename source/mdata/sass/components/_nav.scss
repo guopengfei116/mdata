@@ -18,7 +18,7 @@
                 background-color: #2b384e;
                 color: #fff;
             }
-            &:hover {
+            &:hover:not(.nav_list_item-active) {
                 background-color: #2b384e;
                 color: #fff;
                 .iconfont {
