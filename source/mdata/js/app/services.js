@@ -6,6 +6,55 @@
 oasgames.mdataPanelServices = angular.module('mdataPanelServices', ['ngResource']);
 
 /*
+ * @provider {Object} API 接口url
+ * @return {Function} 获取接口url
+ * */
+oasgames.mdataPanelServices.provider('GetApi', [
+    function () {
+        return {
+            API : {
+                'login' : '/mdata/js/login.json',
+                'logout' : '/mdata/js/logout.text',
+                'application' : '/mdata/js/:appId.json'
+            },
+            setApi : function (name, url) {
+                this.API[name] = url;
+            },
+            $get : function () {
+                var self = this;
+                return function (name) {
+                    var url = self.API[name];
+                    if(!url) {
+                        console.log('api--' + name + '不存在');
+                        return '';
+                    }
+                    return url;
+                }
+            }
+        };
+    }
+]);
+
+
+/*
+* 用户登录验证
+* @return {Object} AuthService
+*
+* */
+oasgames.mdataPanelServices.factory('AuthService', [
+    '$http',
+    'GetApi',
+    function ($http, getApi) {
+        var AuthService = {};
+        AuthService.userLoggedIn = function () {
+            return true
+        };
+        return AuthService
+    }
+]);
+
+
+/*
  * 用来配置哪些页面不需要基本的轮廓显示，
  * 提供getBlackList方法用来获取列表
  * @return {Array}
@@ -105,36 +154,6 @@ oasgames.mdataPanelServices.provider('Breadcrumb', [
                     }
                 }
             ]
-        };
-    }
-]);
-
-/*
- * @provider {Object} API 接口url
- * @return {Function} 获取接口url
- * */
-oasgames.mdataPanelServices.provider('GetApi', [
-    function () {
-        return {
-            API : {
-                'login' : '/mdata/js/login.json',
-                'logout' : '/mdata/js/logout.text',
-                'application' : '/mdata/js/:appId.json'
-            },
-            setApi : function (name, url) {
-                this.API[name] = url;
-            },
-            $get : function () {
-                var self = this;
-                return function (name) {
-                    var url = self.API[name];
-                    if(!url) {
-                        console.log('api--' + name + '不存在');
-                        return '';
-                    }
-                    return url;
-                }
-            }
         };
     }
 ]);
