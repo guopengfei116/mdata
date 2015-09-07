@@ -177,6 +177,22 @@ oasgames.mdataPanelControllers.controller('ApplicationListCtrl', [
     '$scope',
     'Application',
     function ($scope, Application) {
+        var searching = false;
         $scope.apps = Application.query();
+        $scope.submit = function () {
+            if($scope.searchForm.searchInput.$valid && $scope.searchTerms && !searching) {
+                searching = true;
+                Application.get(
+                    { appId: $scope.searchTerms },
+                    function (data) {
+                        console.log(data);
+                        searching = false;
+                    },
+                    function () {
+
+                    }
+                )
+            }
+        }
     }
 ]);
