@@ -6,12 +6,6 @@
                 <p>Application</p>
             </a>
         </li>
-        <li class="nav_list_item" ng-class="{'nav_list_item-active' : page == 'channel'}">
-            <a href="#/channel/manage">
-                <i class="iconfont icon-channel"></i>
-                <p>Channel</p>
-            </a>
-        </li>
         <li class="nav_list_item" ng-class="{'nav_list_item-active' : page == 'account'}">
             <a href="#/account/manage">
                 <i class="iconfont icon-account"></i>

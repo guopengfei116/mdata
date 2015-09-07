@@ -1,4 +1,4 @@
-.button {
+%button, .button {
     @include prefix(transition, all 1s );
     cursor: pointer;
     @include inline-block();
@@ -56,4 +56,9 @@
             background-color: darken(#1ea78f, 10%);
         }
     }
+}
+
+.button-group {
+    font-size: 0;
+    @extend %button;
 }

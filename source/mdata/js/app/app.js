@@ -46,23 +46,6 @@ oasgames.mdataPanelApp.config([
             controller: 'ApplicationListCtrl'
         })
 
-        //channel
-        .when('/channel', {
-            redirectTo: '/channel/manage'
-        })
-        .when('/channel/manage', {
-            templateUrl: '/mdata/tpl/partials/channel_manage.html',
-            controller: 'ApplicationListCtrl'
-        })
-        .when('/channel/manage/create', {
-            templateUrl: '/mdata/tpl/partials/channel_create.html',
-            controller: 'ApplicationListCtrl'
-        })
-        .when('/channel/manage/edit/:channelId', {
-            templateUrl: '/mdata/tpl/partials/channel_edit.html',
-            controller: 'ApplicationListCtrl'
-        })
-
         //account
         .when('/account', {
             redirectTo: '/account/manage'
