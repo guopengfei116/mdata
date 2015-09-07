@@ -118,7 +118,7 @@ oasgames.mdataPanelServices.provider('GetApi', [
         return {
             API : {
                 'login' : '/mdata/js/login.json',
-                'logout' : '/mdata/js/logout.json',
+                'logout' : '/mdata/js/logout.text',
                 'application' : '/mdata/js/:appId.json'
             },
             setApi : function (name, url) {

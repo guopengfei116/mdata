@@ -1,0 +1,8 @@
+登录接口: /site/login
+登出：/site/logout
+修改密码： /site/modify-psw
+
+
+获取app列表: /app/view
+删除app: /app/delete
+
