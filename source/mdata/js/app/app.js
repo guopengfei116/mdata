@@ -87,13 +87,8 @@ oasgames.mdataPanelApp.config([
         })
 
         //report
-        .when('/report/:appName/:reportId', {
-            templateUrl: '/mdata/tpl/partials/report.html',
-            controller: 'ApplicationListCtrl'
-        })
         .when('/report', {
-            templateUrl: '/mdata/tpl/partials/report_manage.html',
-            controller: 'ApplicationListCtrl'
+            redirectTo: '/report/manage'
         })
         .when('/report/manage', {
             templateUrl: '/mdata/tpl/partials/report_manage.html',
@@ -105,6 +100,10 @@ oasgames.mdataPanelApp.config([
         })
         .when('/report/manage/edit/:reportId', {
             templateUrl: '/mdata/tpl/partials/report_edit.html',
+            controller: 'ApplicationListCtrl'
+        })
+        .when('/report/view/:reportId', {
+            templateUrl: '/mdata/tpl/partials/report.html',
             controller: 'ApplicationListCtrl'
         })
 
