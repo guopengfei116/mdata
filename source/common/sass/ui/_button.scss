@@ -2,7 +2,7 @@
     &-group {
         font-size: 0;
     }
-    @include prefix(transition, all 1s );
+    @include prefix(transition, all 0.4s );
     cursor: pointer;
     @include inline-block();
     padding: 7px 12px;

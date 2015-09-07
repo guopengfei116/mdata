@@ -118,7 +118,8 @@ oasgames.mdataPanelServices.provider('GetApi', [
         return {
             API : {
                 'login' : '/mdata/js/login.json',
-                'logout' : '/mdata/js/logout.json'
+                'logout' : '/mdata/js/logout.json',
+                'application' : '/mdata/js/:appId.json'
             },
             setApi : function (name, url) {
                 this.API[name] = url;
@@ -138,11 +139,11 @@ oasgames.mdataPanelServices.provider('GetApi', [
     }
 ]);
 
-oasgames.mdataPanelServices.factory('Applications', [
+oasgames.mdataPanelServices.factory('Application', [
     '$resource',
     'GetApi',
     function ($resource, GetApi) {
-        return $resource('/mdata/js/:appId.json', {}, {
+        return $resource(GetApi('application'), {}, {
             query: {method: 'GET', params: {appId: 'applications'}, isArray: true}
         });
     }
