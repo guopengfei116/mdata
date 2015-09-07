@@ -7,15 +7,17 @@
     width: rem(200);
     min-height: 100%;
     background-color: #34425a;
+    color: #899dc1;
     &_list {
         &_item {
-            @include prefix(transition, all 0.4s);
+            @include prefix(transition, all 0.8s);
             padding: rem(18) 0;
             font-size: 14px;
+            font-weight: bold;
             text-align: center;
-            color: #899dc1;
             &-active {
                 background-color: #2b384e;
+                font-weight: bold;
                 color: #fff;
             }
             &:hover:not(.nav_list_item-active) {
@@ -30,4 +32,85 @@
             }
         }
     }
+    .shortcuts {
+        text-align: center;
+        &_title {
+            @include prefix(transition, all 0.8s);
+            cursor: pointer;
+            position: relative;
+            padding: rem(14) 0 rem(30) 0;
+            background-color: #2b384e;
+            font-weight: bold;
+            font-size: 14px;
+            .iconfont {
+                @include prefix(transition, all 0.8s);
+            }
+            &_icon {
+                font-size: 26px;
+            }
+            &_arrow {
+                position: absolute;
+                top: rem(20);
+                right: rem(14);
+                font-size: 26px;
+            }
+            &:hover {
+                color: #fff;
+                .shortcuts_title_icon {
+                    @include prefix(transform, scale(1.3, 1.3));
+                }
+                .shortcuts_title_arrow {
+                    @include prefix(transform, rotate(180deg));
+                }
+            }
+        }
+        &_apps {
+            display: none;
+            font-size: 12px;
+            &_app {
+                @include prefix(transition, all 0.8s);
+                &_title {
+                    cursor: pointer;
+                    position: relative;
+                    padding: rem(14) 0;
+                    background-color: #263246;
+                    &_arrow {
+                        @include prefix(transition, all 0.8s);
+                        position: absolute;
+                        top: rem(14);
+                        right: rem(14);
+                    }
+                    &:hover {
+                        color: #fff;
+                        .shortcuts_apps_app_title_arrow {
+                            @include prefix(transform, rotate(180deg));
+                        }
+                    }
+                }
+                &_report {
+                    display: none;
+                    li {
+                        padding: rem(14) 0;
+                        color: #899dc1;
+                    }
+                }
+                &-active {
+                    .shortcuts_apps_app_title {
+                        font-weight: bold;
+                        color: #fff;
+                    }
+                    .shortcuts_apps_app_report {
+                        display: block;
+                    }
+                }
+            }
+        }
+        &-active {
+            color: #fff;
+            .shortcuts_apps {
+                display: block;
+            }
+        }
+    }
 }
+

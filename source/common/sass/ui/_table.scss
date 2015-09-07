@@ -6,8 +6,9 @@
         line-height: 16px;
         font-size: 12px;
         color: #777777;
-        .row-title {
+        &-title {
             border-color: #111111;
+            font-weight: bold;
         }
         &_column {
             @include prefix(box-sizing, border-box);

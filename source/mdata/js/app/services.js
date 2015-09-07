@@ -140,7 +140,8 @@ oasgames.mdataPanelServices.provider('GetApi', [
 
 oasgames.mdataPanelServices.factory('Applications', [
     '$resource',
-    function ($resource) {
+    'GetApi',
+    function ($resource, GetApi) {
         return $resource('/mdata/js/:appId.json', {}, {
             query: {method: 'GET', params: {appId: 'applications'}, isArray: true}
         });

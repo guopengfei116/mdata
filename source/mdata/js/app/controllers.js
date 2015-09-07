@@ -175,7 +175,7 @@ oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
  * */
 oasgames.mdataPanelControllers.controller('ApplicationListCtrl', [
     '$scope',
-    'Applications',
+    'GetApi',
     function ($scope, Applications) {
         $scope.applications = Applications.query();
     }

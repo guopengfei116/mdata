@@ -25,20 +25,39 @@
             </a>
         </li>
     </ul>
-    <section class="shortcuts">
-        <div class="shortcuts-title">
-            <i class="iconfont icon-report"></i>
+    <dl class="shortcuts shortcuts-active">
+        <dt class="shortcuts_title">
+            <i class="shortcuts_title_icon iconfont icon-shortcuts"></i>
             <p>Shortcuts</p>
-            <i class="iconfont icon-arrow-samll-up"></i>
-        </div>
-        <dl class="shortcuts-list">
-            <dt class="shortcuts-list_app">app1</dt>
-            <dd class="shortcuts-list_report">report1</dd>
-        </dl>
-        <dl class="shortcuts-list">
-            <dt class="shortcuts-list_app">app2</dt>
-            <dd class="shortcuts-list_report">report2</dd>
-            <dd class="shortcuts-list_report">report3</dd>
-        </dl>
-    </section>
+            <i class="shortcuts_title_arrow iconfont icon-arrow-small-up"></i>
+        </dt>
+        <dd class="shortcuts_apps">
+            <dl class="shortcuts_apps_app">
+                <dt class="shortcuts_apps_app_title">
+                    <p>app1</p>
+                    <i class="shortcuts_apps_app_title_arrow iconfont icon-arrow-small-up"></i>
+                </dt>
+                <dd class="shortcuts_apps_app_report">
+                    <ul>
+                        <li><a href="">report1</a></li>
+                        <li><a href="">report2</a></li>
+                        <li><a href="">report3</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl class="shortcuts_apps_app">
+                <dt class="shortcuts_apps_app_title">
+                    <p>app2</p>
+                    <i class="shortcuts_apps_app_title_arrow iconfont icon-arrow-small-up"></i>
+                </dt>
+                <dd class="shortcuts_apps_app_report">
+                    <ul>
+                        <li><a href="">report1</a></li>
+                        <li><a href="">report2</a></li>
+                        <li><a href="">report3</a></li>
+                    </ul>
+                </dd>
+            </dl>
+        </dd>
+    </dl>
 </nav>
