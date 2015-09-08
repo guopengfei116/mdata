@@ -45,8 +45,10 @@
 ### 2、application
 
 >####1.  app列表
+>>* url : /api/app/view
 
 >####2.  删除app
+>>* url : /api/app/delete
 
 >####3.  创建app
 
