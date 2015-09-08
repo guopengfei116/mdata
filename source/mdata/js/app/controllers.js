@@ -197,6 +197,8 @@ oasgames.mdataPanelControllers.controller('ApplicationListCtrl', [
     function ($scope, Application) {
         var searching = false;
         $scope.apps = Application.query();
+
+        //搜索
         $scope.submit = function () {
             if($scope.searchForm.searchInput.$valid && $scope.searchTerms && !searching) {
                 searching = true;

@@ -10,9 +10,8 @@ oasgames.mdataPanelApp = angular.module('mdataPanelApp', [
     'ngRoute',
     'mdataPanelControllers',
     'mdataPanelServices',
-    'mdataPanelFilter',
+    'mdataPanelFilter'
 ]);
-
 
 /*
  * 用户权限对照表
@@ -26,7 +25,6 @@ oasgames.mdataPanelApp.constant("AUTHORITY", {
     }
 });
 
-
 /*
 * 页面初始化
 * */
@@ -36,13 +34,16 @@ oasgames.mdataPanelApp.run([
     '$log',
     'UserAuth',
     function ($rootScope, $location, $log, UserAuth) {
+        //用户初始属性
         $rootScope.user = {
             "logined" : false,
             "auth" : null
         };
 
+        //切换页面时权限认证
         $rootScope.$on('$routeChangeStart', function (event, next, current) {
             $log.debug(next.templateUrl);
+
             // 如果用户未登录
             if(!$rootScope.user['logined']) {
                 if(next.templateUrl === '/mdata/tpl/partials/login.html') {
@@ -51,7 +52,7 @@ oasgames.mdataPanelApp.run([
                     $location.path('/login');
                 }
             }else {
-                UserAuth.route();
+                UserAuth.route(next.templateUrl);
             }
         });
     }

@@ -44,41 +44,61 @@ oasgames.mdataPanelServices.provider('ApiCtrl', [
 
 /*
 * 用户登录验证
-* @return {Object} AuthService
+* @return {Object} UserAuth
 *
 * */
-oasgames.mdataPanelServices.factory('UserAuth', [
+oasgames.mdataPanelServices.provider('UserAuth', [
     '$rootScope',
     '$http',
     'ApiCtrl',
     'AUTHORITY',
     function ($rootScope, $http, ApiCtrl, AUTHORITY) {
-        var UserAuth = {
-            //获取登陆状态
-            userLoggedIn : function () {
-                var logined = false;
+        return {
+            //权限可访问的路由表
+            regAuthTable : {
+                '1' : [
+                    /^\/\w+/
+                ],
+                '2' : [
+                    /^\/report/
+                ],
+                '3' : [
+                    /^\/report/
+                ],
+                '4' : [
+                    /^\/report\/view\/\w+$/
+                ]
+            },
 
-                if(loginStatus == null) {
-                    $http({
-                        method : "GET",
-                        url : ApiCtrl.get('userAuth')
-                    }).success(function (data) {
-                        if(data.code == 200) {
-                            loginStatus = true, logined = true;
+            $get : function () {
+                var self = this;
+
+                var UserAuth = {
+
+                    //路由权限验证
+                    route : function (url) {
+
+                        //用户权限
+                        var userAuth = $rootScope.user.auth;
+
+                        //可访问的路由正则list
+                        var regAuthList =  self.authTable[userAuth];
+                        var result = false;
+
+                        //验证路由是否合法
+                        for(var i = regAuthList.length - 1; i >= 0; i--) {
+                            if(regAuthList[i].test(url)) {
+                                result = true;
+                                break;
+                            }
                         }
-                    }).error(function () {
 
-                    });
-                }else {
-                    logined = loginStatus;
-                }
-
-                return logined;
+                        return result;
+                    }
+                };
+                return UserAuth;
             }
-
-        };
-
-        return AuthService
+        }
     }
 ]);
 
