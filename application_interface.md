@@ -24,10 +24,10 @@
 >####1.  登录 
 >>*  url : /api/site/login
 >>*  param : { email : 账号， passowrd : 密码 }
+>>*  data : { authority : 权限(1-4) }
 
 >####2.  登出
 >>*  url : /api/site/logout
->>*  param : null
 
 >####3.  修改密码
 >>*  url : /api/site/modify-psw
