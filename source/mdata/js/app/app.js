@@ -33,7 +33,8 @@ oasgames.mdataPanelApp.run([
     '$location',
     '$log',
     'UserAuth',
-    function ($rootScope, $location, $log, UserAuth) {
+    'AUTHORITY',
+    function ($rootScope, $location, $log, UserAuth, AUTHORITY) {
         //用户初始属性
         $rootScope.user = {
             "logined" : false,
@@ -54,6 +55,14 @@ oasgames.mdataPanelApp.run([
                 }else {
                     $location.path('/login');
                 }
+            // 已登陆访问登陆页
+            }else if(nextUrl == '/login' || nextUrl == '/'){
+                if($rootScope.user.authority == AUTHORITY.administrators) {
+                    $location.path('/application/manage');
+                }else {
+                    $location.path('/report/manage');
+                }
+            // 已登录访问其他页
             }else {
                 var license = UserAuth.route(nextUrl);
                 // 如果权限不足

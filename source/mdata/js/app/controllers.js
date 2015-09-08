@@ -39,8 +39,10 @@ oasgames.mdataPanelControllers.controller('PageFrameCtrl', [
  * header控制器
  * */
 oasgames.mdataPanelControllers.controller('HeaderCtrl', [
+    '$rootScope',
     '$scope',
     '$http',
+    '$location',
     'ApiCtrl',
     function ($scope, $http, ApiCtrl) {
         $scope.isshow = false;
@@ -50,8 +52,17 @@ oasgames.mdataPanelControllers.controller('HeaderCtrl', [
         $scope.logout = function () {
             var api = ApiCtrl.get('logout');
             if(api) {
-                $http.get(api).success(function () {
-                    location.hash = '#/login';
+                $http({
+                    method : "GET",
+                    url : api
+                }).success(function (data) {
+                    if(data.code == 200) {
+                        $rootScope.user['logined'] = false;
+                        $rootScope.user['authority'] = null;
+                        $location.path('/login');
+                    }else {
+                        Ui.alert(data.msg);
+                    }
                 });
             }
         };
@@ -179,13 +190,13 @@ oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
                     //记录登陆状态
                     $rootScope.user['logined'] = true;
                     $rootScope.user['authority'] = data.authority;
-
+/*
                     if(data.authority == AUTHORITY.administrators) {
                         $location.path('/application/manage');
                     }else {
                         $location.path('/report/manage');
                     }
-
+*/
                 }).error(function (status) {
                     Ui.alert('网络错误！');
                 });
