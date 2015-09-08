@@ -42,8 +42,9 @@ oasgames.mdataPanelApp.run([
 
         //切换页面时权限认证
         $rootScope.$on('$routeChangeStart', function (event, next, current) {
-            $log.debug(next);
             var nextUrl = next && next.originalPath;
+            var currentUrl = current && current.originalPath;
+            console.log('当前页：' + currentUrl + ', 下一页：' + nextUrl);
 
             // 如果用户未登录
             if(!$rootScope.user['logined']) {
@@ -55,6 +56,11 @@ oasgames.mdataPanelApp.run([
                 }
             }else {
                 var license = UserAuth.route(nextUrl);
+                // 如果权限不足
+                if(!license) {
+                    console.log('不通过');
+                    $location.path(currentUrl);
+                }
                 $log.debug("访问权限验证：" + license);
             }
         });

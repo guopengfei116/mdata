@@ -118,7 +118,8 @@ oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
     '$http',
     '$location',
     'ApiCtrl',
-    function ($rootScope, $scope, $http, $location, ApiCtrl) {
+    'AUTHORITY',
+    function ($rootScope, $scope, $http, $location, ApiCtrl, AUTHORITY) {
 
         $scope.account = '';
         $scope.password = '';
@@ -178,7 +179,12 @@ oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
                     //记录登陆状态
                     $rootScope.user['logined'] = true;
                     $rootScope.user['authority'] = data.authority;
-                    $location.path('/application/manage');
+
+                    if(data.authority == AUTHORITY.administrators) {
+                        $location.path('/application/manage');
+                    }else {
+                        $location.path('/report/manage');
+                    }
 
                 }).error(function (status) {
                     Ui.alert('网络错误！');
