@@ -37,22 +37,25 @@ oasgames.mdataPanelApp.run([
         //用户初始属性
         $rootScope.user = {
             "logined" : false,
-            "auth" : null
+            "authority" : null
         };
 
         //切换页面时权限认证
         $rootScope.$on('$routeChangeStart', function (event, next, current) {
-            $log.debug(next.templateUrl);
+            $log.debug(next);
+            var nextUrl = next && next.originalPath;
 
             // 如果用户未登录
             if(!$rootScope.user['logined']) {
+                console.log('用户未登录');
                 if(next.templateUrl === '/mdata/tpl/partials/login.html') {
                     // 已经转向登录路由因此无需重定向
                 }else {
                     $location.path('/login');
                 }
             }else {
-                UserAuth.route(next.templateUrl);
+                var license = UserAuth.route(nextUrl);
+                $log.debug("访问权限验证：" + license);
             }
         });
     }

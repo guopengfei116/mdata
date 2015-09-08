@@ -68,7 +68,7 @@ oasgames.mdataPanelControllers.controller('navigationCtrl', [
     function ($rootScope, $scope) {
         $rootScope.$watch('path', function (newPath) {
             $scope.page = newPath.match(/\w+/)[0];
-            console.log($scope.page);
+            console.log("进入" + $scope.page + "页");
         });
     }
 ]);
@@ -86,7 +86,7 @@ oasgames.mdataPanelControllers.controller('breadcrumbCtrl', [
         //监听path变更
         $rootScope.$watch('path', function (newPath) {
             $scope.breadcrumb = Breadcrumb.getBreadcrumb(newPath);
-            console.log($scope.breadcrumb);
+            //console.log($scope.breadcrumb);
         });
 
         //关联每个breadcrumb Url
@@ -176,8 +176,9 @@ oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
                 $http.get(api).success(function (data) {
 
                     //记录登陆状态
-                    $rootScope.loginStatus = true;
-                    $location.path('application');
+                    $rootScope.user['logined'] = true;
+                    $rootScope.user['authority'] = data.authority;
+                    $location.path('/application/manage');
 
                 }).error(function (status) {
                     Ui.alert('网络错误！');
