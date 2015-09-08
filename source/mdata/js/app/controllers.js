@@ -41,14 +41,14 @@ oasgames.mdataPanelControllers.controller('PageFrameCtrl', [
 oasgames.mdataPanelControllers.controller('HeaderCtrl', [
     '$scope',
     '$http',
-    'GetApi',
-    function ($scope, $http, GetApi) {
+    'ApiCtrl',
+    function ($scope, $http, ApiCtrl) {
         $scope.isshow = false;
         $scope.show = function () {
             $scope.isshow = !$scope.isshow;
         };
         $scope.logout = function () {
-            var api = GetApi('logout');
+            var api = ApiCtrl.get('logout');
             if(api) {
                 $http.get(api).success(function () {
                     location.hash = '#/login';
@@ -83,10 +83,13 @@ oasgames.mdataPanelControllers.controller('breadcrumbCtrl', [
     '$location',
     'Breadcrumb',
     function ($rootScope, $scope, $location, Breadcrumb) {
+        //监听path变更
         $rootScope.$watch('path', function (newPath) {
             $scope.breadcrumb = Breadcrumb.getBreadcrumb(newPath);
             console.log($scope.breadcrumb);
         });
+
+        //关联每个breadcrumb Url
         $scope.setHref = function (index) {
             //最后路径指向当前页
             if(index == $scope.breadcrumb.length - 1) {
@@ -110,15 +113,18 @@ oasgames.mdataPanelControllers.controller('breadcrumbCtrl', [
  * login模块控制器
  * */
 oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
+    '$rootScope',
     '$scope',
     '$http',
     '$location',
-    'GetApi',
-    function ($scope, $http, $location, GetApi) {
+    'ApiCtrl',
+    function ($rootScope, $scope, $http, $location, ApiCtrl) {
 
         $scope.account = '';
         $scope.password = '';
         $scope.tooltip = new Tooltip({'position':'rc'}).getNewTooltip();
+
+        //表单失去焦点时错误验证
         $scope.blur = function (type, $errors) {
             var errorInfo = {
                 account: {
@@ -145,24 +151,36 @@ oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
 
             $scope[type + 'Error'] = false;
         };
+
+        //表单焦点时清除错误提示
         $scope.focus = function (type) {
             $scope[type + 'Error'] = false;
             if($scope.tooltip.errorType == type) {
                 $scope.tooltip.hide();
             }
         };
+
+        //清除错误
         $scope.clearErrors = function () {
             var errorCtl = ['accountError', 'passwordError'];
             for(var i = 0; i < types.length; i++) {
                 $scope[errorCtl[i]] = false;
             }
         };
+
+        //登陆
         $scope.submit = function () {
-            var api = GetApi('login');
+            var api = ApiCtrl.get('login');
+
             if($scope['ndForm'].$valid && api) {
-                $http.get('/mdata/js/login.json').success(function (data) {
+                $http.get(api).success(function (data) {
+
+                    //记录登陆状态
+                    $rootScope.loginStatus = true;
                     $location.path('application');
-                    //location.hash = '#/application';
+
+                }).error(function (status) {
+                    Ui.alert('网络错误！');
                 });
             }
         }

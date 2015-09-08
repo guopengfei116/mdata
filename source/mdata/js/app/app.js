@@ -13,24 +13,45 @@ oasgames.mdataPanelApp = angular.module('mdataPanelApp', [
     'mdataPanelFilter',
 ]);
 
+
 /*
-* 权限验证
+ * 用户权限对照表
+ * */
+oasgames.mdataPanelApp.constant("AUTHORITY", {
+    'administrators' : 1,
+    'user' : {
+        'reportAdmin' : 2,
+        'reportViewer' : 3,
+        'reportGuest' : 4
+    }
+});
+
+
+/*
+* 页面初始化
 * */
 oasgames.mdataPanelApp.run([
     '$rootScope',
     '$location',
-    'AuthService',
-    function ($rootScope, $location, AuthService) {
+    '$log',
+    'UserAuth',
+    function ($rootScope, $location, $log, UserAuth) {
+        $rootScope.user = {
+            "logined" : false,
+            "auth" : null
+        };
+
         $rootScope.$on('$routeChangeStart', function (event, next, current) {
+            $log.debug(next.templateUrl);
             // 如果用户未登录
-            if(!AuthService.userLoggedIn()) {
+            if(!$rootScope.user['logined']) {
                 if(next.templateUrl === '/mdata/tpl/partials/login.html') {
                     // 已经转向登录路由因此无需重定向
                 }else {
                     $location.path('/login');
                 }
             }else {
-                $rootScope.userLevel = AuthService.userLevel();
+                UserAuth.route();
             }
         });
     }

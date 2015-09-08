@@ -1,3 +1,9 @@
+{
+   "msg" : "fsdds"
+   "code" : ""
+   "data" : ""
+}
+
 登录接口: /site/login
 登出：/site/logout
 修改密码： /site/modify-psw

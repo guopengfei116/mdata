@@ -9,10 +9,11 @@ oasgames.mdataPanelServices = angular.module('mdataPanelServices', ['ngResource'
  * @provider {Object} API 接口url
  * @return {Function} 获取接口url
  * */
-oasgames.mdataPanelServices.provider('GetApi', [
+oasgames.mdataPanelServices.provider('ApiCtrl', [
     function () {
         return {
             API : {
+                'userAuth' : '/isLogin',
                 'login' : '/mdata/js/login.json',
                 'logout' : '/mdata/js/logout.text',
                 'application' : '/mdata/js/:appId.json'
@@ -22,13 +23,18 @@ oasgames.mdataPanelServices.provider('GetApi', [
             },
             $get : function () {
                 var self = this;
-                return function (name) {
-                    var url = self.API[name];
-                    if(!url) {
-                        console.log('api--' + name + '不存在');
-                        return '';
+                return {
+                    get : function (name) {
+                        var url = self.API[name];
+                        if(!url) {
+                            console.log('api--' + name + '不存在');
+                            return '';
+                        }
+                        return url;
+                    },
+                    set : function (name, url) {
+                        self.setApi(name, url);
                     }
-                    return url;
                 }
             }
         };
@@ -41,14 +47,37 @@ oasgames.mdataPanelServices.provider('GetApi', [
 * @return {Object} AuthService
 *
 * */
-oasgames.mdataPanelServices.factory('AuthService', [
+oasgames.mdataPanelServices.factory('UserAuth', [
+    '$rootScope',
     '$http',
-    'GetApi',
-    function ($http, getApi) {
-        var AuthService = {};
-        AuthService.userLoggedIn = function () {
-            return true
+    'ApiCtrl',
+    'AUTHORITY',
+    function ($rootScope, $http, ApiCtrl, AUTHORITY) {
+        var UserAuth = {
+            //获取登陆状态
+            userLoggedIn : function () {
+                var logined = false;
+
+                if(loginStatus == null) {
+                    $http({
+                        method : "GET",
+                        url : ApiCtrl.get('userAuth')
+                    }).success(function (data) {
+                        if(data.code == 200) {
+                            loginStatus = true, logined = true;
+                        }
+                    }).error(function () {
+
+                    });
+                }else {
+                    logined = loginStatus;
+                }
+
+                return logined;
+            }
+
         };
+
         return AuthService
     }
 ]);
@@ -160,9 +189,9 @@ oasgames.mdataPanelServices.provider('Breadcrumb', [
 
 oasgames.mdataPanelServices.factory('Application', [
     '$resource',
-    'GetApi',
-    function ($resource, GetApi) {
-        return $resource(GetApi('application'), {}, {
+    'ApiCtrl',
+    function ($resource, ApiCtrl) {
+        return $resource(ApiCtrl.get('application'), {}, {
             query: {method: 'GET', params: {appId: 'applications'}, isArray: true}
         });
     }
