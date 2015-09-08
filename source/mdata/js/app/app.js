@@ -14,6 +14,29 @@ oasgames.mdataPanelApp = angular.module('mdataPanelApp', [
 ]);
 
 /*
+* 权限验证
+* */
+oasgames.mdataPanelApp.run([
+    '$rootScope',
+    '$location',
+    'AuthService',
+    function ($rootScope, $location, AuthService) {
+        $rootScope.$on('$routeChangeStart', function (event, next, current) {
+            // 如果用户未登录
+            if(!AuthService.userLoggedIn()) {
+                if(next.templateUrl === '/mdata/tpl/partials/login.html') {
+                    // 已经转向登录路由因此无需重定向
+                }else {
+                    $location.path('/login');
+                }
+            }else {
+                $rootScope.userLevel = AuthService.userLevel();
+            }
+        });
+    }
+]);
+
+/*
 * 配置页面路由
 * */
 oasgames.mdataPanelApp.config([
