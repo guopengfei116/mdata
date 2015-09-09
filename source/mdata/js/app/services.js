@@ -16,7 +16,8 @@ oasgames.mdataPanelServices.provider('ApiCtrl', [
                 'userAuth' : '/isLogin',
                 'login' : '/mdata/js/login.json',
                 'logout' : '/mdata/js/logout.text',
-                'application' : '/mdata/js/:appId.json'
+                'application' : '/mdata/js/:appId.json',
+                'shortcuts' : '/mdata/js/shortcuts.json'
             },
             setApi : function (name, url) {
                 this.API[name] = url;

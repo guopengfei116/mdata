@@ -96,12 +96,18 @@
                     li {
                         padding: rem(14) 0;
                         color: #899dc1;
+                        &:hover {
+                            color: #fff;
+                        }
                     }
                 }
                 &-active {
                     .shortcuts_apps_app_title {
                         font-weight: bold;
                         color: #fff;
+                    }
+                    .shortcuts_apps_app_title_arrow {
+                        @include prefix(transform, rotate(180deg));
                     }
                     .shortcuts_apps_app_report {
                         display: block;
@@ -110,7 +116,12 @@
             }
         }
         &-active {
-            color: #fff;
+            .shortcuts_title_arrow {
+                @include prefix(transform, rotate(180deg));
+            }
+            .shortcuts_title {
+                color: #fff;
+            }
             .shortcuts_apps {
                 display: block;
             }

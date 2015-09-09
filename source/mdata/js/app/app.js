@@ -56,7 +56,7 @@ oasgames.mdataPanelApp.run([
                     $location.path('/login');
                 }
             // 已登陆访问登陆页
-            }else if(nextUrl == '/login' || nextUrl == '/'){
+            }else if(nextUrl === '/login' || nextUrl === '/' || nextUrl === undefined){
                 if($rootScope.user.authority == AUTHORITY.administrators) {
                     $location.path('/application/manage');
                 }else {

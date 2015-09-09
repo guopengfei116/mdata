@@ -76,10 +76,48 @@ oasgames.mdataPanelControllers.controller('HeaderCtrl', [
 oasgames.mdataPanelControllers.controller('navigationCtrl', [
     '$rootScope',
     '$scope',
-    function ($rootScope, $scope) {
+    '$http',
+    'ApiCtrl',
+    function ($rootScope, $scope, $http, ApiCtrl) {
+        //权限
+        $scope.authority = $rootScope.user['authority'];
+
         $rootScope.$watch('path', function (newPath) {
+            //当前页
             $scope.page = newPath.match(/\w+/)[0];
+
+            //当前预览的report
+            var reportViewPath = newPath.match(/\/report\/view\/(\w+)/);
+            // reportViewPath == null
+            if(reportViewPath && reportViewPath[1]) {
+                $scope.currentReportId = reportViewPath[1];
+            }
+
             console.log("进入" + $scope.page + "页");
+            console.log($scope.currentReportId);
+        });
+
+        //收藏列表默认状态
+        var shortcutsDefaultStatus = false;
+        $scope.appsShow = shortcutsDefaultStatus;
+        $scope.reportsShow = [];
+
+        //shortcuts列表初始化
+        $scope.shortcuts = [];
+        $http({
+            method : "GET",
+            url : ApiCtrl.get('shortcuts'),
+            data : { "reportId" : 1, }
+        }).success(function (data, status) {
+            if(data && data.code == 200) {
+                $scope.shortcuts = data.data;
+            }
+            //初始化reports默认状态
+            for(var i = $scope.shortcuts.length - 1; i >= 0; i--) {
+                $scope.reportsShow[i] = shortcutsDefaultStatus;
+            }
+        }).error(function () {
+            Ui.alert('网络错误');
         });
     }
 ]);
@@ -190,13 +228,8 @@ oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
                     //记录登陆状态
                     $rootScope.user['logined'] = true;
                     $rootScope.user['authority'] = data.authority;
-/*
-                    if(data.authority == AUTHORITY.administrators) {
-                        $location.path('/application/manage');
-                    }else {
-                        $location.path('/report/manage');
-                    }
-*/
+                    $rootScope.$emit('$routeChangeStart');
+
                 }).error(function (status) {
                     Ui.alert('网络错误！');
                 });
