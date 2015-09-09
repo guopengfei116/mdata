@@ -1,0 +1,33 @@
+<section class="cf">
+    <div class="left button-group">
+        <a href="#/report/manage/create" class="button button-create-plus">+</a>
+        <a href="#/report/manage/create" class="button button-create">Create Report</a>
+    </div>
+    <div class="form-tool right">
+        <form novalidate name="searchForm">
+            <fieldset class="fieldset">
+                <input class="fieldset_text" name="searchInput" ng-model="searchTerms" type="text" required>
+                <button class="fieldset_button iconfont icon-search" ng-click="submit()"></button>
+            </fieldset>
+        </form>
+    </div>
+</section>
+<dl ng-repeat="appReports in dataReports.data">
+    <dt class="row">
+        <ul>
+            <li class="row_column row_column-2">{{ appReports.name }}</li>
+            <li class="row_column row_column-2"><i class="iconfont icon-collection"></i></li>
+        </ul>
+    </dt>
+    <dd class="row" ng-repeat="report in appReports.report">
+        <ul>
+            <li class="row_column row_column-2">{{ report.name }}</li>
+            <li class="row_column row_column-2">
+                <span class="iconfont icon-report tooltip-host" data-tooltip-position="bc" data-tooltip-info="Duplicate"></span>
+                <span class="iconfont icon-report tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></span>
+                <span class="iconfont icon-report tooltip-host" data-tooltip-position="bc" data-tooltip-info="Delete"></span>
+                <span class="iconfont icon-report tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></span>
+            </li>
+        </ul>
+    </dd>
+</dl>
