@@ -12,21 +12,21 @@
         </form>
     </div>
 </section>
-<dl ng-repeat="appReports in dataReports.data">
-    <dt class="row">
+<dl class="container" ng-repeat="reportGroup in dataReports.data">
+    <dt class="row row-title">
         <ul>
-            <li class="row_column row_column-2">{{ appReports.name }}</li>
+            <li class="row_column row_column-2"><a href="javascript: void (0);">{{ reportGroup.appName }}</a></li>
             <li class="row_column row_column-2"><i class="iconfont icon-collection"></i></li>
         </ul>
     </dt>
-    <dd class="row" ng-repeat="report in appReports.report">
+    <dd class="row" ng-repeat="report in reportGroup.reports">
         <ul>
-            <li class="row_column row_column-2">{{ report.name }}</li>
+            <li class="row_column row_column-2"><a href="#/report/view/{{ report.id }}">{{ report.name }}</a></li>
             <li class="row_column row_column-2">
                 <span class="iconfont icon-report tooltip-host" data-tooltip-position="bc" data-tooltip-info="Duplicate"></span>
-                <span class="iconfont icon-report tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></span>
-                <span class="iconfont icon-report tooltip-host" data-tooltip-position="bc" data-tooltip-info="Delete"></span>
-                <span class="iconfont icon-report tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></span>
+                <span class="iconfont icon-edit tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></span>
+                <span class="iconfont icon-delete tooltip-host" data-tooltip-position="bc" data-tooltip-info="Delete"></span>
+                <span class="iconfont icon-shortcuts tooltip-host" data-tooltip-position="bc" data-tooltip-info="Shortcut"></span>
             </li>
         </ul>
     </dd>

@@ -17,8 +17,8 @@ oasgames.mdataPanelControllers.controller('PageFrameCtrl', [
     'PageOutline',
     'Breadcrumb',
     function ($rootScope, $scope, $location, PageOutline, Breadcrumb) {
-        $scope.outlineHide = true;
-        $scope.islogin = true;
+        $scope.outlineHide = false;
+        $scope.islogin = false;
         $scope.pageTitle = 'Application';
         $scope.breadcrumb = ['Application', 'Create'];
 
@@ -84,10 +84,11 @@ oasgames.mdataPanelControllers.controller('navigationCtrl', [
 
         $rootScope.$watch('path', function (newPath) {
             //当前页
-            $scope.page = newPath.match(/\w+/)[0];
+            $scope.page = newPath && newPath.match(/\w+/)[0];
 
             //当前预览的report
-            var reportViewPath = newPath.match(/\/report\/view\/(\w+)/);
+            var reportViewPath = newPath && newPath.match(/\/report\/view\/(\w+)/);
+
             // reportViewPath == null
             if(reportViewPath && reportViewPath[1]) {
                 $scope.currentReportId = reportViewPath[1];
@@ -132,6 +133,7 @@ oasgames.mdataPanelControllers.controller('breadcrumbCtrl', [
     '$location',
     'Breadcrumb',
     function ($rootScope, $scope, $location, Breadcrumb) {
+
         //监听path变更
         $rootScope.$watch('path', function (newPath) {
             $scope.breadcrumb = Breadcrumb.getBreadcrumb(newPath);
@@ -223,12 +225,14 @@ oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
             var api = ApiCtrl.get('login');
 
             if($scope['ndForm'].$valid && api) {
-                $http.get(api).success(function (data) {
+                $http.get(api).success(function (result) {
 
-                    //记录登陆状态
-                    $rootScope.user['logined'] = true;
-                    $rootScope.user['authority'] = data.authority;
-                    $rootScope.$emit('$routeChangeStart');
+                    if(result.code == 200) {
+                        //记录登陆状态
+                        $rootScope.user['logined'] = true;
+                        $rootScope.user['authority'] = result.data.authority;
+                        $rootScope.$emit('$routeChangeStart');
+                    }
 
                 }).error(function (status) {
                     Ui.alert('网络错误！');
@@ -352,8 +356,27 @@ oasgames.mdataPanelControllers.controller('systemLogCtrl', [
  * */
 oasgames.mdataPanelControllers.controller('reportManageCtrl', [
     '$scope',
-    function ($scope) {
+    'Report',
+    function ($scope, Report) {
+        var searching = false;
+        $scope.dataReports = Report.query();
 
+        //搜索
+        $scope.submit = function () {
+            if($scope.searchForm.searchInput.$valid && $scope.searchTerms && !searching) {
+                searching = true;
+                Account.get(
+                    { accountId: $scope.searchTerms },
+                    function (data) {
+                        console.log(data);
+                        searching = false;
+                    },
+                    function () {
+                        Ui.alert('网络错误');
+                    }
+                )
+            }
+        }
     }
 ]);
 

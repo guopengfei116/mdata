@@ -1,6 +1,6 @@
 .nav {
     @include border-box();
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     padding-top: rem(60);

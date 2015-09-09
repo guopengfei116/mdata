@@ -35,6 +35,7 @@ oasgames.mdataPanelApp.run([
     'UserAuth',
     'AUTHORITY',
     function ($rootScope, $location, $log, UserAuth, AUTHORITY) {
+
         //用户初始属性
         $rootScope.user = {
             "logined" : false,
@@ -55,6 +56,7 @@ oasgames.mdataPanelApp.run([
                 }else {
                     $location.path('/login');
                 }
+
             // 已登陆访问登陆页
             }else if(nextUrl === '/login' || nextUrl === '/' || nextUrl === undefined){
                 if($rootScope.user.authority == AUTHORITY.administrators) {
@@ -62,6 +64,7 @@ oasgames.mdataPanelApp.run([
                 }else {
                     $location.path('/report/manage');
                 }
+
             // 已登录访问其他页
             }else {
                 var license = UserAuth.route(nextUrl);
@@ -72,6 +75,7 @@ oasgames.mdataPanelApp.run([
                 }
                 $log.debug("访问权限验证：" + license);
             }
+
         });
     }
 ]);
@@ -83,6 +87,7 @@ oasgames.mdataPanelApp.config([
     '$routeProvider',
     function ($routeProvider) {
         $routeProvider
+
         //login
         .when('/', {
             redirectTo: '/login'

@@ -19,7 +19,7 @@ oasgames.mdataPanelServices.provider('ApiCtrl', [
                 'shortcuts' : '/mdata/js/shortcuts.json',
                 'application' : '/mdata/js/:appId.json',
                 'account' : '/mdata/js/:accountId.json',
-                'report' : '/mdata/js/:report.json',
+                'report' : '/mdata/js/:reportId.json',
                 'systemLog' : '/mdata/js/systemLog.json'
             },
             setApi : function (name, url) {
@@ -236,6 +236,20 @@ oasgames.mdataPanelServices.factory('Account', [
     function ($resource, ApiCtrl) {
         return $resource(ApiCtrl.get('account'), {}, {
             query: {method: 'GET', params: {accountId: 'accounts'}}
+        });
+    }
+]);
+
+
+/*
+ * get report
+ * */
+oasgames.mdataPanelServices.factory('Report', [
+    '$resource',
+    'ApiCtrl',
+    function ($resource, ApiCtrl) {
+        return $resource(ApiCtrl.get('report'), {}, {
+            query: {method: 'GET', params: {reportId: 'reports'}}
         });
     }
 ]);
