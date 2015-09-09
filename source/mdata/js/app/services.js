@@ -16,8 +16,11 @@ oasgames.mdataPanelServices.provider('ApiCtrl', [
                 'userAuth' : '/isLogin',
                 'login' : '/mdata/js/login.json',
                 'logout' : '/mdata/js/logout.text',
+                'shortcuts' : '/mdata/js/shortcuts.json',
                 'application' : '/mdata/js/:appId.json',
-                'shortcuts' : '/mdata/js/shortcuts.json'
+                'account' : '/mdata/js/:accountId.json',
+                'report' : '/mdata/js/:report.json',
+                'systemLog' : '/mdata/js/systemLog.json'
             },
             setApi : function (name, url) {
                 this.API[name] = url;
@@ -209,12 +212,30 @@ oasgames.mdataPanelServices.provider('Breadcrumb', [
     }
 ]);
 
+
+/*
+* get app
+* */
 oasgames.mdataPanelServices.factory('Application', [
     '$resource',
     'ApiCtrl',
     function ($resource, ApiCtrl) {
         return $resource(ApiCtrl.get('application'), {}, {
-            query: {method: 'GET', params: {appId: 'applications'}, isArray: true}
+            query: {method: 'GET', params: {appId: 'applications'}}
+        });
+    }
+]);
+
+
+/*
+ * get account
+ * */
+oasgames.mdataPanelServices.factory('Account', [
+    '$resource',
+    'ApiCtrl',
+    function ($resource, ApiCtrl) {
+        return $resource(ApiCtrl.get('account'), {}, {
+            query: {method: 'GET', params: {accountId: 'accounts'}}
         });
     }
 ]);

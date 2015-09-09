@@ -98,15 +98,15 @@ oasgames.mdataPanelApp.config([
         })
         .when('/application/manage', {
             templateUrl: '/mdata/tpl/partials/application_manage.html',
-            controller: 'ApplicationListCtrl'
+            controller: 'ApplicationManageCtrl'
         })
         .when('/application/manage/create', {
             templateUrl: '/mdata/tpl/partials/application_create.html',
-            controller: 'ApplicationListCtrl'
+            controller: 'ApplicationCreateCtrl'
         })
         .when('/application/manage/edit/:applicationId', {
             templateUrl: '/mdata/tpl/partials/application_edit.html',
-            controller: 'ApplicationListCtrl'
+            controller: 'ApplicationEditCtrl'
         })
 
         //account
@@ -115,21 +115,21 @@ oasgames.mdataPanelApp.config([
         })
         .when('/account/manage', {
             templateUrl: '/mdata/tpl/partials/account_manage.html',
-            controller: 'ApplicationListCtrl'
+            controller: 'AccountManageCtrl'
         })
         .when('/account/manage/create', {
             templateUrl: '/mdata/tpl/partials/account_create.html',
-            controller: 'ApplicationListCtrl'
+            controller: 'AccountCreateCtrl'
         })
         .when('/account/manage/edit/:accountId', {
             templateUrl: '/mdata/tpl/partials/account_edit.html',
-            controller: 'ApplicationListCtrl'
+            controller: 'AccountEditCtrl'
         })
 
         //system log
         .when('/systemLog', {
             templateUrl: '/mdata/tpl/partials/system_log.html',
-            controller: 'ApplicationListCtrl'
+            controller: 'systemLogCtrl'
         })
 
         //report
@@ -138,19 +138,19 @@ oasgames.mdataPanelApp.config([
         })
         .when('/report/manage', {
             templateUrl: '/mdata/tpl/partials/report_manage.html',
-            controller: 'ApplicationListCtrl'
+            controller: 'reportManageCtrl'
         })
         .when('/report/manage/create', {
             templateUrl: '/mdata/tpl/partials/report_create.html',
-            controller: 'ApplicationListCtrl'
+            controller: 'reportCreateCtrl'
         })
         .when('/report/manage/edit/:reportId', {
             templateUrl: '/mdata/tpl/partials/report_edit.html',
-            controller: 'ApplicationListCtrl'
+            controller: 'reportEditCtrl'
         })
         .when('/report/view/:reportId', {
             templateUrl: '/mdata/tpl/partials/report.html',
-            controller: 'ApplicationListCtrl'
+            controller: 'reportViewCtrl'
         })
 
         //notfound

@@ -1,7 +1,7 @@
 <section class="cf">
     <div class="left button-group">
-        <button class="button button-create-plus" ng-click="$location.path('/application/manage/create')">+</button>
-        <button class="button button-create">Create</button>
+        <a href="#/application/manage/create" class="button button-create-plus">+</a>
+        <a href="#/application/manage/create" class="button button-create">Create</a>
     </div>
     <div class="form-tool right">
         <form novalidate name="searchForm">
@@ -22,7 +22,7 @@
             <li class="row_column row_column-5">Manage</li>
         </ul>
     </dt>
-    <dd class="row" ng-repeat="app in apps">
+    <dd class="row" ng-repeat="app in dataApps.data">
         <ul>
             <li class="row_column row_column-5">{{ app.name }}</li>
             <li class="row_column row_column-5">{{ app.id }}</li>

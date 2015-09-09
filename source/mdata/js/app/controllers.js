@@ -240,14 +240,14 @@ oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
 
 
 /*
- * application模块控制器
+ *  application manage控制器
  * */
-oasgames.mdataPanelControllers.controller('ApplicationListCtrl', [
+oasgames.mdataPanelControllers.controller('ApplicationManageCtrl', [
     '$scope',
     'Application',
     function ($scope, Application) {
         var searching = false;
-        $scope.apps = Application.query();
+        $scope.dataApps = Application.query();
 
         //搜索
         $scope.submit = function () {
@@ -265,5 +265,124 @@ oasgames.mdataPanelControllers.controller('ApplicationListCtrl', [
                 )
             }
         }
+    }
+]);
+
+/*
+*  application create控制器
+* */
+oasgames.mdataPanelControllers.controller('ApplicationCreateCtrl', [
+    '$scope',
+    function ($scope) {
+
+    }
+]);
+
+/*
+ *  application edit控制器
+ * */
+oasgames.mdataPanelControllers.controller('ApplicationEditCtrl', [
+    '$scope',
+    function ($scope) {
+
+    }
+]);
+
+/*
+ *  account manage控制器
+ * */
+oasgames.mdataPanelControllers.controller('AccountManageCtrl', [
+    '$scope',
+    'Account',
+    function ($scope, Account) {
+        var searching = false;
+        $scope.dataAccounts = Account.query();
+
+        //搜索
+        $scope.submit = function () {
+            if($scope.searchForm.searchInput.$valid && $scope.searchTerms && !searching) {
+                searching = true;
+                Account.get(
+                    { accountId: $scope.searchTerms },
+                    function (data) {
+                        console.log(data);
+                        searching = false;
+                    },
+                    function () {
+                        Ui.alert('网络错误');
+                    }
+                )
+            }
+        }
+    }
+]);
+
+/*
+ *  account create控制器
+ * */
+oasgames.mdataPanelControllers.controller('AccountCreateCtrl', [
+    '$scope',
+    function ($scope) {
+
+    }
+]);
+
+/*
+ *  account edit控制器
+ * */
+oasgames.mdataPanelControllers.controller('AccountEditCtrl', [
+    '$scope',
+    function ($scope) {
+
+    }
+]);
+
+/*
+ *  system log控制器
+ * */
+oasgames.mdataPanelControllers.controller('systemLogCtrl', [
+    '$scope',
+    function ($scope) {
+
+    }
+]);
+
+/*
+ *  report manage控制器
+ * */
+oasgames.mdataPanelControllers.controller('reportManageCtrl', [
+    '$scope',
+    function ($scope) {
+
+    }
+]);
+
+/*
+ *  report create控制器
+ * */
+oasgames.mdataPanelControllers.controller('reportCreateCtrl', [
+    '$scope',
+    function ($scope) {
+
+    }
+]);
+
+/*
+ *  report edit控制器
+ * */
+oasgames.mdataPanelControllers.controller('reportEditCtrl', [
+    '$scope',
+    function ($scope) {
+
+    }
+]);
+
+/*
+ *  report view控制器
+ * */
+oasgames.mdataPanelControllers.controller('reportViewCtrl', [
+    '$scope',
+    function ($scope) {
+
     }
 ]);
