@@ -1,0 +1,20 @@
+<dl class="container">
+    <dt class="row row-title">
+    <ul>
+        <li class="row_column row_column-4">Time</li>
+        <li class="row_column row_column-4">Account</li>
+        <li class="row_column row_column-4">Operation</li>
+        <li class="row_column row_column-4">IP</li>
+    </ul>
+    </dt>
+    <dd class="row row-color-interlaced" ng-repeat="log in logs">
+        <ul>
+            <li class="row_column row_column-4">{{ log.time }}</li>
+            <li class="row_column row_column-4">
+                <a href="#/account/manage/edit/log.account.id">{{ log.account.email }}</a>
+            </li>
+            <li class="row_column row_column-4">{{ log.operation }}</li>
+            <li class="row_column row_column-4">{{ log.ip }}</li>
+        </ul>
+    </dd>
+</dl>

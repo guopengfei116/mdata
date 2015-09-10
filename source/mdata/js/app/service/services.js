@@ -20,7 +20,7 @@ oasgames.mdataPanelServices.provider('ApiCtrl', [
                 'application' : '/mdata/js/:appId.json',
                 'account' : '/mdata/js/:accountId.json',
                 'report' : '/mdata/js/:reportId.json',
-                'systemLog' : '/mdata/js/systemLog.json'
+                'systemLog' : '/mdata/js/system_log.json'
             },
             setApi : function (name, url) {
                 this.API[name] = url;

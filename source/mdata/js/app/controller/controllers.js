@@ -94,8 +94,7 @@ oasgames.mdataPanelControllers.controller('navigationCtrl', [
                 $scope.currentReportId = reportViewPath[1];
             }
 
-            console.log("进入" + $scope.page + "页");
-            console.log($scope.currentReportId);
+            console.log("进入" + $scope.page + "页，" + "当前" + location.hash + "页");
         });
 
         //收藏列表默认状态
