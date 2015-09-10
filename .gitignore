@@ -1,0 +1,10 @@
+
+*.log
+
+node_modules/
+debug/
+.sass-cache/
+bower_components/
+.idea/
+.DS_store
+root.key
