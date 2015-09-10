@@ -1,5 +1,5 @@
 <section class="cf">
-    <div class="left button-group">
+    <div class="left button-group" ng-if="authority == 1">
         <a href="#/report/manage/create" class="button button-create-plus">+</a>
         <a href="#/report/manage/create" class="button button-create">Create Report</a>
     </div>
@@ -23,9 +23,9 @@
         <ul>
             <li class="row_column row_column-2"><a href="#/report/view/{{ report.id }}">{{ report.name }}</a></li>
             <li class="row_column row_column-2">
-                <span class="iconfont icon-report tooltip-host" data-tooltip-position="bc" data-tooltip-info="Duplicate"></span>
-                <span class="iconfont icon-edit tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></span>
-                <span class="iconfont icon-delete tooltip-host" data-tooltip-position="bc" data-tooltip-info="Delete"></span>
+                <span ng-if="authority <= 2" class="iconfont icon-report tooltip-host" data-tooltip-position="bc" data-tooltip-info="Duplicate"></span>
+                <a href="#/report/manage/edit/{{ report.id }}" ng-if="authority <= 2" class="iconfont icon-edit tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></a>
+                <span ng-if="authority <= 2" class="iconfont icon-delete tooltip-host" data-tooltip-position="bc" data-tooltip-info="Delete"></span>
                 <span class="iconfont icon-shortcuts tooltip-host" data-tooltip-position="bc" data-tooltip-info="Shortcut"></span>
             </li>
         </ul>

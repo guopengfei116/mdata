@@ -31,17 +31,17 @@
                 <a href="#/application/manage/edit/{{ app.id }}">{{ app.id }}</a>
             </li>
             <li class="row_column row_column-5">
-                <span ng-repeat="user in app.users">
-                    <a href="#/report/report/{{ report.id }}">{{ report.name }}</a>
+                <span ng-repeat="user in app['users_admin']">
+                    <a href="#/account/manage/edit/{{ user.id }}">{{ user.name }}</a>
                 </span>
             </li>
             <li class="row_column row_column-5">
-                <span ng-repeat="report in app.reports">
-                    <a href="#/report/report/{{ report.id }}">{{ report.name }}</a>
+                <span ng-repeat="user in app['users_viewer']">
+                    <a href="#/account/manage/edit/{{ user.id }}">{{ user.name }}</a>
                 </span>
             </li>
             <li class="row_column row_column-5">
-                <i class="iconfont icon-edit tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></i>
+                <a href="#/application/manage/edit/{{ app.id }}" class="iconfont icon-edit tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></a>
                 <i class="iconfont icon-delete tooltip-host" data-tooltip-position="bc" data-tooltip-info="Delete"></i>
             </li>
         </ul>

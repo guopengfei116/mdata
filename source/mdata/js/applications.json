@@ -4,12 +4,7 @@
     {
       "name" : "you",
       "id" : "12",
-      "users" : [
-        {
-          "name" : "jon",
-          "email" : "1@1.com",
-          "id" : "12"
-        },
+      "users_admin" : [
         {
           "name" : "jon",
           "email" : "1@1.com",
@@ -21,23 +16,33 @@
           "id" : "12"
         }
       ],
-      "reports" : [
+      "users_viewer" : [
         {
           "name" : "baode",
-          "id" : "44",
+          "email" : "4@4.com",
           "app" : "444"
+        },
+        {
+          "name" : "jon",
+          "email" : "1@1.com",
+          "id" : "128"
+        },
+        {
+          "name" : "jon",
+          "email" : "1dfg@1d.com",
+          "id" : "18"
+        },
+        {
+          "name" : "jon",
+          "email" : "aa@mv.com",
+          "id" : "132"
         }
       ]
     },
     {
-      "name" : "fei",
-      "id" : "198",
-      "users" : [
-        {
-          "name" : "jon",
-          "email" : "1@1.com",
-          "id" : "12"
-        },
+      "name" : "gaga",
+      "id" : "123",
+      "users_admin" : [
         {
           "name" : "jon",
           "email" : "1@1.com",
@@ -49,23 +54,33 @@
           "id" : "12"
         }
       ],
-      "reports" : [
+      "users_viewer" : [
         {
-          "name" : "bao",
-          "id" : "11",
-          "app" : "111"
+          "name" : "baode",
+          "email" : "4@4.com",
+          "app" : "444"
+        },
+        {
+          "name" : "jon",
+          "email" : "1@1.com",
+          "id" : "128"
+        },
+        {
+          "name" : "jon",
+          "email" : "1dfg@1d.com",
+          "id" : "18"
+        },
+        {
+          "name" : "jon",
+          "email" : "aa@mv.com",
+          "id" : "132"
         }
       ]
     },
     {
-      "name" : "guo",
-      "id" : "46412",
-      "users" : [
-        {
-          "name" : "jon",
-          "email" : "1@1.com",
-          "id" : "12"
-        },
+      "name" : "feuf",
+      "id" : "88",
+      "users_admin" : [
         {
           "name" : "jon",
           "email" : "1@1.com",
@@ -77,11 +92,64 @@
           "id" : "12"
         }
       ],
-      "reports" : [
+      "users_viewer" : [
         {
-          "name" : "baoDS",
-          "id" : "33",
-          "app" : "333"
+          "name" : "baode",
+          "email" : "4@4.com",
+          "app" : "444"
+        },
+        {
+          "name" : "jon",
+          "email" : "1@1.com",
+          "id" : "128"
+        },
+        {
+          "name" : "jon",
+          "email" : "1dfg@1d.com",
+          "id" : "18"
+        },
+        {
+          "name" : "jon",
+          "email" : "aa@mv.com",
+          "id" : "132"
+        }
+      ]
+    },
+    {
+      "name" : "pp",
+      "id" : "88",
+      "users_admin" : [
+        {
+          "name" : "jon",
+          "email" : "1@1.com",
+          "id" : "12"
+        },
+        {
+          "name" : "jon",
+          "email" : "1@1.com",
+          "id" : "12"
+        }
+      ],
+      "users_viewer" : [
+        {
+          "name" : "baode",
+          "email" : "4@4.com",
+          "app" : "444"
+        },
+        {
+          "name" : "jon",
+          "email" : "1@1.com",
+          "id" : "128"
+        },
+        {
+          "name" : "jon",
+          "email" : "1dfg@1d.com",
+          "id" : "18"
+        },
+        {
+          "name" : "jon",
+          "email" : "aa@mv.com",
+          "id" : "132"
         }
       ]
     }
