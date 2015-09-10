@@ -1,0 +1,19 @@
+<form class="form form-panel" name="ndForm" novalidate>
+    <fieldset class="fieldset fieldset-group fieldset-account" ng-class="{'fieldset-error':accountError}">
+        <label class="fieldset-group_label iconfont icon-user"></label>
+        <input ng-model="account" class="fieldset_text" type="text"
+               placeholder="Email" required ng-pattern="/^\w{6,16}$/"
+               name="ndAccount" ng-blur="blur('account', ndForm.ndAccount.$error)"
+               ng-focus="focus('account')" >
+    </fieldset>
+    <fieldset class="fieldset fieldset-group fieldset-password" ng-class="{'fieldset-error':passwordError}">
+        <label class="fieldset-group_label iconfont icon-key"></label>
+        <input ng-model="password" class="fieldset_text" type="password"
+               placeholder="Password" required ng-pattern="/^\w{6,16}$/"
+               name="ndPassword" ng-blur="blur('password', ndForm.ndPassword.$error)"
+               ng-focus="focus('password')" >
+    </fieldset>
+    <fieldset class="fieldset">
+        <button ng-click="submit()" class="fieldset_button" type="button">log in</button>
+    </fieldset>
+</form>

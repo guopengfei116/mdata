@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>预览</title>
+        <link href="/common/ui_guide/ui_guide.css" rel="stylesheet" type="text/css" />
+        <script src="/common/js/common.js"></script>
+    </head>
+    <body>
+        <h2>Button</h2>
+        <div class="wrapper">
+            <a href="javascript:void(0);" class="btn">绿色</a>
+            <a href="javascript:void(0);" class="btn btn--grey">灰色</a>
+            <a href="javascript:void(0);" class="btn btn--blue">蓝色</a>
+            <a href="javascript:void(0);" class="btn btn--blue btn--large">大一些的</a>
+        </div>
+        <h2 id="tab">Tab</h2>
+        <div class="wrapper cf">
+            <div data-uix="tab" class="tab pull-left">
+                <ul class="tab__nav cf">
+                    <li><a class="current" href="javascript:void(0);">tab1</a></li>
+                    <li><a href="javascript:void(0);">tab2</a></li>
+                    <li><a href="javascript:void(0);">tab3</a></li>
+                </ul>
+                <div class="tab__sheet current">tab1 sheet</div>
+                <div class="tab__sheet">tab2 sheet</div>
+                <div class="tab__sheet">tab3 sheet</div>
+            </div>
+            <div data-uix="tab" data-params='{"effect": "fade"}' class="tab pull-left">
+                <ul class="tab__nav cf">
+                    <li><a class="current" href="javascript:void(0);">tab1</a></li>
+                    <li><a href="javascript:void(0);">tab2</a></li>
+                    <li><a href="javascript:void(0);">tab3</a></li>
+                </ul>
+                <div class="tab__sheet current">tab1 sheet</div>
+                <div class="tab__sheet">tab2 sheet</div>
+                <div class="tab__sheet">tab3 sheet</div>
+            </div>
+            <div data-uix="tab" data-params='{"effect": "slide"}' class="tab pull-left">
+                <ul class="tab__nav cf">
+                    <li><a class="current" href="javascript:void(0);">tab1</a></li>
+                    <li><a href="javascript:void(0);">tab2</a></li>
+                    <li><a href="javascript:void(0);">tab3</a></li>
+                </ul>
+                <div class="tab__sheet current">tab1 sheet</div>
+                <div class="tab__sheet">tab2 sheet</div>
+                <div class="tab__sheet">tab3 sheet</div>
+            </div>
+        </div>
+        <h2>Tip</h2>
+        <div class="wrapper">
+            <span class="tip tip--red">123</span>
+            <span class="tip tip--yellow">123</span>
+            <span class="tip">123</span>
+        </div>
+        <h2>Dropdown</h2>
+        <div class="wrapper cf">
+            <div data-uix="dropdown" class="pull-left dropdown">
+                <div class="dropdown__trigger">个人信息</div>
+                <ul data-uix="autohide" class="dropdown__content">
+                    <li><a href="javascript:void(0);">账号管理</a></li>
+                    <li><a href="javascript:void(0);">上传证书</a></li>
+                    <li><a href="javascript:void(0);">注销</a></li>
+                </ul>
+            </div>
+            <div data-uix="dropdown" data-params='{ "effect": "fade" }' class="pull-left dropdown">
+                <div class="dropdown__trigger">个人信息Fade</div>
+                <ul data-uix="autohide" data-params='{ "effect": "fade" }' class="dropdown__content">
+                    <li><a href="javascript:void(0);">账号管理</a></li>
+                    <li><a href="javascript:void(0);">上传证书</a></li>
+                    <li><a href="javascript:void(0);">注销</a></li>
+                </ul>
+            </div>
+            <div data-uix="dropdown" data-params='{ "effect": "slide" }' class="pull-left dropdown">
+                <div class="dropdown__trigger">个人信息Slide</div>
+                <ul data-uix="autohide" data-params='{ "effect": "slide" }' class="dropdown__content">
+                    <li><a href="javascript:void(0);">账号管理</a></li>
+                    <li><a href="javascript:void(0);">上传证书</a></li>
+                    <li><a href="javascript:void(0);">注销</a></li>
+                </ul>
+            </div>
+        </div>
+        <h2>Icon</h2>
+        <div id="icon" class="wrapper">
+            <i class="icon icon--return-arrow"></i>
+            <i class="icon icon--nav1"></i>
+            <i class="icon icon--nav2"></i>
+            <i class="icon icon--nav3"></i>
+            <i class="icon icon--nav4"></i>
+            <i class="icon icon--nav5"></i>
+            <i class="icon icon--nav6"></i>
+            <i class="icon icon--nav7"></i>
+            <i class="icon icon--nav8"></i>
+            <i class="icon icon--nav9"></i>
+            <i class="icon icon--nav10"></i>
+            <i class="icon icon--nav11"></i>
+            <i class="icon icon--service-question"></i>
+            <i class="icon icon--calendar"></i>
+            <i class="icon icon--share"></i>
+            <i class="icon icon--reply"></i>
+            <i class="icon icon--select-arrow"></i>
+            <i class="icon icon--left-arrow"></i>
+            <i class="icon icon--right-arrow"></i>
+            <i class="icon icon--star"></i>
+            <i class="icon icon--praise"></i>
+            <i class="icon icon--lightning"></i>
+        </div>
+        <div id="icon-large" class="wrapper">
+            <i class="icon icon--QRcode"></i>
+            <i class="icon icon--service-text"></i>
+            <i class="icon icon--service-phone"></i>
+            <i class="icon icon--service-family"></i>
+            <i class="icon icon--service-appointment"></i>
+            <i class="icon icon--clinic-logo"></i>
+            <i class="icon icon--arrow"></i>
+            <i class="icon icon--notice"></i>
+            <i class="icon icon--download-clinic"></i>
+            <i class="icon icon--download-doctor"></i>
+        </div>
+        <h2>IconFont</h2>
+        <div class="wrapper">
+            <span class="iconfont icon-star"></span>
+            <span class="iconfont icon-user"></span>
+            <span class="iconfont icon-doctor"></span>
+            <span class="iconfont icon-phone"></span>
+            <span class="iconfont icon-bigphone"></span>
+            <span class="iconfont icon-talk"></span>
+            <span class="iconfont icon-question"></span>
+            <span class="iconfont icon-money"></span>
+            <span class="iconfont icon-edit"></span>
+            <span class="iconfont icon-medical"></span>
+            <span class="iconfont icon-card"></span>
+            <span class="iconfont icon-back"></span>
+        </div>
+        <h2>Select</h2>
+        <div class="wrapper">
+            <div data-uix="select" class="select">
+                <div class="select__trigger">
+                    <i class="icon icon--select-arrow"></i>
+                    <p data-placeholder="请选择科室"></p>
+                </div>
+                <ul data-uix="autohide" class="select__content">
+                    <li><a data-val="1" href="javascript:void(0);" title="儿科">儿科</a></li>
+                    <li><a data-val="2" href="javascript:void(0);" title="2科">2科</a></li>
+                    <li><a data-val="3" href="javascript:void(0);" title="各种我了个去名字好长啊科">各种我了个去名字好长啊科</a></li>
+                    <li><a data-val="4" href="javascript:void(0);" title="4科">4科</a></li>
+                </ul>
+            </div>
+            <div data-uix="select" class="select select--disable">
+                <div class="select__trigger">
+                    <i class="icon icon--select-arrow"></i>
+                    <p data-placeholder="请选择科室"></p>
+                </div>
+                <ul data-uix="autohide" class="select__content">
+                    <li><a data-val="1" href="javascript:void(0);" title="儿科">儿科</a></li>
+                    <li><a data-val="2" href="javascript:void(0);" title="2科">2科</a></li>
+                    <li><a data-val="3" href="javascript:void(0);" title="各种我了个去名字好长啊科">各种我了个去名字好长啊科</a></li>
+                    <li><a data-val="4" href="javascript:void(0);" title="4科">4科</a></li>
+                </ul>
+            </div>
+        </div>
+        <h2>Dialog</h2>
+        <div class="wrapper">
+            <a href="javascript:void(0);" data-uix="dialog" data-params='{"type": "alert", "content": "这是一个alert"}' class="btn">Alert</a>
+            <a href="javascript:void(0);" data-uix="dialog" data-params='{"type": "alert", "content": "这是一个红色alert", "color": "red"}' class="btn">Red Alert</a>
+            <a href="javascript:void(0);" data-uix="dialog" data-params='{"type": "confirm", "content": "这是一个confirm"}' class="btn">Confirm</a>
+            <a href="javascript:void(0);" data-uix="dialog" data-params='{"type": "alert", "content": "这是一个自动隐藏的alert", "position": "bl", "autoHide": 1000}' class="btn">AutoHide Alert</a>
+        </div>
+        <h2>Placeholder</h2>
+        <div class="wrapper">
+            <input type="text" data-uix="placeholder" placeholder="placeholder" />
+        </div>
+        <h2>Smoothscroll</h2>
+        <div data-uix="smoothscroll" class="wrapper">
+            <p><a href="javascript:void(0)">Go to top</a></p>
+            <p><a data-scroll="#tab" href="javascript:void(0)">Go to tab</a></p>
+            <p><a data-scroll="50" href="javascript:void(0)">Go to 50</a></p>
+        </div>
+        <h2>Tooltip</h2>
+        <div class="wrapper">
+            <p><a href="javascript:void(0);" data-params='{"position": "tc"}' data-uix="tooltip" data-tooltip="blablablabla...">top</a></p>
+            <p><a href="javascript:void(0);" data-params='{"position": "rc"}' data-uix="tooltip" data-tooltip="blablablabla...">right</a></p>
+            <p><a href="javascript:void(0);" data-params='{"position": "bc"}' data-uix="tooltip" data-tooltip="blablablabla...">bottom</a></p>
+            <p><a href="javascript:void(0);" data-params='{"position": "lc"}' data-uix="tooltip" data-tooltip="blablablabla...">left</a></p>
+        </div>
+        <h2>Form</h2>
+        <form class="wrapper">
+            <fieldset class="wrapper">
+                <legend>Switch Demo</legend>
+                <a data-uix="switches" href="javascript:void(0)" class="switch" data-params='{}'></a><span class="radio-label1"></span>
+            </fieldset>
+            <fieldset class="wrapper">
+                <legend>Radio Demo</legend>
+                <a data-uix="radio" href="javascript:void(0)" class="radio" name="radio-demo" data-params='{ "label": ".radio-label1"}'></a><span class="radio-label1">单选框</span>
+                <a data-uix="radio" href="javascript:void(0)" class="radio" name="radio-demo" data-params='{ "label": ".radio-label2"}'></a><span class="radio-label2">单选框</span>
+            </fieldset>
+            <fieldset class="wrapper">
+                <legend>Checkbox Demo</legend>
+                <a href="javascript:void(0)" data-uix="checkbox" class="checkbox" data-params='{ "label": ".J-label1" }'></a><span class="J-label1">复选框1</span>
+                <a href="javascript:void(0)" data-uix="checkbox" class="checkbox" data-params='{ "label": ".J-label2" }'></a><span class="J-label2">复选框2</span>
+            </fieldset>
+            <fieldset class="wrapper">
+                <legend>Text Demo</legend>
+                <input class="text" type="text" />
+            </fieldset>
+            <fieldset class="wrapper">
+                <legend>Textarea Demo</legend>
+                <textarea class="textarea" ></textarea>
+            </fieldset>
+            <fieldset class="fieldset wrapper">
+                <legend>input group Demo</legend>
+                <label class="fieldset__label" for="input-name">label<br/><i>(选填)</i></label>
+                <input id="input-name" class="fieldset__text" type="text" />
+                <span class="fieldset__error">warning</span>
+                <p class="fieldset__affix">description</p>
+            </fieldset>
+            <fieldset class="wrapper">
+                <legend>submit</legend>
+                <button class="btn fieldset__btn" type="submit">submit</button>
+            </fieldset>
+        </form>
+        <h2>Position</h2>
+        <div class="wrapper">
+            <img src="/common/ui_guide/img/position.png" alt="position" height="340" width="454" />
+        </div>
+        <script src="/common/ui_guide/ui_guide.js"></script>
+    </body>
+</html>

@@ -1,0 +1,54 @@
+{
+  "msg" : "",
+  "code" : 200,
+  "data" : [
+    {
+      "app" : {
+        "name" : "app1",
+        "id" : 1
+      },
+      "reports" : [
+        {
+          "name" : "report1",
+          "id" : 11
+        },
+        {
+          "name" : "report2",
+          "id" : 12
+        }
+      ]
+    },
+    {
+      "app" : {
+        "name" : "app2",
+        "id" : 2
+      },
+      "reports" : [
+        {
+          "name" : "report21",
+          "id" : 21
+        },
+        {
+          "name" : "report22",
+          "id" : 22
+        }
+      ]
+    },
+    {
+      "app" : {
+        "name" : "app3",
+        "id" : 3
+      },
+      "reports" : [
+        {
+          "name" : "report31",
+          "id" : 31
+        },
+        {
+          "name" : "report32",
+          "id" : 32
+        }
+      ]
+    }
+  ]
+}
