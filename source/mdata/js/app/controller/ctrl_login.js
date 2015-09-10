@@ -79,3 +79,12 @@ oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
         }
     }
 ]);
+/*
+ *  change pasword控制器
+ * */
+oasgames.mdataPanelControllers.controller('ChangePasswordCtrl', [
+    '$scope',
+    function ($scope) {
+
+    }
+]);

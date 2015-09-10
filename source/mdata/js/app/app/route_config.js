@@ -14,6 +14,10 @@ oasgames.mdataPanelApp.config([
                 templateUrl: '/mdata/tpl/partials/login.html',
                 controller: 'MdataLoginCtrl'
             })
+            .when('/change_password', {
+                templateUrl: '/mdata/tpl/partials/change_password.html',
+                controller: 'MdataChangePasswordCtrl'
+            })
 
             //application
             .when('/application', {
