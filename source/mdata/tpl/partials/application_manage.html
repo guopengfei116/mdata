@@ -24,16 +24,20 @@
     </dt>
     <dd class="row row-color-interlaced" ng-repeat="app in dataApps.data">
         <ul>
-            <li class="row_column row_column-5">{{ app.name }}</li>
-            <li class="row_column row_column-5">{{ app.id }}</li>
+            <li class="row_column row_column-5">
+                <a href="#/application/manage/edit/{{ app.id }}">{{ app.name }}</a>
+            </li>
+            <li class="row_column row_column-5">
+                <a href="#/application/manage/edit/{{ app.id }}">{{ app.id }}</a>
+            </li>
             <li class="row_column row_column-5">
                 <span ng-repeat="user in app.users">
-                    <a href="#/account/manage/edit/{{ user.id }}">{{ user.email }}</a>
+                    <a href="#/report/report/{{ report.id }}">{{ report.name }}</a>
                 </span>
             </li>
             <li class="row_column row_column-5">
                 <span ng-repeat="report in app.reports">
-                    <a href="#/report/view/{{ report.id }}">{{ report.name }}</a>
+                    <a href="#/report/report/{{ report.id }}">{{ report.name }}</a>
                 </span>
             </li>
             <li class="row_column row_column-5">

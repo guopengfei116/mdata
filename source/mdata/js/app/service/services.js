@@ -253,5 +253,5 @@ oasgames.mdataPanelServices.factory('Report', [
         });
     }
 
-    
+
 ]);

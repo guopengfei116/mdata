@@ -10,6 +10,11 @@
             border-color: #111111;
             font-weight: bold;
         }
+        &-color-interlaced {
+            &:nth-child(2n) {
+                background-color: #f9f9f9;
+            }
+        }
         &_column {
             @include prefix(box-sizing, border-box);
             float: left;
