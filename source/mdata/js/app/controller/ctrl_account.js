@@ -6,7 +6,19 @@ oasgames.mdataPanelControllers.controller('AccountManageCtrl', [
     'Account',
     function ($scope, Account) {
         var searching = false;
+
+        //初始化数据
         $scope.dataAccounts = Account.query();
+
+        $scope.search = "";
+        $scope.appListSort = "email";
+        $scope.reportAdminSort = "name";
+        $scope.reportViewerSort = "name";
+
+        //修改排序规则
+        $scope.changeAppSort = function (sortTitle) {
+            $scope.appListSort = sortTitle;
+        };
 
         //搜索
         $scope.submit = function () {

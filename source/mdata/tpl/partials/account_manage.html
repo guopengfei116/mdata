@@ -15,14 +15,14 @@
 <dl class="container">
     <dt class="row row-title">
     <ul>
-        <li class="row_column row_column-5">Name</li>
-        <li class="row_column row_column-5">Email</li>
+        <li class="row_column row_column-5" ng-click="changeAppSort('name')">Name</li>
+        <li class="row_column row_column-5" ng-click="changeAppSort('email')">Email</li>
         <li class="row_column row_column-5">As Report Admin</li>
         <li class="row_column row_column-5">As Report Viewer</li>
         <li class="row_column row_column-5">Manage</li>
     </ul>
     </dt>
-    <dd class="row row-color-interlaced" ng-repeat="account in dataAccounts.data">
+    <dd class="row row-color-interlaced" ng-repeat="account in dataAccounts.data | filter:search | orderBy:appListSort ">
         <ul>
             <li class="row_column row_column-5">
                 <a href="#/account/manage/edit/{{ account.id }}">{{ account.name }}</a>
@@ -31,12 +31,12 @@
                 <a href="#/account/manage/edit/{{ account.id }}">{{ account.email }}</a>
             </li>
             <li class="row_column row_column-5">
-                <span ng-repeat="report in account['as_report_admin']">
+                <span ng-repeat="report in account['as_report_admin'] | orderBy:reportAdminSort ">
                     <a href="#/report/view/{{ report.id }}">{{ report.name }}</a>
                 </span>
             </li>
             <li class="row_column row_column-5">
-                <span ng-repeat="report in account['as_report_viewer']">
+                <span ng-repeat="report in account['as_report_viewer'] | orderBy:reportViewerSort ">
                     <a href="#/report/view/{{ report.id }}">{{ report.name }}</a>
                 </span>
             </li>

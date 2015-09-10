@@ -9,6 +9,9 @@
         &-title {
             border-color: #111111;
             font-weight: bold;
+            .row_column {
+                cursor: pointer;
+            }
         }
         &-color-interlaced {
             &:nth-child(2n) {
