@@ -130,4 +130,18 @@
         }
     }
 }
+.change{
+    width:285px; 
+    &-field_title{
+        color: #4e5e6a; 
+        font-family: $lucida-grande;
+        line-height: $base-line-height;
+    }
+    .fieldset_text{
+        height: 32px; 
+        width: 284px; 
+        border: 1px solid #dce1e4;
+
+    }
+}
 
