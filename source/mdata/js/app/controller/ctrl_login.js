@@ -82,9 +82,43 @@ oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
 /*
  *  change pasword控制器
  * */
-oasgames.mdataPanelControllers.controller('ChangePasswordCtrl', [
+oasgames.mdataPanelControllers.controller('MdataChangePasswordCtrl', [
     '$scope',
     function ($scope) {
+        $scope.tpassword = new Tooltip({'position':'rc'}).getNewTooltip();
+        $scope.tnewPassword = new Tooltip({'position':'rc'}).getNewTooltip();
+        $scope.treNewPassword = new Tooltip({'position':'rc'}).getNewTooltip();
+        //表单失去焦点时错误验证
+        $scope.blur = function (type, $errors) {
+            var errorInfo = {
+                password: {
+                    required: '请输入旧密码',
+                    pattern: '旧密码格式错误'
+                },
+                newPassword: {
+                    required: '请输入新密码',
+                    pattern: '新密码格式错误'
+                },
+                reNewPassword:{
+                    required: '请重新输入新密码',
+                    pattern: '新密码格式错误'
+                }
+            };
+
+            for(var $error in $errors) {
+                if($errors[$error]) {
+                    $scope[type + 'Error'] = true;
+                    $scope['t'+type].errorType = type;
+                    $scope['t'+type].setContent(errorInfo[type][$error]);
+                    $scope['t'+type].setPosition('.fieldset-' + type, $scope['t'+type].toolTipLooks);
+                    $scope['t'+type].toolTipLooks.css({'color': 'rgba(255, 0, 0, 0.7)'});
+                    $scope['t'+type].show();
+                    return;
+                }
+            }
+
+            $scope[type + 'Error'] = false;
+        };
 
     }
 ]);
