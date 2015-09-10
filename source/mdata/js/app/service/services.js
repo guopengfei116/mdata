@@ -252,4 +252,6 @@ oasgames.mdataPanelServices.factory('Report', [
             query: {method: 'GET', params: {reportId: 'reports'}}
         });
     }
+
+    
 ]);
