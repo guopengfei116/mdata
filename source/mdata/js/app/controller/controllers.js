@@ -44,12 +44,16 @@ oasgames.mdataPanelControllers.controller('HeaderCtrl', [
     '$http',
     '$location',
     'ApiCtrl',
-    function ($scope, $http, ApiCtrl) {
+    function ($rootScope, $scope, $http, $location, ApiCtrl) {
         $scope.isshow = false;
         $scope.show = function () {
             $scope.isshow = !$scope.isshow;
         };
         $scope.logout = function () {
+            $scope.$emit('logout');
+        };
+
+        $rootScope.$on('logout', function () {
             var api = ApiCtrl.get('logout');
             if(api) {
                 $http({
@@ -65,7 +69,7 @@ oasgames.mdataPanelControllers.controller('HeaderCtrl', [
                     }
                 });
             }
-        };
+        });
     }
 ]);
 

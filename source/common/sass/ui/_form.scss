@@ -136,12 +136,18 @@
         color: #4e5e6a; 
         font-family: $lucida-grande;
         line-height: $base-line-height;
+        font-weight:600;
     }
     .fieldset_text{
         height: 32px; 
         width: 284px; 
         border: 1px solid #dce1e4;
-
+        margin: 6px 0 20px 0;
+        text-indent:10px;
+        box-shadow:none;
+    }
+    .password-error{
+        border-color: rgba(255, 0, 0, 0.4);
     }
 }
 
