@@ -15,14 +15,14 @@
 <dl class="container">
     <dt class="row row-title">
     <ul>
-        <li class="row_column row_column-5" ng-click="changeAppSort('name')">Name</li>
-        <li class="row_column row_column-5" ng-click="changeAppSort('email')">Email</li>
-        <li class="row_column row_column-5">As Report Admin</li>
-        <li class="row_column row_column-5">As Report Viewer</li>
+        <li class="row_column row_column-5" ng-click="changeAppSort('appList', 'name')">Name</li>
+        <li class="row_column row_column-5" ng-click="changeAppSort('appList', 'email')">Email</li>
+        <li class="row_column row_column-5" ng-click="changeAppSort('adminReports', 'name')">As Report Admin</li>
+        <li class="row_column row_column-5" ng-click="changeAppSort('viewerReports', 'name')">As Report Viewer</li>
         <li class="row_column row_column-5">Manage</li>
     </ul>
     </dt>
-    <dd class="row row-color-interlaced" ng-repeat="account in dataAccounts.data | filter:search | orderBy:appListSort ">
+    <dd class="row row-color-interlaced" ng-repeat="account in dataAccounts.data | filter:sort.appList.filter | orderBy:sort.appList.orderKey:sort.appList.isDownOrder ">
         <ul>
             <li class="row_column row_column-5">
                 <a href="#/account/manage/edit/{{ account.id }}">{{ account.name }}</a>
@@ -31,12 +31,12 @@
                 <a href="#/account/manage/edit/{{ account.id }}">{{ account.email }}</a>
             </li>
             <li class="row_column row_column-5">
-                <span ng-repeat="report in account['as_report_admin'] | orderBy:reportAdminSort ">
+                <span ng-repeat="report in account['as_report_admin'] | orderBy:sort.adminReports.orderKey:sort.adminReports.isDownOrder ">
                     <a href="#/report/view/{{ report.id }}">{{ report.name }}</a>
                 </span>
             </li>
             <li class="row_column row_column-5">
-                <span ng-repeat="report in account['as_report_viewer'] | orderBy:reportViewerSort ">
+                <span ng-repeat="report in account['as_report_viewer'] | orderBy:sort.viewerReports.orderKey:sort.viewerReports.isDownOrder ">
                     <a href="#/report/view/{{ report.id }}">{{ report.name }}</a>
                 </span>
             </li>
