@@ -38,7 +38,7 @@ oasgames.mdataPanelControllers.controller('AccountManageCtrl', [
         };
 
         // 修改排序规则
-        $scope.changeAppSort = function (type, orderKey) {
+        $scope.changeListSort = function (type, orderKey) {
             if($scope.sort[type].orderKey == orderKey) {
                 $scope.sort[type].isDownOrder = !$scope.sort[type].isDownOrder;
             }else {
@@ -47,7 +47,7 @@ oasgames.mdataPanelControllers.controller('AccountManageCtrl', [
         };
 
         //搜索
-        $scope.submit = function () {
+        $scope.search = function () {
             $timeout.cancel(searchTimer);
             searchTimer = $timeout(function () {
                 var searchVal = searchForm.searchInput.value;
@@ -58,8 +58,6 @@ oasgames.mdataPanelControllers.controller('AccountManageCtrl', [
                 }else {
                     $scope.accounts = Filter($scope.dataAccounts, {name : searchVal, email : searchVal});
                 }
-
-                console.log($scope.accounts);
             }, 200);
         }
     }

@@ -53,7 +53,7 @@ oasgames.mdataPanelServices.factory('Filter', [
 
         //暴漏方法
         var filter = function (data, config) {
-            var result = [], tempObj = null, tempReg = null;
+            var result = [], tempReg = null, tempObj = null,  tempKey = '';
 
             //  data != [] || data = []
             if(Object.prototype.toString.call(data) != '[object Array]' || !data.length) {
@@ -74,16 +74,25 @@ oasgames.mdataPanelServices.factory('Filter', [
                     continue;
                 }
 
+                tempObj = data[i];
+
                 //正则效验
                 for(var key in config) {
-                    if(data[i][key]) {
-                        tempReg = new RegExp(config[key]);
 
-                        //符合条件则push到result
-                        if(tempReg.test(data[i][key])) {
-                            tempObj = data[i];
-                            result.push(tempObj);
-                            break;
+                    // key == array
+                    if(Object.prototype.toString.call(key) == '[object Array]') {
+                        for (var j = key.length - 1; j >= 0; j--) {
+                            tempObj = tempObj[key[j]];
+                        }
+                    }else {
+                        if(tempObj[key]) {
+                            tempReg = new RegExp(config[key]);
+
+                            //符合条件则push到result
+                            if(tempReg.test(tempObj[key])) {
+                                result.push(tempObj);
+                                break;
+                            }
                         }
                     }
                 }

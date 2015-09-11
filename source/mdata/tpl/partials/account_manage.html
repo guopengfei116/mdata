@@ -7,7 +7,7 @@
         <form novalidate name="searchForm">
             <fieldset class="fieldset">
                 <input class="fieldset_text" name="searchInput" ng-model="searchTerms" type="text" required placeholder="Search message...">
-                <button class="fieldset_button iconfont icon-search" ng-click="submit()"></button>
+                <button class="fieldset_button iconfont icon-search" ng-click="search()"></button>
             </fieldset>
         </form>
     </div>
@@ -15,10 +15,10 @@
 <dl class="container">
     <dt class="row row-title">
     <ul>
-        <li class="row_column row_column-5" ng-click="changeAppSort('appList', 'name')">Name</li>
-        <li class="row_column row_column-5" ng-click="changeAppSort('appList', 'email')">Email</li>
-        <li class="row_column row_column-5" ng-click="changeAppSort('adminReports', 'name')">As Report Admin</li>
-        <li class="row_column row_column-5" ng-click="changeAppSort('viewerReports', 'name')">As Report Viewer</li>
+        <li class="row_column row_column-5" ng-click="changeListSort('appList', 'name')">Name</li>
+        <li class="row_column row_column-5" ng-click="changeListSort('appList', 'email')">Email</li>
+        <li class="row_column row_column-5" ng-click="changeListSort('adminReports', 'name')">As Report Admin</li>
+        <li class="row_column row_column-5" ng-click="changeListSort('viewerReports', 'name')">As Report Viewer</li>
         <li class="row_column row_column-5">Manage</li>
     </ul>
     </dt>
