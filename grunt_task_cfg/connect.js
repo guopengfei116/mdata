@@ -10,6 +10,8 @@ exports.options = {
     livereload : 79513
 };
 
+console.log('http://127.0.0.1:9801');
+
 /**
  * 调试模式指向开发目录，部署模式指向上线目录
  * */
