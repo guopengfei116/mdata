@@ -5,11 +5,20 @@ oasgames.mdataPanelControllers.controller('AccountManageCtrl', [
     '$scope',
     '$timeout',
     'Account',
-    function ($scope, $timeout, Account) {
-        var searching = false;
+    'Filter',
+    function ($scope, $timeout, Account, Filter) {
+        var searchTimer = null;
+        //数据模型
+        $scope.dataAccounts = [];
+        //数据模型模板动态映射
+        $scope.accounts = [];
 
-        //初始化数据
-        $scope.dataAccounts = Account.query();
+        //数据初始化
+        $scope.dataAccounts = Account.query().$promise.then(function (data) {
+            $scope.dataAccounts = data.data;
+            //模板所用动态数据
+            $scope.accounts = $scope.dataAccounts;
+        });
 
         //排序数据模型
         $scope.sort = {
@@ -37,26 +46,21 @@ oasgames.mdataPanelControllers.controller('AccountManageCtrl', [
             }
         };
 
-        // search
-        $scope.submit = function () {
-            console.log('search');
-        };
-
         //搜索
         $scope.submit = function () {
-            if($scope.searchForm.searchInput.$valid && $scope.searchTerms && !searching) {
-                searching = true;
-                Account.get(
-                    { accountId: $scope.searchTerms },
-                    function (data) {
-                        console.log(data);
-                        searching = false;
-                    },
-                    function () {
-                        Ui.alert('网络错误');
-                    }
-                )
-            }
+            $timeout.cancel(searchTimer);
+            searchTimer = $timeout(function () {
+                var searchVal = searchForm.searchInput.value;
+
+                // searchVal == null || searchVal == ' '
+                if(!searchVal || !searchVal.trim()) {
+                    $scope.accounts = $scope.dataAccounts;
+                }else {
+                    $scope.accounts = Filter($scope.dataAccounts, {name : searchVal, email : searchVal});
+                }
+
+                console.log($scope.accounts);
+            }, 200);
         }
     }
 ]);

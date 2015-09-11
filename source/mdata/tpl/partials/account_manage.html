@@ -22,7 +22,7 @@
         <li class="row_column row_column-5">Manage</li>
     </ul>
     </dt>
-    <dd class="row row-color-interlaced" ng-repeat="account in dataAccounts.data | filter:sort.appList.filter | orderBy:sort.appList.orderKey:sort.appList.isDownOrder ">
+    <dd class="row row-color-interlaced" ng-repeat="account in accounts | orderBy:sort.appList.orderKey:sort.appList.isDownOrder ">
         <ul>
             <li class="row_column row_column-5">
                 <a href="#/account/manage/edit/{{ account.id }}">{{ account.name }}</a>
