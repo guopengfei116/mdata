@@ -88,7 +88,7 @@ oasgames.mdataPanelControllers.controller('MdataChangePasswordCtrl', [
     '$http',
     'ApiCtrl',
     function ($scope, $rootScope, $http, ApiCtrl) {
-        $scope.tpassword = new Tooltip({'position':'rc'}).getNewTooltip();
+        $scope.toldPassword = new Tooltip({'position':'rc'}).getNewTooltip();
         $scope.tnewPassword = new Tooltip({'position':'rc'}).getNewTooltip();
         $scope.treNewPassword = new Tooltip({'position':'rc'}).getNewTooltip();
         //错误提示
@@ -103,7 +103,7 @@ oasgames.mdataPanelControllers.controller('MdataChangePasswordCtrl', [
         //表单失去焦点时错误验证
         $scope.blur = function (type, $errors) {
             var errorInfo = {
-                password: {
+                oldPassword : {
                     required: 'Password must not be empty',
                     error: 'Incorrect Password'
                 },
@@ -126,11 +126,11 @@ oasgames.mdataPanelControllers.controller('MdataChangePasswordCtrl', [
                 }
             }
             //新旧密码相同
-            if($scope.newPassword == $scope.password && type == "newPassword" ){
+            if($scope.newPassword == $scope.oldPassword && type == "newPassword" ){
                 $scope.showError('newPassword', errorInfo.newPassword.noSame);
             }
             //重新输入密码不一致
-            if($scope.newPassword != $scope.reNewPassword && (type == "reNewPassword" || type == "newPassword")){
+            if($scope.newPassword != $scope.reNewPassword && (type == "reNewPassword" || type == "newPassword" && $scope.reNewPassword)){
                 $scope.showError('reNewPassword', errorInfo.reNewPassword.mustSame);
             }   
             //重新输入新密码正确
@@ -141,7 +141,7 @@ oasgames.mdataPanelControllers.controller('MdataChangePasswordCtrl', [
                 }
             }  
         };
-        //表单失去焦点时清除错误
+        //表单获得焦点时清除错误
         $scope.focus = function (type) {
             $scope[type + 'Error'] = false;
             if($scope['t'+type].errorType == type) {
@@ -152,7 +152,7 @@ oasgames.mdataPanelControllers.controller('MdataChangePasswordCtrl', [
         $scope.submit = function () {
             var api = ApiCtrl.get('login');
             //验证通过、新旧密码不一致并且新密码相同
-            if($scope['cPaw'].$valid && api && $scope.newPassword != $scope.password && $scope.newPassword == $scope.reNewPassword) {
+            if($scope['cPaw'].$valid && api && $scope.newPassword != $scope.oldPassword && $scope.newPassword == $scope.reNewPassword) {
                 $http.get(api).success(function (result) {
 
                     if(result.code == 200) {
