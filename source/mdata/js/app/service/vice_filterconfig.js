@@ -51,9 +51,14 @@ oasgames.mdataPanelServices.factory('OrderHandle', [
 oasgames.mdataPanelServices.factory('Filter', [
     function () {
 
-        //暴漏方法
+        /*
+        * 暴漏方法
+        * @parm {Array} data
+        * @parm {Object} config
+        * config：其每个属性值必须为String||Array，如果为arr，则认为比较的是一个深度嵌套对象，会依次向下找，直到倒数第二项作为比较值，最后一项作为正则条件
+        * */
         var filter = function (data, config) {
-            var result = [], tempReg = null, tempObj = null,  tempKey = '';
+            var result = [], tempReg = null, tempResultObj, tempObj = null, tempVal = '';
 
             //  data != [] || data = []
             if(Object.prototype.toString.call(data) != '[object Array]' || !data.length) {
@@ -74,26 +79,45 @@ oasgames.mdataPanelServices.factory('Filter', [
                     continue;
                 }
 
-                tempObj = data[i];
+                tempResultObj = data[i];
 
-                //正则效验
+                /*
+                * 查找符合过滤条件的对象
+                * */
                 for(var key in config) {
 
-                    // key == array
-                    if(Object.prototype.toString.call(key) == '[object Array]') {
-                        for (var j = key.length - 1; j >= 0; j--) {
-                            tempObj = tempObj[key[j]];
-                        }
-                    }else {
-                        if(tempObj[key]) {
-                            tempReg = new RegExp(config[key]);
+                    // config[key] == array
+                    if(Object.prototype.toString.call(config[key]) == '[object Array]') {
 
-                            //符合条件则push到result
-                            if(tempReg.test(tempObj[key])) {
-                                result.push(tempObj);
+                        tempVal = tempResultObj;
+                        for (var j = 0; j < config[key].length; j++) {
+
+                            //最后一个值作为过滤条件
+                            if(j == config[key].length - 1) {
+                                tempReg = new RegExp(config[key][j]);
                                 break;
                             }
+
+                            //向下依次查找判断源数据
+                            tempVal = tempVal[config[key][j]];
                         }
+
+                    // config[key] == string
+                    }else if(Object.prototype.toString.call(key) == '[object String]'){
+                        tempVal = tempResultObj[key];
+                        tempReg = new RegExp(config[key]);
+                    }else {
+                        throw new Error('不合法的Filter过滤条件');
+                    }
+
+                    //符合条件则push到result
+                    if(tempVal && tempReg) {
+                        if(tempReg.test(tempVal)) {
+                            result.push(tempResultObj);
+                            break;
+                        }
+                    }else {
+                        throw new Error('Filter发生数据错误');
                     }
                 }
             }

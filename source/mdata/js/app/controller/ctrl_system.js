@@ -58,7 +58,7 @@ oasgames.mdataPanelControllers.controller('systemLogCtrl', [
                 if(!searchVal || !searchVal.trim()) {
                     $scope.logs = $scope.dataLogs;
                 }else {
-                    $scope.logs = Filter($scope.dataLogs, {account : searchVal, operation : searchVal});
+                    $scope.logs = Filter($scope.dataLogs, {email : ['account', 'email', searchVal], operation : searchVal});
                 }
             }, 200);
         }
