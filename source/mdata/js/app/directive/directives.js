@@ -5,4 +5,12 @@
  * */
 oasgames.mdataPanelControllers = angular.module('mdataPanelDirective', []);
 
-oasgames.mdataPanelControllers =
+
+/*
+* 搜索指令
+* */
+oasgames.mdataPanelControllers.directive('search', [
+    function () {
+        
+    }
+]);
