@@ -10,7 +10,8 @@ oasgames.mdataPanelApp = angular.module('mdataPanelApp', [
     'ngRoute',
     'mdataPanelControllers',
     'mdataPanelServices',
-    'mdataPanelFilter'
+    'mdataPanelFilter',
+    'mdataPanelDirective'
 ]);
 
 /*

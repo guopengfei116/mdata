@@ -8,6 +8,7 @@ oasgames.mdataPanelControllers.controller('AccountManageCtrl', [
     'Filter',
     function ($scope, $timeout, Account, Filter) {
         var searchTimer = null;
+
         //数据模型
         $scope.dataAccounts = [];
         //数据模型模板动态映射

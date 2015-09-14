@@ -5,14 +5,15 @@
     </div>
     <div class="form-tool right">
         <form novalidate name="searchForm">
-            <fieldset class="fieldset">
+            <!--fieldset class="fieldset">
                 <input class="fieldset_text" name="searchInput" ng-model="searchTerms" type="text" required>
                 <button class="fieldset_button iconfont icon-search" ng-click="submit()"></button>
-            </fieldset>
+            </fieldset-->
+            <search></search>
         </form>
     </div>
 </section>
-<dl class="container" ng-repeat="reportGroup in dataReports.data">
+<dl class="container" ng-repeat="reportGroup in viewData">
     <dt class="row row-title">
         <ul>
             <li class="row_column row_column-2"><a href="javascript: void (0);">{{ reportGroup.appName }}</a></li>

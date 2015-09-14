@@ -5,25 +5,36 @@ oasgames.mdataPanelControllers.controller('reportManageCtrl', [
     '$scope',
     'Report',
     function ($scope, Report) {
-        var searching = false;
-        $scope.dataReports = Report.query();
+        var searchTimer = null;
 
-        //搜索
-        $scope.submit = function () {
-            if($scope.searchForm.searchInput.$valid && $scope.searchTerms && !searching) {
-                searching = true;
-                Account.get(
-                    { accountId: $scope.searchTerms },
-                    function (data) {
-                        console.log(data);
-                        searching = false;
-                    },
-                    function () {
-                        Ui.alert('网络错误');
-                    }
-                )
+        //数据默认值
+        $scope.searchPlaceholder = 'Search report...';
+        $scope.sourceData = [];
+        $scope.viewData = [];
+
+        //展示列表数据初始化
+        $scope.sourceData = Report.query().$promise.then(function (data) {
+            $scope.sourceData = data.data;
+            $scope.viewData = $scope.sourceData;
+        });
+
+        //排序数据模型
+        $scope.sort = {
+            systemList : {
+                filter : '',
+                orderKey : 'time',
+                isDownOrder : false
             }
-        }
+        };
+
+        // 修改排序规则
+        $scope.changeListSort = function (type, orderKey) {
+            if($scope.sort[type].orderKey == orderKey) {
+                $scope.sort[type].isDownOrder = !$scope.sort[type].isDownOrder;
+            }else {
+                $scope.sort[type].orderKey = orderKey;
+            }
+        };
     }
 ]);
 
