@@ -10,7 +10,8 @@
 >####2.  状态码约定：
 >>*  200 : 操作成功  
 >>*  401 : 操作失败
->>*  404 : 不存在
+>>*  403 : 数据不存在
+>>*  404 : 接口不存在
 >>*  405 : 权限不足
 >>*  500 : 服务器错误
 
@@ -19,59 +20,151 @@
 
 ## 二、接口
 
-### 1、account
+### 1、login
 
 >####1.  登录 
+>>*  method : post
 >>*  url : /api/site/login
->>*  param : { email : 账号， passowrd : 密码 }
->>*  data : { authority : 权限(1-4) }
+>>*  param : { email: 账号， password: 密码 }
+>>*  data : { authority: 权限(1-4) }
 
 >####2.  登出
+>>*  method : get
 >>*  url : /api/site/logout
 
+### 2、account
+
+>####1.  账号唯一性检测
+>>*  method : post
+>>*  url : /api/site/account/verify
+>>*  param : { email: email }
+
+>####2.  密码正确性检测
+>>*  method : post
+>>*  url : /api/site/account/modify-psw/verify
+>>*  param : { password: password }
+
 >####3.  修改密码
+>>*  method : post
 >>*  url : /api/site/modify-psw
->>*  param : { oldPassowrd : 旧密码，passowrd : 新密码， confirmPassword : 新密码  }
+>>*  param : { oldPassword: 旧密码，password: 新密码，confirmPassword: 新密码  }
 
 >####4.  账号列表
+>>*  method : get
+>>*  url : /api/site/account/
+>>*  data : { 
+        name: 姓名，email: 邮箱，id: ID，
+        as_report_admin：[ { name: reportName，id: reportId }... ]，
+        as_report_viewer：[ { name: reportName，id: reportId }... ] 
+    }
 
->####5.  删除列表
+>####5.  创建账号
+>>*  method : post
+>>*  url : /api/site/account/
+>>*  param : {   }
 
->####6.  创建账号
+>####6.  已存账号信息
+>>*  method : get
+>>*  url : /api/site/account/'accountId'
+>>*  data : {   }
 
 >####7.  编辑账号
+>>*  method : post
+>>*  url : /api/site/account/'accountId'
+>>*  param : {   }
 
+>####8.  删除账号
+>>*  method : delete
+>>*  url : /api/site/account/'accountId'
+>>*  param : { id: accountId }
 
-### 2、application
+### 3、application
 
 >####1.  app列表
->>* url : /api/app/view
+>>*  method : get
+>>*  url : /api/site/app/
+>>*  data : { 
+        name: 名字，id: ID，
+        users_admin：[ { name: 姓名，email: 邮箱，id: ID }... ]，
+        users_viewer：[ { name: 姓名，email: 邮箱，id: ID }... ] 
+    }
 
->####2.  删除app
->>* url : /api/app/delete
+>####2.  创建app
+>>*  method : post
+>>*  url : /api/site/app/
+>>*  param : {   }
 
->####3.  创建app
+>####3.  已存app信息
+>>*  method : get
+>>*  url : /api/site/app/'appId'
+>>*  data : {   }
 
 >####4.  编辑app
+>>*  method : post
+>>*  url : /api/site/app/'appId'
+>>*  param : {   }
 
->####5.  创建app动态列表
+>####5.  删除app
+>>*  method : delete
+>>*  url : /api/site/app/'appId'
+>>*  param : { id: appId }
 
-### 3、system log
+>####6.  创建app所需的select字段列表
+
+### 4、system log
 
 >####1.  日志列表
+>>*  method : get
+>>*  url : /api/site/systemLog/
+>>*  data : { 
+        time: 时间戳，operation: 描述，ip: IP，
+        account：[ { name: 姓名，email: 邮箱，id: ID }... ] 
+    }
 
-### 4、report
+### 5、report
 
 >####1.  report列表
+>>*  method : get
+>>*  url : /api/site/report/
+>>*  data : { 
+        app: { name: appName，id: appID}，
+        reports: [ { name: 名字，id: ID }... ] 
+    }
+        
+>####2.  创建report
+>>*  method : post
+>>*  url : /api/site/report/
+>>*  param : {   }
 
->####2.  删除report
-
->####3.  创建report
+>####3.  已存report信息
+>>*  method : get
+>>*  url : /api/site/report/'reportId'
+>>*  data : {   }
 
 >####4.  编辑report
+>>*  method : post
+>>*  url : /api/site/report/'reportId'
+>>*  param : {   }
 
->####5.  收藏report
+>####5.  删除report
+>>*  method : delete
+>>*  url : /api/site/report/'reportId'
+>>*  param : { id: reportId }
 
->####6.  创建report动态列表
+>####6.  创建report所需的select字段列表
 
+### 4、shortcut
+
+>####1.  get收藏列表
+>>*  method : get
+>>*  url : /api/site/shortcut/
+>>*  data : [ { 
+        app: { name: appName，id: appID}，
+        reports: [ { name: reportName，id: reportId}... ] 
+    }... ]
+    
+>####2.  收藏report
+>>*  method : post
+>>*  url : /api/site/shortcut/
+>>*  param : { id: reportId }
 
