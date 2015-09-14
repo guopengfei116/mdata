@@ -7,28 +7,33 @@ oasgames.mdataPanelControllers.controller('systemLogCtrl', [
     '$timeout',
     'ApiCtrl',
     'Filter',
-    function ($scope, $http, $timeout, ApiCtrl, Filter) {
-        var searchTimer = null;
+    'OrderHandler',
+    function ($scope, $http, $timeout, ApiCtrl, Filter, OrderHandler) {
 
-        //数据模型
-        $scope.dataLogs = [];
-        //数据模型模板动态映射
-        $scope.logs = [];
+        //定义default数据
+        $scope.searchPlaceholder = 'Search Account Operation...';
+        $scope.sourceData = [];
+        $scope.viewData = [];
 
-        //数据初始化
+        //展示列表数据初始化
         $http({
             method: 'GET',
             url : ApiCtrl.get('systemLog')
         }).success(function (result) {
             if(result.code == 200) {
-                $scope.dataLogs = result.data;
-                $scope.logs = $scope.dataLogs;
+                $scope.sourceData = result.data;
+                $scope.viewData = $scope.sourceData;
             }else {
                 Ui.alert(result.msg);
             }
         }).error(function () {
             Ui.alert('数据获取失败，请稍后再试！');
         });
+
+        //搜索自定义处理函数
+        $scope.searchHandler = function (searchVal) {
+            $scope.viewData = Filter($scope.sourceData, {email : ['account', 'email', searchVal], operation : searchVal});
+        };
 
         //排序数据模型
         $scope.sort = {
@@ -39,28 +44,9 @@ oasgames.mdataPanelControllers.controller('systemLogCtrl', [
             }
         };
 
-        // 修改排序规则
-        $scope.changeListSort = function (type, orderKey) {
-            if($scope.sort[type].orderKey == orderKey) {
-                $scope.sort[type].isDownOrder = !$scope.sort[type].isDownOrder;
-            }else {
-                $scope.sort[type].orderKey = orderKey;
-            }
+        //修改排序规则
+        $scope.changeSort = function (type, orderKey) {
+            OrderHandler.change($scope.sort, type, orderKey);
         };
-
-        //搜索
-        $scope.search = function () {
-            $timeout.cancel(searchTimer);
-            searchTimer = $timeout(function () {
-                var searchVal = searchForm.searchInput.value;
-
-                // searchVal == null || searchVal == ' '
-                if(!searchVal || !searchVal.trim()) {
-                    $scope.logs = $scope.dataLogs;
-                }else {
-                    $scope.logs = Filter($scope.dataLogs, {email : ['account', 'email', searchVal], operation : searchVal});
-                }
-            }, 200);
-        }
     }
 ]);

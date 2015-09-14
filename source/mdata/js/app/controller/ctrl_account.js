@@ -6,20 +6,24 @@ oasgames.mdataPanelControllers.controller('AccountManageCtrl', [
     '$timeout',
     'Account',
     'Filter',
-    function ($scope, $timeout, Account, Filter) {
-        var searchTimer = null;
+    'OrderHandler',
+    function ($scope, $timeout, Account, Filter, OrderHandler) {
 
-        //数据模型
-        $scope.dataAccounts = [];
-        //数据模型模板动态映射
-        $scope.accounts = [];
+        //定义default数据
+        $scope.searchPlaceholder = 'Search Name Email...';
+        $scope.sourceData = [];
+        $scope.viewData = [];
 
-        //数据初始化
-        $scope.dataAccounts = Account.query().$promise.then(function (data) {
-            $scope.dataAccounts = data.data;
-            //模板所用动态数据
-            $scope.accounts = $scope.dataAccounts;
+        //展示列表数据初始化
+        $scope.sourceData = Account.query().$promise.then(function (data) {
+            $scope.sourceData = data.data;
+            $scope.viewData = $scope.sourceData;
         });
+
+        //搜索自定义处理函数
+        $scope.searchHandler = function (searchVal) {
+            $scope.viewData = Filter($scope.sourceData, {name : searchVal, email : searchVal});
+        };
 
         //排序数据模型
         $scope.sort = {
@@ -38,29 +42,10 @@ oasgames.mdataPanelControllers.controller('AccountManageCtrl', [
             }
         };
 
-        // 修改排序规则
-        $scope.changeListSort = function (type, orderKey) {
-            if($scope.sort[type].orderKey == orderKey) {
-                $scope.sort[type].isDownOrder = !$scope.sort[type].isDownOrder;
-            }else {
-                $scope.sort[type].orderKey = orderKey;
-            }
+        //修改排序规则
+        $scope.changeSort = function (type, orderKey) {
+            OrderHandler.change($scope.sort, type, orderKey);
         };
-
-        //搜索
-        $scope.search = function () {
-            $timeout.cancel(searchTimer);
-            searchTimer = $timeout(function () {
-                var searchVal = searchForm.searchInput.value;
-
-                // searchVal == null || searchVal == ' '
-                if(!searchVal || !searchVal.trim()) {
-                    $scope.accounts = $scope.dataAccounts;
-                }else {
-                    $scope.accounts = Filter($scope.dataAccounts, {name : searchVal, email : searchVal});
-                }
-            }, 200);
-        }
     }
 ]);
 

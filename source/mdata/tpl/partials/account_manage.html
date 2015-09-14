@@ -4,25 +4,20 @@
         <a href="#/account/manage/create" class="button button-create">Create Account</a>
     </div>
     <div class="form-tool right">
-        <form novalidate name="searchForm">
-            <fieldset class="fieldset">
-                <input class="fieldset_text" name="searchInput" ng-model="searchTerms" type="text" required placeholder="Search message...">
-                <button class="fieldset_button iconfont icon-search" ng-click="search()"></button>
-            </fieldset>
-        </form>
+        <search></search>
     </div>
 </section>
 <dl class="container">
     <dt class="row row-title">
     <ul>
-        <li class="row_column row_column-5" ng-click="changeListSort('appList', 'name')">Name</li>
-        <li class="row_column row_column-5" ng-click="changeListSort('appList', 'email')">Email</li>
-        <li class="row_column row_column-5" ng-click="changeListSort('adminReports', 'name')">As Report Admin</li>
-        <li class="row_column row_column-5" ng-click="changeListSort('viewerReports', 'name')">As Report Viewer</li>
+        <li class="row_column row_column-5" ng-click="changeSort('appList', 'name')">Name</li>
+        <li class="row_column row_column-5" ng-click="changeSort('appList', 'email')">Email</li>
+        <li class="row_column row_column-5" ng-click="changeSort('adminReports', 'name')">As Report Admin</li>
+        <li class="row_column row_column-5" ng-click="changeSort('viewerReports', 'name')">As Report Viewer</li>
         <li class="row_column row_column-5">Manage</li>
     </ul>
     </dt>
-    <dd class="row row-color-interlaced" ng-repeat="account in accounts | orderBy:sort.appList.orderKey:sort.appList.isDownOrder ">
+    <dd class="row row-color-interlaced" ng-repeat="account in viewData | orderBy:sort.appList.orderKey:sort.appList.isDownOrder ">
         <ul>
             <li class="row_column row_column-5">
                 <a href="#/account/manage/edit/{{ account.id }}">{{ account.name }}</a>

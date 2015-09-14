@@ -40,7 +40,7 @@ oasgames.mdataPanelControllers.controller('ApplicationManageCtrl', [
             }
         };
 
-        // 修改排序规则
+        //修改排序规则
         $scope.changeSort = function (type, orderKey) {
             OrderHandler.change($scope.sort, type, orderKey);
         };

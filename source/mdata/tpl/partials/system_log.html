@@ -1,23 +1,18 @@
 <section class="cf">
     <div class="form-tool right">
-        <form novalidate name="searchForm">
-            <fieldset class="fieldset">
-                <input class="fieldset_text" name="searchInput" ng-model="searchTerms" type="text" required placeholder="Search account operation...">
-                <button class="fieldset_button iconfont icon-search" ng-click="search()"></button>
-            </fieldset>
-        </form>
+        <search></search>
     </div>
 </section>
 <dl class="container">
     <dt class="row row-title">
     <ul>
-        <li class="row_column row_column-4" ng-click="changeListSort('systemList', 'time')">Time</li>
-        <li class="row_column row_column-4" ng-click="changeListSort('systemList', 'account')">Account</li>
-        <li class="row_column row_column-4" ng-click="changeListSort('systemList', 'operation')">Operation</li>
-        <li class="row_column row_column-4" ng-click="changeListSort('systemList', 'ip')">IP</li>
+        <li class="row_column row_column-4" ng-click="changeSort('systemList', 'time')">Time</li>
+        <li class="row_column row_column-4" ng-click="changeSort('systemList', 'account')">Account</li>
+        <li class="row_column row_column-4" ng-click="changeSort('systemList', 'operation')">Operation</li>
+        <li class="row_column row_column-4" ng-click="changeSort('systemList', 'ip')">IP</li>
     </ul>
     </dt>
-    <dd class="row row-color-interlaced" ng-repeat="log in logs | orderBy:sort.systemList.orderKey:sort.systemList.isDownOrder ">
+    <dd class="row row-color-interlaced" ng-repeat="log in viewData | orderBy:sort.systemList.orderKey:sort.systemList.isDownOrder ">
         <ul>
             <li class="row_column row_column-4">{{ log.time | date:'yyyy-MM-dd hh:mm:ss' }}</li>
             <li class="row_column row_column-4">
