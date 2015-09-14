@@ -11,7 +11,7 @@ oasgames.mdataPanelControllers.controller('reportManageCtrl', [
         $scope.authority = $rootScope.user['authority'];
 
         //定义default数据
-        $scope.searchPlaceholder = 'Search report...';
+        $scope.searchPlaceholder = 'Search appName appId...';
         $scope.sourceData = [];
         $scope.viewData = [];
 

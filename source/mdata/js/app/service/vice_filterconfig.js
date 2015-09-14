@@ -1,19 +1,28 @@
 /*
- * 获取过滤器语法的正反排序
+ * 过滤器排序方法
  * */
-oasgames.mdataPanelServices.factory('OrderHandle', [
+oasgames.mdataPanelServices.factory('OrderHandler', [
     function ($resource, ApiCtrl) {
         return {
             up : function (key) {
 
             },
+
             down : function (key) {
 
             },
 
+            change : function (sortCfg, type, orderKey) {
+                if(sortCfg[type].orderKey == orderKey) {
+                    sortCfg[type].isDownOrder = !sortCfg[type].isDownOrder;
+                }else {
+                    sortCfg[type].orderKey = orderKey;
+                }
+            },
+
             //排序取反
             negate : function (key) {
-                console.log()
+                console.log();
                 if(Object.prototype.toString.call(key) == 'Object') {
                     for(var keyword in key) {
                         return key[keyword];

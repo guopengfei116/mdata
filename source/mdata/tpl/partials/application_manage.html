@@ -5,24 +5,25 @@
     </div>
     <div class="form-tool right">
         <form novalidate name="searchForm">
-            <fieldset class="fieldset">
+            <!--fieldset class="fieldset">
                 <input class="fieldset_text" name="searchInput" ng-model="searchTerms" type="text" required>
                 <button class="fieldset_button iconfont icon-search" ng-click="submit()"></button>
-            </fieldset>
+            </fieldset-->
+            <search></search>
         </form>
     </div>
 </section>
 <dl class="container">
     <dt class="row row-title">
         <ul>
-            <li class="row_column row_column-5">App Name</li>
-            <li class="row_column row_column-5">App ID</li>
-            <li class="row_column row_column-5">Report Admin</li>
-            <li class="row_column row_column-5">Report Viewer</li>
+            <li class="row_column row_column-5" ng-click="changeSort('appList', 'name')">App Name</li>
+            <li class="row_column row_column-5" ng-click="changeSort('appList', 'id')">App ID</li>
+            <li class="row_column row_column-5" ng-click="changeSort('adminUsers', 'name')">Report Admin</li>
+            <li class="row_column row_column-5" ng-click="changeSort('viewerUsers', 'name')">Report Viewer</li>
             <li class="row_column row_column-5">Manage</li>
         </ul>
     </dt>
-    <dd class="row row-color-interlaced" ng-repeat="app in dataApps.data">
+    <dd class="row row-color-interlaced" ng-repeat="app in viewData | orderBy:sort.appList.orderKey:sort.appList.isDownOrder ">
         <ul>
             <li class="row_column row_column-5">
                 <a href="#/application/manage/edit/{{ app.id }}">{{ app.name }}</a>
@@ -31,12 +32,12 @@
                 <a href="#/application/manage/edit/{{ app.id }}">{{ app.id }}</a>
             </li>
             <li class="row_column row_column-5">
-                <span ng-repeat="user in app['users_admin']">
+                <span ng-repeat="user in app['users_admin'] | orderBy:sort.adminUsers.orderKey:sort.adminUsers.isDownOrder ">
                     <a href="#/account/manage/edit/{{ user.id }}">{{ user.name }}</a>
                 </span>
             </li>
             <li class="row_column row_column-5">
-                <span ng-repeat="user in app['users_viewer']">
+                <span ng-repeat="user in app['users_viewer'] | orderBy:sort.viewerUsers.orderKey:sort.viewerUsers.isDownOrder ">
                     <a href="#/account/manage/edit/{{ user.id }}">{{ user.name }}</a>
                 </span>
             </li>
