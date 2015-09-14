@@ -46,6 +46,26 @@ oasgames.mdataPanelControllers.controller('AccountManageCtrl', [
         $scope.changeSort = function (type, orderKey) {
             OrderHandler.change($scope.sort, type, orderKey);
         };
+
+        //删除account
+        $scope.delete = function (accountId) {
+            Ui.confirm('确定要删除这个账号吗', function () {
+                Account.save(
+                    {accountId : accountId},
+                    {accountId : accountId},
+                    function (result) {
+                        if(result && result.code == 200) {
+                            Ui.alert('删除成功');
+                        }else {
+                            Ui.alert('删除失败');
+                        }
+                    },
+                    function () {
+                        Ui.alert('网络错误');
+                    }
+                );
+            });
+        };
     }
 ]);
 

@@ -67,6 +67,57 @@ Ui.prototype = {
             }
         }
     })(),
+    confirm: (function () {
+        var Confirm = {
+            initialized: false,
+            looks: null,
+            init: function () {
+                var tpl =
+                    '<div class="confirm">' +
+                        '<section class="confirm_mask"></section>' +
+                        '<aside class="confirm_panel">' +
+                            '<section class="confirm_panel_info">' +
+                            '</section>' +
+                            '<ul class="confirm_panel_btn">' +
+                                '<li class="confirm_panel_btn_item confirm_panel_btn_item-no">取消</li>' +
+                                '<li class="confirm_panel_btn_item confirm_panel_btn_item-ok">确定</li>' +
+                            '</ul>' +
+                        '</aside>' +
+                    '</div>';
+                Confirm.looks = $(tpl).hide().appendTo('body');
+                Confirm.bind();
+                Confirm.initialized = true;
+            },
+            bind: function () {
+                $(document).on('touchend click', '.confirm_panel_btn_item-no', function() {
+                    Confirm.hide();
+                });
+                $(document).on('touchend click', '.confirm_panel_btn_item-ok', function() {
+                    Confirm.callback && Confirm.callback();
+                    Confirm.hide();
+                });
+            },
+            setInfo: function (info) {
+                Confirm.looks.find('.confirm_panel_info').html(info);
+            },
+            show: function () {
+                Confirm.looks.show();
+            },
+            hide: function () {
+                Confirm.looks.hide();
+            }
+        };
+        return function (info, callback) {
+            if(Confirm.initialized) {
+                Confirm.setInfo(info);
+                Confirm.callback = callback;
+                Confirm.show();
+            }else {
+                Confirm.init();
+                this.confirm(info, callback);
+            }
+        }
+    })(),
     uSetPosition:  function (target, self, position, offset) {
         if(arguments.length != 4) {
             return;
@@ -156,3 +207,6 @@ Ui.prototype = {
         }
     }
 };
+
+Ui.alert = Ui.prototype.alert;
+Ui.confirm = Ui.prototype.confirm;

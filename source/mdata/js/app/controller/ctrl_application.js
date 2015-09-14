@@ -44,6 +44,26 @@ oasgames.mdataPanelControllers.controller('ApplicationManageCtrl', [
         $scope.changeSort = function (type, orderKey) {
             OrderHandler.change($scope.sort, type, orderKey);
         };
+
+        //删除app
+        $scope.delete = function (appId) {
+            Ui.confirm('确定要删除这个app吗', function () {
+                Application.save(
+                    {appId : appId},
+                    {appId : appId},
+                    function (result) {
+                        if(result && result.code == 200) {
+                            Ui.alert('删除成功');
+                        }else {
+                            Ui.alert('删除失败');
+                        }
+                    },
+                    function () {
+                        Ui.alert('网络错误');
+                    }
+                );
+            });
+        };
     }
 ]);
 

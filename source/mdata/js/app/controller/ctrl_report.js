@@ -25,6 +25,26 @@ oasgames.mdataPanelControllers.controller('reportManageCtrl', [
         $scope.searchHandler = function (searchVal) {
             $scope.viewData = Filter($scope.sourceData, {appName : searchVal});
         };
+
+        //删除account
+        $scope.delete = function (reportId) {
+            Ui.confirm('确定要删除这个report吗', function () {
+                Report.save(
+                    {reportId : reportId},
+                    {reportId : reportId},
+                    function (result) {
+                        if(result && result.code == 200) {
+                            Ui.alert('删除成功');
+                        }else {
+                            Ui.alert('删除失败');
+                        }
+                    },
+                    function () {
+                        Ui.alert('网络错误');
+                    }
+                );
+            });
+        };
     }
 ]);
 

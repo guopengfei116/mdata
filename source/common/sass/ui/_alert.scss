@@ -1,4 +1,4 @@
-.alert {
+.alert, .confirm {
     &_mask {
         @include mask(99);
     }
@@ -21,6 +21,23 @@
             text-align: center;
             font-size: 0.9rem;
             color: #f6644e;
+        }
+    }
+}
+
+.confirm {
+    &_panel_btn {
+        &_item {
+            @include inline-block();
+            float: left;
+            width: 6rem;
+            &-no {
+
+            }
+            &-ok {
+                border-left: 1px solid #d9d9d9;
+                margin-left: -1px;
+            }
         }
     }
 }
