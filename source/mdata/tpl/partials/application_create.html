@@ -1,121 +1,179 @@
-<form>
-    <fieldset>
-        <legend>Name</legend>
-        <input type="text">
+<form class="app-page">
+    <fieldset class="field-common">
+        <legend class="field-title-com">Name</legend>
+        <input class="fieldset-text-com" type="text">
+        <span class="red-star">*</span>
     </fieldset>
-    <p>
-        Application ID
-        <i class="tip">{{ id }}</i>
-    </p>
-    <fieldset>
-        <legend>Report Name</legend>
-        <input type="text">
+    <fieldset class="field-common">
+        <p>
+            <span class="field-title-com">ID</span>
+            <span class="flag tooltip-host" data-tooltip-position="rc" data-tooltip-info="lc">132</span>
+        </p>
     </fieldset>
-    <fieldset>
-        <legend>Describe</legend>
-        <textarea></textarea>
-    </fieldset>
-    <fieldset>
-        <legend>Dimension</legend>
-        <div>
-            <div class="select"></div>
-            <button>Add</button>
-        </div>
-        <div>
-            <div class="select dropdown-host" data-value="Mail">
-                <ul class="select_main">
-                    <p class="select_main_p">Mail</p>
-                    <i class="select_main_icon"></i>
-                </ul>
-                <div class="dropdown"></div>
+    <fieldset class="field-common">
+        <legend class="field-title-com">Time Zone</legend>
+        <div class="select dropdown-host app-zone">
+            <div class="select_main">
+                <p class="select_main_p">哈哈哈</p>
+                <i class="select_main_icon"></i>
             </div>
+            <ul class="dropdown dropdown-bl">
+                <li class="dropdown_arrow"></li>
+                <li class="dropdown_arrow dropdown_arrow-mask"></li>
+                <li class="dropdown_list">
+                    <a class="dropdown_list_content" data-value="1">123</a>
+                </li>
+                <li class="dropdown_list">
+                    <a class="dropdown_list_content" data-value="2">456</a>
+                </li>
+            </ul>
+        </div>
+        <span class="red-star">*</span>
+    </fieldset>
+    <fieldset class="field-common">
+        <legend class="field-title-com">Report Admin</legend>
+        <div>
+            <div class="select dropdown-host select-btn">
+                <div class="select_main">
+                    <p class="select_main_p">哈哈哈</p>
+                    <i class="select_main_icon"></i>
+                </div>
+                <ul class="dropdown dropdown-bl">
+                    <li class="dropdown_arrow"></li>
+                    <li class="dropdown_arrow dropdown_arrow-mask"></li>
+                    <li class="dropdown_list">
+                        <a class="dropdown_list_content" data-value="1">123</a>
+                    </li>
+                    <li class="dropdown_list">
+                        <a class="dropdown_list_content" data-value="2">456</a>
+                    </li>
+                </ul>
+            </div>
+            <button class="button tooltip-host" data-tooltip-position="tc" data-tooltip-info="tc">add</button>
+        </div>
+        <div class="textarea">
+            <span class="flag flag-icon"> Admin1
+                <i class="flag-icon_delete iconfont icon-close">
+                    
+                </i>
+            </span>
+            <span class="flag flag-icon"> Admin2
+                <i class="flag-icon_delete iconfont icon-close">
+                    
+                </i>
+            </span>
+            <span class="flag flag-icon"> Admin3
+                <i class="flag-icon_delete iconfont icon-close">
+                    
+                </i>
+            </span>
         </div>
     </fieldset>
-    <fieldset>
-        <legend>Filter</legend>
+    <fieldset class="field-common">
+        <legend class="field-title-com">Report Viewer</legend>
         <div>
-            <div class="select"></div>
-            <button>Add</button>
-        </div>
-        <div>
-            <div class="select dropdown-host" data-value="Mail">
-                <ul class="select_main">
-                    <p class="select_main_p">Mail</p>
+            <div class="select dropdown-host select-btn">
+                <div class="select_main">
+                    <p class="select_main_p">哈哈哈</p>
                     <i class="select_main_icon"></i>
+                </div>
+                <ul class="dropdown dropdown-bl">
+                    <li class="dropdown_arrow"></li>
+                    <li class="dropdown_arrow dropdown_arrow-mask"></li>
+                    <li class="dropdown_list">
+                        <a class="dropdown_list_content" data-value="1">123</a>
+                    </li>
+                    <li class="dropdown_list">
+                        <a class="dropdown_list_content" data-value="2">456</a>
+                    </li>
                 </ul>
-                <div class="dropdown"></div>
             </div>
+            <button class="button tooltip-host" data-tooltip-position="tc" data-tooltip-info="tc">add</button>
+        </div>
+        <div class="textarea">
+            <span class="flag flag-icon"> Admin1
+                <i class="flag-icon_delete iconfont icon-close">
+                    
+                </i>
+            </span>
+            <span class="flag flag-icon"> Admin2
+                <i class="flag-icon_delete iconfont icon-close">
+                    
+                </i>
+            </span>
+            <span class="flag flag-icon"> Admin3
+                <i class="flag-icon_delete iconfont icon-close">
+                    
+                </i>
+            </span>
         </div>
     </fieldset>
-    <fieldset>
-        <legend>Column</legend>
+    <fieldset class="field-common">
+        <legend class="field-title-com">Processor(s)</legend>
         <div>
-            <div class="select"></div>
-            <div class="select"></div>
-            <div class="select"></div>
-            <button>Add</button>
+            <div class="select dropdown-host processor-select">
+                <div class="select_main">
+                    <p class="select_main_p">哈哈哈</p>
+                    <i class="select_main_icon"></i>
+                </div>
+                <ul class="dropdown dropdown-bl">
+                    <li class="dropdown_arrow"></li>
+                    <li class="dropdown_arrow dropdown_arrow-mask"></li>
+                    <li class="dropdown_list">
+                        <a class="dropdown_list_content" data-value="1">123</a>
+                    </li>
+                    <li class="dropdown_list">
+                        <a class="dropdown_list_content" data-value="2">456</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="select dropdown-host processor-select">
+                <div class="select_main">
+                    <p class="select_main_p">哈哈哈</p>
+                    <i class="select_main_icon"></i>
+                </div>
+                <ul class="dropdown dropdown-bl">
+                    <li class="dropdown_arrow"></li>
+                    <li class="dropdown_arrow dropdown_arrow-mask"></li>
+                    <li class="dropdown_list">
+                        <a class="dropdown_list_content" data-value="1">123</a>
+                    </li>
+                    <li class="dropdown_list">
+                        <a class="dropdown_list_content" data-value="2">456</a>
+                    </li>
+                </ul>
+            </div>
+            <button class="button tooltip-host" data-tooltip-position="tc" data-tooltip-info="tc">add</button>
         </div>
-        <div>
-            <input type="text" placeholder="Processor">
-            <div class="select dropdown-host" data-value="event1">
-                <ul class="select_main">
-                    <p class="select_main_p">event1</p>
-                    <i class="select_main_icon"></i>
-                </ul>
-                <div class="dropdown"></div>
-            </div>
-            <div class="select dropdown-host" data-value="event2">
-                <ul class="select_main">
-                    <p class="select_main_p">event2</p>
-                    <i class="select_main_icon"></i>
-                </ul>
-                <div class="dropdown"></div>
-            </div>
-            <div class="select dropdown-host" data-value="event3">
-                <ul class="select_main">
-                    <p class="select_main_p">event3</p>
-                    <i class="select_main_icon"></i>
-                </ul>
-                <div class="dropdown"></div>
-            </div>
+        <div class="textarea textarea-processor">
+            <span class="flag flag-icon"> Admin1
+                <i class="flag-icon_delete iconfont icon-close">
+                    
+                </i>
+            </span>
+            <span class="flag flag-icon"> Admin2
+                <i class="flag-icon_delete iconfont icon-close">
+                    
+                </i>
+            </span>
+            <span class="flag flag-icon"> Admin3
+                <i class="flag-icon_delete iconfont icon-close">
+                    
+                </i>
+            </span>
         </div>
+        <span class="red-star">*</span>
     </fieldset>
-    <fieldset>
-        <legend>Report Guest</legend>
-        <div>
-            <div class="select"></div>
-            <button>Add</button>
-        </div>
-        <div>
-            <div class="select dropdown-host" data-value="Mail">
-                <ul class="select_main">
-                    <p class="select_main_p">Mail</p>
-                    <i class="select_main_icon"></i>
-                </ul>
-                <div class="dropdown"></div>
-            </div>
-        </div>
-    </fieldset>
-    <fieldset>
-        <legend>Default Date Range</legend>
-        <div>
-            <div class="select dropdown-host" data-value="Today">
-                <ul class="select_main">
-                    <p class="select_main_p">Today</p>
-                    <i class="select_main_icon"></i>
-                </ul>
-                <div class="dropdown"></div>
-            </div>
-        </div>
-    </fieldset>
-    <fieldset>
-        <span class="button-group">
-            <button class="button button-plus"></button>
-            <button class="button button-create"></button>
+
+
+    <fieldset class="field-common">
+        <span class="button-group page-btns">
+            <button class="button button-create-plus">+</button>
+            <button class="button button-create">Create</button>
         </span>
         <span class="button-group">
-            <button class="button button-minus"></button>
-            <button class="button button-cancel"></button>
+            <button class="button button-cancel-minus">-</button>
+            <button class="button button-cancel">Cancel</button>
         </span>
     </fieldset>
 </form>

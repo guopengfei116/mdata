@@ -1,0 +1,44 @@
+.field-common{
+	margin-bottom:20px;
+}
+.fieldset-text-com{
+    height: 32px; 
+    width: 284px; 
+    border: 1px solid #dce1e4;
+    text-indent:10px;
+    box-shadow:none;
+}
+.field-title-com{
+    color: #4e5e6a; 
+    font-family: $lucida-grande;
+    line-height: $base-line-height;
+    font-weight:bold;
+    margin-bottom:6px;
+    font-size:12px;
+}
+.textarea{
+	width:354px;
+	height:94px;
+	border: 1px solid #dce1e4;
+	display:block; 
+	padding:9px 8px;
+    margin-top:10px;
+}
+.select{
+    vertical-align: top;
+}
+.red-star{
+    color:red;
+}
+.select_main_p{
+    font-size:12px;
+    color:#666666;
+}
+.page-btns{
+     margin-right:20px;
+}
+.select-btn{
+    width:268px;
+}
+
+

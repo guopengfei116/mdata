@@ -1,0 +1,19 @@
+.account-page{
+	.field-title-account{
+	    color: #4e5e6a; 
+	    font-family: $lucida-grande;
+	    line-height: $base-line-height;
+	    margin-bottom:6px;
+	    font-size:12px;
+	}
+	.field-account{
+		margin-left:80px;
+		margin-bottom:12px;
+	}
+	.account-authority{
+		float:left;
+	}
+	.account-email{
+		background:#eeeeee;
+	}
+}
