@@ -1,13 +1,17 @@
 'use strict';
 
 /*
- * 注册指令
+ * @注册指令
  * */
 oasgames.mdataPanelControllers = angular.module('mdataPanelDirective', []);
 
 
 /*
-* 搜索指令
+* @搜索指令
+* 父控制器需要申明sourceData 和 viewData两个变量以供指令使用，
+* 指令只帮助处理了搜索为空的处理，
+* 具体搜索逻辑需父控制器自己定义searchHandler函数，接收搜索值进行处理，
+* 如果搜索输入框需要placeholder，则在父控制器作用域设置searchPlaceholder值
 * */
 oasgames.mdataPanelControllers.directive('search', [
     function () {
@@ -39,6 +43,8 @@ oasgames.mdataPanelControllers.directive('search', [
                             if(!searchVal || !searchVal.trim()) {
                                 $scope.viewData = $scope.sourceData;
                             }else {
+
+                                //具体搜索由控制器根据不同需求单独处理
                                 $scope.searchHandler(searchVal);
                             }
                         }, 200);
