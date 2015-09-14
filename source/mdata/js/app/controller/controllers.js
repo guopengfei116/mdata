@@ -75,7 +75,7 @@ oasgames.mdataPanelControllers.controller('HeaderCtrl', [
 
 
 /*
- * navigation控制器
+ * 左侧navigation控制器
  * */
 oasgames.mdataPanelControllers.controller('navigationCtrl', [
     '$rootScope',

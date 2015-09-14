@@ -20,14 +20,11 @@ oasgames.mdataPanelControllers.directive('search', [
                             '<button class="fieldset_button iconfont icon-search" ng-click="search()"></button>' +
                         '</fieldset>' +
                       '</form>',
-            link: function (scope, element, attrs) {
-                console.log(scope);
-            },
             controller: [
                 '$scope',
                 '$timeout',
                 'Filter',
-                function ($scope, $timeout, Filter) {
+                function ($scope, $timeout) {
 
                     /*
                     * 根据搜索关键字更新模板展示数据
@@ -42,7 +39,7 @@ oasgames.mdataPanelControllers.directive('search', [
                             if(!searchVal || !searchVal.trim()) {
                                 $scope.viewData = $scope.sourceData;
                             }else {
-                                $scope.viewData = Filter($scope.sourceData, {email : ['account', 'email', searchVal], operation : searchVal});
+                                $scope.searchHandler(searchVal);
                             }
                         }, 200);
                     };

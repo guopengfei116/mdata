@@ -2,12 +2,15 @@
  *  report manage控制器
  * */
 oasgames.mdataPanelControllers.controller('reportManageCtrl', [
+    '$rootScope',
     '$scope',
     'Report',
-    function ($scope, Report) {
-        var searchTimer = null;
+    'Filter',
+    function ($rootScope, $scope, Report, Filter) {
+        //权限
+        $scope.authority = $rootScope.user['authority'];
 
-        //数据默认值
+        //定义default数据
         $scope.searchPlaceholder = 'Search report...';
         $scope.sourceData = [];
         $scope.viewData = [];
@@ -18,22 +21,9 @@ oasgames.mdataPanelControllers.controller('reportManageCtrl', [
             $scope.viewData = $scope.sourceData;
         });
 
-        //排序数据模型
-        $scope.sort = {
-            systemList : {
-                filter : '',
-                orderKey : 'time',
-                isDownOrder : false
-            }
-        };
-
-        // 修改排序规则
-        $scope.changeListSort = function (type, orderKey) {
-            if($scope.sort[type].orderKey == orderKey) {
-                $scope.sort[type].isDownOrder = !$scope.sort[type].isDownOrder;
-            }else {
-                $scope.sort[type].orderKey = orderKey;
-            }
+        //搜索自定义处理函数
+        $scope.searchHandler = function (searchVal) {
+            $scope.viewData = Filter($scope.sourceData, {appName : searchVal});
         };
     }
 ]);
