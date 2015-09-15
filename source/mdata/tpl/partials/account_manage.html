@@ -20,24 +20,24 @@
     <dd class="row row-color-interlaced" ng-repeat="account in viewData | orderBy:sort.appList.orderKey:sort.appList.isDownOrder ">
         <ul>
             <li class="row_column row_column-5">
-                <a href="#/account/manage/edit/{{ account.id }}">{{ account.name }}</a>
+                <a href="#/account/manage/edit/{{ account.uid }}">{{ account.nickname }}</a>
             </li>
             <li class="row_column row_column-5">
-                <a href="#/account/manage/edit/{{ account.id }}">{{ account.email }}</a>
+                <a href="#/account/manage/edit/{{ account.uid }}">{{ account.username }}</a>
             </li>
             <li class="row_column row_column-5">
-                <span ng-repeat="report in account['as_report_admin'] | orderBy:sort.adminReports.orderKey:sort.adminReports.isDownOrder ">
-                    <a href="#/report/view/{{ report.id }}">{{ report.name }}</a>
+                <span ng-repeat="app in account['as_report_admin'] | orderBy:sort.adminReports.orderKey:sort.adminReports.isDownOrder ">
+                    <a href="#/report/view/{{ app.appid }}">{{ app.appname }}</a>
                 </span>
             </li>
             <li class="row_column row_column-5">
-                <span ng-repeat="report in account['as_report_viewer'] | orderBy:sort.viewerReports.orderKey:sort.viewerReports.isDownOrder ">
-                    <a href="#/report/view/{{ report.id }}">{{ report.name }}</a>
+                <span ng-repeat="app in account['as_report_viewer'] | orderBy:sort.viewerReports.orderKey:sort.viewerReports.isDownOrder ">
+                    <a href="#/report/view/{{ app.appid }}">{{ app.appname }}</a>
                 </span>
             </li>
             <li class="row_column row_column-5">
-                <a href="#/account/manage/edit/{{ account.id }}" class="iconfont icon-edit tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></a>
-                <i class="iconfont icon-delete tooltip-host" data-tooltip-position="bc" data-tooltip-info="Delete" ng-click="delete(account.id)"></i>
+                <a href="#/account/manage/edit/{{ account.uid }}" class="iconfont icon-edit tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></a>
+                <i class="iconfont icon-delete tooltip-host" data-tooltip-position="bc" data-tooltip-info="Delete" ng-click="delete(account.uid)"></i>
             </li>
         </ul>
     </dd>
