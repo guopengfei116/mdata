@@ -1,10 +1,3 @@
-'use strict';
-
-/*
- * 注册自定义过滤器
- * */
-oasgames.mdataPanelFilter = angular.module('mdataPanelFilter', []);
-
 
 /*
 *   输出html文档

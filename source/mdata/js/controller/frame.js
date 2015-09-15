@@ -1,10 +1,3 @@
-'use strict';
-
-/*
- * 注册控制器
- * */
-oasgames.mdataPanelControllers = angular.module('mdataPanelControllers', []);
-
 
 /*
  * 页面框架控制器，
