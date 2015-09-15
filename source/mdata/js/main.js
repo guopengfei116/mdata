@@ -12,27 +12,10 @@ require('./lib/angular-route.js');
 require('./lib/angular-sanitize.js');
 
 /*
- * 控制器
+ * 加载常量
  * */
-oasgames.mdataControllers = angular.module('mdataControllers', []);
-require('./controller/frame.js');
-require('./controller/login.js');
-require('./controller/application.js');
-require('./controller/account.js');
-require('./controller/system.js');
-require('./controller/report.js');
-
-/*
- * 指令
- * */
-oasgames.mdataDirective = angular.module('mdataDirective', []);
-require('./directive/search.js');
-
-/*
- * 过滤器
- * */
-oasgames.mdataFilter = angular.module('mdataFilter', []);
-require('./filter/filters.js');
+oasgames.mdataConstant = angular.module('mdataConstant', []);
+require('./constant/constant.js');
 
 /*
  * 服务
@@ -44,16 +27,33 @@ require('./service/get_api.js');
 require('./service/user_auth.js');
 
 /*
- * 加载常量
- * */
-oasgames.mdataConstant = angular.module('mdataConstant', []);
-require('./constant/constant.js');
-
-/*
  * 加载服务配置
  * */
 oasgames.mdataServicesConfig = angular.module('mdataServicesConfig', []);
 require('./service_config/route_config.js');
+
+/*
+ * 过滤器
+ * */
+oasgames.mdataFilter = angular.module('mdataFilter', []);
+require('./filter/filters.js');
+
+/*
+ * 指令
+ * */
+oasgames.mdataDirective = angular.module('mdataDirective', []);
+require('./directive/search.js');
+
+/*
+ * 控制器
+ * */
+oasgames.mdataControllers = angular.module('mdataControllers', []);
+require('./controller/frame.js');
+require('./controller/login.js');
+require('./controller/application.js');
+require('./controller/account.js');
+require('./controller/system.js');
+require('./controller/report.js');
 
 /*
  * app主模块
@@ -61,12 +61,12 @@ require('./service_config/route_config.js');
 oasgames.mdataApp = angular.module('mdataApp', [
     'ngSanitize',
     'ngRoute',
-    'mdataPanelServices',
+    'mdataConstant',
+    'mdataServices',
     'mdataServicesConfig',
-    'mdataPanelFilter',
-    'mdataPanelDirective',
-    'mdataPanelConstant',
-    'mdataPanelControllers'
+    'mdataFilter',
+    'mdataDirective',
+    'mdataControllers'
 ]);
 
 /*
