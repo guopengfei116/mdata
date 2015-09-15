@@ -57,7 +57,7 @@ oasgames.mdataServices.factory('OrderHandler', [
  *
  * @return {Function} filter方法
  * */
-oasgames.mdataPanelServices.factory('Filter', [
+oasgames.mdataServices.factory('Filter', [
     function () {
 
         /*
