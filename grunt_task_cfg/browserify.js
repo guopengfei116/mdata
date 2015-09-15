@@ -1,17 +1,16 @@
 
 /**
- * 开发模式生产结构化代码，
- * 部署模式生产混淆压缩代码
+ * 别名配置
  * */
 exports.options = {
     alias : {
-        'main': gruntProject.src + '/mdata/js/main.js'
+        'main': gruntProject.src + '/mdata/js/main.js',
+        'common': gruntProject.src + '/mdata/js/main.js'
     }
 };
 
 /**
- * 开发模式合并js到调试目录
- * 部署模式合并js到生产目录
+ * 合并js到调试目录
  * */
 exports.all = {
     files: [
@@ -19,7 +18,7 @@ exports.all = {
             expand: true,
             cwd: gruntProject.src,
             src: ['*/js/*.js'],
-            dest: gruntProject.debug ? gruntProject.prd : gruntProject.dest
+            dest: gruntProject.prd
         }
     ]
 };
