@@ -116,20 +116,20 @@
 >####1.  日志列表
 >>*  method : get
 >>*  url : /api/site/systemLog/
->>*  data : { 
+>>*  data : [{ 
         time: 时间戳，operation: 描述，ip: IP，
         account：[ { name: 姓名，email: 邮箱，id: ID }... ] 
-    }
+    }... ]
 
 ### 5、report
 
 >####1.  report列表
 >>*  method : get
 >>*  url : /api/site/report/
->>*  data : { 
+>>*  data : [{ 
         app: { name: appName，id: appID}，
         reports: [ { name: 名字，id: ID }... ] 
-    }
+    }... ]
         
 >####2.  创建report
 >>*  method : post
