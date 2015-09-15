@@ -21,6 +21,8 @@ oasgames.mdataPanelApp.run([
             var nextUrl = next && next.originalPath;
             var currentUrl = current && current.originalPath;
             console.log('当前页：' + currentUrl + ', 下一页：' + nextUrl);
+            console.log(current);
+            console.log(next);
 
             // 如果用户未登录
             if(!$rootScope.user['logined']) {

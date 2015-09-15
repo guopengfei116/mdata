@@ -52,11 +52,11 @@
 >####4.  账号列表
 >>*  method : get
 >>*  url : /api/site/account/
->>*  data : { 
+>>*  data : [{ 
         name: 姓名，email: 邮箱，id: ID，
         as_report_admin：[ { name: reportName，id: reportId }... ]，
         as_report_viewer：[ { name: reportName，id: reportId }... ] 
-    }
+    }... ]
 
 >####5.  创建账号
 >>*  method : post
@@ -83,11 +83,11 @@
 >####1.  app列表
 >>*  method : get
 >>*  url : /api/site/app/
->>*  data : { 
+>>*  data : [{ 
         name: 名字，id: ID，
         users_admin：[ { name: 姓名，email: 邮箱，id: ID }... ]，
         users_viewer：[ { name: 姓名，email: 邮箱，id: ID }... ] 
-    }
+    }... ]
 
 >####2.  创建app
 >>*  method : post
