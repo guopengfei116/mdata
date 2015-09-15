@@ -14,7 +14,7 @@ require('./lib/angular-sanitize.js');
 /*
  * 控制器
  * */
-oasgames.mdataPanelControllers = angular.module('mdataPanelControllers', []);
+oasgames.mdataControllers = angular.module('mdataControllers', []);
 require('./controller/frame.js');
 require('./controller/login.js');
 require('./controller/application.js');
@@ -25,45 +25,49 @@ require('./controller/report.js');
 /*
  * 指令
  * */
-oasgames.mdataPanelControllers = angular.module('mdataPanelDirective', []);
+oasgames.mdataDirective = angular.module('mdataDirective', []);
 require('./directive/search.js');
 
 /*
  * 过滤器
  * */
-oasgames.mdataPanelFilter = angular.module('mdataPanelFilter', []);
+oasgames.mdataFilter = angular.module('mdataFilter', []);
 require('./filter/filters.js');
 
 /*
  * 服务
  * */
-oasgames.mdataPanelServices = angular.module('mdataPanelServices', ['ngResource']);
+oasgames.mdataServices = angular.module('mdataServices', ['ngResource']);
 require('./service/filter.js');
 require('./service/frame.js');
 require('./service/get_api.js');
 require('./service/user_auth.js');
 
 /*
- * app主模块
+ * 加载常量
  * */
-oasgames.mdataPanelApp = angular.module('mdataPanelApp', [
-    'ngSanitize',
-    'ngRoute',
-    'mdataPanelControllers',
-    'mdataPanelServices',
-    'mdataPanelFilter',
-    'mdataPanelDirective'
-]);
-
-/*
-* 加载常量
-* */
+oasgames.mdataConstant = angular.module('mdataConstant', []);
 require('./constant/constant.js');
 
 /*
  * 加载服务配置
  * */
+oasgames.mdataServicesConfig = angular.module('mdataServicesConfig', []);
 require('./service_config/route_config.js');
+
+/*
+ * app主模块
+ * */
+oasgames.mdataApp = angular.module('mdataApp', [
+    'ngSanitize',
+    'ngRoute',
+    'mdataPanelServices',
+    'mdataServicesConfig',
+    'mdataPanelFilter',
+    'mdataPanelDirective',
+    'mdataPanelConstant',
+    'mdataPanelControllers'
+]);
 
 /*
  * 初始化页面路由

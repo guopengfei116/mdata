@@ -1,7 +1,7 @@
 /*
  * login模块控制器
  * */
-oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
+oasgames.mdataControllers.controller('MdataLoginCtrl', [
     '$rootScope',
     '$scope',
     '$http',

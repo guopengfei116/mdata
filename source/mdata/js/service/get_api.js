@@ -3,7 +3,7 @@
  * @provider {Object} API 接口url
  * @return {Function} 获取接口url
  * */
-oasgames.mdataPanelServices.provider('ApiCtrl', [
+oasgames.mdataServices.provider('ApiCtrl', [
     function () {
         return {
             API : {
@@ -43,7 +43,7 @@ oasgames.mdataPanelServices.provider('ApiCtrl', [
 /*
  * get app
  * */
-oasgames.mdataPanelServices.factory('Application', [
+oasgames.mdataServices.factory('Application', [
     '$resource',
     'ApiCtrl',
     function ($resource, ApiCtrl) {
@@ -57,7 +57,7 @@ oasgames.mdataPanelServices.factory('Application', [
 /*
  * get account
  * */
-oasgames.mdataPanelServices.factory('Account', [
+oasgames.mdataServices.factory('Account', [
     '$resource',
     'ApiCtrl',
     function ($resource, ApiCtrl) {
@@ -71,7 +71,7 @@ oasgames.mdataPanelServices.factory('Account', [
 /*
  * get report
  * */
-oasgames.mdataPanelServices.factory('Report', [
+oasgames.mdataServices.factory('Report', [
     '$resource',
     'ApiCtrl',
     function ($resource, ApiCtrl) {

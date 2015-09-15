@@ -53,9 +53,9 @@
 >>*  method : get
 >>*  url : /api/site/account/
 >>*  data : [{ 
-        name: 姓名，email: 邮箱，id: ID，
-        as_report_admin：[ { name: reportName，id: reportId }... ]，
-        as_report_viewer：[ { name: reportName，id: reportId }... ] 
+        nickname: 姓名，username: 邮箱，uid: ID，
+        as_report_admin：[ { appname: appName，appid: appId }... ]，
+        as_report_viewer：[ { appname: appName，appid: appId }... ] 
     }... ]
 
 >####5.  创建账号

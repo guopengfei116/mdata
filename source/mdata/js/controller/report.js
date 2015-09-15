@@ -1,7 +1,7 @@
 /*
  *  report manage控制器
  * */
-oasgames.mdataPanelControllers.controller('reportManageCtrl', [
+oasgames.mdataControllers.controller('reportManageCtrl', [
     '$rootScope',
     '$scope',
     'Report',

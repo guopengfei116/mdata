@@ -2,7 +2,7 @@
 /*
  * 页面初始化之前，验证用户登录状态和权限，进行页面跳转
  * */
-oasgames.mdataPanelApp.run([
+oasgames.mdataApp.run([
     '$rootScope',
     '$location',
     '$log',

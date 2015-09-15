@@ -2,7 +2,7 @@
 /*
 *   输出html文档
 * */
-oasgames.mdataPanelFilter.filter('to_trusted', [
+oasgames.mdataFilter.filter('to_trusted', [
     '$sce',
     function ($sce) {
         return function (text) {
@@ -17,7 +17,7 @@ oasgames.mdataPanelFilter.filter('to_trusted', [
 /*
 * 首字母大写
 * */
-oasgames.mdataPanelFilter.filter('capitalize', [
+oasgames.mdataFilter.filter('capitalize', [
     function () {
         return function (text) {
             if(text) {

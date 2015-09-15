@@ -4,7 +4,7 @@
  * @return {Object} UserAuth
  *
  * */
-oasgames.mdataPanelServices.provider('UserAuth', [
+oasgames.mdataServices.provider('UserAuth', [
     function () {
         return {
             //权限可访问的路由表

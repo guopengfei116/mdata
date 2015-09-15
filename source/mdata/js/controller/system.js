@@ -1,7 +1,7 @@
 /*
  *  system log控制器
  * */
-oasgames.mdataPanelControllers.controller('systemLogCtrl', [
+oasgames.mdataControllers.controller('systemLogCtrl', [
     '$scope',
     '$http',
     '$timeout',

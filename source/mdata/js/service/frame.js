@@ -4,7 +4,7 @@
  * 提供getBlackList方法用来获取列表
  * @return {Array}
  * */
-oasgames.mdataPanelServices.factory('PageOutline', [
+oasgames.mdataServices.factory('PageOutline', [
     function () {
         return {
             outlineHideList : [ '', '\\/login', '\\/notfound' ],
@@ -33,7 +33,7 @@ oasgames.mdataPanelServices.factory('PageOutline', [
  * @provider {Object} parseMethod 自定义生成breadcrumb，key为正值，value为处理方法
  * @return {Function} 解析path为breadcrumb
  * */
-oasgames.mdataPanelServices.provider('Breadcrumb', [
+oasgames.mdataServices.provider('Breadcrumb', [
     function () {
         return {
             breadcrumbSeparator : '&nbsp;&gt;&nbsp;',

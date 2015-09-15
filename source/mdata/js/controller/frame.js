@@ -3,7 +3,7 @@
  * 页面框架控制器，
  * 根据hash值判断页面框架的展示
  * */
-oasgames.mdataPanelControllers.controller('PageFrameCtrl', [
+oasgames.mdataControllers.controller('PageFrameCtrl', [
     '$rootScope',
     '$scope',
     '$location',
@@ -31,7 +31,7 @@ oasgames.mdataPanelControllers.controller('PageFrameCtrl', [
 /*
  * header控制器
  * */
-oasgames.mdataPanelControllers.controller('HeaderCtrl', [
+oasgames.mdataControllers.controller('HeaderCtrl', [
     '$rootScope',
     '$scope',
     '$http',
@@ -70,7 +70,7 @@ oasgames.mdataPanelControllers.controller('HeaderCtrl', [
 /*
  * 左侧navigation控制器
  * */
-oasgames.mdataPanelControllers.controller('navigationCtrl', [
+oasgames.mdataControllers.controller('navigationCtrl', [
     '$rootScope',
     '$scope',
     '$http',
@@ -123,7 +123,7 @@ oasgames.mdataPanelControllers.controller('navigationCtrl', [
 /*
  * breadcrumb控制器
  * */
-oasgames.mdataPanelControllers.controller('breadcrumbCtrl', [
+oasgames.mdataControllers.controller('breadcrumbCtrl', [
     '$rootScope',
     '$scope',
     '$location',

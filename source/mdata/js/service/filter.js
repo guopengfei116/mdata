@@ -1,7 +1,7 @@
 /*
  * 过滤器排序方法
  * */
-oasgames.mdataPanelServices.factory('OrderHandler', [
+oasgames.mdataServices.factory('OrderHandler', [
     function ($resource, ApiCtrl) {
         return {
             up : function (key) {

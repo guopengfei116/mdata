@@ -27,12 +27,12 @@
             </li>
             <li class="row_column row_column-5">
                 <span ng-repeat="app in account['as_report_admin'] | orderBy:sort.adminReports.orderKey:sort.adminReports.isDownOrder ">
-                    <a href="#/report/view/{{ app.appid }}">{{ app.appname }}</a>
+                    <a href="#/application/manage/edit/{{ app.appid }}">{{ app.appname }}</a>
                 </span>
             </li>
             <li class="row_column row_column-5">
                 <span ng-repeat="app in account['as_report_viewer'] | orderBy:sort.viewerReports.orderKey:sort.viewerReports.isDownOrder ">
-                    <a href="#/report/view/{{ app.appid }}">{{ app.appname }}</a>
+                    <a href="#/application/manage/edit/{{ app.appid }}">{{ app.appname }}</a>
                 </span>
             </li>
             <li class="row_column row_column-5">

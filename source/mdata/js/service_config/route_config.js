@@ -1,7 +1,7 @@
 /*
  * 配置页面路由
  * */
-oasgames.mdataPanelApp.config([
+oasgames.mdataServicesConfig.config([
     '$routeProvider',
     function ($routeProvider) {
         $routeProvider

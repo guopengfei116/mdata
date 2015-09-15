@@ -1,7 +1,7 @@
 /*
  *  application manage控制器
  * */
-oasgames.mdataPanelControllers.controller('ApplicationManageCtrl', [
+oasgames.mdataControllers.controller('ApplicationManageCtrl', [
     '$scope',
     'Application',
     'Filter',

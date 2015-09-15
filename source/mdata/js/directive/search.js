@@ -6,7 +6,7 @@
 * 具体搜索逻辑需父控制器自己定义searchHandler函数，接收搜索值进行处理，
 * 如果搜索输入框需要placeholder，则在父控制器作用域设置searchPlaceholder值
 * */
-oasgames.mdataPanelControllers.directive('search', [
+oasgames.mdataDirective.directive('search', [
     function () {
         return {
             restrict: 'E',

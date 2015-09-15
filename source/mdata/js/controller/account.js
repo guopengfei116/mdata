@@ -1,7 +1,7 @@
 /*
  *  account manage控制器
  * */
-oasgames.mdataPanelControllers.controller('AccountManageCtrl', [
+oasgames.mdataControllers.controller('AccountManageCtrl', [
     '$scope',
     '$timeout',
     'Account',

@@ -2,7 +2,7 @@
 /*
  * 用户权限对照表
  * */
-oasgames.mdataPanelApp.constant("AUTHORITY", {
+oasgames.mdataConstant.constant("AUTHORITY", {
     'administrators' : 1,
     'user' : {
         'reportAdmin' : 2,
