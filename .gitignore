@@ -3,6 +3,7 @@
 
 node_modules/
 debug/
+production/
 .sass-cache/
 bower_components/
 .idea/
