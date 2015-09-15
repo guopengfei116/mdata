@@ -27,6 +27,7 @@ oasgames.mdataApp.run([
             // 如果用户未登录
             if(!$rootScope.user['logined']) {
                 console.log('用户未登录');
+                console.log(next.templateUrl);
                 if(next.templateUrl === '/mdata/tpl/partials/login.html') {
                     // 已经转向登录路由因此无需重定向
                 }else {
