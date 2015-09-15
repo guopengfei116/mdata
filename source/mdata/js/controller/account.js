@@ -72,7 +72,7 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
 /*
  *  account create控制器
  * */
-oasgames.mdataPanelControllers.controller('AccountCreateCtrl', [
+oasgames.mdataControllers.controller('AccountCreateCtrl', [
     '$scope',
     function ($scope) {
 
@@ -82,7 +82,7 @@ oasgames.mdataPanelControllers.controller('AccountCreateCtrl', [
 /*
  *  account edit控制器
  * */
-oasgames.mdataPanelControllers.controller('AccountEditCtrl', [
+oasgames.mdataControllers.controller('AccountEditCtrl', [
     '$scope',
     function ($scope) {
 

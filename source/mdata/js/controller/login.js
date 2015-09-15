@@ -82,7 +82,7 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
 /*
  *  change pasword控制器
  * */
-oasgames.mdataPanelControllers.controller('MdataChangePasswordCtrl', [
+oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
     '$scope',
     '$rootScope',
     '$http',

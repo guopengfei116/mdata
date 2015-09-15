@@ -61,7 +61,7 @@ oasgames.mdataPanelControllers.controller('reportCreateCtrl', [
 /*
  *  report edit控制器
  * */
-oasgames.mdataPanelControllers.controller('reportEditCtrl', [
+oasgames.mdataControllers.controller('reportEditCtrl', [
     '$scope',
     function ($scope) {
 
@@ -71,7 +71,7 @@ oasgames.mdataPanelControllers.controller('reportEditCtrl', [
 /*
  *  report view控制器
  * */
-oasgames.mdataPanelControllers.controller('reportViewCtrl', [
+oasgames.mdataControllers.controller('reportViewCtrl', [
     '$scope',
     function ($scope) {
 

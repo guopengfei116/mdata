@@ -70,7 +70,7 @@ oasgames.mdataControllers.controller('ApplicationManageCtrl', [
 /*
  *  application create控制器
  * */
-oasgames.mdataPanelControllers.controller('ApplicationCreateCtrl', [
+oasgames.mdataControllers.controller('ApplicationCreateCtrl', [
     '$scope',
     function ($scope) {
 
@@ -80,7 +80,7 @@ oasgames.mdataPanelControllers.controller('ApplicationCreateCtrl', [
 /*
  *  application edit控制器
  * */
-oasgames.mdataPanelControllers.controller('ApplicationEditCtrl', [
+oasgames.mdataControllers.controller('ApplicationEditCtrl', [
     '$scope',
     function ($scope) {
 
