@@ -29,15 +29,15 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
         $scope.sort = {
             appList : {
                 filter : '',
-                orderKey : 'email',
+                orderKey : 'username',
                 isDownOrder : false
             },
             adminReports : {
-                orderKey : 'name',
+                orderKey : 'appname',
                 isDownOrder : false
             },
             viewerReports : {
-                orderKey : 'name',
+                orderKey : 'appname',
                 isDownOrder : false
             }
         };

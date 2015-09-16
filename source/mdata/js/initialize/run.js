@@ -21,31 +21,36 @@ oasgames.mdataApp.run([
             var nextUrl = next && next.originalPath;
             var currentUrl = current && current.originalPath;
             console.log('当前页：' + currentUrl + ', 下一页：' + nextUrl);
-            console.log(current);
-            console.log(next);
 
             // 如果用户未登录
             if(!$rootScope.user['logined']) {
-                console.log('用户未登录');
-                console.log(next.templateUrl);
-                if(next.templateUrl === '/mdata/tpl/partials/login.html') {
+                console.log('用户未登录, nextUrl:' + nextUrl);
+
+                if(nextUrl && (nextUrl == '/login' || nextUrl === '/')) {
                     // 已经转向登录路由因此无需重定向
                 }else {
                     $location.path('/login');
                 }
 
-                // 已登陆访问登陆页
+            // 访问登陆页面，如果已登录，则重定向
             }else if(nextUrl === '/login' || nextUrl === '/' || nextUrl === undefined){
+
+                // 超级管理员跳转到app管理
                 if($rootScope.user.authority == AUTHORITY.administrators) {
                     $location.path('/application/manage');
+
+                // 其他跳转到report管理
                 }else {
                     $location.path('/report/manage');
                 }
 
-                // 已登录访问其他页
+            // 访问其它页，如果已登录，需进行权限效验
             }else {
+
+                // 访问页面权限效验
                 var license = UserAuth.route(nextUrl);
-                // 如果权限不足
+
+                // 权限不足
                 if(!license) {
                     console.log('不通过');
                     $location.path(currentUrl);

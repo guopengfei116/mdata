@@ -8,7 +8,7 @@
     <body ng-controller="PageFrameCtrl">
         <!-- @import /mdata/tpl/component/header.tpl -->
         <!-- @import /mdata/tpl/component/nav.tpl -->
-        <article class="main img-cover" ng-class="{'main-login': islogin, 'main-other': outlineHide}">
+        <article class="main img-cover" ng-class="{'main-login': !logined, 'main-other': !outlineShow && logined}">
             <!-- @import /mdata/tpl/component/main_header.tpl -->
             <section class="main_content">
                 <div class="main_content-wrap ng-view"></div>

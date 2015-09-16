@@ -15,6 +15,7 @@ require('./lib/angular-sanitize.js');
 * 公共
 * */
 require('common');
+window.Ui = require('Ui');
 
 /*
  * 加载常量
