@@ -13,11 +13,15 @@
         },
         {
           "id" : 45,
-          "report_name" : "report2"
+          "report_name" : "hgjfg"
         },
         {
           "id" : 76,
           "report_name" : "report3"
+        },
+        {
+          "id" : 88,
+          "report_name" : "cddgs"
         }
       ]
     },
@@ -28,15 +32,42 @@
       "reports" : [
         {
           "id" : 23,
-          "report_name" : "report1"
+          "report_name" : "nrd"
         },
         {
           "id" : 45,
-          "report_name" : "report2"
+          "report_name" : "awzx"
         },
         {
           "id" : 76,
-          "report_name" : "report3"
+          "report_name" : "sewd"
+        },
+        {
+          "id" : 33,
+          "report_name" : "nk"
+        }
+      ]
+    },
+    {
+      "appname" : "cu",
+      "appid" : 28,
+      "premission" : 2,
+      "reports" : [
+        {
+          "id" : 45,
+          "report_name" : "nrd"
+        },
+        {
+          "id" : 27,
+          "report_name" : "awzx"
+        },
+        {
+          "id" : 34,
+          "report_name" : "sewd"
+        },
+        {
+          "id" : 64,
+          "report_name" : "nk"
         }
       ]
     }

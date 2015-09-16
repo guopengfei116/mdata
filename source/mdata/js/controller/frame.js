@@ -131,8 +131,13 @@ oasgames.mdataControllers.controller('navigationCtrl', [
 
         // 收藏列表
         (function () {
+            // 默认不展示
             var shortcutsDefaultStatus = false;
+
+            // app默认展示
             $scope.appsShow = shortcutsDefaultStatus;
+
+            // 用于存储每个report默认展示状态
             $scope.reportsShow = [];
 
             // shortcuts列表初始化
@@ -145,7 +150,8 @@ oasgames.mdataControllers.controller('navigationCtrl', [
                 if(data && data.code == 200) {
                     $scope.shortcuts = data.data;
                 }
-                //初始化reports默认状态
+
+                // 初始化reports默认展示
                 for(var i = $scope.shortcuts.length - 1; i >= 0; i--) {
                     $scope.reportsShow[i] = shortcutsDefaultStatus;
                 }

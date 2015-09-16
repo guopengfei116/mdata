@@ -16,10 +16,28 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
         $scope.sourceData = [];
         $scope.viewData = [];
 
+        // 用于存储每个report默认展示状态
+        $scope.reportsShow = [];
+
+        // 更新report默认展示状态
+        function upReportsListShow (reportsList) {
+            var reportsList = reportsList || $scope.viewData;
+            if(reportsList && reportsList.length > 1) {
+                for(var i = 0; i < reportsList.length; i++) {
+                    $scope.reportsShow[i] = false;
+                }
+            }else {
+                for(var i = 0; i < reportsList.length; i++) {
+                    $scope.reportsShow[i] = true;
+                }
+            }
+        }
+
         // 展示列表数据初始化
         $scope.sourceData = Report.query().$promise.then(function (data) {
             $scope.sourceData = data.data;
             $scope.viewData = $scope.sourceData;
+            upReportsListShow();
         });
 
         // 搜索自定义处理函数
@@ -75,6 +93,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                 }
             }
 
+            upReportsListShow(matchedApps);
             $scope.viewData = matchedApps;
         };
 
