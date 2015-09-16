@@ -128,7 +128,7 @@
 >>*  url : /api/site/report/
 >>*  data : [{ 
         app: { name: appName，id: appID}，
-        reports: [ { name: 名字，id: ID }... ] 
+        reports: [ { appId: 所属app，name: 名字，id: ID }... ] 
     }... ]
         
 >####2.  创建report

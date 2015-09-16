@@ -22,7 +22,7 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
 
         //搜索自定义处理函数
         $scope.searchHandler = function (searchVal) {
-            $scope.viewData = Filter($scope.sourceData, {name : searchVal, email : searchVal});
+            $scope.viewData = Filter($scope.sourceData, {nickname : searchVal, username : searchVal});
         };
 
         //排序数据模型
