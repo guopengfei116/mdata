@@ -1,27 +1,26 @@
 {
-  "name" : 1,
-  "time zone" : 1,
-  "report admin" : [
-    "1",
-    "2",
-    "3"
-  ],
-  "report viewer" : [
-    "4",
-    "5",
-    "6"
-  ],
-  "processor" : [
+  "code" : 200,
+  "data" : 
       {
-        "processor": "process1",
-        "events" : "event"
-      },
-      {
-        "processor": "process1",
-        "events" : "event"
+        "name" : 1,
+        "id" : 133,
+        "time zone" : 1,
+        "reportAdmin" : [
+          "1",
+          "2",
+          "3"
+        ],
+        "reportViewer" : [
+          "4",
+          "5",
+          "6"
+        ],
+        "processor" : [
+          "4",
+          "5",
+          "6"
+        ]
       }
-  ]
 }
-
 
 

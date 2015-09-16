@@ -17,8 +17,7 @@
     font-size:12px;
 }
 .textarea{
-	width:354px;
-	height:94px;
+	min-height:54px;
 	border: 1px solid #dce1e4;
 	display:block; 
 	padding:9px 8px;
@@ -29,6 +28,7 @@
 }
 .red-star{
     color:red;
+    margin-left:5px;
 }
 .select_main_p{
     font-size:12px;

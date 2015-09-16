@@ -66,14 +66,53 @@ oasgames.mdataControllers.controller('ApplicationManageCtrl', [
         };
     }
 ]);
-
+var tooltip = require('Tooltip');
 /*
  *  application create控制器
  * */
 oasgames.mdataControllers.controller('ApplicationCreateCtrl', [
     '$scope',
-    function ($scope) {
+    'ApplicationCreate',
+    'Filter',
+    function ($scope,ApplicationCreate,Filter) {
+        $scope.sourceData = [];
+        $scope.viewData = [];
+        $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
 
+        //展示列表数据初始化
+        $scope.sourceData = ApplicationCreate.query().$promise.then(function (data) {
+            $scope.sourceData = data.data;
+            $scope.viewData = $scope.sourceData;
+        });
+        $scope.blur = function(type,$errors){
+            var errorInfo = {
+                name: {
+                    required: 'Name must not be empty',
+                    pattern: 'Only accepts English letters and numbers'
+                }
+            };
+
+            for(var $error in $errors) {
+                if($errors[$error]) {
+                    $scope[type + 'Error'] = true;
+                    $scope.tooltip.errorType = type;
+                    $scope.tooltip.setContent(errorInfo[type][$error]);
+                    $scope.tooltip.setPosition('.fieldset-' + type, $scope.tooltip.toolTipLooks);
+                    $scope.tooltip.toolTipLooks.css({'color': 'rgba(255, 0, 0, 0.7)'});
+                    $scope.tooltip.show();
+                    return;
+                }
+            }
+
+            $scope[type + 'Error'] = false;
+        }
+        //表单焦点时清除错误提示
+        $scope.focus = function (type) {
+            $scope[type + 'Error'] = false;
+            if($scope.tooltip.errorType == type) {
+                $scope.tooltip.hide();
+            }
+        };
     }
 ]);
 

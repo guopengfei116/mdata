@@ -1,13 +1,13 @@
-<form class="app-page">
+<form class="app-page" name="appCreate">
     <fieldset class="field-common">
         <legend class="field-title-com">Name</legend>
-        <input class="fieldset-text-com" type="text">
+        <input class="fieldset-text-com fieldset-name" ng-model="name" type="text" name="appName" required ng-pattern="/^\w{6,20}$/"  ng-blur="blur('name',appCreate.appName.$error)"  ng-focus="focus('name')" >
         <span class="red-star">*</span>
     </fieldset>
     <fieldset class="field-common">
         <p>
             <span class="field-title-com">ID</span>
-            <span class="flag">132</span>
+            <span class="flag">{{viewData.id}}</span>
         </p>
     </fieldset>
     <fieldset class="field-common">
@@ -35,17 +35,14 @@
         <div>
             <div class="select dropdown-host select-btn">
                 <div class="select_main">
-                    <p class="select_main_p">哈哈哈</p>
+                    <p class="select_main_p">Admin</p>
                     <i class="select_main_icon"></i>
                 </div>
                 <ul class="dropdown dropdown-bl">
                     <li class="dropdown_arrow"></li>
                     <li class="dropdown_arrow dropdown_arrow-mask"></li>
-                    <li class="dropdown_list">
-                        <a class="dropdown_list_content" data-value="1">123</a>
-                    </li>
-                    <li class="dropdown_list">
-                        <a class="dropdown_list_content" data-value="2">456</a>
+                    <li class="dropdown_list" ng-repeat="app in viewData.reportAdmin | orderBy:app">
+                        <a class="dropdown_list_content" data-value="{{app}}">{{app}}</a>
                     </li>
                 </ul>
             </div>
@@ -74,17 +71,14 @@
         <div>
             <div class="select dropdown-host select-btn">
                 <div class="select_main">
-                    <p class="select_main_p">哈哈哈</p>
+                    <p class="select_main_p">Viewer</p>
                     <i class="select_main_icon"></i>
                 </div>
                 <ul class="dropdown dropdown-bl">
                     <li class="dropdown_arrow"></li>
                     <li class="dropdown_arrow dropdown_arrow-mask"></li>
-                    <li class="dropdown_list">
-                        <a class="dropdown_list_content" data-value="1">123</a>
-                    </li>
-                    <li class="dropdown_list">
-                        <a class="dropdown_list_content" data-value="2">456</a>
+                    <li class="dropdown_list" ng-repeat="app in viewData.reportViewer | orderBy:app">
+                        <a class="dropdown_list_content" data-value="{{app}}">{{app}}</a>
                     </li>
                 </ul>
             </div>
@@ -113,21 +107,19 @@
         <div>
             <div class="select dropdown-host processor-select">
                 <div class="select_main">
-                    <p class="select_main_p">哈哈哈</p>
+                    <p class="select_main_p">Processor</p>
                     <i class="select_main_icon"></i>
                 </div>
                 <ul class="dropdown dropdown-bl">
                     <li class="dropdown_arrow"></li>
                     <li class="dropdown_arrow dropdown_arrow-mask"></li>
-                    <li class="dropdown_list">
-                        <a class="dropdown_list_content" data-value="1">123</a>
-                    </li>
-                    <li class="dropdown_list">
-                        <a class="dropdown_list_content" data-value="2">456</a>
+                    <li class="dropdown_list" ng-repeat="app in viewData.processor">
+                        <a class="dropdown_list_content" data-value="{{app.processor}}">{{app.processor}}</a>
                     </li>
                 </ul>
             </div>
-            <div class="select dropdown-host processor-select">
+            <input class="fieldset-text-com" type="text" placeholder="event1|event2">
+            <!-- <div class="select dropdown-host processor-select">
                 <div class="select_main">
                     <p class="select_main_p">哈哈哈</p>
                     <i class="select_main_icon"></i>
@@ -142,10 +134,10 @@
                         <a class="dropdown_list_content" data-value="2">456</a>
                     </li>
                 </ul>
-            </div>
+            </div> -->
             <button class="button">add</button>
         </div>
-        <div class="textarea textarea-processor">
+        <div class="textarea textarea-processor fieldset-processor" required  >
             <span class="flag flag-icon"> Admin1
                 <i class="flag-icon_delete iconfont icon-close">
                     
