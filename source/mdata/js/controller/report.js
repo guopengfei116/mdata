@@ -16,28 +16,66 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
         $scope.sourceData = [];
         $scope.viewData = [];
 
-        // 分类提取app和report，便于搜索操作
-        var apps = [], reports = [];
-        function classify (data) {
-            for(var i = 0; i < data.length - 1; i++) {
-                apps.push(data[i]['app']);
-                for(var j = 0; j < data[i]['reports'].length - 1; j++) {
-                    reports.push(data[i]['reports'][j]);
-                }
-            }
-        }
-
         // 展示列表数据初始化
         $scope.sourceData = Report.query().$promise.then(function (data) {
             $scope.sourceData = data.data;
             $scope.viewData = $scope.sourceData;
-            classify($scope.viewData);
         });
 
         // 搜索自定义处理函数
         $scope.searchHandler = function (searchVal) {
-            var matchedApps = Filter(apps, {name : searchVal});
-            var matchedReports = Filter(reports, {name : searchVal});
+
+            // 依据appName匹配到的apps
+            var matchedApps = Filter($scope.sourceData, {appname : searchVal});
+            // 依据appName匹配到的apps
+            var unmatchedApps = [];
+            // 用于临时存放依据reportsName匹配到的reports
+            var tmpMatchedReports = null;
+            // 用于临时创建新的匹配对象，以避免修改源对象属性
+            var tmpMatchedApps = null;
+
+            /*
+            * 得到未匹配的apps
+            * */
+            if(matchedApps && matchedApps.length) {
+                for(var j = 0; j < $scope.viewData.length; j++) {
+                    for(var i = 0; i < matchedApps.length; i++) {
+                        if($scope.viewData[j] === matchedApps[i]) {
+                            break;
+                        }
+                        if(j == $scope.sourceData.length - 1) {
+                            unmatchedApps.push($scope.sourceData[j]);
+                        }
+                    }
+                }
+            }else {
+                unmatchedApps = $scope.sourceData;
+            }
+
+            /*
+            * 遍历未匹配的apps，查找其匹配的reports,
+            * 如果有匹配的reports，则重置该app的reports属性，并添加至匹配的apps
+            * */
+            if(unmatchedApps && unmatchedApps.length) {
+                for(var i = 0; i < unmatchedApps.length; i++) {
+                    var tmpMatchedReports = Filter(unmatchedApps[i]['reports'], {report_name : searchVal});
+
+                    // 为匹配到的reports重新创建一个app对象存储
+                    if(tmpMatchedReports && tmpMatchedReports.length) {
+                        if(Object.prototype.toString.call(matchedApps) !== '[object Array]') {
+                            matchedApps = [];
+                        }
+
+                        // 初始化空对象
+                        tmpMatchedApps = {};
+                        $.extend(tmpMatchedApps, unmatchedApps[i]);
+                        tmpMatchedApps['reports'] = tmpMatchedReports;
+                        matchedApps.push(tmpMatchedApps);
+                    }
+                }
+            }
+
+            $scope.viewData = matchedApps;
         };
 
         // 删除account

@@ -1,4 +1,4 @@
-<nav class="nav" ng-controller="navigationCtrl" ng-if="outlineShow && logined">
+<nav class="nav" ng-controller="navigationCtrl" ng-if="outlineShow && logined" ng-show="outlineShow && logined">
     <ul class="nav_list">
         <li class="nav_list_item" ng-if="authority == 1" ng-class="{'nav_list_item-active' : page == 'application'}">
             <a href="#/application/manage">

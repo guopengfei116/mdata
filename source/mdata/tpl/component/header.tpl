@@ -1,4 +1,4 @@
-<header class="header" ng-controller="HeaderCtrl" ng-if="outlineShow && logined">
+<header class="header" ng-controller="HeaderCtrl" ng-if="outlineShow && logined" ng-show="outlineShow && logined">
     <h1 class="header_logo sprite sprite-mdata_logo"></h1>
     <menu class="header_settings dropdown-host">
         <a class="header_settings_user dropdown-target" href="javascript:void(0);"

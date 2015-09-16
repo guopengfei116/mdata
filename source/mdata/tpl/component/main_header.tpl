@@ -1,4 +1,4 @@
-<section class="main_header" ng-controller="breadcrumbCtrl" ng-if="outlineShow && logined">
+<section class="main_header" ng-controller="breadcrumbCtrl" ng-if="outlineShow && logined" ng-show="outlineShow && logined">
     <h2 class="main_header_title" ng-bind="breadcrumb[0] | capitalize"></h2>
     <nav class="breadcrumb">
         <em class="iconfont icon-coords"></em>
