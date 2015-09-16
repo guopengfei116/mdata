@@ -67,3 +67,5 @@ $.extend(Dropdown.prototype, {
         }
     }
 });
+
+module.exports = Dropdown;

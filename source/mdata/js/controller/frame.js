@@ -16,7 +16,7 @@ oasgames.mdataControllers.controller('PageFrameCtrl', [
         $scope.breadcrumb = ['Application', 'Create'];
 
         //初始化Ui
-        var ui = new Ui();
+        var ui = new (require('Ui'));
         ui.init();
 
         $scope.$on('$routeChangeSuccess', function () {

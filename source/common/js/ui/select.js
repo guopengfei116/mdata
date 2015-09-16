@@ -65,3 +65,4 @@ $.extend(Select.prototype, {
     }
 });
 
+module.exports = Select;

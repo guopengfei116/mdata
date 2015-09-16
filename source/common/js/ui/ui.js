@@ -5,7 +5,8 @@
 var Ui = function (options) {
     this._o = {
         initializeList : ['Flag', 'Tooltip', 'Dropdown', 'Select']
-    }
+    };
+    $.extend(this._o, options);
 };
 
 Ui.prototype = {
@@ -17,7 +18,7 @@ Ui.prototype = {
                 var leng = self._o.initializeList.length;
 
                 while(leng--) {
-                    (new window[self._o.initializeList[leng]]).init();
+                    (new (require(self._o.initializeList[leng]))).init();
                 }
             }, 500);
         });
@@ -208,5 +209,10 @@ Ui.prototype = {
     }
 };
 
+/*
+* 添加静态方法
+* */
 Ui.alert = Ui.prototype.alert;
 Ui.confirm = Ui.prototype.confirm;
+
+module.exports = Ui;

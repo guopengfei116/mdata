@@ -12,6 +12,11 @@ require('./lib/angular-route.js');
 require('./lib/angular-sanitize.js');
 
 /*
+* 公共
+* */
+require('common');
+
+/*
  * 加载常量
  * */
 oasgames.mdataConstant = angular.module('mdataConstant', []);
