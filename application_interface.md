@@ -127,8 +127,8 @@
 >>*  method : get
 >>*  url : /api/site/report/
 >>*  data : [{ 
-        app: { name: appName，id: appID}，
-        reports: [ { appId: 所属app，name: 名字，id: ID }... ] 
+        appname: appName，appid: appID，premission: 用户app权限
+        reports: [ { report_name: 名字，id: ID }... ] 
     }... ]
         
 >####2.  创建report
