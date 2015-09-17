@@ -1,44 +1,46 @@
-<section class="cf">
-    <div class="left button-group">
-        <a href="#/application/manage/create" class="button button-create-plus"><i class="iconfont icon-plus"></i></a>
-        <a href="#/application/manage/create" class="button button-create">Create</a>
-    </div>
-    <div class="form-tool right">
-        <search></search>
-    </div>
-</section>
-<dl class="container">
-    <dt class="row row-title">
-        <ul>
-            <li class="row_column row_column-5" ng-click="changeSort('appList', 'name')">App Name</li>
-            <li class="row_column row_column-5" ng-click="changeSort('appList', 'id')">App ID</li>
-            <li class="row_column row_column-5" ng-click="changeSort('adminUsers', 'name')">Report Admin</li>
-            <li class="row_column row_column-5" ng-click="changeSort('viewerUsers', 'name')">Report Viewer</li>
-            <li class="row_column row_column-5">Manage</li>
-        </ul>
-    </dt>
-    <dd class="row row-color-interlaced" ng-repeat="app in viewData | orderBy:sort.appList.orderKey:sort.appList.isDownOrder ">
-        <ul>
-            <li class="row_column row_column-5">
-                <a href="#/application/manage/edit/{{ app.id }}">{{ app.name }}</a>
-            </li>
-            <li class="row_column row_column-5">
-                <a href="#/application/manage/edit/{{ app.id }}">{{ app.id }}</a>
-            </li>
-            <li class="row_column row_column-5">
-                <span ng-repeat="user in app['users_admin'] | orderBy:sort.adminUsers.orderKey:sort.adminUsers.isDownOrder ">
-                    <a href="#/account/manage/edit/{{ user.id }}">{{ user.name }}</a>
-                </span>
-            </li>
-            <li class="row_column row_column-5">
-                <span ng-repeat="user in app['users_viewer'] | orderBy:sort.viewerUsers.orderKey:sort.viewerUsers.isDownOrder ">
-                    <a href="#/account/manage/edit/{{ user.id }}">{{ user.name }}</a>
-                </span>
-            </li>
-            <li class="row_column row_column-5">
-                <a href="#/application/manage/edit/{{ app.id }}" class="iconfont icon-edit tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></a>
-                <i class="iconfont icon-delete tooltip-host" data-tooltip-position="bc" data-tooltip-info="Delete" ng-click="delete(app.id)"></i>
-            </li>
-        </ul>
-    </dd>
-</dl>
+<article class="app-page app-manage">
+    <section class="cf">
+        <div class="left button-group">
+            <a href="#/application/manage/create" class="button button-create-plus"><i class="iconfont icon-plus"></i></a>
+            <a href="#/application/manage/create" class="button button-create">Create</a>
+        </div>
+        <div class="form-tool right">
+            <search></search>
+        </div>
+    </section>
+    <dl class="container">
+        <dt class="row row-title">
+            <ul>
+                <li class="row_column row_column-5" ng-click="changeSort('appList', 'name')">App Name</li>
+                <li class="row_column row_column-5" ng-click="changeSort('appList', 'id')">App ID</li>
+                <li class="row_column row_column-5" ng-click="changeSort('adminUsers', 'name')">Report Admin</li>
+                <li class="row_column row_column-5" ng-click="changeSort('viewerUsers', 'name')">Report Viewer</li>
+                <li class="row_column row_column-5">Manage</li>
+            </ul>
+        </dt>
+        <dd class="row row-color-interlaced" ng-repeat="app in viewData | orderBy:sort.appList.orderKey:sort.appList.isDownOrder ">
+            <ul>
+                <li class="row_column row_column-5">
+                    <a href="#/application/manage/edit/{{ app.id }}">{{ app.name }}</a>
+                </li>
+                <li class="row_column row_column-5">
+                    <a href="#/application/manage/edit/{{ app.id }}">{{ app.id }}</a>
+                </li>
+                <li class="row_column row_column-5">
+                    <span ng-repeat="user in app['users_admin'] | orderBy:sort.adminUsers.orderKey:sort.adminUsers.isDownOrder ">
+                        <a href="#/account/manage/edit/{{ user.id }}">{{ user.name }}</a>
+                    </span>
+                </li>
+                <li class="row_column row_column-5">
+                    <span ng-repeat="user in app['users_viewer'] | orderBy:sort.viewerUsers.orderKey:sort.viewerUsers.isDownOrder ">
+                        <a href="#/account/manage/edit/{{ user.id }}">{{ user.name }}</a>
+                    </span>
+                </li>
+                <li class="row_column row_column-5">
+                    <a href="#/application/manage/edit/{{ app.id }}" class="iconfont icon-edit tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></a>
+                    <i class="iconfont icon-delete tooltip-host" data-tooltip-position="bc" data-tooltip-info="Delete" ng-click="delete(app.id)"></i>
+                </li>
+            </ul>
+        </dd>
+    </dl>
+</article>
