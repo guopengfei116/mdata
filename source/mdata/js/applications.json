@@ -3,8 +3,8 @@
   "data" : [
     {
       "name" : "you",
-      "id" : "12",
-      "users_admin" : [
+      "appid" : "12",
+      "appadmin" : [
         {
           "name" : "bibi",
           "email" : "1@1.com",
@@ -21,7 +21,7 @@
           "id" : "12"
         }
       ],
-      "users_viewer" : [
+      "appuser" : [
         {
           "name" : "baode",
           "email" : "4@4.com",
@@ -46,8 +46,8 @@
     },
     {
       "name" : "gaga",
-      "id" : "123",
-      "users_admin" : [
+      "appid" : "123",
+      "appadmin" : [
         {
           "name" : "zirke",
           "email" : "1@1.com",
@@ -59,7 +59,7 @@
           "id" : "12"
         }
       ],
-      "users_viewer" : [
+      "appuser" : [
         {
           "name" : "baode",
           "email" : "4@4.com",
@@ -84,8 +84,8 @@
     },
     {
       "name" : "feuf",
-      "id" : "88",
-      "users_admin" : [
+      "appid" : "88",
+      "appadmin" : [
         {
           "name" : "saxi",
           "email" : "1@1.com",
@@ -97,7 +97,7 @@
           "id" : "12"
         }
       ],
-      "users_viewer" : [
+      "appuser" : [
         {
           "name" : "baode",
           "email" : "4@4.com",
@@ -122,8 +122,8 @@
     },
     {
       "name" : "pp",
-      "id" : "88",
-      "users_admin" : [
+      "appid" : "88",
+      "appadmin" : [
         {
           "name" : "saxi",
           "email" : "1@1.com",
@@ -135,7 +135,7 @@
           "id" : "12"
         }
       ],
-      "users_viewer" : [
+      "appuser" : [
         {
           "name" : "baode",
           "email" : "4@4.com",

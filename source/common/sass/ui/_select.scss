@@ -16,7 +16,7 @@
         cursor: pointer;
         padding-right: rem(32);
         border: 1px solid $select-color;
-        line-height: rem(32);
+        line-height: 32px;
         &_textarea, &_text {
             padding: 0 6px;
             background-color: transparent;
