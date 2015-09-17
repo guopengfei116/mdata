@@ -7,8 +7,10 @@
     .row_column:last-of-type {
         text-align: right;
     }
-    .iconfont {
-        color: #8facd2;
-        margin: 0 16px;
+    .container {
+        .iconfont {
+            color: #8facd2;
+            margin: 0 16px;
+        }
     }
 }
