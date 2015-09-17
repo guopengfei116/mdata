@@ -26,7 +26,7 @@ $.extend(Tooltip.prototype, {
             return;
         }
 
-        Tooltip.prototype.toolTipLooks = $(this.getTooltipTpl()).appendTo('body');
+        Tooltip.prototype.toolTipLooks = $(this.getTooltipTpl()).addClass('common').appendTo('body');
         this._bind();
         Tooltip.prototype.initialized = true;
     },
@@ -65,7 +65,12 @@ $.extend(Tooltip.prototype, {
             positionClass = 'tooltip-' + position,
             showClass = 'tooltip-active';
 
-        this.toolTipLooks.attr('class', baseClass + ' ' + positionClass + ' ' + showClass);
+        // common tooltip add common class
+        if(this.toolTipLooks.hasClass('common')) {
+            this.toolTipLooks.attr('class', baseClass + ' ' + positionClass + ' ' + showClass + ' ' + 'common');
+        }else {
+            this.toolTipLooks.attr('class', baseClass + ' ' + positionClass + ' ' + showClass);
+        }
     },
 
     hide: function () {
