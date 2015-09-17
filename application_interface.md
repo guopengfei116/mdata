@@ -61,17 +61,29 @@
 >####5.  创建账号
 >>*  method : post
 >>*  url : /api/site/account/
->>*  param : {   }
+>>*  param : { 
+         username: 邮箱，nickname: 姓名，password: 密码，
+         admin_app_id: [ appId... ]，
+         user_app_id: [ appId... ]
+     }
 
 >####6.  已存账号信息
 >>*  method : get
 >>*  url : /api/site/account/'accountId'
->>*  data : {   }
+>>*  data : { 
+        username: 邮箱，nickname: 姓名，password: 密码，
+        admin_app_id: [ appId... ]，
+        user_app_id: [ appId... ]
+    }
 
 >####7.  编辑账号
 >>*  method : post
 >>*  url : /api/site/account/'accountId'
->>*  param : {   }
+>>*  param : { 
+         username: 邮箱，nickname: 姓名，password: 密码，
+         admin_app_id: [ appId... ]，
+         user_app_id: [ appId... ]
+     }
 
 >####8.  删除账号
 >>*  method : delete
@@ -84,25 +96,29 @@
 >>*  method : get
 >>*  url : /api/site/app/
 >>*  data : [{ 
-        name: 名字，id: ID，
-        users_admin：[ { name: 姓名，email: 邮箱，id: ID }... ]，
-        users_viewer：[ { name: 姓名，email: 邮箱，id: ID }... ] 
+        name: app名字，appid: appID，
+        appadmin：[ { name: 姓名，email: 邮箱，id: ID }... ]，
+        appuser：[ { name: 姓名，email: 邮箱，id: ID }... ] 
     }... ]
 
 >####2.  创建app
 >>*  method : post
 >>*  url : /api/site/app/
->>*  param : {   }
+>>*  param : { 
+        name: app名字，appid: appID，
+        admin_app_id: [ appId... ]，
+        user_app_id: [ appId... ]
+    }
 
 >####3.  已存app信息
 >>*  method : get
 >>*  url : /api/site/app/'appId'
->>*  data : {   }
+>>*  data : 
 
 >####4.  编辑app
 >>*  method : post
 >>*  url : /api/site/app/'appId'
->>*  param : {   }
+>>*  param : 
 
 >####5.  删除app
 >>*  method : delete
