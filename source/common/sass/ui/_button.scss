@@ -56,4 +56,13 @@
             background-color: darken(#22baa0, 10%);
         }
     }
+    &-create-plus {
+        border-color: #22baa0;
+        background-color: #22baa0;
+        height: 1.5em;
+        &:active {
+            border-color: darken(#22baa0, 10%);
+            background-color: darken(#22baa0, 10%);
+        }
+    }
 }
