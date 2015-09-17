@@ -40,6 +40,20 @@
 .select-btn{
     width:268px;
 }
+.button-check,.button-close{
+    padding: 0 5px;
+    height: 33px;
+    line-height:33px;
+    background-color: #65c178;
+    border-radius: 4px;
+    border: none;
+}
+.button-close{
+    background-color: #dc6060;
+}
+.icon-check,.icon-close{
+    font-size:20px;
+}
 
 
 
