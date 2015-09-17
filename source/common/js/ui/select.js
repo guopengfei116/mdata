@@ -7,8 +7,9 @@
 var Select = function (options) {
     this._o = {
         trigger : 'body',
-        content : '.dropdown',
-        triggerEvent : 'click'
+        content : '.select_content',
+        triggerEvent : 'click',
+        offset : 10
     };
 
     $.extend(this._o, options);
@@ -16,8 +17,11 @@ var Select = function (options) {
 
 $.extend(Select.prototype, {
     selector : '.select',
+    host: '.select-host',
     target : '.select_target',
-    optionsTarget : '.select .dropdown_list_content',
+    textarea : '.select_main_textarea',
+    text : '.select_main_text',
+    optionsTarget : '.select_content_list_value',
     initialized : false,
 
     init : function () {
@@ -31,36 +35,62 @@ $.extend(Select.prototype, {
     bind : function () {
         var o = this._o, self = this;
 
-        //开关
+        // select开关
         $(o.trigger).on(o.triggerEvent, self.target, function (e) {
             e.stopPropagation();
             var $this = $(this);
-            if($this.parent(self.selector).hasClass('select-disable')) {
+
+            // disabled
+            if($this.parents(self.selector).hasClass('select-disable')) {
                 return;
             }
 
-            //清除其他select的active状态
-            $(self.target).removeClass('active').parent(self.selector).find(o.content).hide();
+            self.initPosition();
 
-            $this.toggleClass('select_main-active');
-            if($this.hasClass('select_main-active')) {
-                $this.parent(self.selector).find(o.content).show();
+            // 清除其他select的active状态
+            //$(self.selector).removeClass('select-active').find(o.content).hide();
+            $this.parents(self.selector).toggleClass('select-active');
+            /*if($this.parents(self.selector).hasClass('select-active')) {
+                $this.parents(self.selector).find(o.content).show();
             }else {
-                $this.parent(self.selector).find(o.content).hide();
-            }
+                $this.parents(self.selector).find(o.content).hide();
+            }*/
         });
 
-        //selected
+        // selected word
         $(o.trigger).on('click', self.optionsTarget, function (e) {
             e.stopPropagation();
             var $this = $(this);
 
-            $this.parents('.dropdown').hide().parents(self.selector).data('value', $this.data('value'))
-                .find(self.target).toggleClass('select_main-active').find('.select_main_p').text($this.text());
+            var val = $this.data('value');
+            $this.parents(self.selector).data('value', $this.data('value')).toggleClass('select-active');
+            $this.parents(self.selector).find(self.textarea).val($this.text());
+            $this.parents(self.selector).find(self.text).text($this.text());
         });
 
-        $(o.trigger).on('click', function () {
-            $(self.target).removeClass('select_main-active');
+        // select阻止事件外流
+        $(o.trigger).on(o.triggerEvent, self.selector, function (e) {
+            e.stopPropagation();
+        });
+
+        // 清除active状态
+        $(o.trigger).on('click', function (e) {
+            $(self.selector).removeClass('select-active');
+        });
+    },
+
+    initPosition: function () {
+        var o = this._o, self = this;
+        $(o.content).each(function () {
+            var $looks = $(this);
+            if($looks.attr('init')) {
+                return;
+            }
+            var $host = $looks.parent(self.host);
+            $looks.css({
+                top: $host.outerHeight() + o.offset,
+                left: 0
+            }).attr('init', true);
         });
     }
 });

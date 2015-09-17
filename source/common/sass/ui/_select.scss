@@ -6,26 +6,79 @@
         color:#999;
         background-color: #f1f1f1;
     }
+    &-active {
+        background-color: #f1f1f1;
+        .select_content {
+            display: block;
+        }
+    }
     &_main {
         cursor: pointer;
         padding-right: rem(32);
         border: 1px solid $select-color;
         line-height: rem(32);
-        &-active {
-            background-color: #f1f1f1;
-        }
-        &_p {
+        &_textarea, &_text {
             padding: 0 6px;
+            background-color: transparent;
             @include ellipsis();
         }
-        &_icon {
+        &_btn {
             position: absolute;
-            top: 14px;
-            right: 12px;
-            @include arrow(top, 4px, 4px, #333333);
+            right: 0;
+            width: rem(32);
+            height: rem(32);
+            background-color: transparent;
+            &_icon {
+                position: absolute;
+                top: 14px;
+                right: 12px;
+                @include arrow(top, 4px, 4px, #333333);
+            }
         }
     }
     &_content {
+        z-index: get-index(8);
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        border: 1px solid #d8dee4;
+        &-host {
+            position: relative;
+        }
+        &-target {
+            position: relative;
+        }
+        &_list {
+            z-index: get-index(8);
+            @include padding(null 6px);
+            line-height: rem(34);
+            font-size: 12px;
+            color: #5f5f5f;
+            &:hover {
+                background-color: #f7f7f7;
+                color: #262626;
+            }
+            &-group {
+                position: relative;
+                padding-left: 24px;
+                &_iconfont {
+                    position: absolute;
+                    left: 6px;
+                }
+            }
+        }
+        &_arrow {
+            z-index: get-index(7);
+            position:absolute;
+            @include arrow(bottom, 8px, 8px, #d8dee4);
+            top: -8px;
+            left: 10px;
+            &-mask {
+                position: absolute;
+                top:-7px;
+                border-bottom-color: #fff;
+            }
+        }
         //@extend .dropdown__content;
         a {
             @include ellipsis();
