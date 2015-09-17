@@ -16,7 +16,7 @@ var Select = function (options) {
 
 $.extend(Select.prototype, {
     selector : '.select',
-    target : '.select_main',
+    target : '.select_target',
     optionsTarget : '.select .dropdown_list_content',
     initialized : false,
 

@@ -1,6 +1,9 @@
 .button {
     &-group {
         font-size: 0;
+        .iconfont {
+            font-size: inherit;
+        }
     }
     @include prefix(transition, all 0.4s );
     cursor: pointer;
@@ -47,18 +50,10 @@
     &-create {
         border-color: #22baa0;
         background-color: #22baa0;
+        height: 1.5em;
         &:active {
             border-color: darken(#22baa0, 10%);
             background-color: darken(#22baa0, 10%);
-        }
-    }
-    &-create-plus {
-        border-color: #1ea78f;
-        background-color: #1ea78f;
-        padding: 4px 9px;
-        &:active {
-            border-color: darken(#1ea78f, 10%);
-            background-color: darken(#1ea78f, 10%);
         }
     }
 }

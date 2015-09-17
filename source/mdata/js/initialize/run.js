@@ -18,6 +18,7 @@ oasgames.mdataApp.run([
 
         //切换页面时权限认证
         $rootScope.$on('$routeChangeStart', function (event, next, current) {
+            $('.tooltip').remove();
             var nextUrl = next && next.originalPath;
             var currentUrl = current && current.originalPath;
             console.log('当前页：' + currentUrl + ', 下一页：' + nextUrl);
