@@ -41,7 +41,7 @@
     &-cancel-minus {
         border-color: #868686;
         background-color: #868686;
-        padding: 4px 9px;
+        height: 1.5em;
         &:active {
             border-color: darken(#868686, 10%);
             background-color: darken(#868686, 10%);
@@ -50,7 +50,6 @@
     &-create {
         border-color: #22baa0;
         background-color: #22baa0;
-        height: 1.5em;
         &:active {
             border-color: darken(#22baa0, 10%);
             background-color: darken(#22baa0, 10%);
