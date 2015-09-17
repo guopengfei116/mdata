@@ -64,6 +64,18 @@ oasgames.mdataServices.factory('ApplicationCreate', [
         });
     }
 ]);
+/*
+ * get app edit
+ * */
+oasgames.mdataServices.factory('ApplicationEdit', [
+    '$resource',
+    'ApiCtrl',
+    function ($resource, ApiCtrl) {
+        return $resource(ApiCtrl.get('application'), {}, {
+            query: {method: 'GET', params: {appId: 'application_edit'}}
+        });
+    }
+]);
 
 /*
  * get account

@@ -75,25 +75,25 @@ oasgames.mdataControllers.controller('ApplicationCreateCtrl', [
     'ApplicationCreate',
     'Filter',
     function ($scope,ApplicationCreate,Filter) {
-        $scope.sourceData = [];
         $scope.viewData = [];
         $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
 
         //展示列表数据初始化
-        $scope.sourceData = ApplicationCreate.query().$promise.then(function (data) {
-            $scope.sourceData = data.data;
-            $scope.viewData = $scope.sourceData;
+        $scope.viewData = ApplicationCreate.query().$promise.then(function (data) {
+            $scope.viewData = data.data;
         });
         $scope.blur = function(type,$errors){
             var errorInfo = {
                 name: {
-                    required: 'Name must not be empty',
                     pattern: 'Only accepts English letters and numbers'
                 }
             };
-
+            console.log("sss");
+            console.log($errors);
             for(var $error in $errors) {
+                console.log($errors);
                 if($errors[$error]) {
+                    console.log($errors[$error]);
                     $scope[type + 'Error'] = true;
                     $scope.tooltip.errorType = type;
                     $scope.tooltip.setContent(errorInfo[type][$error]);
@@ -121,7 +121,15 @@ oasgames.mdataControllers.controller('ApplicationCreateCtrl', [
  * */
 oasgames.mdataControllers.controller('ApplicationEditCtrl', [
     '$scope',
-    function ($scope) {
+    'ApplicationEdit',
+    'Filter',
+    function ($scope,ApplicationCreate,Filter) {
+        $scope.viewData = [];
+        $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
 
+        //展示列表数据初始化
+        $scope.viewData = ApplicationCreate.query().$promise.then(function (data) {
+            $scope.viewData = data.data;
+        });
     }
 ]);
