@@ -20,8 +20,11 @@
 	min-height:54px;
 	border: 1px solid #dce1e4;
 	display:block; 
-	padding:9px 8px;
+	padding:7px 6px;
     margin-top:10px;
+    .flag {
+        margin: 2px;
+    }
 }
 .select{
     vertical-align: top;

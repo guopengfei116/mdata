@@ -1,16 +1,33 @@
 {
-  "id" : 564,
-  "email" : "3@4.com",
-  "name" : "fsf",
-  "password" : "fsdfsda",
-  "authority" : {
-    "admin" : [
-      "appId1",
-      "appId2"
+  "msg" : "",
+  "code" : 200,
+  "data" : {
+    "username" : "3@4.com",
+    "nickname" : "fsf",
+    "password" : "fsdfsda",
+    "as_report_admin" : [
+      {
+        "appname" : "fdsfsff",
+        "appid" : "123"
+      },
+      {
+        "appname" : "report2",
+        "appid" : "124"
+      },
+      {
+        "appname" : "avcsedf",
+        "appid" : "125"
+      }
     ],
-    "viewer" : [
-      "appId3",
-      "appId4"
+    "as_report_viewer" : [
+      {
+        "appname" : "report4",
+        "appid" : "126"
+      },
+      {
+        "appname" : "ndfdfgf",
+        "appid" : "127"
+      }
     ]
   }
 }

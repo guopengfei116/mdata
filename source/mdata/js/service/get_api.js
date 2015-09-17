@@ -52,6 +52,8 @@ oasgames.mdataServices.factory('Application', [
         });
     }
 ]);
+
+
 /*
  * get app create
  * */
@@ -64,6 +66,8 @@ oasgames.mdataServices.factory('ApplicationCreate', [
         });
     }
 ]);
+
+
 /*
  * get app edit
  * */
@@ -76,6 +80,7 @@ oasgames.mdataServices.factory('ApplicationEdit', [
         });
     }
 ]);
+
 
 /*
  * get account
