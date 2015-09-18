@@ -1,3 +1,4 @@
+var tooltip = require('Tooltip');
 /*
  *  account manage控制器
  * */
@@ -98,8 +99,10 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
     '$route',
     'Account',
     'Application',
-    function ($scope, $cacheFactory, $route, Account, Application) {
-
+    'MdataVerify',
+    function ($scope, $cacheFactory, $route, Account, Application, MdataVerify) {
+        
+        $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
         // 所有的app列表
         $scope.appsData = [];
 
@@ -164,6 +167,20 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
 
             // 调试期只能暂用get方法，测试期需要修改method方法为对应fn
             var submitMethod = 'get';
+
+            //表单失去焦点时错误提示
+            $scope.blur = function(type, $errors){
+
+                MdataVerify.blur(type, $errors, $scope);
+            };
+
+            //表单焦点时清除错误提示
+            $scope.focus = function (type) {
+                $scope[type + 'Error'] = false;
+                if($scope.tooltip.errorType == type) {
+                    $scope.tooltip.hide();
+                }
+            };
 
             /*
             * 提交
