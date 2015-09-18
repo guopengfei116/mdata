@@ -6,10 +6,11 @@ var tooltip = require('Tooltip');
  * */
 oasgames.mdataControllers.controller('ApplicationManageCtrl', [
     '$scope',
+    '$cacheFactory',
     'Application',
     'Filter',
     'OrderHandler',
-    function ($scope, Application, Filter, OrderHandler) {
+    function ($scope, $cacheFactory, Application, Filter, OrderHandler) {
 
         //定义default数据
         $scope.searchPlaceholder = 'Search AppName AppId...';
@@ -21,6 +22,30 @@ oasgames.mdataControllers.controller('ApplicationManageCtrl', [
             $scope.sourceData = data.data;
             $scope.viewData = $scope.sourceData;
         });
+
+        // get账号列表数据
+        var appCache = $cacheFactory.get('app');
+        if(appCache && appCache.get('list')) {
+            $scope.sourceData = appCache.get('list');
+            $scope.viewData = $scope.sourceData;
+        }else {
+            appCache = $cacheFactory('app');
+            // 异步获取
+            Application.query().$promise.then(
+                function (result) {
+                    if(result && result.code == 200) {
+                        $scope.sourceData = result.data;
+                        $scope.viewData = result.data;
+                        appCache.put('list', result.data);
+                    }else {
+                        Ui.alert(result.msg);
+                    }
+                },
+                function () {
+                    Ui.alert('网络错误');
+                }
+            );
+        }
 
         //搜索自定义处理函数
         $scope.searchHandler = function (searchVal) {
@@ -74,7 +99,7 @@ oasgames.mdataControllers.controller('ApplicationManageCtrl', [
 /*
  *  application create控制器
  * */
-oasgames.mdataControllers.controller('ApplicationCreateCtrl', [
+oasgames.mdataControllers.controller('ApplicationEditCtrl', [
     '$scope',
     '$cacheFactory',
     '$route',
@@ -92,37 +117,24 @@ oasgames.mdataControllers.controller('ApplicationCreateCtrl', [
         $scope.appSourceData = [];
 
         // 当前编辑的appId
-        $scope.appId = $route.current.params.appId;
-        // 写死方便调试获取json-data
-        $scope.appId = 'application_info';
+        $scope.appId = $route.current.params.applicationId;
+
+        /*
+         * 如果有id，则说明是编辑状态
+         * accountId先写死方便调试获取json-data
+         * */
+        if($scope.appId) {
+            $scope.appId = 'application_info';
+            initAppData();
+        }
 
         // getApp数据
-        $scope.appSourceData = Application.get(
-            {appId: $scope.appId},
-            function (result) {
-                if(result && result.code == 200) {
-                    $scope.appSourceData = result.data;
-                }else {
-                    Ui.alert(result.msg);
-                }
-            },
-            function () {
-                Ui.alert('网络错误');
-            }
-        );
-
-        // getAccount列表数据
-        var accountCache = $cacheFactory.get('account');
-        if(accountCache && accountCache.get('list')) {
-            $scope.accountsData = accountCache.get('list');
-        }else {
-            accountCache = $cacheFactory('account');
-            // 异步获取
-            Account.query().$promise.then(
+        function initAppData () {
+            Application.get(
+                {appId: $scope.appId},
                 function (result) {
                     if(result && result.code == 200) {
-                        $scope.accountsData = result.data;
-                        accountCache.put('list', result.data);
+                        $scope.appSourceData = result.data;
                     }else {
                         Ui.alert(result.msg);
                     }
@@ -132,6 +144,30 @@ oasgames.mdataControllers.controller('ApplicationCreateCtrl', [
                 }
             );
         }
+
+        // getAccount列表数据
+        (function () {
+            var accountCache = $cacheFactory.get('account');
+            if(accountCache && accountCache.get('list')) {
+                $scope.accountsData = accountCache.get('list');
+            }else {
+                accountCache = $cacheFactory('account');
+                // 异步获取
+                Account.query().$promise.then(
+                    function (result) {
+                        if(result && result.code == 200) {
+                            $scope.accountsData = result.data;
+                            accountCache.put('list', result.data);
+                        }else {
+                            Ui.alert(result.msg);
+                        }
+                    },
+                    function () {
+                        Ui.alert('网络错误');
+                    }
+                );
+            }
+        })();
 
         // 事件处理、表单效验
         (function () {
@@ -168,9 +204,16 @@ oasgames.mdataControllers.controller('ApplicationCreateCtrl', [
                 }
             };
 
-            // 提交 》》 需要修改get为save，开发期只能暂用get方法
+            // 调试期只能暂用get方法，测试期需要修改method方法为对应fn
+            var submitMethod = 'get';
+
+            /*
+             * 提交
+             * 创建提交的数据中id为空，
+             * 编辑提交的数据不为空
+             * */
             $scope.submit = function () {
-                Application.get(
+                Application[submitMethod](
                     {appId: $scope.appId},
                     $scope.appSourceData,
                     function (result) {
@@ -188,24 +231,5 @@ oasgames.mdataControllers.controller('ApplicationCreateCtrl', [
                 )
             };
         })();
-    }
-]);
-
-
-/*
- *  application edit控制器
- * */
-oasgames.mdataControllers.controller('ApplicationEditCtrl', [
-    '$scope',
-    'ApplicationEdit',
-    'Filter',
-    function ($scope,ApplicationCreate,Filter) {
-        $scope.viewData = [];
-        $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
-
-        //展示列表数据初始化
-        $scope.viewData = ApplicationCreate.query().$promise.then(function (data) {
-            $scope.viewData = data.data;
-        });
     }
 ]);

@@ -99,33 +99,43 @@ oasgames.mdataControllers.controller('AccountCreateCtrl', [
     'Application',
     function ($scope, $route, $cacheFactory, Account, Application) {
 
-        $scope.accountSourceData = {};
-        $scope.appsData = [];
-        $scope.accountId = $route.current.params.accountId;
         // 写死方便调试或许json-data
         $scope.accountId = 'account_info';
 
+        // 所有的app列表
+        $scope.appsData = [];
+
+        // 当前account的数据
+        $scope.accountSourceData = {};
+
+        // 当前编辑的accountId
+        $scope.accountId = $route.current.params.accountId;
+        // 写死方便调试获取json-data
+        $scope.accountId = 'account_info';
+
         // getApp列表数据
-        var accountCache = $cacheFactory.get('app');
-        if(accountCache && accountCache.get('list')) {
-            $scope.appsData = accountCache.get('list');
-        }else {
-            accountCache = $cacheFactory('app');
-            // 异步获取
-            Application.query().$promise.then(
-                function (result) {
-                    if(result && result.code == 200) {
-                        $scope.appsData = result.data;
-                        accountCache.put('list', result.data);
-                    }else {
-                        Ui.alert(result.msg);
+        (function () {
+            var AppCache = $cacheFactory.get('app');
+            if(AppCache && AppCache.get('list')) {
+                $scope.appsData = AppCache.get('list');
+            }else {
+                AppCache = $cacheFactory('app');
+                // 异步获取
+                Application.query().$promise.then(
+                    function (result) {
+                        if(result && result.code == 200) {
+                            $scope.appsData = result.data;
+                            AppCache.put('list', result.data);
+                        }else {
+                            Ui.alert(result.msg);
+                        }
+                    },
+                    function () {
+                        Ui.alert('网络错误');
                     }
-                },
-                function () {
-                    Ui.alert('网络错误');
-                }
-            );
-        }
+                );
+            }
+        })();
 
         // 提交
         $scope.submit = function () {
@@ -168,36 +178,23 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
 
         // 当前编辑的accountId
         $scope.accountId = $route.current.params.accountId;
-        // 写死方便调试获取json-data
-        $scope.accountId = 'account_info';
+
+        /*
+        * 如果有id，则说明是编辑状态
+        * accountId先写死方便调试获取json-data
+        * */
+        if($scope.accountId) {
+            $scope.accountId = 'account_info';
+            initAccountData();
+        }
 
         // getAccount数据
-        Account.get(
-            {accountId: $scope.accountId},
-            function (result) {
-                if(result && result.code == 200) {
-                    $scope.accountSourceData = result.data;
-                }else {
-                    Ui.alert(result.msg);
-                }
-            },
-            function () {
-                Ui.alert('网络错误');
-            }
-        );
-
-        // getApp列表数据
-        var AppCache = $cacheFactory.get('app');
-        if(AppCache && AppCache.get('list')) {
-            $scope.appsData = AppCache.get('list');
-        }else {
-            AppCache = $cacheFactory('app');
-            // 异步获取
-            Application.query().$promise.then(
+        function initAccountData () {
+            Account.get(
+                {accountId: $scope.accountId},
                 function (result) {
                     if(result && result.code == 200) {
-                        $scope.appsData = result.data;
-                        AppCache.put('list', result.data);
+                        $scope.accountSourceData = result.data;
                     }else {
                         Ui.alert(result.msg);
                     }
@@ -208,12 +205,43 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
             );
         }
 
+        // getApp列表数据
+        (function () {
+            var AppCache = $cacheFactory.get('app');
+            if(AppCache && AppCache.get('list')) {
+                $scope.appsData = AppCache.get('list');
+            }else {
+                AppCache = $cacheFactory('app');
+                // 异步获取
+                Application.query().$promise.then(
+                    function (result) {
+                        if(result && result.code == 200) {
+                            $scope.appsData = result.data;
+                            AppCache.put('list', result.data);
+                        }else {
+                            Ui.alert(result.msg);
+                        }
+                    },
+                    function () {
+                        Ui.alert('网络错误');
+                    }
+                );
+            }
+        })();
+
         // 事件处理、表单效验
         (function () {
 
-            // 提交 》》 需要修改get为save，开发期只能暂用get方法
+            // 调试期只能暂用get方法，测试期需要修改method方法为对应fn
+            var submitMethod = 'get';
+
+            /*
+            * 提交
+            * 创建提交的数据中id为空，
+            * 编辑提交的数据不为空
+            * */
             $scope.submit = function () {
-                Account.get(
+                Account[submitMethod](
                     {accountId: $scope.accountId},
                     $scope.accountSourceData,
                     function (result) {

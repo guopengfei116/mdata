@@ -29,7 +29,7 @@ oasgames.mdataServicesConfig.config([
             })
             .when('/application/manage/create', {
                 templateUrl: '/mdata/tpl/partials/application_edit.html',
-                controller: 'ApplicationCreateCtrl'
+                controller: 'ApplicationEditCtrl'
             })
             .when('/application/manage/edit/:applicationId', {
                 templateUrl: '/mdata/tpl/partials/application_edit.html',
@@ -46,7 +46,7 @@ oasgames.mdataServicesConfig.config([
             })
             .when('/account/manage/create', {
                 templateUrl: '/mdata/tpl/partials/account_edit.html',
-                controller: 'AccountCreateCtrl'
+                controller: 'AccountEditCtrl'
             })
             .when('/account/manage/edit/:accountId', {
                 templateUrl: '/mdata/tpl/partials/account_edit.html',

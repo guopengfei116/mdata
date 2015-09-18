@@ -48,7 +48,8 @@ oasgames.mdataServices.factory('Application', [
     'ApiCtrl',
     function ($resource, ApiCtrl) {
         return $resource(ApiCtrl.get('application'), {}, {
-            query: {method: 'GET', params: {appId: 'applications'}}
+            query: {method: 'GET', params: {appId: 'applications'}},
+            get: {method: 'GET', params: {appId: 'applications'}}
         });
     }
 ]);
@@ -90,7 +91,8 @@ oasgames.mdataServices.factory('Account', [
     'ApiCtrl',
     function ($resource, ApiCtrl) {
         return $resource(ApiCtrl.get('account'), {}, {
-            query: {method: 'GET', params: {accountId: 'accounts'}}
+            query: {method: 'GET', params: {accountId: 'accounts'}},
+            get: {method: 'GET', params: {accountId: 'accounts'}}
         });
     }
 ]);
