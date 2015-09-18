@@ -4,9 +4,10 @@
 oasgames.mdataControllers.controller('reportManageCtrl', [
     '$rootScope',
     '$scope',
+    '$cacheFactory',
     'Report',
     'Filter',
-    function ($rootScope, $scope, Report, Filter) {
+    function ($rootScope, $scope, $cacheFactory, Report, Filter) {
 
         // 权限
         $scope.authority = $rootScope.user['authority'];
