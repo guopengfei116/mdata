@@ -103,8 +103,9 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
     'Application',
     'Account',
     'Filter',
-    function ($scope, $cacheFactory, $route, Application, Account, Filter) {
-
+    'MdataVerify',
+    function ($scope, $cacheFactory, $route, Application, Account, Filter, MdataVerify) {
+ 
         $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
 
         // 所有的account列表
@@ -168,31 +169,19 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
 
         // 事件处理、表单效验
         (function () {
-            $scope.blur = function(type,$errors){
-                var errorInfo = {
-                    name: {
-                        pattern: 'Only accepts English letters and numbers'
-                    }
-                };
-                console.log("sss");
-                console.log($errors);
-                for(var $error in $errors) {
-                    console.log($errors);
-                    if($errors[$error]) {
-                        console.log($errors[$error]);
-                        $scope[type + 'Error'] = true;
-                        $scope.tooltip.errorType = type;
-                        $scope.tooltip.setContent(errorInfo[type][$error]);
-                        $scope.tooltip.setPosition('.fieldset-' + type, $scope.tooltip.toolTipLooks);
-                        $scope.tooltip.toolTipLooks.css({'color': 'rgba(255, 0, 0, 0.7)'});
-                        $scope.tooltip.show();
-                        return;
-                    }
-                }
+            //表单失去焦点时错误提示
+            $scope.blur = function(type, $errors){
 
-                $scope[type + 'Error'] = false;
+                MdataVerify.blur(type, $errors, $scope);
             };
 
+            //表单焦点时清除错误提示
+            $scope.focus = function (type) {
+                $scope[type + 'Error'] = false;
+                if($scope.tooltip.errorType == type) {
+                    $scope.tooltip.hide();
+                }
+            };
             //表单焦点时清除错误提示
             $scope.focus = function (type) {
                 $scope[type + 'Error'] = false;
