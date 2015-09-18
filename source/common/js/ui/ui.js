@@ -46,25 +46,31 @@ Ui.prototype = {
             bind: function () {
                 $(document).on('touchend click', '.alert_panel_btn', function() {
                     Alert.hide();
+                    $(document).trigger('AlertEvent')
                 });
             },
             setInfo: function (info) {
                 Alert.looks.find('.alert_panel_info').html(info);
             },
-            show: function () {
+            show: function (callback) {
                 Alert.looks.show();
+                if(callback) {
+                    $(document).bind('AlertEvent', callback);
+                }else {
+                    $(document).unbind('AlertEvent');
+                }
             },
             hide: function () {
                 Alert.looks.hide();
             }
         };
-        return function (info) {
+        return function (info, callback) {
             if(Alert.initialized) {
                 Alert.setInfo(info);
-                Alert.show();
+                Alert.show(callback);
             }else {
                 Alert.init();
-                this.alert(info);
+                this.alert(info, callback);
             }
         }
     })(),

@@ -93,9 +93,59 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
  * */
 oasgames.mdataControllers.controller('AccountCreateCtrl', [
     '$scope',
+    '$route',
+    '$cacheFactory',
     'Account',
-    function ($scope, Account) {
+    'Application',
+    function ($scope, $route, $cacheFactory, Account, Application) {
 
+        $scope.accountSourceData = {};
+        $scope.appsData = [];
+        $scope.accountId = $route.current.params.accountId;
+        // 写死方便调试或许json-data
+        $scope.accountId = 'account_info';
+
+        // getApp列表数据
+        var accountCache = $cacheFactory.get('app');
+        if(accountCache && accountCache.get('list')) {
+            $scope.appsData = accountCache.get('list');
+        }else {
+            accountCache = $cacheFactory('app');
+            // 异步获取
+            Application.query().$promise.then(
+                function (result) {
+                    if(result && result.code == 200) {
+                        $scope.appsData = result.data;
+                        accountCache.put('list', result.data);
+                    }else {
+                        Ui.alert(result.msg);
+                    }
+                },
+                function () {
+                    Ui.alert('网络错误');
+                }
+            );
+        }
+
+        // 提交
+        $scope.submit = function () {
+            Account.get(
+                {accountId: $scope.accountId},
+                $scope.accountSourceData,
+                function (result) {
+                    if(result && result.code == 200) {
+                        Ui.alert('success', function () {
+                            history.back();
+                        });
+                    }else {
+                        Ui.alert(result.msg);
+                    }
+                },
+                function () {
+                    Ui.alert('网络错误');
+                }
+            )
+        };
     }
 ]);
 
@@ -105,16 +155,20 @@ oasgames.mdataControllers.controller('AccountCreateCtrl', [
 oasgames.mdataControllers.controller('AccountEditCtrl', [
     '$scope',
     '$cacheFactory',
+    '$route',
     'Account',
     'Application',
-    function ($scope, $cacheFactory, Account, Application) {
+    function ($scope, $cacheFactory, $route, Account, Application) {
 
-        $scope.accountSourceData = [];
+        $scope.accountSourceData = {};
         $scope.appsData = [];
+        $scope.accountId = $route.current.params.accountId;
+        // 写死方便调试或许json-data
+        $scope.accountId = 'account_info';
 
         // get该账号数据
         Account.get(
-            {accountId: 'account_edit'},
+            {accountId: $scope.accountId},
             function (result) {
                 if(result && result.code == 200) {
                     $scope.accountSourceData = result.data;
@@ -148,5 +202,25 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 }
             );
         }
+
+        // 提交
+        $scope.submit = function () {
+            Account.get(
+                {accountId: $scope.accountId},
+                $scope.accountSourceData,
+                function (result) {
+                    if(result && result.code == 200) {
+                        Ui.alert('success', function () {
+                            history.back();
+                        });
+                    }else {
+                        Ui.alert(result.msg);
+                    }
+                },
+                function () {
+                    Ui.alert('网络错误');
+                }
+            )
+        };
     }
 ]);

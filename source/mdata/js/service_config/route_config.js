@@ -45,7 +45,7 @@ oasgames.mdataServicesConfig.config([
                 controller: 'AccountManageCtrl'
             })
             .when('/account/manage/create', {
-                templateUrl: '/mdata/tpl/partials/account_create.html',
+                templateUrl: '/mdata/tpl/partials/account_edit.html',
                 controller: 'AccountCreateCtrl'
             })
             .when('/account/manage/edit/:accountId', {
