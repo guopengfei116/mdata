@@ -1,16 +1,21 @@
-<form class="account-page">
+<form class="account-page" name="accountForm">
     <fieldset class="field-common">
         <legend class="field-title-com">Email</legend>
+<<<<<<< HEAD
         <input class="fieldset-text-com" type="text" ng-class="accountSourceData.username" ng-readonly="accountSourceData.username" ng-model="accountSourceData.username">
+=======
+        <input class="fieldset-text-com account-email fieldset-email" type="text" name="email" ng-model="accountSourceData.username" required ng-pattern="/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/" ng-blur="blur('email', accountForm.email.$error)"
+               ng-focus="focus('email')">
+>>>>>>> origin/develop
     </fieldset>
     <fieldset class="field-common">
         <legend class="field-title-com">Name</legend>
-        <input class="fieldset-text-com" type="text" ng-model="accountSourceData.nickname">
+        <input class="fieldset-text-com fieldset-accountName" type="text" name="accountName" ng-model="accountSourceData.nickname"  required ng-pattern="/^[\u4e00-\u9fa5a-zA-Z0-9]+$/" ng-blur="blur('accountName', accountForm.accountName.$error)"   ng-focus="focus('accountName')" >
         <span class="red-star">*</span>
     </fieldset>
     <fieldset class="field-common">
         <legend class="field-title-com">Password</legend>
-        <input class="fieldset-text-com" type="password" ng-model="accountSourceData.password">
+        <input class="fieldset-text-com fieldset-acountPassword" type="password" ng-model="accountSourceData.password" name="acountPassword" required ng-pattern="/^[a-zA-Z0-9]{6,20}$/" required ng-pattern="/^[\u4e00-\u9fa5a-zA-Z0-9]+$/" ng-blur="blur('acountPassword', accountForm.acountPassword.$error)"  ng-focus="focus('acountPassword')" onpaste="return false;" >
         <span class="red-star">*</span>
     </fieldset>
     <legend class="field-title-com account-authority">Authority</legend>

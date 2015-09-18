@@ -1,7 +1,7 @@
 <form class="app-page" name="appCreate">
     <fieldset class="field-common">
         <legend class="field-title-com">Name</legend>
-        <input class="fieldset-text-com fieldset-name" ng-model="appSourceData.name" type="text" name="appName" ng-pattern="/^\w+$/"  ng-blur="blur('name',appCreate.appName.$error)"  ng-focus="focus('name')" >
+        <input class="fieldset-text-com fieldset-appName" ng-model="appSourceData.name" type="text" name="appName" required ng-pattern="/^\w+$/"  ng-blur="blur('appName',appCreate.appName.$error)"  ng-focus="focus('appName')" >
         <span class="red-star">*</span>
     </fieldset>
     <fieldset class="field-common" ng-if="appSourceData.id">
