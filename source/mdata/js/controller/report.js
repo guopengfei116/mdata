@@ -19,7 +19,19 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
         // 用于存储每个report默认展示状态
         $scope.reportsShow = [];
 
-        // 更新report默认展示状态
+        // 展示列表数据初始化
+        $scope.sourceData = Report.query().$promise.then(function (data) {
+            $scope.sourceData = data.data;
+            $scope.viewData = $scope.sourceData;
+
+            // 初始化展示状态
+            upReportsListShow();
+        });
+
+        /*
+        * 更新report列表的展示状态，
+        * 一个app时展开，多个app时合并列表
+        * */
         function upReportsListShow (reportsList) {
             var reportsList = reportsList || $scope.viewData;
             if(reportsList && reportsList.length > 1) {
@@ -33,14 +45,10 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
             }
         }
 
-        // 展示列表数据初始化
-        $scope.sourceData = Report.query().$promise.then(function (data) {
-            $scope.sourceData = data.data;
-            $scope.viewData = $scope.sourceData;
-            upReportsListShow();
-        });
-
-        // 搜索自定义处理函数
+        /*
+        * @暴漏的搜索处理函数
+        * @param {String} searchVal
+        * */
         $scope.searchHandler = function (searchVal) {
 
             // 依据appName匹配到的apps
@@ -97,25 +105,28 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
             $scope.viewData = matchedApps;
         };
 
-        // 删除account
-        $scope.delete = function (reportId) {
-            Ui.confirm('确定要删除这个report吗', function () {
-                Report.save(
-                    {reportId : reportId},
-                    {reportId : reportId},
-                    function (result) {
-                        if(result && result.code == 200) {
-                            Ui.alert('删除成功');
-                        }else {
-                            Ui.alert('删除失败');
+        // 事件处理
+        (function () {
+            // 删除account
+            $scope.delete = function (reportId) {
+                Ui.confirm('确定要删除这个report吗', function () {
+                    Report.save(
+                        {reportId : reportId},
+                        {reportId : reportId},
+                        function (result) {
+                            if(result && result.code == 200) {
+                                Ui.alert('删除成功');
+                            }else {
+                                Ui.alert('删除失败');
+                            }
+                        },
+                        function () {
+                            Ui.alert('网络错误');
                         }
-                    },
-                    function () {
-                        Ui.alert('网络错误');
-                    }
-                );
-            });
-        };
+                    );
+                });
+            };
+        })();
     }
 ]);
 

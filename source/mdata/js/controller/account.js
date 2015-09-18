@@ -15,7 +15,7 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
         $scope.sourceData = [];
         $scope.viewData = [];
 
-        // get账号列表数据
+        // getAccount列表数据
         var accountCache = $cacheFactory.get('account');
         if(accountCache && accountCache.get('list')) {
             $scope.sourceData = accountCache.get('list');

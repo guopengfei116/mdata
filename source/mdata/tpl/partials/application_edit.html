@@ -4,7 +4,7 @@
         <input class="fieldset-text-com fieldset-name" ng-model="appSourceData.name" type="text" name="appName" ng-pattern="/^\w+$/"  ng-blur="blur('name',appCreate.appName.$error)"  ng-focus="focus('name')" >
         <span class="red-star">*</span>
     </fieldset>
-    <fieldset class="field-common">
+    <fieldset class="field-common" ng-if="appSourceData.id">
         <p>
             <span class="field-title-com">ID</span>
             <span class="flag">{{ appSourceData.id }}</span>
