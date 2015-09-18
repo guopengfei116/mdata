@@ -17,12 +17,6 @@ oasgames.mdataControllers.controller('ApplicationManageCtrl', [
         $scope.sourceData = [];
         $scope.viewData = [];
 
-        //展示列表数据初始化
-        $scope.sourceData = Application.query().$promise.then(function (data) {
-            $scope.sourceData = data.data;
-            $scope.viewData = $scope.sourceData;
-        });
-
         // get账号列表数据
         var appCache = $cacheFactory.get('app');
         if(appCache && appCache.get('list')) {
