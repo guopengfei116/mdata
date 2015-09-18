@@ -1,0 +1,56 @@
+{
+  "code" : 200,
+  "data" : 
+    {
+      "name" : 1,
+      "id" : 133,
+      "time zone" : 1,
+      "reportAdmin" : [
+        {
+          "nickname" : "xx",
+          "username" : "xxxxx@a.com",
+          "uid" : 321
+        },
+        {
+          "nickname" : "vv",
+          "username" : "vvvvvv@a.com",
+          "uid" : 567
+        },
+        {
+          "nickname" : "mm",
+          "username" : "mmmm@d.com",
+          "uid" : 908
+        }
+      ],
+      "reportViewer" : [
+        {
+          "nickname" : "daaa",
+          "username" : "daaa@c.com",
+          "uid" : 908
+        },
+        {
+          "nickname" : "bbb",
+          "username" : "bbbb@c.com",
+          "uid" : 908
+        },
+        {
+          "nickname" : "ppp",
+          "username" : "ppppp@a.com",
+          "uid" : 321
+        }
+      ],
+      "processor" : [
+        {
+          "processor": "process1",
+          "events" : "event"
+        },
+        {
+          "processor": "process1",
+          "events" : "event"
+        }
+      ]
+    }
+}
+
+
+

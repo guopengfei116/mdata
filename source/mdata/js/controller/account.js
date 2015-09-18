@@ -160,13 +160,18 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
     'Application',
     function ($scope, $cacheFactory, $route, Account, Application) {
 
-        $scope.accountSourceData = {};
+        // 所有的app列表
         $scope.appsData = [];
+
+        // 当前account的数据
+        $scope.accountSourceData = {};
+
+        // 当前编辑的accountId
         $scope.accountId = $route.current.params.accountId;
-        // 写死方便调试或许json-data
+        // 写死方便调试获取json-data
         $scope.accountId = 'account_info';
 
-        // get该账号数据
+        // getAccount数据
         Account.get(
             {accountId: $scope.accountId},
             function (result) {
@@ -182,17 +187,17 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
         );
 
         // getApp列表数据
-        var accountCache = $cacheFactory.get('app');
-        if(accountCache && accountCache.get('list')) {
-            $scope.appsData = accountCache.get('list');
+        var AppCache = $cacheFactory.get('app');
+        if(AppCache && AppCache.get('list')) {
+            $scope.appsData = AppCache.get('list');
         }else {
-            accountCache = $cacheFactory('app');
+            AppCache = $cacheFactory('app');
             // 异步获取
             Application.query().$promise.then(
                 function (result) {
                     if(result && result.code == 200) {
                         $scope.appsData = result.data;
-                        accountCache.put('list', result.data);
+                        AppCache.put('list', result.data);
                     }else {
                         Ui.alert(result.msg);
                     }
@@ -203,24 +208,28 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
             );
         }
 
-        // 提交
-        $scope.submit = function () {
-            Account.get(
-                {accountId: $scope.accountId},
-                $scope.accountSourceData,
-                function (result) {
-                    if(result && result.code == 200) {
-                        Ui.alert('success', function () {
-                            history.back();
-                        });
-                    }else {
-                        Ui.alert(result.msg);
+        // 事件处理、表单效验
+        (function () {
+
+            // 提交 》》 需要修改get为save，开发期只能暂用get方法
+            $scope.submit = function () {
+                Account.get(
+                    {accountId: $scope.accountId},
+                    $scope.accountSourceData,
+                    function (result) {
+                        if(result && result.code == 200) {
+                            Ui.alert('success', function () {
+                                history.back();
+                            });
+                        }else {
+                            Ui.alert(result.msg);
+                        }
+                    },
+                    function () {
+                        Ui.alert('网络错误');
                     }
-                },
-                function () {
-                    Ui.alert('网络错误');
-                }
-            )
-        };
+                )
+            };
+        })();
     }
 ]);

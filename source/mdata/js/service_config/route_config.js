@@ -28,7 +28,7 @@ oasgames.mdataServicesConfig.config([
                 controller: 'ApplicationManageCtrl'
             })
             .when('/application/manage/create', {
-                templateUrl: '/mdata/tpl/partials/application_create.html',
+                templateUrl: '/mdata/tpl/partials/application_edit.html',
                 controller: 'ApplicationCreateCtrl'
             })
             .when('/application/manage/edit/:applicationId', {

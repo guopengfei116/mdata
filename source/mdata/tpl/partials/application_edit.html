@@ -1,96 +1,114 @@
-<form class="app-page">
+<form class="app-page" name="appCreate">
     <fieldset class="field-common">
         <legend class="field-title-com">Name</legend>
-        <input class="fieldset-text-com" type="text">
+        <input class="fieldset-text-com fieldset-name" ng-model="appSourceData.name" type="text" name="appName" ng-pattern="/^\w+$/"  ng-blur="blur('name',appCreate.appName.$error)"  ng-focus="focus('name')" >
         <span class="red-star">*</span>
     </fieldset>
     <fieldset class="field-common">
         <p>
             <span class="field-title-com">ID</span>
-            <span class="flag">132</span>
+            <span class="flag">{{ appSourceData.id }}</span>
         </p>
     </fieldset>
     <fieldset class="field-common">
         <legend class="field-title-com">Time Zone</legend>
-        <div class="select dropdown-host app-zone">
-            <div class="select_main">
-                <p class="select_main_p">哈哈哈</p>
-                <i class="select_main_icon"></i>
+        <div class="select select-host app-zone">
+                <div class="select_main">
+                    <p class="select_main_text select_target">aaa</p>
+                    <button class="select_main_btn select_target">
+                        <i class="select_main_btn_icon"></i>
+                    </button>
+                </div>
+                <ul class="select_content">
+                    <li class="select_content_arrow"></li>
+                    <li class="select_content_arrow select_content_arrow-mask"></li>
+                    <li class="select_content_list" >
+                        <a class="select_content_list_value" data-value="q">qqq</a>
+                    </li>
+                    <li class="select_content_list" >
+                        <a class="select_content_list_value" data-value="s">sss</a>
+                    </li>
+                </ul>
             </div>
-            <ul class="dropdown dropdown-bl">
-                <li class="dropdown_arrow"></li>
-                <li class="dropdown_arrow dropdown_arrow-mask"></li>
-                <li class="dropdown_list">
-                    <a class="dropdown_list_content" data-value="1">123</a>
-                </li>
-                <li class="dropdown_list">
-                    <a class="dropdown_list_content" data-value="2">456</a>
-                </li>
-            </ul>
-        </div>
         <span class="red-star">*</span>
     </fieldset>
-    <fieldset class="field-common">
+    <cascadechoice>
         <legend class="field-title-com">Report Admin</legend>
         <div>
-            <div class="select dropdown-host select-btn">
+            <div class="select select-host select-btn">
                 <div class="select_main">
-                    <p class="select_main_p">哈哈哈</p>
-                    <i class="select_main_icon"></i>
+                    <input class="select_main_textarea select_target" type="text" value="mail" placeholder="Viewer" ng-model="filterViewer">
+                    <button class="select_main_btn select_target">
+                        <i class="select_main_btn_icon"></i>
+                    </button>
                 </div>
-                <ul class="dropdown dropdown-bl">
-                    <li class="dropdown_arrow"></li>
-                    <li class="dropdown_arrow dropdown_arrow-mask"></li>
-                    <li class="dropdown_list">
-                        <a class="dropdown_list_content" data-value="1">123</a>
-                    </li>
-                    <li class="dropdown_list">
-                        <a class="dropdown_list_content" data-value="2">456</a>
+                <ul class="select_content">
+                    <li class="select_content_arrow"></li>
+                    <li class="select_content_arrow select_content_arrow-mask"></li>
+                    <li class="select_content_list" ng-repeat="account in accountsData | orderBy:app | filter:filterViewer as results">
+                        <a class="select_content_list_value" data-value="{{ account.username }}">{{ account.nickname }}</a>
                     </li>
                 </ul>
             </div>
-            <button class="button">add</button>
+            <a class="button">add</a>
             <a class="button button-check"><i class="iconfont icon-check"></i></a>
             <a class="button button-close"><i class="iconfont icon-close"></i></a>
         </div>
         <div class="textarea">
-            <span class="flag flag-icon"> Admin1
-                <i class="flag-icon_delete iconfont icon-close">
-                    
-                </i>
-            </span>
-            <span class="flag flag-icon"> Admin2
-                <i class="flag-icon_delete iconfont icon-close">
-                    
-                </i>
-            </span>
-            <span class="flag flag-icon"> Admin3
-                <i class="flag-icon_delete iconfont icon-close">
-                    
-                </i>
+            <span class="flag flag-icon" ng-repeat="account in appSourceData['reportAdmin']">
+                <i data-value="{{ account.uid }}">{{ account.username }}</i>
+                <i class="flag-icon_delete iconfont icon-close"></i>
             </span>
         </div>
-    </fieldset>
-    <fieldset class="field-common">
+    </cascadechoice>
+    <cascadechoice>
         <legend class="field-title-com">Report Viewer</legend>
         <div>
-            <div class="select dropdown-host select-btn">
+            <div class="select select-host select-btn">
                 <div class="select_main">
-                    <p class="select_main_p">哈哈哈</p>
-                    <i class="select_main_icon"></i>
+                    <input class="select_main_textarea select_target" type="text" value="mail" placeholder="Viewer" ng-model="filterViewer">
+                    <button class="select_main_btn select_target">
+                        <i class="select_main_btn_icon"></i>
+                    </button>
                 </div>
-                <ul class="dropdown dropdown-bl">
-                    <li class="dropdown_arrow"></li>
-                    <li class="dropdown_arrow dropdown_arrow-mask"></li>
-                    <li class="dropdown_list">
-                        <a class="dropdown_list_content" data-value="1">123</a>
-                    </li>
-                    <li class="dropdown_list">
-                        <a class="dropdown_list_content" data-value="2">456</a>
+                <ul class="select_content">
+                    <li class="select_content_arrow"></li>
+                    <li class="select_content_arrow select_content_arrow-mask"></li>
+                    <li class="select_content_list" ng-repeat="account in accountsData | orderBy:app | filter:filterViewer as results">
+                        <a class="select_content_list_value" data-value="{{ account.username }}">{{ account.nickname }}</a>
                     </li>
                 </ul>
             </div>
-            <button class="button">add</button>
+            <a class="button">add</a>
+            <a class="button button-check"><i class="iconfont icon-check"></i></a>
+            <a class="button button-close"><i class="iconfont icon-close"></i></a>
+        </div>
+        <div class="textarea">
+            <span class="flag flag-icon" ng-repeat="account in appSourceData['reportViewer']">
+                <i data-value="{{ account.uid }}">{{ account.username }}</i>
+                <i class="flag-icon_delete iconfont icon-close"></i>
+            </span>
+        </div>
+    </cascadechoice>
+    <!--fieldset class="field-common">
+
+        <div>
+            <div class="select select-host select-btn">
+                <div class="select_main">
+                    <input class="select_main_textarea select_target" type="text" value="mail" placeholder="Viewer" ng-model="filterViewer">
+                    <button class="select_main_btn select_target">
+                        <i class="select_main_btn_icon"></i>
+                    </button>
+                </div>
+                <ul class="select_content">
+                    <li class="select_content_arrow"></li>
+                    <li class="select_content_arrow select_content_arrow-mask"></li>
+                    <li class="select_content_list" ng-repeat="app in viewData.reportViewer | orderBy:app | filter:filterViewer as results">
+                        <a class="select_content_list_value" data-value="{{app}}">{{app}}</a>
+                    </li>
+                </ul>
+            </div>
+            <a class="button">add</a>
             <a class="button button-check"><i class="iconfont icon-check"></i></a>
             <a class="button button-close"><i class="iconfont icon-close"></i></a>
         </div>
@@ -111,47 +129,32 @@
                 </i>
             </span>
         </div>
-    </fieldset>
+    </fieldset-->
+
     <fieldset class="field-common">
         <legend class="field-title-com">Processor(s)</legend>
         <div>
-            <div class="select dropdown-host processor-select">
+            <div class="select select-host processor-select">
                 <div class="select_main">
-                    <p class="select_main_p">哈哈哈</p>
-                    <i class="select_main_icon"></i>
+                    <p class="select_main_text select_target">Processor</p>
+                    <button class="select_main_btn select_target">
+                        <i class="select_main_btn_icon"></i>
+                    </button>
                 </div>
-                <ul class="dropdown dropdown-bl">
-                    <li class="dropdown_arrow"></li>
-                    <li class="dropdown_arrow dropdown_arrow-mask"></li>
-                    <li class="dropdown_list">
-                        <a class="dropdown_list_content" data-value="1">123</a>
-                    </li>
-                    <li class="dropdown_list">
-                        <a class="dropdown_list_content" data-value="2">456</a>
+                <ul class="select_content">
+                    <li class="select_content_arrow"></li>
+                    <li class="select_content_arrow select_content_arrow-mask"></li>
+                    <li class="select_content_list" ng-repeat="app in viewData.processor">
+                        <a class="select_content_list_value" data-value="{{app.processor}}">{{app.processor}}</a>
                     </li>
                 </ul>
             </div>
-            <div class="select dropdown-host processor-select">
-                <div class="select_main">
-                    <p class="select_main_p">哈哈哈</p>
-                    <i class="select_main_icon"></i>
-                </div>
-                <ul class="dropdown dropdown-bl">
-                    <li class="dropdown_arrow"></li>
-                    <li class="dropdown_arrow dropdown_arrow-mask"></li>
-                    <li class="dropdown_list">
-                        <a class="dropdown_list_content" data-value="1">123</a>
-                    </li>
-                    <li class="dropdown_list">
-                        <a class="dropdown_list_content" data-value="2">456</a>
-                    </li>
-                </ul>
-            </div>
+            <input class="fieldset-text-com" type="text" placeholder="event1|event2">
             <button class="button">add</button>
             <a class="button button-check"><i class="iconfont icon-check"></i></a>
             <a class="button button-close"><i class="iconfont icon-close"></i></a>
         </div>
-        <div class="textarea textarea-processor">
+        <div class="textarea textarea-processor fieldset-processor" required  >
             <span class="flag flag-icon"> Admin1
                 <i class="flag-icon_delete iconfont icon-close">
                     

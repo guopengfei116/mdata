@@ -49,6 +49,7 @@ require('./filter/filters.js');
  * */
 oasgames.mdataDirective = angular.module('mdataDirective', []);
 require('./directive/search.js');
+require('./directive/cascade_choice.js');
 
 /*
  * 控制器
