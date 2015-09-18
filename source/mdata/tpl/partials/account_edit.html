@@ -16,7 +16,7 @@
     </fieldset>
     <legend class="field-title-com account-authority">Authority</legend>
     <section class="field-account">
-        <cascadechoice flag-data="accountSourceData">
+        <cascadechoice flag-data="accountSourceData['as_report_admin']" flag-data-key="appid">
             <legend class="field-title-account">As Report Admin</legend>
             <div>
                 <div class="select select-host select-btn">
@@ -39,7 +39,7 @@
                 <a class="button button-close"><i class="iconfont icon-close"></i></a>
             </div>
             <div class="textarea">
-                <span class="flag flag-icon" ng-repeat="app in accountSourceData['as_user_admin']">
+                <span class="flag flag-icon" ng-repeat="app in accountSourceData['as_report_admin']">
                     {{ app.appname }}
                     <i class="flag-icon_delete iconfont icon-close"></i>
                 </span>
@@ -68,7 +68,7 @@
                 <a class="button button-close"><i class="iconfont icon-close"></i></a>
             </div>
             <div class="textarea">
-                <span class="flag flag-icon" ng-repeat="app in accountSourceData['as_user_viewer']">
+                <span class="flag flag-icon" ng-repeat="app in accountSourceData['as_report_viewer']">
                     {{ app.appname }}
                     <i class="flag-icon_delete iconfont icon-close"></i>
                 </span>

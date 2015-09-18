@@ -35,7 +35,7 @@ oasgames.mdataDirective.directive('cascadechoice', [
                         '<a class="button button-close"><i class="iconfont icon-close"></i></a>' +
                     '</div>' +
                     '<div class="textarea">' +
-                        '<span class="flag flag-icon" ng-repeat="app in accountSourceData.as_report_admin">' +
+                        '<span class="flag flag-icon" ng-repeat="flag in flagData">' +
                             '{{ app.appname }}' +
                             '<i class="flag-icon_delete iconfont icon-close"></i>'+
                         '</span>' +
@@ -49,14 +49,28 @@ oasgames.mdataDirective.directive('cascadechoice', [
                 var $select = $(element).find('.select');
                 var $addSelect = $(element).find('.add-select');
                 $addSelect.bind('click', function () {
-                    console.log($scope);
+                    var val = $(this).data('value');
                     console.log($scope.flagData);
+                    console.log($scope);
                 })
             },
             controller: [
                 '$scope',
                 function ($scope) {
 
+                    // 要提交的值
+                    var resultValue = [];
+
+                    // 之前提交的对象
+                    var flagData = $scope.flagData;
+
+                    // 所选值在falgData中的key名
+                    var flagDataKey = $scope.flagDataKey;
+
+                    // 初始化result数据
+                    for(var i = 0; i < flagData.length; i++) {
+                        resultValue.push(flagData[i][flagDataKey]);
+                    }
                 }
             ]
         }
