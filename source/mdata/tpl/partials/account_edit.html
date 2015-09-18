@@ -1,12 +1,8 @@
 <form class="account-page" name="accountForm">
     <fieldset class="field-common">
         <legend class="field-title-com">Email</legend>
-<<<<<<< HEAD
-        <input class="fieldset-text-com" type="text" ng-class="accountSourceData.username" ng-readonly="accountSourceData.username" ng-model="accountSourceData.username">
-=======
-        <input class="fieldset-text-com account-email fieldset-email" type="text" name="email" ng-model="accountSourceData.username" required ng-pattern="/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/" ng-blur="blur('email', accountForm.email.$error)"
-               ng-focus="focus('email')">
->>>>>>> origin/develop
+        <input class="fieldset-text-com  fieldset-email" type="text" name="email" ng-model="accountSourceData.username" required ng-pattern="/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/" ng-blur="blur('email', accountForm.email.$error)"
+               ng-focus="focus('email')" ng-class="{'account-email': accountSourceData.username}" ng-readonly="accountSourceData.username">
     </fieldset>
     <fieldset class="field-common">
         <legend class="field-title-com">Name</legend>
