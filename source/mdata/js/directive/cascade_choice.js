@@ -42,8 +42,16 @@ oasgames.mdataDirective.directive('cascadechoice', [
                     '</div>' +
                 '</fieldset>',
             transclude: true,
+            scope: {
+                flagData : '='
+            },
             link: function ($scope, element, attr) {
-
+                var $select = $(element).find('.select');
+                var $addSelect = $(element).find('.add-select');
+                $addSelect.bind('click', function () {
+                    console.log($scope);
+                    console.log($scope.flagData);
+                })
             },
             controller: [
                 '$scope',

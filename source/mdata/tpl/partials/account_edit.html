@@ -1,7 +1,7 @@
 <form class="account-page">
     <fieldset class="field-common">
         <legend class="field-title-com">Email</legend>
-        <input class="fieldset-text-com account-email" type="text" ng-readonly="accountSourceData.username" ng-model="accountSourceData.username">
+        <input class="fieldset-text-com" type="text" ng-class="accountSourceData.username" ng-readonly="accountSourceData.username" ng-model="accountSourceData.username">
     </fieldset>
     <fieldset class="field-common">
         <legend class="field-title-com">Name</legend>
@@ -15,7 +15,7 @@
     </fieldset>
     <legend class="field-title-com account-authority">Authority</legend>
     <section class="field-account">
-        <cascadechoice>
+        <cascadechoice flag-data="accountSourceData">
             <legend class="field-title-account">As Report Admin</legend>
             <div>
                 <div class="select select-host select-btn">
@@ -33,15 +33,15 @@
                         </li>
                     </ul>
                 </div>
-                <button class="button">add</button>
+                <button class="button add-select">add</button>
                 <a class="button button-check"><i class="iconfont icon-check"></i></a>
                 <a class="button button-close"><i class="iconfont icon-close"></i></a>
             </div>
             <div class="textarea">
-            <span class="flag flag-icon" ng-repeat="app in accountSourceData['as_user_admin']">
-                {{ app.appname }}
-                <i class="flag-icon_delete iconfont icon-close"></i>
-            </span>
+                <span class="flag flag-icon" ng-repeat="app in accountSourceData['as_user_admin']">
+                    {{ app.appname }}
+                    <i class="flag-icon_delete iconfont icon-close"></i>
+                </span>
             </div>
         </cascadechoice>
         <cascadechoice>
@@ -67,10 +67,10 @@
                 <a class="button button-close"><i class="iconfont icon-close"></i></a>
             </div>
             <div class="textarea">
-            <span class="flag flag-icon" ng-repeat="app in accountSourceData['as_user_viewer']">
-                {{ app.appname }}
-                <i class="flag-icon_delete iconfont icon-close"></i>
-            </span>
+                <span class="flag flag-icon" ng-repeat="app in accountSourceData['as_user_viewer']">
+                    {{ app.appname }}
+                    <i class="flag-icon_delete iconfont icon-close"></i>
+                </span>
             </div>
         </cascadechoice>
     </section>
