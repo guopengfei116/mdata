@@ -1,5 +1,5 @@
 <!-- 表单提交验证 -->
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html ng-app="FormValidation" id="ng-app">
 <head>
   <title>17.1表单验证</title>
@@ -14,7 +14,6 @@ formValidation.controller('myform',function($scope){
     age:''
   };
   $scope.message = "";
-
   $scope.addUser = function(){
 	  if($scope['signUp'].$valid){
 	  	//把数据存入数据库   
@@ -41,7 +40,7 @@ formValidation.controller('myform',function($scope){
   <form name="signUp" ng-controller="myform">
     <h1>注册:</h1>
     <h3 ng-show="message">{{message}}</h3>
-    <span>昵称:</span><span><input type="text" ng-model="user.name" required/></span>
+    <span>昵称:</span><span><input type="text" ng-model="user.name" required ng-pattern="/^\w{6,16}$/"/></span>
     <br>
     <span>邮箱:</span><span><input type="email" ng-model="user.email" required/></span>
     <br>
@@ -51,7 +50,7 @@ formValidation.controller('myform',function($scope){
   </form>
 </div>
 </body>
-</html> -->
+</html>
 
 <!-- 显示 隐藏bg-show -->
 <!-- <!DOCTYPE html>
@@ -211,7 +210,7 @@ formValidation.controller('myform',function($scope){
 
 </body>
 </html> -->
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
   <title></title>
@@ -250,5 +249,5 @@ formValidation.controller('myform',function($scope){
       }]);
 </script>
 </body>
-</html>
+</html> -->
 

@@ -10,40 +10,17 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
     '$location',
     'ApiCtrl',
     'AUTHORITY',
-    function ($rootScope, $scope, $http, $location, ApiCtrl, AUTHORITY) {
+    'MdataVerify',
+    function ($rootScope, $scope, $http, $location, ApiCtrl, AUTHORITY, MdataVerify) {
 
         $scope.account = '';
         $scope.password = '';
         $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
+        //表单失去焦点时错误提示
+        $scope.blur = function(type, $errors){
 
-        //表单失去焦点时错误验证
-        $scope.blur = function (type, $errors) {
-            var errorInfo = {
-                account: {
-                    required: 'E-mail must not be empty',
-                    pattern: 'This user does not exist'
-                },
-                password: {
-                    required: 'Password must not be empty',
-                    pattern: 'Incorrect Password '
-                }
-            };
-
-            for(var $error in $errors) {
-                if($errors[$error]) {
-                    $scope[type + 'Error'] = true;
-                    $scope.tooltip.errorType = type;
-                    $scope.tooltip.setContent(errorInfo[type][$error]);
-                    $scope.tooltip.setPosition('.fieldset-' + type, $scope.tooltip.toolTipLooks);
-                    $scope.tooltip.toolTipLooks.css({'color': 'rgba(255, 0, 0, 0.7)'});
-                    $scope.tooltip.show();
-                    return;
-                }
-            }
-
-            $scope[type + 'Error'] = false;
+            MdataVerify.blur(type, $errors, $scope);
         };
-
         //表单焦点时清除错误提示
         $scope.focus = function (type) {
             $scope[type + 'Error'] = false;
@@ -51,7 +28,6 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                 $scope.tooltip.hide();
             }
         };
-
         //清除错误
         $scope.clearErrors = function () {
             var errorCtl = ['accountError', 'passwordError'];
@@ -63,8 +39,7 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
         //登陆
         $scope.submit = function () {
             var api = ApiCtrl.get('login');
-
-            if($scope['ndForm'].$valid && api) {
+            if($scope['ndForm'].$valid && api ) {
                 $http.get(api).success(function (result) {
 
                     if(result.code == 200) {
@@ -77,6 +52,9 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                 }).error(function (status) {
                     Ui.alert('网络错误！');
                 });
+            }else{
+                $scope.blur("password",$scope['ndForm']['ndPassword'].$error);
+                $scope.blur("account",$scope['ndForm']['ndAccount'].$error);                                          
             }
         }
     }

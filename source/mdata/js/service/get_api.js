@@ -56,34 +56,6 @@ oasgames.mdataServices.factory('Application', [
 
 
 /*
- * get app create
- * */
-oasgames.mdataServices.factory('ApplicationCreate', [
-    '$resource',
-    'ApiCtrl',
-    function ($resource, ApiCtrl) {
-        return $resource(ApiCtrl.get('application'), {}, {
-            query: {method: 'GET', params: {appId: 'application_edit'}}
-        });
-    }
-]);
-
-
-/*
- * get app edit
- * */
-oasgames.mdataServices.factory('ApplicationEdit', [
-    '$resource',
-    'ApiCtrl',
-    function ($resource, ApiCtrl) {
-        return $resource(ApiCtrl.get('application'), {}, {
-            query: {method: 'GET', params: {appId: 'application_edit'}}
-        });
-    }
-]);
-
-
-/*
  * get account
  * */
 oasgames.mdataServices.factory('Account', [

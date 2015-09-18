@@ -31,6 +31,7 @@ require('./service/filter.js');
 require('./service/frame.js');
 require('./service/get_api.js');
 require('./service/user_auth.js');
+require('./service/verify_form.js');
 
 /*
  * 加载服务配置
