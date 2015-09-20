@@ -1,4 +1,4 @@
-<form class="app-page" name="appCreate">
+<form class="app-page" name="appCreate" novalidate>
     <fieldset class="field-common">
         <legend class="field-title-com">Name</legend>
         <input class="fieldset-text-com fieldset-appName" ng-model="appSourceData.name" type="text" name="appName" required ng-pattern="/^\w+$/"  ng-blur="blur('appName',appCreate.appName.$error)"  ng-focus="focus('appName')" >

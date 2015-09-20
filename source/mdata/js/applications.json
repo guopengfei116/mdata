@@ -2,7 +2,7 @@
   "code" : 200,
   "data" : [
     {
-      "name" : "you",
+      "appname" : "you",
       "appid" : "12",
       "appadmin" : [
         {
@@ -45,7 +45,7 @@
       ]
     },
     {
-      "name" : "gaga",
+      "appname" : "gaga",
       "appid" : "123",
       "appadmin" : [
         {
@@ -83,7 +83,7 @@
       ]
     },
     {
-      "name" : "feuf",
+      "appname" : "feuf",
       "appid" : "88",
       "appadmin" : [
         {
@@ -121,8 +121,8 @@
       ]
     },
     {
-      "name" : "pp",
-      "appid" : "88",
+      "appname" : "pp",
+      "appid" : "99",
       "appadmin" : [
         {
           "name" : "saxi",

@@ -1,4 +1,4 @@
-<form class="account-page" name="accountForm">
+<form class="account-page" name="accountForm" novalidate>
     <fieldset class="field-common">
         <legend class="field-title-com">Email</legend>
         <input class="fieldset-text-com  fieldset-email" type="text" name="email" ng-model="accountSourceData.username" required ng-pattern="/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/" ng-blur="blur('email', accountForm.email.$error)"
@@ -6,22 +6,22 @@
     </fieldset>
     <fieldset class="field-common">
         <legend class="field-title-com">Name</legend>
-        <input class="fieldset-text-com fieldset-accountName" type="text" name="accountName" ng-model="accountSourceData.nickname"  required ng-pattern="/^[\u4e00-\u9fa5a-zA-Z0-9]+$/" ng-blur="blur('accountName', accountForm.accountName.$error)"   ng-focus="focus('accountName')" >
+        <input class="fieldset-text-com fieldset-accountName" autocomplete="off" type="text" name="accountName" ng-model="accountSourceData.nickname"  required ng-pattern="/^[\u4e00-\u9fa5a-zA-Z0-9]+$/" ng-blur="blur('accountName', accountForm.accountName.$error)"   ng-focus="focus('accountName')" >
         <span class="red-star">*</span>
     </fieldset>
     <fieldset class="field-common">
         <legend class="field-title-com">Password</legend>
-        <input class="fieldset-text-com fieldset-acountPassword" type="password" ng-model="accountSourceData.password" name="acountPassword" required ng-pattern="/^[a-zA-Z0-9]{6,20}$/" required ng-pattern="/^[\u4e00-\u9fa5a-zA-Z0-9]+$/" ng-blur="blur('acountPassword', accountForm.acountPassword.$error)"  ng-focus="focus('acountPassword')" onpaste="return false;" >
+        <input class="fieldset-text-com fieldset-acountPassword" autocomplete="off" type="password" ng-model="accountSourceData.password" name="acountPassword" required ng-pattern="/^[a-zA-Z0-9]{6,20}$/" required ng-pattern="/^[\u4e00-\u9fa5a-zA-Z0-9]+$/" ng-blur="blur('acountPassword', accountForm.acountPassword.$error)"  ng-focus="focus('acountPassword')" onpaste="return false;" >
         <span class="red-star">*</span>
     </fieldset>
     <legend class="field-title-com account-authority">Authority</legend>
     <section class="field-account">
-        <cascadechoice flag-data="accountSourceData['as_report_admin']" flag-data-key="appid">
+        <cascadechoice select-data="appsData" selected-data="selectedAppids" flag-data="accountSourceData['as_report_admin']" flag-data-key="appid">
             <legend class="field-title-account">As Report Admin</legend>
             <div>
                 <div class="select select-host select-btn">
                     <div class="select_main">
-                        <input class="select_main_textarea select_target" type="text" value="mail">
+                        <input class="select_main_textarea select_target" type="text" value="">
                         <button class="select_main_btn select_target">
                             <i class="select_main_btn_icon"></i>
                         </button>
@@ -29,8 +29,8 @@
                     <ul class="select_content">
                         <li class="select_content_arrow"></li>
                         <li class="select_content_arrow select_content_arrow-mask"></li>
-                        <li class="select_content_list" ng-repeat="app in appsData">
-                            <a class="select_content_list_value" data-value="{{ app.appid }}">{{ app.name }}</a>
+                        <li class="select_content_list" ng-repeat="app in appsData | exclude:selectedAppids:'appid'">
+                            <a class="select_content_list_value" data-value="{{ app }}">{{ app.appname }}</a>
                         </li>
                     </ul>
                 </div>
@@ -41,16 +41,16 @@
             <div class="textarea">
                 <span class="flag flag-icon" ng-repeat="app in accountSourceData['as_report_admin']">
                     {{ app.appname }}
-                    <i class="flag-icon_delete iconfont icon-close"></i>
+                    <i class="flag-icon_delete iconfont icon-close" data-value="{{ app.appid }}"></i>
                 </span>
             </div>
         </cascadechoice>
-        <cascadechoice>
+        <cascadechoice select-data="appsData" selected-data="selectedAppids" flag-data="accountSourceData['as_report_viewer']"  flag-data-key="appid">
             <legend class="field-title-account">As Report Viewer</legend>
             <div>
                 <div class="select select-host select-btn">
                     <div class="select_main">
-                        <input class="select_main_textarea select_target" type="text" value="mail">
+                        <input class="select_main_textarea select_target" type="text" value="">
                         <button class="select_main_btn select_target">
                             <i class="select_main_btn_icon"></i>
                         </button>
@@ -58,19 +58,19 @@
                     <ul class="select_content">
                         <li class="select_content_arrow"></li>
                         <li class="select_content_arrow select_content_arrow-mask"></li>
-                        <li class="select_content_list" ng-repeat="app in appsData">
-                            <a class="select_content_list_value" data-value="{{ app.appid }}">{{ app.name }}</a>
+                        <li class="select_content_list" ng-repeat="app in appsData | exclude:selectedAppids:'appid'">
+                            <a class="select_content_list_value" data-value="{{ app }}">{{ app.appname }}</a>
                         </li>
                     </ul>
                 </div>
-                <button class="button">add</button>
+                <button class="button add-select">add</button>
                 <a class="button button-check"><i class="iconfont icon-check"></i></a>
                 <a class="button button-close"><i class="iconfont icon-close"></i></a>
             </div>
             <div class="textarea">
                 <span class="flag flag-icon" ng-repeat="app in accountSourceData['as_report_viewer']">
                     {{ app.appname }}
-                    <i class="flag-icon_delete iconfont icon-close"></i>
+                    <i class="flag-icon_delete iconfont icon-close" data-value="{{ app.appid }}"></i>
                 </span>
             </div>
         </cascadechoice>

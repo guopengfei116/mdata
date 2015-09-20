@@ -251,3 +251,30 @@ formValidation.controller('myform',function($scope){
 </body>
 </html> -->
 
+'<legend class="field-title-account">As Report Admin</legend>' +
+'<div>' +
+    '<div class="select select-host select-btn">' +
+        '<div class="select_main">' +
+            '<input class="select_main_textarea select_target" type="text" value="mail">' +
+            '<button class="select_main_btn select_target">' +
+                '<i class="select_main_btn_icon"></i>' +
+                '</button>' +
+            '</div>' +
+        '<ul class="select_content">' +
+            '<li class="select_content_arrow"></li>' +
+            '<li class="select_content_arrow select_content_arrow-mask"></li>' +
+            '<li class="select_content_list" ng-repeat="app in appsData">' +
+                '<a class="select_content_list_value" data-value="{{ app.appid }}">{{ app.name }}</a>' +
+                '</li>' +
+            '</ul>' +
+        '</div>' +
+    '<button class="button tooltip-host" data-tooltip-position="tc" data-tooltip-info="tc">add</button>' +
+    '<a class="button button-check"><i class="iconfont icon-check"></i></a>' +
+    '<a class="button button-close"><i class="iconfont icon-close"></i></a>' +
+    '</div>' +
+'<div class="textarea">' +
+    '<span class="flag flag-icon" ng-repeat="flag in flagData">' +
+                            '{{ app.appname }}' +
+                            '<i class="flag-icon_delete iconfont icon-close"></i>'+
+                        '</span>' +
+    '</div>' +

@@ -105,6 +105,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
         $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
         // 所有的app列表
         $scope.appsData = [];
+        $scope.selectedAppids = [12];
 
         // 当前account的数据
         $scope.accountSourceData = {};
