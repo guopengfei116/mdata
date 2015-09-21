@@ -58,7 +58,7 @@
                     <ul class="select_content">
                         <li class="select_content_arrow"></li>
                         <li class="select_content_arrow select_content_arrow-mask"></li>
-                        <li class="select_content_list" ng-repeat="app in appsData | exclude:selectedAppids:'appid'">
+                        <li class="select_content_list" ng-repeat=" app in appsData | exclude:selectedAppids:'appid' ">
                             <a class="select_content_list_value" data-value="{{ app }}">{{ app.appname }}</a>
                         </li>
                     </ul>

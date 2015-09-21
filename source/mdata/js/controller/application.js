@@ -110,6 +110,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
 
         // 所有的account列表
         $scope.accountsData = [];
+        $scope.selectedAccountuids = [];
 
         // 当前app的信息
         $scope.appSourceData = [];

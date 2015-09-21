@@ -32,7 +32,7 @@
             </div>
         <span class="red-star">*</span>
     </fieldset>
-    <cascadechoice>
+    <cascadechoice select-data="accountsData" selected-data="selectedAccountuids" flag-data="appSourceData['reportAdmin']"  flag-data-key="uid">
         <legend class="field-title-com">Report Admin</legend>
         <div>
             <div class="select select-host select-btn">
@@ -45,7 +45,7 @@
                 <ul class="select_content">
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
-                    <li class="select_content_list" ng-repeat="account in accountsData | orderBy:app | filter:filterViewer as results">
+                    <li class="select_content_list" ng-repeat="account in accountsData | orderBy:app | exclude:selectedAccountuids:'uid' ">
                         <a class="select_content_list_value" data-value="{{ account.username }}">{{ account.nickname }}</a>
                     </li>
                 </ul>
@@ -57,11 +57,11 @@
         <div class="textarea">
             <span class="flag flag-icon" ng-repeat="account in appSourceData['reportAdmin']">
                 <i data-value="{{ account.uid }}">{{ account.username }}</i>
-                <i class="flag-icon_delete iconfont icon-close"></i>
+                <i class="flag-icon_delete iconfont icon-close" data-value="{{ account.uid }}"></i>
             </span>
         </div>
     </cascadechoice>
-    <cascadechoice>
+    <cascadechoice select-data="accountsData" selected-data="selectedAccountuids" flag-data="appSourceData['reportViewer']"  flag-data-key="uid">
         <legend class="field-title-com">Report Viewer</legend>
         <div>
             <div class="select select-host select-btn">
@@ -74,8 +74,8 @@
                 <ul class="select_content">
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
-                    <li class="select_content_list" ng-repeat="account in accountsData | orderBy:app | filter:filterViewer as results">
-                        <a class="select_content_list_value" data-value="{{ account.username }}">{{ account.nickname }}</a>
+                    <li class="select_content_list" ng-repeat="account in accountsData | orderBy:app | exclude:selectedAccountuids:'uid' ">
+                        <a class="select_content_list_value" data-value="{{ account.uid }}">{{ account.nickname }}</a>
                     </li>
                 </ul>
             </div>
@@ -86,7 +86,7 @@
         <div class="textarea">
             <span class="flag flag-icon" ng-repeat="account in appSourceData['reportViewer']">
                 <i data-value="{{ account.uid }}">{{ account.username }}</i>
-                <i class="flag-icon_delete iconfont icon-close"></i>
+                <i class="flag-icon_delete iconfont icon-close" data-value="{{ account.uid }}"></i>
             </span>
         </div>
     </cascadechoice>
