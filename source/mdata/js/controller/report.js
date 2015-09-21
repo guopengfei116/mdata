@@ -147,12 +147,17 @@ oasgames.mdataControllers.controller('reportCreateCtrl', [
  * */
 oasgames.mdataControllers.controller('reportEditCtrl', [
     '$scope',
+    'REPORT_DATE_RANGE',
     'MdataVerify',
-    function ($scope,MdataVerify) {
-        $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
+    function ($scope, reportDateRanges, MdataVerify) {
+
+        // report日期范围
+        $scope.reportDateRanges = reportDateRanges;
+
 
         // 事件处理、表单效验
         (function () {
+            $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
 
             //表单失去焦点时错误提示
             $scope.blur = function(type, $errors){
@@ -169,7 +174,6 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
             };
 
         })();
-
     }
 ]);
 
@@ -184,7 +188,7 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
     function ($scope, $route, reportDateRanges, Report) {
 
         // report日期范围
-        $scope.reportDateRanges = {};
+        $scope.reportDateRanges = reportDateRanges;
 
         // 当前report的数据
         $scope.reportSourceData = {};

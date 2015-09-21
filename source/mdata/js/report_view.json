@@ -41,7 +41,7 @@
         "20150815": {
           "dims": {
             "ip": "10.1.9.148",
-            "uuid": "uid"
+            "uuid": "456"
           },
           "values": {
             "status age": "1.00",
@@ -49,6 +49,36 @@
             "install uni": null,
             "visituni": null,
             "转化率": false
+          }
+        }
+      },
+      {
+        "20150815": {
+          "dims": {
+            "ip": "10.1.9.157",
+            "uuid": "123"
+          },
+          "values": {
+            "status age": "1.00",
+            "creeate": 1,
+            "install uni": "cv",
+            "visituni": "xc",
+            "转化率": "ou"
+          }
+        }
+      },
+      {
+        "20150815": {
+          "dims": {
+            "ip": "10.1.9.168",
+            "uuid": "789"
+          },
+          "values": {
+            "status age": "1.00",
+            "creeate": "25",
+            "install uni": "dfgc",
+            "visituni": "vcv",
+            "转化率": "qwe"
           }
         }
       }

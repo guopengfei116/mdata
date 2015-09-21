@@ -233,25 +233,21 @@
     <fieldset class="field-common">
         <legend class="field-title-com">Default Date Range</legend>
         <div class="select select-host report-date">
-                <div class="select_main">
-                    <p class="select_main_text select_target">bbb</p>
-                    <button class="select_main_btn select_target">
-                        <i class="select_main_btn_icon"></i>
-                    </button>
-                </div>
-                <ul class="select_content">
-                    <li class="select_content_arrow"></li>
-                    <li class="select_content_arrow select_content_arrow-mask"></li>
-                    <li class="select_content_list">
-                        <a class="select_content_list_value" data-value="1">123</a>
-                    </li>
-                    <li class="select_content_list">
-                        <a class="select_content_list_value" data-value="2">456</a>
-                    </li>
-                </ul>
+            <div class="select_main">
+                <p class="select_main_text select_target">bbb</p>
+                <button class="select_main_btn select_target">
+                    <i class="select_main_btn_icon"></i>
+                </button>
+            </div>
+            <ul class="select_content">
+                <li class="select_content_arrow"></li>
+                <li class="select_content_arrow select_content_arrow-mask"></li>
+                <li class="select_content_list" ng-repeat="dateRange in reportDateRanges ">
+                    <a class="select_content_list_value" data-value="{{ dateRange.value }}">{{ dateRange.meaning }}</a>
+                </li>
+            </ul>
             </div>
     </fieldset>
-
     <fieldset class="field-common">
         <span class="button-group page-btns">
             <button class="button button-create-plus"><i class="iconfont icon-plus"></i></button>
@@ -261,7 +257,7 @@
             <button class="button button-cancel-minus"><i class="iconfont icon-small"></i></button>
             <button class="button button-cancel">Cancel</button>
         </span>
-    </fieldset>o
+    </fieldset>
 </form>
 
 <!-- <div>

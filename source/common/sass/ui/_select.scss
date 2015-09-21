@@ -1,5 +1,6 @@
 .select {
     @include inline-block();
+    vertical-align: middle;
     position: relative;
     background-color: $select-background-color;
     &-disable {
