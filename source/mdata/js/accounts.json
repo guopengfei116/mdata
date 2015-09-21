@@ -99,7 +99,7 @@
     {
       "nickname" : "d",
       "username" : "c@c.com",
-      "uid" : 908,
+      "uid" : 456,
       "as_report_admin" : [
         {
           "appname" : "qqqqq",
@@ -136,7 +136,7 @@
     {
       "nickname" : "b",
       "username" : "b@c.com",
-      "uid" : 908,
+      "uid" : 369,
       "as_report_admin" : [
         {
           "appname" : "qqqqq",

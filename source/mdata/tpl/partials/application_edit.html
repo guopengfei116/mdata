@@ -46,11 +46,11 @@
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
                     <li class="select_content_list" ng-repeat="account in accountsData | orderBy:app | exclude:selectedAccountuids:'uid' ">
-                        <a class="select_content_list_value" data-value="{{ account.username }}">{{ account.nickname }}</a>
+                        <a class="select_content_list_value" data-value="{{ account }}">{{ account.nickname }}</a>
                     </li>
                 </ul>
             </div>
-            <a class="button">add</a>
+            <button class="button add-select">add</button>
             <a class="button button-check"><i class="iconfont icon-check"></i></a>
             <a class="button button-close"><i class="iconfont icon-close"></i></a>
         </div>
@@ -75,11 +75,11 @@
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
                     <li class="select_content_list" ng-repeat="account in accountsData | orderBy:app | exclude:selectedAccountuids:'uid' ">
-                        <a class="select_content_list_value" data-value="{{ account.uid }}">{{ account.nickname }}</a>
+                        <a class="select_content_list_value" data-value="{{ account }}">{{ account.nickname }}</a>
                     </li>
                 </ul>
             </div>
-            <a class="button">add</a>
+            <button class="button add-select">add</button>
             <a class="button button-check"><i class="iconfont icon-check"></i></a>
             <a class="button button-close"><i class="iconfont icon-close"></i></a>
         </div>
