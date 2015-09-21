@@ -75,18 +75,18 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
     '$http',
     'ApiCtrl',
     function ($scope, $rootScope, $http, ApiCtrl) {
-        $scope.toldPassword = new tooltip({'position':'rc'}).getNewTooltip();
-        $scope.tnewPassword = new tooltip({'position':'rc'}).getNewTooltip();
-        $scope.treNewPassword = new tooltip({'position':'rc'}).getNewTooltip();
-
+        // $scope.toldPassword = new tooltip({'position':'rc'}).getNewTooltip();
+        // $scope.tnewPassword = new tooltip({'position':'rc'}).getNewTooltip();
+        // $scope.treNewPassword = new tooltip({'position':'rc'}).getNewTooltip();
+        $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
         //错误提示
         $scope.showError = function(type, pError) {
             $scope[type + 'Error'] = true;
-            $scope['t' + type].errorType = type;
-            $scope['t' + type].setContent(pError);
-            $scope['t' + type].setPosition('.text-' + type, $scope['t' + type].toolTipLooks);
-            $scope['t' + type].toolTipLooks.css({'color': 'rgba(255, 0, 0, 0.7)'});
-            $scope['t' + type].show();
+            $scope.tooltip.errorType = type;
+            $scope.tooltip.setContent(pError);
+            $scope.tooltip.setPosition('.text-' + type, $scope.tooltip.toolTipLooks);
+            $scope.tooltip.toolTipLooks.css({'color': 'rgba(255, 0, 0, 0.7)'});
+            $scope.tooltip.show();
         };
 
         //表单失去焦点时错误验证
@@ -138,8 +138,8 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
         //表单获得焦点时清除错误
         $scope.focus = function (type) {
             $scope[type + 'Error'] = false;
-            if($scope['t'+type].errorType == type) {
-                $scope['t'+type].hide();
+            if($scope.tooltip.errorType == type) {
+                $scope.tooltip.hide();
             }
         };
 
