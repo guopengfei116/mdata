@@ -1,3 +1,4 @@
+var tooltip = require('Tooltip');
 /*
  *  report manage控制器
  * */
@@ -146,7 +147,28 @@ oasgames.mdataControllers.controller('reportCreateCtrl', [
  * */
 oasgames.mdataControllers.controller('reportEditCtrl', [
     '$scope',
-    function ($scope) {
+    'MdataVerify',
+    function ($scope,MdataVerify) {
+        $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
+
+        // 事件处理、表单效验
+        (function () {
+
+            //表单失去焦点时错误提示
+            $scope.blur = function(type, $errors){
+                console.log($errors);
+                MdataVerify.blur(type, $errors, $scope);
+            };
+
+            //表单焦点时清除错误提示
+            $scope.focus = function (type) {
+                $scope[type + 'Error'] = false;
+                if($scope.tooltip.errorType == type) {
+                    $scope.tooltip.hide();
+                }
+            };
+
+        })();
 
     }
 ]);

@@ -183,13 +183,6 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                     $scope.tooltip.hide();
                 }
             };
-            //表单焦点时清除错误提示
-            $scope.focus = function (type) {
-                $scope[type + 'Error'] = false;
-                if($scope.tooltip.errorType == type) {
-                    $scope.tooltip.hide();
-                }
-            };
 
             // 调试期只能暂用get方法，测试期需要修改method方法为对应fn
             var submitMethod = 'get';
@@ -200,6 +193,13 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
              * 编辑提交的数据不为空
              * */
             $scope.submit = function () {
+                if(!MdataVerify.submit('appName',$scope["appCreate"]["appName"].$error,$scope)){
+                    return;
+                }
+                if($.trim($(".fieldset-processor").html()) == ""){
+                     Ui.alert("Processor must not be empty");
+                     return;
+                }
                 Application[submitMethod](
                     {appId: $scope.appId},
                     $scope.appSourceData,
