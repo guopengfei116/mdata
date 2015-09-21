@@ -192,6 +192,9 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
         // 当前编辑的reportId
         $scope.reportId = $route.current.params.reportId;
 
+        // 当前编辑的reportId
+        $scope.reportId = $route.current.params.reportId;
+
         if($scope.reportId) {
             $scope.reportId = 'report_view';
         }

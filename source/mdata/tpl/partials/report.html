@@ -88,10 +88,19 @@
                     <li class="row_column row_column-{{ statistics.length }}" ng-repeat="tableItem in reportSourceData['table_list'][0]">{{ statistic }}</li>
                 </ul>
             </dt>
-            <dd class="row row-color-interlaced" ng-repeat="(key, val) in reportSourceData['table_list']">
-                <ul>
-                    <li class="row_column row_column-{{ reportSourceData.dimension.length + reportSourceData.values.length + 1 }}" >
-                        <a href="#">aa</a>
+            <dd class="row row-color-interlaced" ng-repeat="list in reportSourceData['table_list']" ng-init="index = $index">
+                <ul ng-repeat="(type, data) in list">
+                    <li class="row_column row_column-{{ reportSourceData.dimension.length + reportSourceData.values.length + 1 }}">
+                        <a href="#">{{ type }}</a>
+                    </li>
+                    <li class="row_column row_column-{{ reportSourceData.dimension.length + reportSourceData.values.length + 1 }}" ng-if="index == 0" ng-repeat="tempDimension in reportSourceData.dimension">
+                        <a href="#">--</a>
+                    </li>
+                    <li class="row_column row_column-{{ reportSourceData.dimension.length + reportSourceData.values.length + 1 }}" ng-repeat="(key, val) in data.dims">
+                        <a href="#">{{ val }}</a>
+                    </li>
+                    <li class="row_column row_column-{{ reportSourceData.dimension.length + reportSourceData.values.length + 1 }}" ng-repeat="(key, val) in data.values">
+                        <a href="#">{{ val }}</a>
                     </li>
                 </ul>
             </dd>

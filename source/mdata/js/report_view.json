@@ -19,7 +19,8 @@
       "status|age",
       "createrole|create",
       "unique_count|install",
-      "unique_count|visit"
+      "unique_count|visit",
+      "zhuanhuanlv"
     ],
     "date_begin": 1442480984,
     "date_end": 1442480984,
