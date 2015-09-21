@@ -16,12 +16,12 @@
     </fieldset>
     <legend class="field-title-com account-authority">Authority</legend>
     <section class="field-account">
-        <cascadechoice select-data="appsData" selected-data="selectedAppids" flag-data="accountSourceData['as_report_admin']" flag-data-key="appid">
+        <cascadechoice select-data="appsData" selected-data="selectedAppids" select-search-data="reportAdminSearch" flag-data="accountSourceData['as_report_admin']" flag-data-key="appid">
             <legend class="field-title-account">As Report Admin</legend>
             <div>
                 <div class="select select-host select-btn">
                     <div class="select_main">
-                        <input class="select_main_textarea select_target" type="text" value="">
+                        <input class="select_main_textarea select_target" type="text" value="" placeholder="Application" ng-model="reportAdminSearch">
                         <button class="select_main_btn select_target">
                             <i class="select_main_btn_icon"></i>
                         </button>
@@ -29,7 +29,7 @@
                     <ul class="select_content">
                         <li class="select_content_arrow"></li>
                         <li class="select_content_arrow select_content_arrow-mask"></li>
-                        <li class="select_content_list" ng-repeat="app in appsData | exclude:selectedAppids:'appid'">
+                        <li class="select_content_list" ng-repeat="app in appsData | exclude:selectedAppids:'appid' | filter:{appname: reportAdminSearch} | orderBy:'appname' ">
                             <a class="select_content_list_value" data-value="{{ app }}">{{ app.appname }}</a>
                         </li>
                     </ul>
@@ -45,12 +45,12 @@
                 </span>
             </div>
         </cascadechoice>
-        <cascadechoice select-data="appsData" selected-data="selectedAppids" flag-data="accountSourceData['as_report_viewer']"  flag-data-key="appid">
+        <cascadechoice select-data="appsData" selected-data="selectedAppids" select-search-data="reportViewerSearch" flag-data="accountSourceData['as_report_viewer']"  flag-data-key="appid">
             <legend class="field-title-account">As Report Viewer</legend>
             <div>
                 <div class="select select-host select-btn">
                     <div class="select_main">
-                        <input class="select_main_textarea select_target" type="text" value="">
+                        <input class="select_main_textarea select_target" type="text" value="" placeholder="Application" ng-model="reportViewerSearch">
                         <button class="select_main_btn select_target">
                             <i class="select_main_btn_icon"></i>
                         </button>
@@ -58,7 +58,7 @@
                     <ul class="select_content">
                         <li class="select_content_arrow"></li>
                         <li class="select_content_arrow select_content_arrow-mask"></li>
-                        <li class="select_content_list" ng-repeat=" app in appsData | exclude:selectedAppids:'appid' ">
+                        <li class="select_content_list" ng-repeat=" app in appsData | exclude:selectedAppids:'appid' | filter:{appname: reportViewerSearch} | orderBy:'appname' ">
                             <a class="select_content_list_value" data-value="{{ app }}">{{ app.appname }}</a>
                         </li>
                     </ul>

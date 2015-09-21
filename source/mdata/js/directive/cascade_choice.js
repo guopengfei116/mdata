@@ -21,6 +21,7 @@ oasgames.mdataDirective.directive('cascadechoice', [
                 selectData : '=',
                 flagData : '=',
                 selectedData : '=',
+                selectSearchData : '=',
                 flagDataKey : '@'
             },
             link: function ($scope, element, attr, reScope) {
@@ -151,6 +152,7 @@ oasgames.mdataDirective.directive('cascadechoice', [
 
                     // 要提交的值 [val, val]
                     $scope.resultValue = [];
+
                 }
             ]
         }
