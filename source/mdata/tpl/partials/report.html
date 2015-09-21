@@ -1,67 +1,83 @@
 <form class="report-page report">
     <fieldset class="field-common field-report">
         <span class="field-title-com report-title">Application Name</span>
-        <span>As Report Admin</span>
+        <span>{{ reportSourceData.appname }}</span>
     </fieldset>
     <fieldset class="field-common field-report">
         <span class="field-title-com report-title">Application ID</span>
-        <span class="flag">132</span>
+        <span class="flag">{{ reportSourceData.appid }}</span>
     </fieldset>
     <fieldset class="field-common field-report">
         <span class="field-title-com report-title">Report Name</span>
-        <span>Report1</span>
-        <button class="report-blue-btn report-edit-btn">Edit Report</button>
+        <span>{{ reportSourceData.report_name }}</span>
+        <a href="#/report/manage/edit/{{ reportSourceData.id }}" class="report-blue-btn report-edit-btn">Edit Report</a>
     </fieldset>
     <fieldset class="field-common field-report">
-        <span class="field-title-com report-title">Report Description</span>
-        <span>Report1</span>
+        <span class="field-title-com report-title">Report Describe</span>
+        <span>{{ reportSourceData.describe }}</span>
     </fieldset>
     <fieldset class="field-common field-report">
         <span class="field-title-com report-title">Dimension</span>
-
-        <span class="iconfont icon-checkbox-checked"></span><span class="report-dimension">Date</span>
-        <span class="iconfont icon-checkbox-unchecked"></span><span class="report-dimension">Dimension1</span>
-        <span class="iconfont icon-checkbox-checked"></span><span class="report-dimension">Dimension2</span>
+        <ul class="inline-block cf">
+            <li class="left">
+                <span class="iconfont icon-checkbox-checked"></span>
+                <span class="report-dimension">Date</span>
+            </li>
+            <li class="left" ng-repeat="dimension in reportSourceData.dimension">
+                <span class="iconfont icon-checkbox-checked"></span>
+                <span class="report-dimension">{{ dimension }}</span>
+            </li>
+        </ul>
     </fieldset>
     <fieldset class="field-common field-report">
         <span class="field-title-com report-title">Filter</span>
+        <ul class="inline-block cf">
+            <li class="left" ng-repeat="filter in reportSourceData.filter">
+                <span class="iconfont icon-checkbox-checked"></span>
+                <span class="report-dimension">{{ filter }}</span>
+            </li>
+        </ul>
     </fieldset>
     <fieldset class="field-common field-report">
-        <span class="field-title-com report-title">Report Description</span>
-        <span>value1,value1,value1...</span>
+        <span class="field-title-com report-title">Value</span>
+        <ul class="inline-block cf">
+            <li class="left" ng-repeat="value in reportSourceData.values">
+                <span class="flag">{{ value }}</span>
+            </li>
+        </ul>
     </fieldset>
     <fieldset class="field-common field-report">
         <span class="field-title-com report-title">Date Range</span>
-        <div class="select dropdown-host report-data-select">
+        <div class="select select-host select-btn">
             <div class="select_main">
-                <p class="select_main_p">自定义</p>
-                <i class="select_main_icon"></i>
+                <input class="select_main_textarea select_target" type="text" value="" placeholder="自定义">
+                <button class="select_main_btn select_target">
+                    <i class="select_main_btn_icon"></i>
+                </button>
             </div>
-            <ul class="dropdown dropdown-bl">
-                <li class="dropdown_arrow"></li>
-                <li class="dropdown_arrow dropdown_arrow-mask"></li>
-                <li class="dropdown_list">
-                    <a class="dropdown_list_content" data-value="1">123</a>
-                </li>
-                <li class="dropdown_list">
-                    <a class="dropdown_list_content" data-value="2">456</a>
+            <ul class="select_content">
+                <li class="select_content_arrow"></li>
+                <li class="select_content_arrow select_content_arrow-mask"></li>
+                <li class="select_content_list" ng-repeat="dateRange in reportDateRanges ">
+                    <a class="select_content_list_value" data-value="{{ dateRange.value }}">{{ dateRange.meaning }}</a>
                 </li>
             </ul>
         </div>
-        <div class="fieldset-text-com report-data-select" >
-            <input class="report-data-text left" type="text" value="2015-07-20" id="checkDate" gldp-id="checkDate">
-            <span class="iconfont icon-date right"></span>
+        <div class="report-data-select">
+            <input class="report-data-text" type="text" value="2015-07-20" id="checkDate" gldp-id="checkDate">
+            <span class="iconfont icon-date"></span>
         </div>
-        <div class="fieldset-text-com report-data-select" >
-            <input class="report-data-text left" type="text" value="2015-07-20" id="leaveDate" gldp-id="leaveDate" >
-            <span class="iconfont icon-date right"></span>
+        <div class="report-data-select">
+            <input class="report-data-text" type="text" value="2015-07-20" id="leaveDate" gldp-id="leaveDate" >
+            <span class="iconfont icon-date"></span>
         </div>
     </fieldset>
-    <a class="report-blue-btn report-load-btn">Load Report</a>
-    <fieldset class="field-common">
+    <fieldset>
+        <button class="report-blue-btn report-load-btn">Load Report</button>
+    </fieldset>
+    <fieldset class="field-common cf">
         <div class="left field-title-com">Report Table</div>
         <div class="right button-group">
-            <a class="report-email">Email</a>
             <a class="report-export">Export</a>
         </div>
     </fieldset>
@@ -69,83 +85,17 @@
         <dl class="container">
             <dt class="row row-title row-color-interlaced">
                 <ul>
-                    <li class="row_column row_column-5">Date</li>
-                    <li class="row_column row_column-5">Dimension1</li>
-                    <li class="row_column row_column-5">Dimensionn2</li>
-                    <li class="row_column row_column-5">value1</li>
-                    <li class="row_column row_column-5">valueN</li>
+                    <li class="row_column row_column-{{ statistics.length }}" ng-repeat="tableItem in reportSourceData['table_list'][0]">{{ statistic }}</li>
                 </ul>
             </dt>
-            <dd class="row row-color-interlaced">
+            <dd class="row row-color-interlaced" ng-repeat="(key, val) in reportSourceData['table_list']">
                 <ul>
-                    <li class="row_column row_column-5">
+                    <li class="row_column row_column-{{ reportSourceData.dimension.length + reportSourceData.values.length + 1 }}" >
                         <a href="#">aa</a>
-                    </li>
-                    <li class="row_column row_column-5">
-                        <a href="#">bb</a>
-                    </li>
-                    <li class="row_column row_column-5">
-                        <span>
-                            <a href="#">cc</a>
-                        </span>
-                    </li>
-                    <li class="row_column row_column-5">
-                        <span>
-                            <a href="#">dd</a>
-                        </span>
-                    </li>
-                    <li class="row_column row_column-5">
-                        hh
                     </li>
                 </ul>
             </dd>
-            <dd class="row row-color-interlaced">
-                <ul>
-                    <li class="row_column row_column-5">
-                        <a href="#">aa</a>
-                    </li>
-                    <li class="row_column row_column-5">
-                        <a href="#">bb</a>
-                    </li>
-                    <li class="row_column row_column-5">
-                        <span>
-                            <a href="#">cc</a>
-                        </span>
-                    </li>
-                    <li class="row_column row_column-5">
-                        <span>
-                            <a href="#">dd</a>
-                        </span>
-                    </li>
-                    <li class="row_column row_column-5">
-                        ee
-                    </li>
-                </ul>
-            </dd>
-            <dd class="row row-color-interlaced">
-                <ul>
-                    <li class="row_column row_column-5">
-                        <a href="#">aa</a>
-                    </li>
-                    <li class="row_column row_column-5">
-                        <a href="#">bb</a>
-                    </li>
-                    <li class="row_column row_column-5">
-                        <span>
-                            <a href="#">cc</a>
-                        </span>
-                    </li>
-                    <li class="row_column row_column-5">
-                        <span>
-                            <a href="#">dd</a>
-                        </span>
-                    </li>
-                    <li class="row_column row_column-5">
-                        ee
-                    </li>
-                </ul>
-            </dd>
-        </dl>    
+        </dl>
     </fieldset>
     <span class="checkbox">
         <span class="checkbox--active"></span>

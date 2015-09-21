@@ -1,0 +1,56 @@
+{
+  "msg": "",
+  "code": 200,
+  "data": {
+    "id": 4,
+    "report_name": "nonono",
+    "appid": 1,
+    "appname": "ddg",
+    "describe": "nimei",
+    "dimension": [
+      "ip",
+      "uuid"
+    ],
+    "filter": [
+      "ip=192",
+      "uuid=1"
+    ],
+    "values": [
+      "status|age",
+      "createrole|create",
+      "unique_count|install",
+      "unique_count|visit"
+    ],
+    "date_begin": 1442480984,
+    "date_end": 1442480984,
+    "create_time": 1442480984,
+    "table_list": [
+      {
+        "total": {
+          "values": {
+            "status age": 5,
+            "creeate": 5,
+            "install uni": 3,
+            "visituni": 1,
+            "转化率": 1
+          }
+        }
+      },
+      {
+        "20150815": {
+          "dims": {
+            "ip": "10.1.9.148",
+            "uuid": "uid"
+          },
+          "values": {
+            "status age": "1.00",
+            "creeate": 1,
+            "install uni": null,
+            "visituni": null,
+            "转化率": false
+          }
+        }
+      }
+    ]
+  }
+}

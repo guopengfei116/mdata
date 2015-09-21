@@ -10,14 +10,6 @@
 
 
 /*
-    base-style
-*/
-@import "util/_base";
-@import "util/_normalize";
-@import "util/_reset";
-
-
-/*
     functions
 */
 @import "function/_direction-reverse";
@@ -62,6 +54,14 @@
 @import "placeholder/_mask";
 @import "placeholder/_opacity";
 @import "placeholder/_radius";
+
+
+/*
+    base-style
+*/
+@import "util/_base";
+@import "util/_normalize";
+@import "util/_reset";
 
 
 /*

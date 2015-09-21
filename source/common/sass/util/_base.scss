@@ -57,3 +57,7 @@ body {
 .hidden {
     display:none;
 }
+
+.inline-block {
+    @include inline-block();
+}

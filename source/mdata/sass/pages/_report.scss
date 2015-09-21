@@ -21,6 +21,9 @@
 	}
 	.field-report{
 		margin-bottom:12px;
+		.flag {
+			margin-right: 4px;
+		}
 	}
 	.report-title{
 		width:152px; 
@@ -64,10 +67,14 @@
 	.report-export{
 		background:#22baa0;
 	}
+	.select {
+		margin-right:20px;
+	}
 	.report-data-select{
+		@include inline-block();
 		width:118px;
 		margin-right:20px;
-		display:inline-block;
+		border: 1px solid #dce1e4;
 	}
 	.report-blue-btn{
 		color:#fff;
@@ -75,13 +82,15 @@
 		background-color:#12afcb;
 	}
 	.report-load-btn{
+		@include inline-block();
 		margin-bottom:20px;
 	}
 	.report-edit-btn{
+		@include inline-block();
 		margin-left:30px;
 	}
 	.report-data-text{
-		width:88px; 
+		width:88px;
 		height:32px;
 		border:none;
 		text-indent:8px;
