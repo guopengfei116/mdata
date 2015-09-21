@@ -175,14 +175,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
 
                 MdataVerify.blur(type, $errors, $scope);
             };
-
-            //表单焦点时清除错误提示
-            $scope.focus = function (type) {
-                $scope[type + 'Error'] = false;
-                if($scope.tooltip.errorType == type) {
-                    $scope.tooltip.hide();
-                }
-            };
+            
             //表单焦点时清除错误提示
             $scope.focus = function (type) {
                 $scope[type + 'Error'] = false;
