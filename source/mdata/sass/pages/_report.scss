@@ -65,6 +65,7 @@
 		margin-right:10px;
 	}
 	.report-export{
+		@include inline-block();
 		background:#22baa0;
 	}
 	.select {
