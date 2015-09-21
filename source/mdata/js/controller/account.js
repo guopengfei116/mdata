@@ -189,6 +189,18 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
             * 编辑提交的数据不为空
             * */
             $scope.submit = function () {
+                //判断邮箱
+                if(!MdataVerify.submit('email', $scope['accountForm']['email'].$error,$scope)){
+                    return;
+                }
+                //判断用户名
+                if(!MdataVerify.submit('accountName', $scope['accountForm']['accountName'].$error,$scope)){
+                    return;
+                }
+                //判断密码
+                if(!MdataVerify.submit('acountPassword', $scope['accountForm']['acountPassword'].$error,$scope)){
+                    return;
+                }
                 Account[submitMethod](
                     {accountId: $scope.accountId},
                     $scope.accountSourceData,

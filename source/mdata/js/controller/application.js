@@ -175,7 +175,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
 
                 MdataVerify.blur(type, $errors, $scope);
             };
-            
+
             //表单焦点时清除错误提示
             $scope.focus = function (type) {
                 $scope[type + 'Error'] = false;
@@ -193,6 +193,13 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
              * 编辑提交的数据不为空
              * */
             $scope.submit = function () {
+                if(!MdataVerify.submit('appName',$scope["appCreate"]["appName"].$error,$scope)){
+                    return;
+                }
+                if($.trim($(".fieldset-processor").html()) == ""){
+                     Ui.alert("Processor must not be empty");
+                     return;
+                }
                 Application[submitMethod](
                     {appId: $scope.appId},
                     $scope.appSourceData,
