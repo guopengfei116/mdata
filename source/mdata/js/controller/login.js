@@ -39,9 +39,11 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
         //登陆
         $scope.submit = function () {
             var api = ApiCtrl.get('login');
+            //判断用户名
             if(!MdataVerify.blur("account",$scope['ndForm']['ndAccount'].$error, $scope)){
                 return;
             }
+            //判断密码
             if(!MdataVerify.blur("password",$scope['ndForm']['ndPassword'].$error, $scope)){
                 return;
             }    
@@ -144,11 +146,11 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
         //修改密码提交
         $scope.submit = function () {
             var api = ApiCtrl.get('login');
-            //提交判断旧密码格式
+            //判断旧密码格式
             if(!$scope.blur("oldPassword",$scope['cPaw']['oldPassword'].$error)){
                 return;
             }
-            //提交判断新密码格式
+            //判断新密码格式
             if(!$scope.blur("newPassword",$scope['cPaw']['newPassword'].$error)){  
                 return;
             }
