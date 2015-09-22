@@ -148,12 +148,19 @@ oasgames.mdataControllers.controller('reportCreateCtrl', [
 oasgames.mdataControllers.controller('reportEditCtrl', [
     '$scope',
     'REPORT_DATE_RANGE',
+    'REPORT_DIMENSION',
+    'COMPUTE_SIGN',
     'MdataVerify',
-    function ($scope, reportDateRanges, MdataVerify) {
+    function ($scope, reportDateRanges, reportDimension, computeSigns, MdataVerify) {
 
         // report日期范围
         $scope.reportDateRanges = reportDateRanges;
 
+        // report可选dimension
+        $scope.reportDimensions = reportDimensions;
+
+        // report_filter支持的运算符
+        $scope.computeSigns = computeSigns;
 
         // 事件处理、表单效验
         (function () {

@@ -23,7 +23,7 @@
         <div>
             <div class="select select-host select-btn">
                 <div class="select_main">
-                    <input class="select_main_textarea select_target" type="text" value="mail">
+                    <input class="select_main_textarea select_target" type="text" value="自定义">
                     <button class="select_main_btn select_target">
                         <i class="select_main_btn_icon"></i>
                     </button>
@@ -31,11 +31,8 @@
                 <ul class="select_content">
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
-                    <li class="select_content_list">
-                        <a class="select_content_list_value" data-value="1">123</a>
-                    </li>
-                    <li class="select_content_list">
-                        <a class="select_content_list_value" data-value="2">456</a>
+                    <li class="select_content_list" ng-repeat="dimension in reportDimension ">
+                        <a class="select_content_list_value" data-value="{{ dimension.value }}">{{ dimension.dimension }}</a>
                     </li>
                 </ul>
             </div>
@@ -66,7 +63,7 @@
         <div>
             <div class="select select-host select-btn">
                 <div class="select_main">
-                    <input class="select_main_textarea select_target" type="text" value="mail">
+                    <input class="select_main_textarea select_target" type="text" value="" />
                     <button class="select_main_btn select_target">
                         <i class="select_main_btn_icon"></i>
                     </button>
@@ -74,14 +71,27 @@
                 <ul class="select_content">
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
-                    <li class="select_content_list">
-                        <a class="select_content_list_value" data-value="1">123</a>
-                    </li>
-                    <li class="select_content_list">
-                        <a class="select_content_list_value" data-value="2">456</a>
+                    <li class="select_content_list" ng-repeat="reportDimension in reportDimensions ">
+                        <a class="select_content_list_value" data-value="{{ reportDimension.value }}">{{ reportDimension.dimension }}</a>
                     </li>
                 </ul>
             </div>
+            <div class="select select-host select-btn">
+                <div class="select_main">
+                    <p class="select_main_text select_target"></p>
+                    <button class="select_main_btn select_target">
+                        <i class="select_main_btn_icon"></i>
+                    </button>
+                </div>
+                <ul class="select_content">
+                    <li class="select_content_arrow"></li>
+                    <li class="select_content_arrow select_content_arrow-mask"></li>
+                    <li class="select_content_list" ng-repeat="computeSign in computeSigns ">
+                        <a class="select_content_list_value" data-value="{{ computeSign }}">{{ computeSign }}</a>
+                    </li>
+                </ul>
+            </div>
+            <input class="" type="text" value="" />
             <button class="button">add</button>
             <a class="button button-check"><i class="iconfont icon-check"></i></a>
             <a class="button button-close"><i class="iconfont icon-close"></i></a>
