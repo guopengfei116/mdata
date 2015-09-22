@@ -104,7 +104,8 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
     'Account',
     'Filter',
     'MdataVerify',
-    function ($scope, $cacheFactory, $route, Application, Account, Filter, MdataVerify) {
+    'TIME_ZONE',
+    function ($scope, $cacheFactory, $route, Application, Account, Filter, MdataVerify, timeZone) {
  
         $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
 
@@ -113,10 +114,13 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
         $scope.selectedAccountuids = [];
 
         // 当前app的信息
-        $scope.appSourceData = [];
+        $scope.appSourceData = {};
 
         // 当前编辑的appId
         $scope.appId = $route.current.params.applicationId;
+
+        //时区内容
+        $scope.timeZones = timeZone;
 
         /*
          * 如果有id，则说明是编辑状态
@@ -196,10 +200,18 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                 if(!MdataVerify.submit('appName',$scope["appCreate"]["appName"].$error,$scope)){
                     return;
                 }
+                if($.trim($('.select.app-zone').data('value')) == ""){
+                    Ui.alert('Time Zone must not be empty');
+                    return;
+                }
                 if($.trim($(".fieldset-processor").html()) == ""){
                      Ui.alert("Processor must not be empty");
                      return;
                 }
+                console.log($scope.appSourceData);
+                $scope.appSourceData.timeZone = $('.select.app-zone').data('value');
+                $scope.appSourceData["reportAdmin"] = $(".field-account").data('value');
+                $scope.appSourceData["reportViewer"] = $(".field-account").next().data('value');
                 Application[submitMethod](
                     {appId: $scope.appId},
                     $scope.appSourceData,

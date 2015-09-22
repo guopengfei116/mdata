@@ -22,11 +22,8 @@
                 <ul class="select_content">
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
-                    <li class="select_content_list" >
-                        <a class="select_content_list_value" data-value="q">qqq</a>
-                    </li>
-                    <li class="select_content_list" >
-                        <a class="select_content_list_value" data-value="s">sss</a>
+                    <li class="select_content_list" ng-repeat="data in timeZones">
+                        <a class="select_content_list_value" data-value="{{data.value}}">{{data.key}}</a>
                     </li>
                 </ul>
             </div>
@@ -109,7 +106,7 @@
             <a class="button button-check"><i class="iconfont icon-check"></i></a>
             <a class="button button-close"><i class="iconfont icon-close"></i></a>
         </div>
-        <div class="textarea textarea-processor fieldset-processor" >
+        <div class="textarea textarea-processor fieldset-processor"  >
             <span class="flag flag-icon"> Admin1
                 <i class="flag-icon_delete iconfont icon-close">
                     
