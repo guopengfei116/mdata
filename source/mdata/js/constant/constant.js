@@ -13,7 +13,7 @@ oasgames.mdataConstant.constant("AUTHORITY", {
 });
 
 /*
- * 时区
+ * app创建time_zone选项
  * */
 oasgames.mdataConstant.constant("TIME_ZONE", [
     { key : 'China', value : 'Asia/Shanghai' },
@@ -22,6 +22,20 @@ oasgames.mdataConstant.constant("TIME_ZONE", [
     { key : 'Argentina', value : 'America/Argentina/Buenos_Aires' },
     { key : 'Mexico', value : 'America/Mexico_City' },
     { key : 'USA', value : 'America/New_York' }
+]);
+
+/*
+ * app创建processor选项
+ * */
+oasgames.mdataConstant.constant("PROCESSOR", [
+    "normalevent",
+    "retention",
+    "dau",
+    "wau",
+    "mau",
+    "dailystatus",
+    "payment",
+    "loss"
 ]);
 
 /*

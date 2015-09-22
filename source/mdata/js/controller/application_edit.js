@@ -7,12 +7,16 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
     '$scope',
     '$cacheFactory',
     '$route',
+    'PROCESSOR',
     'Application',
     'Account',
     'Filter',
     'MdataVerify',
     'TIME_ZONE',
-    function ($scope, $cacheFactory, $route, Application, Account, Filter, MdataVerify, timeZone) {
+    function ($scope, $cacheFactory, $route, processors, Application, Account, Filter, MdataVerify, timeZone) {
+
+        // processor可选列表
+        $scope.processors = processors;
 
         // 所有的account列表
         $scope.accountsData = [];
