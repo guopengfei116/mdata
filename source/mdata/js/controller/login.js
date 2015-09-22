@@ -13,8 +13,9 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
     'MdataVerify',
     function ($rootScope, $scope, $http, $location, ApiCtrl, AUTHORITY, MdataVerify) {
 
-        $scope.account = '';
-        $scope.password = '';
+        //$scope.account = '';
+        //$scope.password = '';
+        $scope.account = {};
         $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
         //表单失去焦点时错误提示
         $scope.blur = function(type, $errors){
@@ -48,7 +49,8 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                 return;
             }    
             if($scope['ndForm'].$valid && api ) {
-                $http.get(api).success(function (result) {
+                console.log($scope.account);
+                $http.get(api,$scope.account).success(function (result) {
 
                     if(result.code == 200) {
                         //记录登陆状态
@@ -78,6 +80,7 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
         // $scope.toldPassword = new tooltip({'position':'rc'}).getNewTooltip();
         // $scope.tnewPassword = new tooltip({'position':'rc'}).getNewTooltip();
         // $scope.treNewPassword = new tooltip({'position':'rc'}).getNewTooltip();
+        $scope.userPassword = {};
         $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
         //错误提示
         $scope.showError = function(type, pError) {
@@ -115,19 +118,19 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
                 }
             }
             //新旧密码相同
-            if($scope.newPassword == $scope.oldPassword && type == "newPassword" ){
+            if($scope.userPassword.newPassword == $scope.userPassword.oldPassword && type == "newPassword" ){
                 $scope.showError('newPassword', errorInfo.newPassword.noSame);
                 return false;
             }
             //重新输入密码不一致
-            if($scope.newPassword != $scope.reNewPassword && (type == "reNewPassword" || type == "newPassword" && $scope.reNewPassword)){
+            if($scope.userPassword.newPassword != $scope.userPassword.reNewPassword && (type == "reNewPassword" || type == "newPassword" && $scope.reNewPassword)){
                 $scope.showError('reNewPassword', errorInfo.reNewPassword.mustSame);
                 return false;
             }   
             //重新输入新密码正确
-            if($scope.newPassword == $scope.reNewPassword && type == "newPassword" ){
-                if($scope.treNewPassword.errorType == 'reNewPassword') {
-                    $scope.treNewPassword.hide();
+            if($scope.userPassword.newPassword == $scope.userPassword.reNewPassword && type == "newPassword" ){
+                if($scope.tooltip.errorType == 'reNewPassword') {
+                    $scope.tooltip.hide();
                     $scope.reNewPasswordError = false;
                     return false;
                 }
@@ -159,13 +162,11 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
                 return;
             }
             //验证通过、新旧密码不一致并且新密码相同
-            if($scope['cPaw'].$valid && api && $scope.newPassword != $scope.oldPassword && $scope.newPassword == $scope.reNewPassword) {
-                $http.get(api).success(function (result) {
-
+            if($scope['cPaw'].$valid && api ) {
+                $http.get(api,$scope.userPassword).success(function (result) {
                     if(result.code == 200) {
                         Ui.alert('Your password has been changed successfully');
                     }
-
                 }).error(function (status) {
                     Ui.alert('网络错误！');
                 });
