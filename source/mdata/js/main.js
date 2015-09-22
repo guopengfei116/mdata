@@ -58,10 +58,14 @@ require('./directive/cascade_choice.js');
 oasgames.mdataControllers = angular.module('mdataControllers', []);
 require('./controller/frame.js');
 require('./controller/login.js');
-require('./controller/application.js');
-require('./controller/account.js');
-require('./controller/system.js');
+require('./controller/applications.js');
+require('./controller/application_edit.js');
+require('./controller/accounts.js');
+require('./controller/account_edit.js');
+require('./controller/reports.js');
+require('./controller/report_edit.js');
 require('./controller/report.js');
+require('./controller/system_log.js');
 
 /*
  * app主模块

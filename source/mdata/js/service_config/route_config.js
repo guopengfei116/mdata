@@ -53,12 +53,6 @@ oasgames.mdataServicesConfig.config([
                 controller: 'AccountEditCtrl'
             })
 
-            //system log
-            .when('/systemLog', {
-                templateUrl: '/mdata/tpl/partials/system_log.html',
-                controller: 'systemLogCtrl'
-            })
-
             //report
             .when('/report', {
                 redirectTo: '/report/manage'
@@ -68,8 +62,8 @@ oasgames.mdataServicesConfig.config([
                 controller: 'reportManageCtrl'
             })
             .when('/report/manage/create', {
-                templateUrl: '/mdata/tpl/partials/report_create.html',
-                controller: 'reportCreateCtrl'
+                templateUrl: '/mdata/tpl/partials/report_edit.html',
+                controller: 'reportEditCtrl'
             })
             .when('/report/manage/edit/:reportId', {
                 templateUrl: '/mdata/tpl/partials/report_edit.html',
@@ -78,6 +72,12 @@ oasgames.mdataServicesConfig.config([
             .when('/report/view/:reportId', {
                 templateUrl: '/mdata/tpl/partials/report.html',
                 controller: 'reportViewCtrl'
+            })
+
+            //system log
+            .when('/systemLog', {
+                templateUrl: '/mdata/tpl/partials/system_log.html',
+                controller: 'systemLogCtrl'
             })
 
             //notfound
