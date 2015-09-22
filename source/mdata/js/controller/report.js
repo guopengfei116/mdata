@@ -151,7 +151,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
     'REPORT_DIMENSION',
     'COMPUTE_SIGN',
     'MdataVerify',
-    function ($scope, reportDateRanges, reportDimension, computeSigns, MdataVerify) {
+    function ($scope, reportDateRanges, reportDimensions, computeSigns, MdataVerify) {
 
         // report日期范围
         $scope.reportDateRanges = reportDateRanges;
