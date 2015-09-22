@@ -1,10 +1,6 @@
 
 /*
  * @account和application联动指令
- * 父控制器需要申明sourceData 和 viewData两个变量以供指令使用，
- * 指令只帮助处理了搜索为空的处理，
- * 具体搜索逻辑需父控制器自己定义searchHandler函数，接收搜索值进行处理，
- * 如果搜索输入框需要placeholder，则在父控制器作用域设置searchPlaceholder值
  * */
 oasgames.mdataDirective.directive('cascadechoice', [
     'Exclude',
@@ -87,6 +83,9 @@ oasgames.mdataDirective.directive('cascadechoice', [
                         console.log('未初始化完成');
                         return;
                     }
+
+                    // 添加未编辑时的初始值
+                    element.data('value', $scope.resultValue);
 
                     // 绑定add事件
                     $addSelect.bind('click', function () {
