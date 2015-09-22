@@ -31,8 +31,8 @@
                 <ul class="select_content">
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
-                    <li class="select_content_list" ng-repeat="dimension in reportDimension ">
-                        <a class="select_content_list_value" data-value="{{ dimension.value }}">{{ dimension.dimension }}</a>
+                    <li class="select_content_list" ng-repeat="reportDimension in reportDimensions ">
+                        <a class="select_content_list_value" data-value="{{ reportDimension.value }}">{{ reportDimension.dimension }}</a>
                     </li>
                 </ul>
             </div>
@@ -202,7 +202,7 @@
         <div>
             <div class="select select-host select-btn">
                 <div class="select_main">
-                    <input class="select_main_textarea select_target" type="text" value="mail">
+                    <input class="select_main_textarea select_target" type="text" value="">
                     <button class="select_main_btn select_target">
                         <i class="select_main_btn_icon"></i>
                     </button>
@@ -244,7 +244,7 @@
         <legend class="field-title-com">Default Date Range</legend>
         <div class="select select-host report-date">
             <div class="select_main">
-                <p class="select_main_text select_target">bbb</p>
+                <p class="select_main_text select_target"></p>
                 <button class="select_main_btn select_target">
                     <i class="select_main_btn_icon"></i>
                 </button>
@@ -269,64 +269,3 @@
         </span>
     </fieldset>
 </form>
-
-<!-- <div>
-    <span class="flag tooltip-host" data-tooltip-position="lc" data-tooltip-info="lc">nihao</span>
-    <span class="flag flag-icon">
-        很好
-        <i class="flag-icon_delete iconfont icon-close"></i>
-    </span>
-    <span class="flag flag-icon tooltip-host" data-tooltip-info="tooltipsgfdsgdsgs">
-        不好
-        <i class="flag-icon_delete iconfont icon-close" data-delete-info="删除成功"></i>
-    </span>
-    <span class="flag flag-icon tooltip-host" data-tooltip-position="rc" data-tooltip-info="rc">
-        不好啊！
-        <i class="flag-icon_delete iconfont icon-close" data-delete-info="哈哈哈"></i>
-    </span>
-</div>
-<div>
-    <input class="input input-text input-warn" type="text">
-    <button class="button tooltip-host" data-tooltip-position="tc" data-tooltip-info="tc">add</button>
-    <ul>
-        <li><button class="button button-plus">+</button><button class="button button-save">save</button></li>
-        <li><button class="button button-minus">+</button><button class="button button-cancel">save</button></li>
-    </ul>
-</div>
-<ul>
-    <li ng-repeat="application in applications">{{ application.name }}</li>
-    <li>{{ yes }}</li>
-</ul>
-<div class="dropdown-host">
-    <div class="dropdown-target">请选择</div>
-    <ul class="dropdown dropdown-bl">
-        <li class="dropdown_arrow"></li>
-        <li class="dropdown_arrow dropdown_arrow-mask"></li>
-        <li class="dropdown_list">
-            <span class="iconfont icon-user"></span>
-            <a>123</a>
-        </li>
-        <li class="dropdown_list">
-            <span class="iconfont icon-accont"></span>
-            <a>456</a>
-        </li>
-    </ul>
-</div>
-
-<div class="select dropdown-host">
-    <div class="select_main">
-        <p class="select_main_p">哈哈哈</p>
-        <i class="select_main_icon"></i>
-    </div>
-    <ul class="dropdown dropdown-bl">
-        <li class="dropdown_arrow"></li>
-        <li class="dropdown_arrow dropdown_arrow-mask"></li>
-        <li class="dropdown_list">
-            <a class="dropdown_list_content" data-value="1">123</a>
-        </li>
-        <li class="dropdown_list">
-            <a class="dropdown_list_content" data-value="2">456</a>
-        </li>
-    </ul>
-</div>
- -->

@@ -23,6 +23,9 @@
             background-color: transparent;
             @include ellipsis();
         }
+        &_text {
+            height: rem(32);
+        }
         &_btn {
             position: absolute;
             right: 0;
@@ -42,6 +45,8 @@
         z-index: get-index(8);
         display: none;
         position: absolute;
+        max-height: 200px;
+        overflow-y: scroll;
         background-color: #fff;
         border: 1px solid #d8dee4;
         &_list {
