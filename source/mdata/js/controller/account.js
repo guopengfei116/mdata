@@ -109,6 +109,9 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
 
         // 当前account的数据
         $scope.accountSourceData = {};
+        //初始account的email值
+        $scope.accountEmail = "";
+        $scope.appsData = [];
 
         // 当前编辑的accountId
         $scope.accountId = $route.current.params.accountId;
@@ -129,6 +132,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 function (result) {
                     if(result && result.code == 200) {
                         $scope.accountSourceData = result.data;
+                        $scope.accountEmail = result.data.username;
                     }else {
                         Ui.alert(result.msg);
                     }

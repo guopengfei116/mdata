@@ -2,7 +2,8 @@
     <fieldset class="field-common">
         <legend class="field-title-com">Email</legend>
         <input class="fieldset-text-com  fieldset-email" type="text" name="email" ng-model="accountSourceData.username" required ng-pattern="/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/" ng-blur="blur('email', accountForm.email.$error)"
-               ng-focus="focus('email')" ng-class="{'account-email': accountSourceData.username}" ng-readonly="accountSourceData.username">
+               ng-focus="focus('email')" ng-class="{'account-email': accountEmail}" ng-readonly="accountEmail">
+        <span class="red-star" ng-class="{'account-red-start': accountEmail}">*</span>
     </fieldset>
     <fieldset class="field-common">
         <legend class="field-title-com">Name</legend>
