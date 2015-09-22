@@ -39,6 +39,9 @@
 }
 .select-btn{
     width:268px;
+    &-small {
+        width: 168px;
+    }
 }
 .button-check,.button-close{
     padding: 0 7px;
