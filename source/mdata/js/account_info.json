@@ -7,26 +7,26 @@
     "password" : "fsdfsda",
     "as_report_admin" : [
       {
-        "appname" : "fdsfsff",
+        "appname" : "you",
+        "appid" : "12"
+      },
+      {
+        "appname" : "gaga",
         "appid" : "123"
       },
       {
-        "appname" : "report2",
-        "appid" : "124"
-      },
-      {
-        "appname" : "avcsedf",
-        "appid" : "125"
+        "appname" : "feuf",
+        "appid" : "88"
       }
     ],
     "as_report_viewer" : [
       {
-        "appname" : "report4",
-        "appid" : "126"
+        "appname" : "pp",
+        "appid" : "99"
       },
       {
         "appname" : "ndfdfgf",
-        "appid" : "127"
+        "appid" : "1237"
       }
     ]
   }

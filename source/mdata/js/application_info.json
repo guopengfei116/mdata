@@ -7,9 +7,9 @@
       "time zone" : 1,
       "reportAdmin" : [
         {
-          "nickname" : "xx",
-          "username" : "xxxxx@a.com",
-          "uid" : 321
+          "nickname" : "o",
+          "username" : "b@a.com",
+          "uid" : 8888
         },
         {
           "nickname" : "vv",
@@ -24,14 +24,14 @@
       ],
       "reportViewer" : [
         {
-          "nickname" : "daaa",
-          "username" : "daaa@c.com",
-          "uid" : 908
+          "nickname" : "d",
+          "username" : "c@c.com",
+          "uid" : 456
         },
         {
-          "nickname" : "bbb",
-          "username" : "bbbb@c.com",
-          "uid" : 908
+          "nickname" : "b",
+          "username" : "b@c.com",
+          "uid" : 369
         },
         {
           "nickname" : "ppp",

@@ -4,7 +4,7 @@
     {
       "nickname" : "o",
       "username" : "b@a.com",
-      "uid" : 321,
+      "uid" : 8888,
       "as_report_admin" : [
         {
           "appname" : "fdsfsff",
@@ -162,6 +162,43 @@
         },
         {
           "appname" : "kkkk",
+          "appid" : "127"
+        },
+        {
+          "appname" : "6546",
+          "appid" : "127"
+        }
+      ]
+    },
+    {
+      "nickname" : "ppp",
+      "username" : "ppppp@a.com",
+      "uid" : 321,
+      "as_report_admin" : [
+        {
+          "appname" : "hqqqqq",
+          "appid" : "123"
+        },
+        {
+          "appname" : "haaaaaa",
+          "appid" : "124"
+        },
+        {
+          "appname" : "hddddd",
+          "appid" : "125"
+        }
+      ],
+      "as_report_viewer" : [
+        {
+          "appname" : "cchccc",
+          "appid" : "126"
+        },
+        {
+          "appname" : "yyyyyhy",
+          "appid" : "127"
+        },
+        {
+          "appname" : "kkkmk",
           "appid" : "127"
         },
         {

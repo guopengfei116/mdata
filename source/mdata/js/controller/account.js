@@ -101,17 +101,18 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
     'Application',
     'MdataVerify',
     function ($scope, $cacheFactory, $route, Account, Application, MdataVerify) {
-        
-        $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
+
         // 所有的app列表
         $scope.appsData = [];
+
+        // 所有已选的app列表
         $scope.selectedAppids = [];
 
         // 当前account的数据
         $scope.accountSourceData = {};
+
         //初始account的email值
         $scope.accountEmail = "";
-        $scope.appsData = [];
 
         // 当前编辑的accountId
         $scope.accountId = $route.current.params.accountId;
@@ -169,6 +170,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
 
         // 事件处理、表单效验
         (function () {
+            $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
 
             // 调试期只能暂用get方法，测试期需要修改method方法为对应fn
             var submitMethod = 'get';

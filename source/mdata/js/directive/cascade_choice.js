@@ -29,19 +29,21 @@ oasgames.mdataDirective.directive('cascadechoice', [
                 var resultValueInit = false, selectDataInit = false, selectedDataInit = false;
 
                 /*
-                * flagData初始化完毕后初始化resultValue
+                * flagData：当前所属select的已选列表, [{}, {}]
+                * 通过flagData初始化resultValue数据,
+                * 因为flagData数据是异步获取的，所以不能保证时实
                 * */
                 var flagDataWatchCancel = $scope.$watch('flagData', function (newValue, oldValue, scope) {
+
                     // flagData = undefined
                     if(!newValue) {
-                        $scope.flagData = [];
+                        return;
                     }
 
-                    /*
-                     * flagData  已存的对象 [{}, {}]
-                     * 通过flagData初始化resultValue数据,
-                     * 因为flagData数据是异步获取的，所以不能保证时实
-                     * */
+                    console.log("begin flagData");
+                    console.log($scope.flagData);
+                    console.log("end flagData");
+
                     var flagData = $scope.flagData;
                     if(!resultValueInit) {
                         for(var i = 0; i < flagData.length; i++) {
@@ -51,24 +53,44 @@ oasgames.mdataDirective.directive('cascadechoice', [
 
                     resultValueInit = true;
                     $scope.$broadcast('bind');
-                    flagDataWatchCancel();
+                    //flagDataWatchCancel();
                 });
 
                 /*
-                * selectData初始化完毕后更新appsViewData
+                * selectData：公共的可选的列表
+                * 初始化完毕后更新appsViewData
                 * */
                 var selectDataWatchCancel = $scope.$watch('selectData', function (newValue, oldValue, scope) {
+
+                    // selectData = undefined
+                    if(!newValue) {
+                        return;
+                    }
+
+                    console.log("begin selectData");
                     console.log($scope.selectData);
+                    console.log("end selectData");
+
                     selectDataInit = true;
                     $scope.$broadcast('bind');
                     selectDataWatchCancel();
                 });
 
                 /*
+                 * selectedData：已选的列表总和
                  * selectedData初始化完毕后更新appsViewData
                  * */
                 var selectedDataWatchCancel = $scope.$watch('selectedData', function (newValue, oldValue, scope) {
+
+                    // selectedData = undefined
+                    if(!newValue) {
+                        return;
+                    }
+
+                    console.log("begin selectedData");
                     console.log($scope.selectedData);
+                    console.log("end selectedData");
+
                     selectedDataInit = true;
                     $scope.$broadcast('bind');
                     selectDataWatchCancel();
@@ -84,8 +106,14 @@ oasgames.mdataDirective.directive('cascadechoice', [
                         return;
                     }
 
+                    console.log("begin resultValue");
+                    console.log($scope.resultValue);
+                    console.log("end resultValue");
+
                     // 添加未编辑时的初始值
                     element.data('value', $scope.resultValue);
+                    // 把初始值添加进入已选值总和
+                    $scope.selectedData.push.apply($scope.selectedData, $scope.resultValue);
 
                     // 绑定add事件
                     $addSelect.bind('click', function () {
