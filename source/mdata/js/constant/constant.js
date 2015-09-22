@@ -57,7 +57,7 @@ oasgames.mdataConstant.constant("REPORT_DIMENSION", [
     { dimension : 'reg_date', value : 'reg_date' },
     { dimension : 'reg_channel', value : 'reg_channel' },
     { dimension : 'reg_subchannel', value : 'reg_subchannel' },
-    { dimension : 'server_reg_directed', value : 'server_reg_directed' },
+    { dimension : 'server_reg_directed', value : 'server_reg_directed' }
 ]);
 
 /*
