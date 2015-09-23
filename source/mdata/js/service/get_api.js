@@ -10,6 +10,7 @@ oasgames.mdataServices.provider('ApiCtrl', [
                 'userAuth' : '/isLogin',
                 'login' : '/mdata/js/login.json',
                 'logout' : '/mdata/js/logout.json',
+                'checkPaw' : '/mdata/js/check_password.json',
                 'shortcuts' : '/mdata/js/shortcuts.json',
                 'application' : '/mdata/js/:appId.json',
                 'account' : '/mdata/js/:accountId.json',
