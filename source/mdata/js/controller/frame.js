@@ -77,6 +77,8 @@ oasgames.mdataControllers.controller('HeaderCtrl', [
                     }else {
                         Ui.alert(data.msg);
                     }
+                }).error(function () {
+                    Ui.alert('网络错误');
                 });
             }
         });

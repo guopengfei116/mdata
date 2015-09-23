@@ -39,7 +39,7 @@ oasgames.mdataConstant.constant("PROCESSOR", [
 ]);
 
 /*
- * report日期范围
+ * report查看的日期范围
  * */
 oasgames.mdataConstant.constant("REPORT_DATE_RANGE", [
     { meaning : '今天', value : 0 },
@@ -51,7 +51,7 @@ oasgames.mdataConstant.constant("REPORT_DATE_RANGE", [
 ]);
 
 /*
- * report_dimension
+ * report_dimension可选列表
  * */
 oasgames.mdataConstant.constant("REPORT_DIMENSION", [
     { dimension : 'ip', value : 'ip' },
@@ -75,9 +75,33 @@ oasgames.mdataConstant.constant("REPORT_DIMENSION", [
 ]);
 
 /*
+ * report_filter可选列表
+ * */
+oasgames.mdataConstant.constant("FILTER", [
+    "ip",
+    "uuid",
+    "udid",
+    "channel",
+    "subchannel",
+    "referrer",
+    "country",
+    "region",
+    "city",
+    "locale",
+    "version",
+    "os",
+    "browser",
+    "screen",
+    "reg_date",
+    "reg_channel",
+    "reg_subchannel",
+    "server_reg_directed"
+]);
+
+/*
  * report_filter支持的运算符
  * */
-oasgames.mdataConstant.constant("COMPUTE_SIGN", [
+oasgames.mdataConstant.constant("FILTER_COMPUTE_SIGN", [
     "=",
     ">",
     "<",
@@ -85,5 +109,26 @@ oasgames.mdataConstant.constant("COMPUTE_SIGN", [
     "<=",
     "in",
     "!="
+]);
+
+/*
+ * report_value_group支持的类型
+ * */
+oasgames.mdataConstant.constant("VALUE_TYPE", [
+    { type : 'original', value : '0' },
+    { type : 'percent', value : '1' },
+    { type : 'int', value : '2' },
+    { type : 'currency', value : '3' }
+]);
+
+/*
+ * report_value_group支持的算法
+ * */
+oasgames.mdataConstant.constant("VALUE_ARITHMETIC", [
+    { arithmetic : 'Null', value : '0' },
+    { arithmetic : 'addition(+)', value : '1' },
+    { arithmetic : 'subtraction(-)', value : '2' },
+    { arithmetic : 'multiplication(*)', value : '3' },
+    { arithmetic : 'division(/)', value : '4' }
 ]);
 

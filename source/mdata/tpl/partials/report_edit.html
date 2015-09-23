@@ -46,16 +46,6 @@
                     
                 </i>
             </span>
-            <span class="flag flag-icon"> Admin2
-                <i class="flag-icon_delete iconfont icon-close">
-                    
-                </i>
-            </span>
-            <span class="flag flag-icon"> Admin3
-                <i class="flag-icon_delete iconfont icon-close">
-                    
-                </i>
-            </span>
         </div>
     </fieldset>
     <fieldset class="field-common">
@@ -102,22 +92,12 @@
                     
                 </i>
             </span>
-            <span class="flag flag-icon"> Admin2
-                <i class="flag-icon_delete iconfont icon-close">
-                    
-                </i>
-            </span>
-            <span class="flag flag-icon"> Admin3
-                <i class="flag-icon_delete iconfont icon-close">
-                    
-                </i>
-            </span>
         </div>
     </fieldset>
     <fieldset class="field-common">
         <legend class="field-title-com">Column</legend>
         <div>
-            <input class="fieldset-text-com field-text-column" type="text">
+            <input class="fieldset-text-com field-text-column" type="text" placeholder="Value Name" />
             <div class="select select-host select-btn-column">
                 <div class="select_main">
                     <p class="select_main_text select_target">aaa</p>
@@ -128,18 +108,31 @@
                 <ul class="select_content">
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
-                    <li class="select_content_list">
-                        <a class="select_content_list_value" data-value="1">123</a>
-                    </li>
-                    <li class="select_content_list">
-                        <a class="select_content_list_value" data-value="2">456</a>
+                    <li class="select_content_list" ng-repeat="type in valueTypes ">
+                        <a class="select_content_list_value" data-value="{{ type.value }}">{{ type.type }}</a>
                     </li>
                 </ul>
             </div>
-
+            <section class="value-group inline-block">
+                <div class="select select-host select-btn-column">
+                    <div class="select_main">
+                        <p class="select_main_text select_target">bbb</p>
+                        <button class="select_main_btn select_target">
+                            <i class="select_main_btn_icon"></i>
+                        </button>
+                    </div>
+                    <ul class="select_content">
+                        <li class="select_content_arrow"></li>
+                        <li class="select_content_arrow select_content_arrow-mask"></li>
+                        <li class="select_content_list" ng-repeat="(valueName, valueFormat) in reportSourceData['appDataList']['val_list']">
+                            <a class="select_content_list_value" data-value="{{ valueName }}">{{ valueName }}</a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
             <div class="select select-host select-btn-column">
                 <div class="select_main">
-                    <p class="select_main_text select_target">bbb</p>
+                    <p class="select_main_text select_target"></p>
                     <button class="select_main_btn select_target">
                         <i class="select_main_btn_icon"></i>
                     </button>
@@ -147,49 +140,34 @@
                 <ul class="select_content">
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
-                    <li class="select_content_list">
-                        <a class="select_content_list_value" data-value="1">123</a>
-                    </li>
-                    <li class="select_content_list">
-                        <a class="select_content_list_value" data-value="2">456</a>
+                    <li class="select_content_list" ng-repeat="arithmetic in valueArithmetics ">
+                        <a class="select_content_list_value" data-value="{{ arithmetic.value }}">{{ arithmetic.arithmetic }}</a>
                     </li>
                 </ul>
             </div>
-            <input class="fieldset-text-com field-text-column" type="text">
-            <div class="select select-host select-btn-column">
-                <div class="select_main">
-                    <p class="select_main_text select_target">ccc</p>
-                    <button class="select_main_btn select_target">
-                        <i class="select_main_btn_icon"></i>
-                    </button>
+            <section class="value-group inline-block">
+                <div class="select select-host select-btn-column">
+                    <div class="select_main">
+                        <p class="select_main_text select_target">bbb</p>
+                        <button class="select_main_btn select_target">
+                            <i class="select_main_btn_icon"></i>
+                        </button>
+                    </div>
+                    <ul class="select_content">
+                        <li class="select_content_arrow"></li>
+                        <li class="select_content_arrow select_content_arrow-mask"></li>
+                        <li class="select_content_list" ng-repeat="(valueName, valueFormat) in reportSourceData['appDataList']['val_list']">
+                            <a class="select_content_list_value" data-value="{{ valueName }}">{{ valueName }}</a>
+                        </li>
+                    </ul>
                 </div>
-                <ul class="select_content">
-                    <li class="select_content_arrow"></li>
-                    <li class="select_content_arrow select_content_arrow-mask"></li>
-                    <li class="select_content_list">
-                        <a class="select_content_list_value" data-value="1">123</a>
-                    </li>
-                    <li class="select_content_list">
-                        <a class="select_content_list_value" data-value="2">456</a>
-                    </li>
-                </ul>
-            </div>
+            </section>
             <button class="button">add</button>
             <a class="button button-check"><i class="iconfont icon-check"></i></a>
             <a class="button button-close"><i class="iconfont icon-close"></i></a>
         </div>
         <div class="textarea teatarea-column">
             <span class="flag flag-icon"> Admin1
-                <i class="flag-icon_delete iconfont icon-close">
-                    
-                </i>
-            </span>
-            <span class="flag flag-icon"> Admin2
-                <i class="flag-icon_delete iconfont icon-close">
-                    
-                </i>
-            </span>
-            <span class="flag flag-icon"> Admin3
                 <i class="flag-icon_delete iconfont icon-close">
                     
                 </i>
@@ -210,8 +188,8 @@
                 <ul class="select_content">
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
-                    <li class="select_content_list" ng-repeat="dateRange in reportDateRanges ">
-                        <a class="select_content_list_value" data-value="{{ dateRange.value }}">{{ dateRange.meaning }}</a>
+                    <li class="select_content_list" ng-repeat="guestUser in guestUsers ">
+                        <a class="select_content_list_value" data-value="{{ guestUser.uid }}">{{ guestUser.nickname }}</a>
                     </li>
                 </ul>
             </div>
@@ -221,16 +199,6 @@
         </div>
         <div class="textarea">
             <span class="flag flag-icon"> Admin1
-                <i class="flag-icon_delete iconfont icon-close">
-                    
-                </i>
-            </span>
-            <span class="flag flag-icon"> Admin2
-                <i class="flag-icon_delete iconfont icon-close">
-                    
-                </i>
-            </span>
-            <span class="flag flag-icon"> Admin3
                 <i class="flag-icon_delete iconfont icon-close">
                     
                 </i>
