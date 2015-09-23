@@ -6,6 +6,7 @@ var tooltip = require('Tooltip');
 oasgames.mdataControllers.controller('reportEditCtrl', [
     '$scope',
     '$route',
+    '$http',
     '$cacheFactory',
     'REPORT_DATE_RANGE',
     'REPORT_DIMENSION',
@@ -16,7 +17,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
     'Report',
     'ApiCtrl',
     'MdataVerify',
-    function ($scope, $route, $cacheFactory, reportDateRanges, reportDimensions, filters, filterComputeSigns, valueTypes, valueArithmetics, Report, ApiCtrl, MdataVerify) {
+    function ($scope, $route, $http, $cacheFactory, reportDateRanges, reportDimensions, filters, filterComputeSigns, valueTypes, valueArithmetics, Report, ApiCtrl, MdataVerify) {
 
         // 日期范围可选列表-常量
         $scope.reportDateRanges = reportDateRanges;

@@ -21,6 +21,11 @@
             "nickname" : "d",
             "username" : "c@c.com",
             "uid" : 456
+        },
+        {
+            "nickname" : "special",
+            "username" : "special@special.com",
+            "uid" : 7758521
         }
     ]
 }
