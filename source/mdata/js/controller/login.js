@@ -49,7 +49,6 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                 return;
             }    
             if($scope['ndForm'].$valid && api ) {
-                console.log($scope.account);
                 $http.get(api,$scope.account).success(function (result) {
 
                     if(result.code == 200) {
@@ -111,30 +110,51 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
                 },
             };
             //格式不正确
-            for(var $error in $errors) {
-                if($errors[$error]) {
-                    $scope.showError(type, errorInfo[type][$error]);
+            if(type == "oldPassword"){  
+                var flag = 0;
+                //验证旧密码格式               
+                for(var $error in $errors) {
+                    if($errors[$error]) {
+                        $scope.showError(type, errorInfo[type][$error]);
+                        return false;
+                    }
+                }    
+                ///验证旧密码是否正确  
+                $http.get(ApiCtrl.get('checkPaw'),$scope.userPassword.oldPassword).success(function (result) {
+                    if(result.code != 200) {                      
+                        $scope.showError(type, errorInfo[type]['error']);
+                        flag = 1;
+                    }
+                }); 
+                if(flag == 1){
+                    return false;
+                } 
+            }else{  
+                for(var $error in $errors) {
+                    if($errors[$error]) {
+                        $scope.showError(type, errorInfo[type][$error]);
+                         return false;
+                    }
+                }  
+                //新旧密码相同
+                if($scope.userPassword.newPassword == $scope.userPassword.oldPassword && type == "newPassword" ){
+                    $scope.showError('newPassword', errorInfo.newPassword.noSame);
                     return false;
                 }
-            }
-            //新旧密码相同
-            if($scope.userPassword.newPassword == $scope.userPassword.oldPassword && type == "newPassword" ){
-                $scope.showError('newPassword', errorInfo.newPassword.noSame);
-                return false;
-            }
-            //重新输入密码不一致
-            if($scope.userPassword.newPassword != $scope.userPassword.reNewPassword && (type == "reNewPassword" || type == "newPassword" && $scope.reNewPassword)){
-                $scope.showError('reNewPassword', errorInfo.reNewPassword.mustSame);
-                return false;
-            }   
-            //重新输入新密码正确
-            if($scope.userPassword.newPassword == $scope.userPassword.reNewPassword && type == "newPassword" ){
-                if($scope.tooltip.errorType == 'reNewPassword') {
-                    $scope.tooltip.hide();
-                    $scope.reNewPasswordError = false;
+                //重新输入密码不一致
+                if($scope.userPassword.newPassword != $scope.userPassword.reNewPassword && (type == "reNewPassword" || type == "newPassword" && $scope.reNewPassword)){
+                    $scope.showError('reNewPassword', errorInfo.reNewPassword.mustSame);
                     return false;
-                }
-            }  
+                }   
+                //重新输入新密码正确
+                if($scope.userPassword.newPassword == $scope.userPassword.reNewPassword && type == "newPassword" ){
+                    if($scope.tooltip.errorType == 'reNewPassword') {
+                        $scope.tooltip.hide();
+                        $scope.reNewPasswordError = false;
+                        return false;
+                    }
+                }               
+            }
             return true;
         };
 
@@ -151,15 +171,13 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
             var api = ApiCtrl.get('login');
             //判断旧密码格式
             if(!$scope.blur("oldPassword",$scope['cPaw']['oldPassword'].$error)){
-                return;
+                return false;
             }
-            //判断新密码格式
-            if(!$scope.blur("newPassword",$scope['cPaw']['newPassword'].$error)){  
-                return;
+            if(!$scope.blur("newPassword",$scope['cPaw']['newPassword'].$error)){  //判断新密码格式
+                return false;
             }
-            //判断重新输入密码格式
-            if(!$scope.blur("reNewPassword",$scope['cPaw']['reNewPassword'].$error)){   
-                return;
+            if(!$scope.blur("reNewPassword",$scope['cPaw']['reNewPassword'].$error)){   //判断重新输入密码格式
+                return false;
             }
             //验证通过、新旧密码不一致并且新密码相同
             if($scope['cPaw'].$valid && api ) {
