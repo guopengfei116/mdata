@@ -21,7 +21,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
         // 当前account的数据
         $scope.accountSourceData = {};
 
-        //初始account的email值
+        // 初始account的email值
         $scope.accountEmail = "";
 
         // 当前编辑的accountId

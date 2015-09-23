@@ -11,13 +11,13 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
     'MdataVerify',
     function ($scope, reportDateRanges, reportDimensions, computeSigns, MdataVerify) {
 
-        // 日期范围可选列表
+        // 日期范围可选列表-常量
         $scope.reportDateRanges = reportDateRanges;
 
-        // dimension可选列表
+        // dimension可选列表-常量
         $scope.reportDimensions = reportDimensions;
 
-        // report_filter支持的运算符
+        // report_filter支持的运算符-常量
         $scope.computeSigns = computeSigns;
 
         // 事件处理、表单效验

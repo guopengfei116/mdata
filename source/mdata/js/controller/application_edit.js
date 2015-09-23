@@ -8,15 +8,18 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
     '$cacheFactory',
     '$route',
     'PROCESSOR',
+    'TIME_ZONE',
     'Application',
     'Account',
     'Filter',
     'MdataVerify',
-    'TIME_ZONE',
-    function ($scope, $cacheFactory, $route, processors, Application, Account, Filter, MdataVerify, timeZone) {
+    function ($scope, $cacheFactory, $route, processors, timeZone, Application, Account, Filter, MdataVerify) {
 
-        // processor可选列表
+        // processor可选列表-常量
         $scope.processors = processors;
+
+        // 时区可选列表-常量
+        $scope.timeZones = timeZone;
 
         // 所有的account列表
         $scope.accountsData = [];
@@ -29,9 +32,6 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
 
         // 当前编辑的appId
         $scope.appId = $route.current.params.applicationId;
-
-        //时区内容
-        $scope.timeZones = timeZone;
 
         /*
          * 如果有id，则说明是编辑状态
