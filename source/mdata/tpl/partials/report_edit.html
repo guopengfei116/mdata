@@ -1,15 +1,43 @@
 <form class="report-page" name="reportFrom" novalidate >
-    <fieldset class="field-common">
-        <legend class="field-title-com">Application Name</legend>
-        <input class="fieldset-text-com report-app" type="text" value="" ng-model="reportSourceData['reportData']['appname']"
-               ng-readonly="true" />
-    </fieldset>
-    <fieldset class="field-common">
-        <p>
-            <span class="field-title-com">Application ID</span>
-            <span class="flag">{{ reportSourceData['reportData']['appid'] }}</span>
-        </p>
-    </fieldset>
+    <section ng-if="reportIsExisting">
+        <fieldset class="field-common">
+            <legend class="field-title-com">Application Name</legend>
+            <input class="fieldset-text-com report-app" type="text" value="" ng-model="reportSourceData['reportData']['appname']"
+                   ng-readonly="true" />
+        </fieldset>
+        <fieldset class="field-common">
+            <p>
+                <span class="field-title-com">Application ID</span>
+                <span class="flag">{{ reportSourceData['reportData']['appid'] }}</span>
+            </p>
+        </fieldset>
+    </section>
+    <section ng-if="!reportIsExisting">
+        <fieldset class="field-common">
+            <legend class="field-title-com">Application Name</legend>
+            <div class="select select-host select-btn">
+                <div class="select_main">
+                    <input class="select_main_textarea select_target" placeholder="" type="text" value="">
+                    <button class="select_main_btn select_target">
+                        <i class="select_main_btn_icon"></i>
+                    </button>
+                </div>
+                <ul class="select_content">
+                    <li class="select_content_arrow"></li>
+                    <li class="select_content_arrow select_content_arrow-mask"></li>
+                    <li class="select_content_list" ng-repeat="reportDimension in reportDimensions ">
+                        <a class="select_content_list_value" data-value="{{ reportDimension.value }}">{{ reportDimension.dimension }}</a>
+                    </li>
+                </ul>
+            </div>
+        </fieldset>
+        <fieldset class="field-common">
+            <p>
+                <span class="field-title-com">Application ID</span>
+                <span class="flag">{{ reportSourceData['reportData']['appid'] }}</span>
+            </p>
+        </fieldset>
+    </section>
     <fieldset class="field-common">
         <legend class="field-title-com">Report Name</legend>
         <input class="fieldset-text-com fieldset-accountName" type="text" name="accountName" ng-model="reportSourceData['reportData']['report_name']"

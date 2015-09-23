@@ -19,25 +19,36 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
     'MdataVerify',
     function ($scope, $route, $http, $cacheFactory, reportDateRanges, reportDimensions, filters, filterComputeSigns, valueTypes, valueArithmetics, Report, ApiCtrl, MdataVerify) {
 
-        // 日期范围可选列表-常量
-        $scope.reportDateRanges = reportDateRanges;
+        /*
+        * 常量
+        * */
+        (function () {
+            // 日期范围可选列表-常量
+            $scope.reportDateRanges = reportDateRanges;
 
-        // dimension可选列表-常量
-        $scope.reportDimensions = reportDimensions;
+            // dimension可选列表-常量
+            $scope.reportDimensions = reportDimensions;
 
-        // report_filter可选列表-常量
-        $scope.filters = filters;
+            // report_filter可选列表-常量
+            $scope.filters = filters;
 
-        // report_filter支持的运算符-常量
-        $scope.filterComputeSigns = filterComputeSigns;
+            // report_filter支持的运算符-常量
+            $scope.filterComputeSigns = filterComputeSigns;
 
-        // report_value支持的类型-常量
-        $scope.valueTypes = valueTypes;
+            // report_value支持的类型-常量
+            $scope.valueTypes = valueTypes;
 
-        // report_value支持的算法-常量
-        $scope.valueArithmetics = valueArithmetics;
+            // report_value支持的算法-常量
+            $scope.valueArithmetics = valueArithmetics;
+        })();
 
-        // 无该report管理权限的账户
+        // 用于区分创建和编辑状态
+        $scope.reportIsExisting = false;
+
+        // 当前选择的app对应的value列表
+        $scope.reportIsExisting = false;
+
+        // 无该report管理权限的账户列表
         $scope.guestUsers = [];
 
         // 当前report的信息
@@ -51,6 +62,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
          * accountId先写死方便调试获取json-data
          * */
         if($scope.reportId) {
+            $scope.reportIsExisting = true;
             $scope.reportId = 'report_info';
             initReportData();
         }else {
@@ -74,6 +86,26 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                     Ui.alert('网络错误');
                 }
             );
+        }
+
+        /*
+        * get创建report所需的app列表数据，
+        * 这些app都是当前用户有管理权限的app
+        * */
+        function initAppData () {
+            $http({
+                method : "GET",
+                url : ApiCtrl.get('guestUser')
+            }).success(function (result) {
+                if(result.code == 200) {
+                    $scope.guestUsers = result.data;
+                    initSelectData();
+                }else {
+                    Ui.alert(result.msg);
+                }
+            }).error(function () {
+                Ui.alert('网络错误');
+            });
         }
 
         // getGuestUser数据
