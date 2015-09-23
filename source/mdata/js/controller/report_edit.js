@@ -37,6 +37,21 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                     $scope.tooltip.hide();
                 }
             };
+            /*
+            * 编辑提交
+            * */
+            $scope.submit = function () {
+                //判断Report Name
+                if(!MdataVerify.submit('accountName', $scope['reportFrom']['accountName'].$error,$scope)){
+                    return;
+                }
+                //判断Column
+                if($.trim($(".teatarea-column").html()) == ""){
+                     Ui.alert("Column must not be empty");
+                     return;
+                }
+
+            };
 
         })();
     }
