@@ -97,8 +97,20 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
             if(!$scope.reportSourceData['appDataList']) {
                 $scope.reportSourceData['appDataList'] = {};
             }
+            if(!$scope.reportSourceData['appDataList']['app']) {
+                $scope.reportSourceData['appDataList']['app'] = {};
+            }
             if(!$scope.reportSourceData['appDataList']['val_list']) {
                 $scope.reportSourceData['appDataList']['val_list'] = {};
+            }
+            if(!$scope.reportSourceData['reportData']) {
+                $scope.reportSourceData['reportData'] = {};
+            }
+            if(!$scope.reportSourceData['reportData']['values']) {
+                $scope.reportSourceData['reportData']['values'] = [];
+            }
+            if(!$scope.reportSourceData['reportData']['guestUserValue']) {
+                $scope.reportSourceData['reportData']['guestUserValue'] = [];
             }
             if(!$scope.guestUsers) {
                 $scope.guestUsers = [];
