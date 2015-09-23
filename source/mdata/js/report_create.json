@@ -2,14 +2,138 @@
   "msg" : "success",
   "code" : 200,
   "data" : {
-    "username" : "3@4.com",
-    "nickname" : "fsf",
-    "password" : "fsdfsda",
-    "admin_app_id" : [
-      777,17067,34712,4184,8422,89
+    "appDataList" : [
+      {
+        "app" : {
+          "appid" : 1419526315,
+          "name" : "ohshit",
+          "status_count" : 0,
+          "status_fields" : [],
+          "timezone" : "Asia/Shanghai",
+          "info_count" : 0,
+          "info_fields" : [],
+          "last_user_import_time" : 0,
+          "redshift_node" : "md50",
+          "_class" : "MDAppInfo"
+        },
+        "val_list" : {
+          "loss" : {
+            "format":""
+          },
+          "sum" : {
+            "format" : "event|property"
+          },
+          "count" : {
+            "format" : "event"
+          },
+          "unique_count" : {
+            "format" : "event"
+          },
+          "max" : {
+            "format" : "event|property"
+          },
+          "min" : {
+            "format" : "event|property"
+          }
+        }
+      },
+      {
+        "app" : {
+          "appid" : 1540934756,
+          "name" : "sed",
+          "status_count" : 2,
+          "status_fields" : [
+            "age",
+            "create"
+          ],
+          "timezone" : "Asia/Shanghai",
+          "info_count" : 0,
+          "info_fields" : [
+
+          ],
+          "last_user_import_time" : 1442892537,
+          "redshift_node" : "md50",
+          "_class" : "MDAppInfo"
+        },
+        "val_list" : {
+          "status" : {
+            "format" : "property"
+          },
+          "createrole" : {
+            "format" : "property"
+          },
+          "dstatus" : {
+            "format" : "property"
+          },
+          "dau" : {
+            "format" : ""
+          },
+          "dnu" : {
+            "format" : ""
+          },
+          "dou":{
+            "format" : ""
+          },
+          "dau_all" : {
+            "format" : ""
+          },
+          "dnu_all" : {
+            "format" : ""
+          },
+          "dou_all" : {
+            "format" : ""
+          },
+          "sum" : {
+            "format" : "event|property"
+          },
+          "count" : {
+            "format" : "event"
+          },
+          "unique_count" : {
+            "format" : "event"
+          },
+          "max" : {
+            "format" : "event|property"
+          },
+          "min" : {
+            "format" : "event|property"
+          },
+          "pay_sum" : {
+            "format" : "property"
+          },
+          "pay_count" : {
+            "format" : "property"
+          },
+          "pay_unique_count" : {
+            "format" : "property"
+          },
+          "retention" : {
+            "format" : "new_user,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13,d14,d15,d16,d17,d18,d19,d20,d21,d22,d23,d24,d25,d26,d27,d28,d29,d30,in4d,after4d,in7d,after7d,w2,w3,w4,in2w,after2w,m2,m3,m4,m5,m6,in1m,after1m,in6m,after6m"
+          }
+        }
+      }
     ],
-    "user_app_id" : [
-      7177,175067,347142,41884,841222,1289
+    "guestUser" : [
+      {
+        "uid" : "28",
+        "username" : "mike2@oasgames.com",
+        "nickname" : "mike_hao"
+      },
+      {
+        "uid" : "29",
+        "username" : "mike22@oasgames.com",
+        "nickname" : "mike_hao2"
+      },
+      {
+        "uid" : "30",
+        "username" : "mike_nbbcc@oasgames.com",
+        "nickname" : "eqwewqe"
+      },
+      {
+        "uid" : "31",
+        "username" : "mike_nb_dsasd2@oasgames.com",
+        "nickname" : "qweqwe"
+      }
     ]
   }
 }

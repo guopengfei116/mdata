@@ -42,112 +42,138 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
             $scope.valueArithmetics = valueArithmetics;
         })();
 
-        // 用于区分创建和编辑状态
-        $scope.reportIsExisting = false;
-
-        // 当前选择的app对应的value列表
-        $scope.reportIsExisting = false;
-
-        // 无该report管理权限的账户列表
-        $scope.guestUsers = [];
-
-        // 当前report的信息
-        $scope.reportSourceData = {};
-
         // 当前编辑的reportId
         $scope.reportId = $route.current.params.reportId;
 
-        /*
-         * 如果有id，则说明是编辑状态
-         * accountId先写死方便调试获取json-data
-         * */
-        if($scope.reportId) {
-            $scope.reportIsExisting = true;
-            $scope.reportId = 'report_info';
-            initReportData();
-        }else {
-            initGuestUserData();
-        }
+        // 用于区分创建和编辑状态
+        $scope.reportIsExisting = false;
 
-        // getReport数据
-        function initReportData () {
-            Report.get(
-                {reportId: $scope.reportId},
-                function (result) {
-                    if(result && result.code == 200) {
-                        $scope.reportSourceData = result.data;
-                        $scope.guestUsers = result.data['guestUser'];
-                        initSelectData();
-                    }else {
-                        Ui.alert(result.msg);
-                    }
-                },
-                function () {
-                    Ui.alert('网络错误');
-                }
-            );
-        }
+        // 编辑report获取到的所有数据
+        $scope.reportSourceData = {};
+
+        // 与当前所选app相关联的数据
+        $scope.appData = [];
 
         /*
-        * get创建report所需的app列表数据，
-        * 这些app都是当前用户有管理权限的app
+        * 可选列表初始化
         * */
-        function initAppData () {
-            $http({
-                method : "GET",
-                url : ApiCtrl.get('guestUser')
-            }).success(function (result) {
-                if(result.code == 200) {
-                    $scope.guestUsers = result.data;
-                    initSelectData();
-                }else {
-                    Ui.alert(result.msg);
+        (function () {
+            // 当前用户可支配的app列表,创建report所需信息
+            $scope.appDataList = [];
+
+            // 可选的value列表
+            $scope.valueList = [];
+
+            // guest_user可选的账户列表
+            $scope.guestUsers = [];
+
+            /*
+             * 如果有id，则说明是编辑状态
+             * */
+            if($scope.reportId) {
+                $scope.reportIsExisting = true;
+                $scope.reportId = 'report_info';
+                initReportData();
+            }else {
+                initAppData();
+            }
+
+            // 编辑Report时获取某report的数据
+            function initReportData () {
+                Report.get(
+                    {reportId: $scope.reportId},
+                    function (result) {
+                        if(result && result.code == 200) {
+                            $scope.reportSourceData = result.data;
+                            $scope.appData = result.data['appDataList'];
+                            $scope.guestUsers = result.data['guestUser'];
+                            initSelectData();
+                        }else {
+                            Ui.alert(result.msg);
+                        }
+                    },
+                    function () {
+                        Ui.alert('网络错误');
+                    }
+                );
+            }
+
+            /*
+             * 创建report时所需的数据，
+             * 包含可选的app列表和app数据，
+             * 这些app都是当前用户有管理权限的app。
+             * 同时含有第一个app对应的guest_account可选列表数据
+             * */
+            function initAppData () {
+                Report.get(
+                    {reportId: 'report_create'},
+                    function (result) {
+                        if(result && result.code == 200) {
+                            $scope.appDataList = result.data['appDataList'];
+                            $scope.appData = result.data['appDataList'][0];
+                            $scope.guestUsers = result.data['guestUser'];
+                            initSelectData();
+                        }else {
+                            Ui.alert(result.msg);
+                        }
+                    },
+                    function () {
+                        Ui.alert('网络错误');
+                    }
+                );
+            }
+
+            /*
+            * 初始化空值
+            * */
+            function initSelectData () {
+                // 已选的value列表
+                if(!$scope.reportSourceData['reportData']) {
+                    $scope.reportSourceData['reportData'] = {};
                 }
-            }).error(function () {
-                Ui.alert('网络错误');
-            });
-        }
+                // 已选的value列表
+                if(!$scope.reportSourceData['reportData']['values']) {
+                    $scope.reportSourceData['reportData']['values'] = [];
+                }
+                // 已选的guest用户列表
+                if(!$scope.reportSourceData['reportData']['guestUserValue']) {
+                    $scope.reportSourceData['reportData']['guestUserValue'] = [];
+                }
+                if(!$scope.appDataList) {
+                    $scope.appDataList = [];
+                }
+                if(!$scope.appData) {
+                    $scope.appData = {};
+                }
+                if(!$scope.appData['app']) {
+                    $scope.appData['app'] = {};
+                }
+                if(!$scope.appData['val_list']) {
+                    $scope.appData['val_list'] = {};
+                }
+                if(!$scope.valueList) {
+                    $scope.valueList = {};
+                }
+                if(!$scope.guestUsers) {
+                    $scope.guestUsers = [];
+                }
+            }
+        })();
 
         // getGuestUser数据
-        function initGuestUserData () {
+        function upGuestUserData () {
             $http({
                 method : "GET",
                 url : ApiCtrl.get('guestUser')
             }).success(function (result) {
                 if(result.code == 200) {
                     $scope.guestUsers = result.data;
-                    initSelectData();
                 }else {
                     Ui.alert(result.msg);
                 }
             }).error(function () {
                 Ui.alert('网络错误');
             });
-        }
-
-        // 排除空值
-        function initSelectData () {
-            if(!$scope.reportSourceData['appDataList']) {
-                $scope.reportSourceData['appDataList'] = {};
-            }
-            if(!$scope.reportSourceData['appDataList']['app']) {
-                $scope.reportSourceData['appDataList']['app'] = {};
-            }
-            if(!$scope.reportSourceData['appDataList']['val_list']) {
-                $scope.reportSourceData['appDataList']['val_list'] = {};
-            }
-            if(!$scope.reportSourceData['reportData']) {
-                $scope.reportSourceData['reportData'] = {};
-            }
-            if(!$scope.reportSourceData['reportData']['values']) {
-                $scope.reportSourceData['reportData']['values'] = [];
-            }
-            if(!$scope.reportSourceData['reportData']['guestUserValue']) {
-                $scope.reportSourceData['reportData']['guestUserValue'] = [];
-            }
-            if(!$scope.guestUsers) {
-                $scope.guestUsers = [];
-            }
         }
 
         // 事件处理、表单效验

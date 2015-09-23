@@ -17,7 +17,7 @@
             <legend class="field-title-com">Application Name</legend>
             <div class="select select-host select-btn">
                 <div class="select_main">
-                    <input class="select_main_textarea select_target" placeholder="" type="text" value="">
+                    <p class="select_main_text select_target"></p>
                     <button class="select_main_btn select_target">
                         <i class="select_main_btn_icon"></i>
                     </button>
@@ -25,8 +25,8 @@
                 <ul class="select_content">
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
-                    <li class="select_content_list" ng-repeat="reportDimension in reportDimensions ">
-                        <a class="select_content_list_value" data-value="{{ reportDimension.value }}">{{ reportDimension.dimension }}</a>
+                    <li class="select_content_list" ng-repeat="appData in appDataList ">
+                        <a class="select_content_list_value" data-value="{{ appData.app.appid }}">{{ appData.app.name }}</a>
                     </li>
                 </ul>
             </div>
@@ -150,7 +150,7 @@
                     <ul class="select_content">
                         <li class="select_content_arrow"></li>
                         <li class="select_content_arrow select_content_arrow-mask"></li>
-                        <li class="select_content_list" ng-repeat="(valueName, valueFormat) in reportSourceData['appDataList']['val_list']">
+                        <li class="select_content_list" ng-repeat="(valueName, valueFormat) in appData['val_list']">
                             <a class="select_content_list_value" data-value="{{ valueName }}">{{ valueName }}</a>
                         </li>
                     </ul>
@@ -182,7 +182,7 @@
                     <ul class="select_content">
                         <li class="select_content_arrow"></li>
                         <li class="select_content_arrow select_content_arrow-mask"></li>
-                        <li class="select_content_list" ng-repeat="(valueName, valueFormat) in reportSourceData['appDataList']['val_list']">
+                        <li class="select_content_list" ng-repeat="(valueName, valueFormat) in appData['val_list']">
                             <a class="select_content_list_value" data-value="{{ valueName }}">{{ valueName }}</a>
                         </li>
                     </ul>
