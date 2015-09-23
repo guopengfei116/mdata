@@ -71,7 +71,7 @@
 	.report-data-select{
 		@include inline-block();
 		width:118px;
-		margin-right:20px;
+		margin:0 10px 0 10px;
 		border: 1px solid #dce1e4;
 	}
 	.report-blue-btn{
@@ -95,6 +95,10 @@
 	.icon-date{
 		margin:8px 3px 0 0;
 		cursor:pointer;
+	}
+	.report-data-define{
+		margin-right:10px;
+		width:120px;
 	}
 }
 .report{
