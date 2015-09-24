@@ -151,7 +151,7 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
                     if($scope.tooltip.errorType == 'reNewPassword') {
                         $scope.tooltip.hide();
                         $scope.reNewPasswordError = false;
-                        return false;
+                        return true;
                     }
                 }               
             }
