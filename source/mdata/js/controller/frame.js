@@ -143,11 +143,12 @@ oasgames.mdataControllers.controller('navigationCtrl', [
             // 用于存储每个report默认展示状态
             $scope.reportsShow = [];
 
-            // shortcuts列表初始化
+            // get_shortcuts列表数据
             $scope.shortcuts = [];
             var shortcutCache = $cacheFactory.get('shortcut');
             if(shortcutCache && shortcutCache.get('list')) {
                 $scope.shortcuts = shortcutCache.get('list');
+                init();
             }else {
                 shortcutCache = $cacheFactory('shortcut');
                 $http({
@@ -158,7 +159,7 @@ oasgames.mdataControllers.controller('navigationCtrl', [
                     if(result.code == 200) {
                         $scope.shortcuts = result.data;
                         shortcutCache.put('list', result.data);
-                        initReportListStyle();
+                        init();
                     }else {
                         Ui.alert(result.msg);
                     }
@@ -167,27 +168,97 @@ oasgames.mdataControllers.controller('navigationCtrl', [
                 });
             }
 
-            // 初始化reports默认展示
-            function initReportListStyle () {
+            // 初始化reports默认展示，绑定事件
+            function init () {
                 for(var i = $scope.shortcuts.length - 1; i >= 0; i--) {
                     $scope.reportsShow[i] = shortcutsDefaultStatus;
                 }
+                bind();
             }
 
-            // 监听收藏事件，以更新左侧收藏列表
-            $rootScope.$on('shortcutsReport', function (appId, report) {
-                if($scope.shortcuts) {
-
+            /*
+            * @method 判断收藏列表是否已存在某app
+            * @return {Array || false} 存在返回一个数组，包含app对象和app的位置，不存在返回null
+            * */
+            function appIsExistShortcut(appId) {
+                for(var i = 0; i < $scope.shortcuts.length; i++) {
+                    if($scope.shortcuts[i].appid == appId) {
+                        return [$scope.shortcuts[i], i];
+                    }
                 }
-            });
 
-            $scope.copy = function (reportId) {
+                return null;
+            }
 
-            };
+            /*
+             * @method 判断收藏列表是否已存在某report
+             * @return {Object || false} 存在返回一个数组，包含report对象和report的位置，不存在返回null
+             * */
+            function reportIsExistShortcut(app, reportId) {
+                for(var i = 0; i < app.reports.length; i++) {
+                    if(app.reports[i].id == reportId) {
+                        return [app.reports[i], i];
+                    }
+                }
 
-            $scope.shortcut = function (reportId) {
+                return false;
+            }
 
-            };
+            // 事件监听，通过事件动态更新收藏列表
+            function bind () {
+
+                /*
+                * 收藏,
+                * 如果已收藏过这个app下的report，
+                * 则push新收藏的report到app['reports']，
+                * 否则新建一个app体系
+                * */
+                $rootScope.$on('addShortcut', function (event, report, app) {
+                    var appExitInfo = appIsExistShortcut(app.appid);
+                    var tempApp = appExitInfo && appExitInfo[0];
+
+                    if(tempApp) {
+                        if(!reportIsExistShortcut(tempApp, report.id)) {
+                            console.log(tempApp.reports);
+                            tempApp.reports.push(report);
+                            console.log(tempApp.reports);
+                        }
+                    }else {
+                        // 修改app的reports属性会造成连锁影响
+                        tempApp = {};
+                        tempApp.appid = app.appid;
+                        tempApp.appname = app.appname;
+                        tempApp.reports = [];
+                        tempApp.reports.push(app);
+                        $scope.shortcuts.push(tempApp);
+                    }
+                });
+
+                /*
+                 * 取消收藏,
+                 * 如果app下只有一个report，
+                 * 则删除这个app，
+                 * 否则删除report，
+                 * */
+                $rootScope.$on('cancelShortcut', function (event, report, app) {
+                    var appExitInfo = appIsExistShortcut(app.appid);
+                    var tempApp = appExitInfo && appExitInfo[0];
+
+                    if(tempApp.reports.length == 1) {
+                        $scope.shortcuts.splice(appExitInfo[1], 1);
+                        return;
+                    }
+
+                    var reportExitInfo = tempApp && reportIsExistShortcut(tempApp, report.id);
+                    var tempReport = reportExitInfo && reportExitInfo[0];
+
+                    if(tempReport) {
+                        console.log(tempApp.reports);
+                        tempApp.reports.splice(reportExitInfo[1], 1);
+                        console.log(tempApp.reports);
+                    }
+                });
+            }
         })()
     }
 ]);

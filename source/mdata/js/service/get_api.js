@@ -95,7 +95,8 @@ oasgames.mdataServices.factory('Shortcut', [
     'ApiCtrl',
     function ($resource, ApiCtrl) {
         return $resource(ApiCtrl.get('shortcut'), {}, {
-            save: {method: 'POST', params: {type: 'shortcut_add'}}
+            save: {method: 'POST', params: {type: 'shortcut_add'}},
+            get: {method: 'GET', params: {type: 'shortcut_add'}}
         });
     }
 ]);

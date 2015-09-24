@@ -34,6 +34,10 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
         * 收藏、取消收藏与左侧导航联动
         * */
         var Shortcuts = {
+            operationObject : {
+                "app" : null,
+                "report" : null
+            },
 
             /*
             * method ：初始化收藏标记-五角星的状态
@@ -119,22 +123,39 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
             * */
             bind : function () {
                 var self = this;
-                $scope.shortcutChange = function (reportId, appId) {
+                $scope.shortcutChange = function (report, app) {
+
+                    var reportId = report.reportId;
+                    var appId = app.appId;
+
+                    self.changeOperationObject(report, app);
+
                     if($scope.reportsShortcutStatus[reportId]) {
                         self.cancelShortcut(reportId, appId);
                     }else {
                         self.addShortcut(reportId, appId);
                     }
-
+                    console.log($scope.reportsShortcutStatus[reportId]);
                     $scope.reportsShortcutStatus[reportId] = !$scope.reportsShortcutStatus[reportId];
+                    console.log($scope.reportsShortcutStatus[reportId]);
                 };
             },
 
+            // 修改当前收藏操作的report和所属app对象
+            changeOperationObject : function (report, app) {
+                this.operationObject.report = report;
+                this.operationObject.app = app;
+            },
+
+            /*
+            *
+            * */
             addShortcut : function (reportId, appId) {
-                Shortcut.save(
+                var self = this;
+                Shortcut.get(
                     {reportId : reportId, appId : appId},
                     function () {
-
+                        $scope.$emit('addShortcut', self.operationObject.report, self.operationObject.app);
                     },
                     function () {
                         $scope.reportsShortcutStatus[reportId] = !$scope.reportsShortcutStatus[reportId];
@@ -142,12 +163,16 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                 );
             },
 
+            /*
+             *
+             * */
             cancelShortcut : function (reportId, appId) {
-                Shortcut.save(
+                var self = this;
+                Shortcut.get(
                     {'type' : 'shortcut_cancel'},
                     {reportId : reportId, appId : appId},
                     function () {
-
+                        $scope.$emit('cancelShortcut', self.operationObject.report, self.operationObject.app);
                     },
                     function () {
                         $scope.reportsShortcutStatus[reportId] = !$scope.reportsShortcutStatus[reportId];
