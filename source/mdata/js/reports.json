@@ -6,6 +6,9 @@
       "appname" : "ddg",
       "appid" : 1,
       "premission" : 1,
+      "admin_uid" : "28",
+      "user_uid" : "",
+      "guest_uid" : "25",
       "reports" : [
         {
           "id" : 23,
@@ -29,6 +32,9 @@
       "appname" : "pig",
       "appid" : 15,
       "premission" : 3,
+      "admin_uid" : "28",
+      "user_uid" : "",
+      "guest_uid" : "25",
       "reports" : [
         {
           "id" : 23,
@@ -52,6 +58,9 @@
       "appname" : "cu",
       "appid" : 28,
       "premission" : 2,
+      "admin_uid" : "28",
+      "user_uid" : "",
+      "guest_uid" : "25",
       "reports" : [
         {
           "id" : 45,

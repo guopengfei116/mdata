@@ -8,10 +8,14 @@
           "appid" : 1419526315,
           "name" : "ohshit",
           "status_count" : 0,
-          "status_fields" : [],
+          "status_fields" : [
+
+          ],
           "timezone" : "Asia/Shanghai",
           "info_count" : 0,
-          "info_fields" : [],
+          "info_fields" : [
+
+          ],
           "last_user_import_time" : 0,
           "redshift_node" : "md50",
           "_class" : "MDAppInfo"

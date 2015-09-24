@@ -92,10 +92,11 @@ oasgames.mdataControllers.controller('HeaderCtrl', [
 oasgames.mdataControllers.controller('navigationCtrl', [
     '$rootScope',
     '$scope',
+    '$cacheFactory',
     '$http',
     '$location',
     'ApiCtrl',
-    function ($rootScope, $scope, $http, $location, ApiCtrl) {
+    function ($rootScope, $scope, $cacheFactory, $http, $location, ApiCtrl) {
 
         // 权限
         $scope.authority = $rootScope.user['authority'];
@@ -144,22 +145,49 @@ oasgames.mdataControllers.controller('navigationCtrl', [
 
             // shortcuts列表初始化
             $scope.shortcuts = [];
-            $http({
-                method : "GET",
-                url : ApiCtrl.get('shortcuts'),
-                data : { "reportId" : 1, }
-            }).success(function (data, status) {
-                if(data && data.code == 200) {
-                    $scope.shortcuts = data.data;
-                }
+            var shortcutCache = $cacheFactory.get('shortcut');
+            if(shortcutCache && shortcutCache.get('list')) {
+                $scope.shortcuts = shortcutCache.get('list');
+            }else {
+                shortcutCache = $cacheFactory('shortcut');
+                $http({
+                    method : "GET",
+                    url : ApiCtrl.get('shortcuts'),
+                    data : { "reportId" : 1, }
+                }).success(function (result, status) {
+                    if(result.code == 200) {
+                        $scope.shortcuts = result.data;
+                        shortcutCache.put('list', result.data);
+                        initReportListStyle();
+                    }else {
+                        Ui.alert(result.msg);
+                    }
+                }).error(function () {
+                    Ui.alert('网络错误');
+                });
+            }
 
-                // 初始化reports默认展示
+            // 初始化reports默认展示
+            function initReportListStyle () {
                 for(var i = $scope.shortcuts.length - 1; i >= 0; i--) {
                     $scope.reportsShow[i] = shortcutsDefaultStatus;
                 }
-            }).error(function () {
-                Ui.alert('网络错误');
+            }
+
+            // 监听收藏事件，以更新左侧收藏列表
+            $rootScope.$on('shortcutsReport', function (appId, report) {
+                if($scope.shortcuts) {
+
+                }
             });
+
+            $scope.copy = function (reportId) {
+
+            };
+
+            $scope.shortcut = function (reportId) {
+
+            };
         })()
     }
 ]);

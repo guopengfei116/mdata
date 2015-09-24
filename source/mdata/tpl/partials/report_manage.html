@@ -11,18 +11,18 @@
     <dl class="container" ng-repeat="app in viewData">
         <dt class="row row-title">
             <ul>
-                <li class="row_column row_column-2"><a href="javascript: void (0);" ng-click="reportsShow[$index] = !reportsShow[$index]">{{ app.appname }}</a></li>
-                <li class="row_column row_column-2"><i class="iconfont icon-collection-unchecked"></i></li>
+                <li class="row_column row_column-1"><a href="javascript: void (0);" ng-click="reportsShow[$index] = !reportsShow[$index]">{{ app.appname }}</a></li>
             </ul>
         </dt>
         <dd ng-show="reportsShow[$index]">
             <ul class="row" ng-repeat="report in app.reports">
                 <li class="row_column row_column-2"><a href="#/report/view/{{ report.id }}">{{ report.report_name }}</a></li>
                 <li class="row_column row_column-2">
-                    <span ng-if="app.premission < 2" class="iconfont icon-copy tooltip-host" data-tooltip-position="bc" data-tooltip-info="Duplicate"></span>
+                    <span ng-if="app.premission < 2" ng-click="copy(report.id)" class="iconfont icon-copy tooltip-host" data-tooltip-position="bc" data-tooltip-info="Duplicate"></span>
                     <a ng-if="app.premission < 2" href="#/report/manage/edit/{{ report.id }}"  class="iconfont icon-edit tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></a>
                     <span ng-if="app.premission < 2" class="iconfont icon-delete tooltip-host" data-tooltip-position="bc" data-tooltip-info="Delete" ng-click="delete(report.id)"></span>
-                    <span class="iconfont icon-collection-unchecked tooltip-host" data-tooltip-position="bc" data-tooltip-info="Shortcut"></span>
+                    <span class="iconfont tooltip-host" ng-class="{ 'icon-collection-unchecked' : !reportsShortcutStatus[report.id], 'icon-collection-checked' : reportsShortcutStatus[report.id] }"
+                          ng-click="shortcutChange(report.id, app.appid)" data-tooltip-position="bc" data-tooltip-info="Shortcut"></span>
                 </li>
             </ul>
         </dd>

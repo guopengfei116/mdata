@@ -3,50 +3,48 @@
   "code" : 200,
   "data" : [
     {
-      "app" : {
-        "name" : "app1",
-        "id" : 1
-      },
+      "appname" : "ddg",
+      "appid" : 1,
       "reports" : [
         {
-          "name" : "report1",
-          "id" : 11
+          "id" : 23,
+          "report_name" : "report1"
         },
         {
-          "name" : "report2",
-          "id" : 12
+          "id" : 45,
+          "report_name" : "hgjfg"
+        },
+        {
+          "id" : 76,
+          "report_name" : "report3"
         }
       ]
     },
     {
-      "app" : {
-        "name" : "app2",
-        "id" : 2
-      },
+      "appname" : "pig",
+      "appid" : 15,
       "reports" : [
         {
-          "name" : "report21",
-          "id" : 21
+          "id" : 23,
+          "report_name" : "nrd"
         },
         {
-          "name" : "report22",
-          "id" : 22
+          "id" : 45,
+          "report_name" : "awzx"
         }
       ]
     },
     {
-      "app" : {
-        "name" : "app3",
-        "id" : 3
-      },
+      "appname" : "cu",
+      "appid" : 28,
       "reports" : [
         {
-          "name" : "report31",
-          "id" : 31
+          "id" : 34,
+          "report_name" : "sewd"
         },
         {
-          "name" : "report32",
-          "id" : 32
+          "id" : 64,
+          "report_name" : "nk"
         }
       ]
     }
