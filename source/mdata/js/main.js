@@ -57,6 +57,7 @@ require('./directive/cascade_choice.js');
  * */
 oasgames.mdataControllers = angular.module('mdataControllers', []);
 require('./controller/frame.js');
+require('./controller/navigation.js');
 require('./controller/login.js');
 require('./controller/applications.js');
 require('./controller/application_edit.js');
