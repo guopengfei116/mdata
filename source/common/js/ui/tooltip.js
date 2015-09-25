@@ -57,6 +57,11 @@ $.extend(Tooltip.prototype, {
         }).on('mouseleave', Tooltip.prototype.target, function () {
             self.hide();
         });
+
+        // 清除active状态
+        $(this.trigger).on('click', function (e) {
+            self.hide();
+        });
     },
 
     show: function (position) {

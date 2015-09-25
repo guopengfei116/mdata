@@ -124,9 +124,8 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
             bind : function () {
                 var self = this;
                 $scope.shortcutChange = function (report, app) {
-
-                    var reportId = report.reportId;
-                    var appId = app.appId;
+                    var reportId = report.id;
+                    var appId = app.appid;
 
                     self.changeOperationObject(report, app);
 

@@ -229,7 +229,7 @@ oasgames.mdataControllers.controller('navigationCtrl', [
                         tempApp.appid = app.appid;
                         tempApp.appname = app.appname;
                         tempApp.reports = [];
-                        tempApp.reports.push(app);
+                        tempApp.reports.push(report);
                         $scope.shortcuts.push(tempApp);
                     }
                 });
