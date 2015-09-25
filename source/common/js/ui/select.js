@@ -61,11 +61,12 @@ $.extend(Select.prototype, {
         $(o.trigger).on('click', self.optionsTarget, function (e) {
             e.stopPropagation();
             var $this = $(this);
-
+            var $select = $this.parents(self.selector);
             var val = $this.data('value');
-            $this.parents(self.selector).data('value', $this.data('value')).toggleClass('select-active');
-            $this.parents(self.selector).find(self.textarea).val($this.text());
-            $this.parents(self.selector).find(self.text).text($this.text());
+
+            $select.data('value', val).toggleClass('select-active');
+            $select.find(self.textarea).val($this.text());
+            $select.find(self.text).text($this.text());
         });
 
         // select阻止事件外流

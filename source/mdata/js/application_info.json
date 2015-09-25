@@ -40,17 +40,8 @@
         }
       ],
       "processor" : [
-        {
-          "processor": "process1",
-          "events" : "event"
-        },
-        {
-          "processor": "process1",
-          "events" : "event"
-        }
+        "dau|event",
+        "mau|event"
       ]
     }
 }
-
-
-

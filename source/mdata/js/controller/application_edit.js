@@ -70,6 +70,9 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
             if(!$scope.appSourceData['reportViewer']) {
                 $scope.appSourceData['reportViewer'] = [];
             }
+            if(!$scope.appSourceData['processor']) {
+                $scope.appSourceData['processor'] = [];
+            }
         }
 
         // getAccount列表数据

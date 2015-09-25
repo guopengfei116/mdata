@@ -5,17 +5,17 @@
 oasgames.mdataConstant.constant("API_CONFIG", {
     "online" : {
         'userAuth' : '/isLogin',
-        'login' : '/mdata/js/login.json',
-        'logout' : '/mdata/js/logout.json',
+        'login' : '/site/login',
+        'logout' : '/site/logout',
         'checkPaw' : '/mdata/js/check_password.json',
-        'shortcuts' : '/mdata/js/shortcuts.json',
-        'application' : '/mdata/js/:appId.json',
-        'account' : '/mdata/js/:accountId.json',
+        'application' : '/app/:appId.json',
+        'account' : '/user/:accountId.json',
+        'systemLog' : '/log/index',
         'report' : '/mdata/js/:reportId.json',
+        'reportName' : '/mdata/js/check_reportName.json',
+        'shortcuts' : '/mdata/js/shortcuts.json',
         'shortcut' : '/mdata/js/:type.json',
-        'guestUser' : '/mdata/js/guest_user.json',
-        'systemLog' : '/mdata/js/system_log.json',
-        'reportName' : '/mdata/js/check_reportName.json'
+        'guestUser' : '/mdata/js/guest_user.json'
     },
     "local" : {
         'userAuth' : '/isLogin',

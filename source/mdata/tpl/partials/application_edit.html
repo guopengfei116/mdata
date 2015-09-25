@@ -83,10 +83,10 @@
             </span>
         </div>
     </cascadechoice>
-    <fieldset class="field-common">
+    <recombination separator="|">
         <legend class="field-title-com">Processor(s)</legend>
-        <div>
-            <div class="select select-host processor-select">
+        <div class="recombination-menu">
+            <div class="select select-host processor-select recombination-input" required-warn="please fill out the processor">
                 <div class="select_main">
                     <p class="select_main_text select_target">Processor</p>
                     <button class="select_main_btn select_target">
@@ -101,32 +101,17 @@
                     </li>
                 </ul>
             </div>
-            <input class="fieldset-text-com" type="text" placeholder="event1|event2">
-            <button class="button">add</button>
-            <a class="button button-check"><i class="iconfont icon-check"></i></a>
-            <a class="button button-close"><i class="iconfont icon-close"></i></a>
+            <input class="fieldset-text-com recombination-input" type="text" placeholder="event1|event2" required-warn="please fill out the processor event">
+            <button class="button add-select">add</button>
         </div>
-        <div class="textarea textarea-processor fieldset-processor"  >
-            <span class="flag flag-icon"> Admin1
-                <i class="flag-icon_delete iconfont icon-close">
-                    
-                </i>
-            </span>
-            <span class="flag flag-icon"> Admin2
-                <i class="flag-icon_delete iconfont icon-close">
-                    
-                </i>
-            </span>
-            <span class="flag flag-icon"> Admin3
-                <i class="flag-icon_delete iconfont icon-close">
-                    
-                </i>
+        <div class="textarea textarea-processor fieldset-processor">
+            <span class="flag flag-icon" ng-repeat="processor in appSourceData['processor']">
+                <i class="flag-text" data-value="{{ processor }}">{{ processor }}</i>
+                <i class="flag-icon_delete iconfont icon-close" data-value="{{ processor }}"></i>
             </span>
         </div>
         <span class="red-star">*</span>
-    </fieldset>
-
-
+    </recombination>
     <fieldset class="field-common">
         <span class="button-group page-btns" ng-click="submit()">
             <button class="button button-create-plus"><i class="iconfont icon-plus"></i></button>

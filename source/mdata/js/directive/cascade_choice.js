@@ -1,6 +1,6 @@
 
 /*
- * @account和application联动指令
+ * @account和application中的联动指令
  * */
 oasgames.mdataDirective.directive('cascadechoice', [
     'Exclude',
@@ -143,8 +143,11 @@ oasgames.mdataDirective.directive('cascadechoice', [
                         $selectInput.val('');
                     });
 
+                    // 绑定delete事件
                     element.on('click', '.flag-icon_delete', function () {
                         var val = $(this).data('value');
+
+                        // resultValue 和 selectedData length一样，记录一下，待优化
 
                         // 删除值，更新select值
                         for(var i = 0; i < $scope.resultValue.length; i++) {
