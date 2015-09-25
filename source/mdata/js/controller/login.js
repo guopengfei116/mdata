@@ -168,7 +168,7 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
 
         //修改密码提交
         $scope.submit = function () {
-            var api = ApiCtrl.get('login');
+            var api = ApiCtrl.get('changePaw');
             //判断旧密码格式
             if(!$scope.blur("oldPassword",$scope['cPaw']['oldPassword'].$error)){
                 return false;
