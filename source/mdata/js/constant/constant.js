@@ -2,6 +2,40 @@
 /*
  * 用户权限对照表
  * */
+oasgames.mdataConstant.constant("API_CONFIG", {
+    "online" : {
+        'userAuth' : '/isLogin',
+        'login' : '/mdata/js/login.json',
+        'logout' : '/mdata/js/logout.json',
+        'checkPaw' : '/mdata/js/check_password.json',
+        'shortcuts' : '/mdata/js/shortcuts.json',
+        'application' : '/mdata/js/:appId.json',
+        'account' : '/mdata/js/:accountId.json',
+        'report' : '/mdata/js/:reportId.json',
+        'shortcut' : '/mdata/js/:type.json',
+        'guestUser' : '/mdata/js/guest_user.json',
+        'systemLog' : '/mdata/js/system_log.json',
+        'reportName' : '/mdata/js/check_reportName.json'
+    },
+    "local" : {
+        'userAuth' : '/isLogin',
+        'login' : '/mdata/js/login.json',
+        'logout' : '/mdata/js/logout.json',
+        'checkPaw' : '/mdata/js/check_password.json',
+        'shortcuts' : '/mdata/js/shortcuts.json',
+        'application' : '/mdata/js/:appId.json',
+        'account' : '/mdata/js/:accountId.json',
+        'report' : '/mdata/js/:reportId.json',
+        'shortcut' : '/mdata/js/:type.json',
+        'guestUser' : '/mdata/js/guest_user.json',
+        'systemLog' : '/mdata/js/system_log.json',
+        'reportName' : '/mdata/js/check_reportName.json'
+    }
+});
+
+/*
+ * 用户权限对照表
+ * */
 oasgames.mdataConstant.constant("AUTHORITY", {
     'administrators' : 1,
     'yeoman' : 2,

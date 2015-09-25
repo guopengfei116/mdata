@@ -4,22 +4,10 @@
  * @return {Function} 获取接口url
  * */
 oasgames.mdataServices.provider('ApiCtrl', [
-    function () {
+    'API_CONFIG',
+    function (apiAll) {
         return {
-            API : {
-                'userAuth' : '/isLogin',
-                'login' : '/mdata/js/login.json',
-                'logout' : '/mdata/js/logout.json',
-                'checkPaw' : '/mdata/js/check_password.json',
-                'shortcuts' : '/mdata/js/shortcuts.json',
-                'application' : '/mdata/js/:appId.json',
-                'account' : '/mdata/js/:accountId.json',
-                'report' : '/mdata/js/:reportId.json',
-                'shortcut' : '/mdata/js/:type.json',
-                'guestUser' : '/mdata/js/guest_user.json',
-                'systemLog' : '/mdata/js/system_log.json',
-                'reportName' : '/mdata/js/check_reportName.json'
-            },
+            API : apiAll.local,
             setApi : function (name, url) {
                 this.API[name] = url;
             },
