@@ -62,14 +62,31 @@ oasgames.mdataDirective.directive('recombination', [
                     var val = $(this).data('value');
                     var $flag = $(this).parent('.flag');
                     $flag.css('bakcgrountColor', '#65c178');
-console.log(111);
+
+                    // 隐藏添加按钮
+                    element.find('.add-select').hide();
+
                     var echo = new Echo(
-                        val, separator, element,
+                        val,
+                        separator,
+                        element,
                         function (newVal) {
-                            $flag.css('bakcgrountColor', '#12afcb').find('flag-text').data('value', newVal).text(newVal);
+                            if(val != newVal) {
+                                for(var i = 0; i < $scope.appSourceData['processor'].length; i++) {
+                                    if($scope.appSourceData['processor'][i] == val) {
+                                        $scope.appSourceData['processor'][i] = newVal;
+                                        element.data('value', $scope.appSourceData['processor']);
+                                        break;
+                                    }
+                                }
+                                $flag.css('bakcgrountColor', '#12afcb').find('.flag-text').data('value', newVal).text(newVal);
+                                $flag.find('.flag-icon_delete').data('value', newVal);
+                                element.find('.add-select').show();
+                            }
                         },
                         function () {
                             $flag.css('bakcgrountColor', '#12afcb');
+                            element.find('.add-select').show();
                         }
                     );
                 });
@@ -83,7 +100,7 @@ console.log(111);
                 * @* echo会按照'.recombination-input'的数量进行分割value并按照顺序回写值
                 * @* 回写时会添加确定与取消两个按钮到'.recombination-menu'里
                 * */
-                var Echo = function (value, separator, domScopo) {
+                var Echo = function (value, separator, domScope) {
 
                     // 复合值的字符串
                     this.value = value;
@@ -92,7 +109,7 @@ console.log(111);
                     this.separator = separator;
 
                     // dom祖类
-                    this.domScopo = domScopo;
+                    this.domScope = domScope;
 
                     // 回调
                     this.success = arguments[arguments.length - 2];
@@ -115,8 +132,8 @@ console.log(111);
                     // 初始化
                     init : function () {
                         var self = this;
-                        var $domScopo = $(this.domScopo);
-                        var $echoForms = $domScopo.find(this.inputSelector);
+                        var $domScope = $(this.domScope);
+                        var $echoForms = $domScope.find(this.inputSelector);
                         var values = this.value.split(this.separator);
 
                         // 检测value分割正确性
@@ -135,30 +152,37 @@ console.log(111);
                     // 销毁操作痕迹
                     destroy : function () {
                         var self = this;
-                        var $domScope = $(this.domScopo);
+                        var $domScope = $(this.domScope);
                         var $echoForms = $domScope.find(this.inputSelector);
 
                         $domScope.find('.echo-button').remove();
-                        $domScope.off('click', '.echo-button-check .echo-button-close');
+                        $domScope.off('click', '.echo-button-check');
+                        $domScope.off('click', '.echo-button-close');
                         this.setValue($echoForms);
                     },
 
                     // echo确定和取消按钮
                     bind : function () {
                         var self = this;
-                        var $domScope = $(this.domScopo);
+                        var $domScope = $(this.domScope);
+                        var $echoForms = $domScope.find(this.inputSelector);
 
-                        // 添加编辑按钮
+                        // 防止重复添加
+                        if($domScope.find('.echo-button').length) {
+                            return;
+                        }
+
+                        // 添加echo操作按钮
                         $domScope.find(this.btnWrapSelector).append(this.btnTemplate);
 
                         // 绑定事件
                         $domScope.on('click', '.echo-button-check', function () {
-                            var newVal = self.getValue($domScope, self.separator);
+                            var newVal = self.getValue($echoForms, self.separator);
                             self.success(newVal);
                             self.destroy();
 
                         }).on('click', '.echo-button-close', function () {
-                            var newVal = self.getValue($domScope, self.separator);
+                            var newVal = self.getValue($echoForms, self.separator);
                             self.failure(newVal);
                             self.destroy();
                         })
@@ -181,15 +205,21 @@ console.log(111);
                             }else {
                                 temVal = $(this).val();
                             }
-                            temWarn = $(this).attr('required-warn');
 
                             // 必填项没有填写，进行提示，并返回""
+                            temWarn = $(this).attr('required-warn');
                             if(!temVal && temWarn) {
                                 Ui.alert(temWarn);
                                 val = "";
                                 return false;
                             }else {
-                                val += separator + temVal;
+
+                                // 第一次直接赋值
+                                if(!val) {
+                                    val = temVal;
+                                }else {
+                                    val += separator + temVal;
+                                }
                             }
                         });
 
@@ -219,6 +249,7 @@ console.log(111);
                         var $select = $(select);
                         var $text = $select.find('.select_main_text');
                         var $textarea = $select.find('.select_main_textarea');
+
                         if($text.length) {
                             $text.text(val);
                         }
@@ -231,7 +262,7 @@ console.log(111);
                     // text表单回写
                     textEcho : function (text, val) {
                         var $text = $(text);
-                        $text.val(text, val);
+                        $text.val(val);
                     }
                 };
             },
