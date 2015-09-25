@@ -182,8 +182,27 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
 
             //表单失去焦点时错误提示
             $scope.blur = function(type, $errors){
-                console.log($errors);
-                MdataVerify.blur(type, $errors, $scope);
+                if(type == "reportName"){
+                    if(MdataVerify.blur(type, $errors, $scope)){
+                        //验证report name是否重复  
+                        var flag = 0;
+                        $http.get(ApiCtrl.get('reportName'),$scope.reportSourceData['reportData']['report_name']).success(function (result) {
+                            if(result.code != 200) {                      
+                                $scope[type + 'Error'] = true;
+                                $scope.tooltip.errorType = type;
+                                $scope.tooltip.setContent("report name 重复");
+                                $scope.tooltip.setPosition('.fieldset-' + type, $scope.tooltip.toolTipLooks);
+                                $scope.tooltip.toolTipLooks.css({'color': 'rgba(255, 0, 0, 0.7)'});
+                                $scope.tooltip.show();
+                                flag = 1;
+                            }
+                        }); 
+                        if(flag == 1){
+                            return false;
+                        } 
+                    }              
+                }
+                MdataVerify.blur(type, $errors, $scope);                
             };
 
             //表单焦点时清除错误提示
@@ -198,8 +217,19 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
             * */
             $scope.submit = function () {
                 //判断Report Name
-                if(!MdataVerify.submit('accountName', $scope['reportFrom']['accountName'].$error,$scope)){
-                    return;
+                if($.trim($(".fieldset-reportName").val()) == ""){
+                     Ui.alert("Report Name must not be empty");
+                     return false;
+                }else{//判断重复
+                    $http.get(ApiCtrl.get('reportName'),$scope.reportSourceData['reportData']['report_name']).success(function (result) {
+                        if(result.code != 200) {                      
+                            Ui.alert("Report Name 重复");
+                            flag = 1;
+                        }
+                    }); 
+                    if(flag == 1){
+                        return false;
+                    } 
                 }
                 //判断Column
                 if($.trim($(".teatarea-column").html()) == ""){

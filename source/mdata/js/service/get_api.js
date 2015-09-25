@@ -17,7 +17,8 @@ oasgames.mdataServices.provider('ApiCtrl', [
                 'report' : '/mdata/js/:reportId.json',
                 'shortcut' : '/mdata/js/:type.json',
                 'guestUser' : '/mdata/js/guest_user.json',
-                'systemLog' : '/mdata/js/system_log.json'
+                'systemLog' : '/mdata/js/system_log.json'，
+                'reportName' : '/mdata/js/check_reportName.json'
             },
             setApi : function (name, url) {
                 this.API[name] = url;
