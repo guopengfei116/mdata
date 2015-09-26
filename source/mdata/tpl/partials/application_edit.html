@@ -29,7 +29,7 @@
             </div>
         <span class="red-star">*</span>
     </fieldset>
-    <cascadechoice select-data="accountsData" selected-data="selectedAccountuids" flag-data="appSourceData['reportAdmin']"  flag-data-key="uid">
+    <cascadechoice select-data="accountsData" selected-data="selectedAccountuids" flag-data="appSourceData['reportAdmin']" flag-data-key="uid">
         <legend class="field-title-com">Report Admin</legend>
         <div>
             <div class="select select-host select-btn">
@@ -56,7 +56,7 @@
             </span>
         </div>
     </cascadechoice>
-    <cascadechoice select-data="accountsData" selected-data="selectedAccountuids" flag-data="appSourceData['reportViewer']"  flag-data-key="uid">
+    <cascadechoice select-data="accountsData" selected-data="selectedAccountuids" flag-data="appSourceData['reportViewer']" flag-data-key="uid">
         <legend class="field-title-com">Report Viewer</legend>
         <div>
             <div class="select select-host select-btn">
@@ -83,7 +83,7 @@
             </span>
         </div>
     </cascadechoice>
-    <recombination separator="|">
+    <recombination separator="|" recombination-data="appSourceData['processor']">
         <legend class="field-title-com">Processor(s)</legend>
         <div class="recombination-menu">
             <div class="select select-host processor-select recombination-input" required-warn="please fill out the processor">

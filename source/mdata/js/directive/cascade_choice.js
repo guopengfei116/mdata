@@ -14,11 +14,10 @@ oasgames.mdataDirective.directive('cascadechoice', [
                 '</fieldset>',
             transclude: true,
             scope: {
-                selectData : '=',
+                flagDataKey : '@',
                 flagData : '=',
-                selectedData : '=',
-                selectSearchData : '=',
-                flagDataKey : '@'
+                selectData : '=',
+                selectedData : '='
             },
             link: function ($scope, element, attr, reScope) {
                 var $select = element.find('.select');
@@ -53,7 +52,7 @@ oasgames.mdataDirective.directive('cascadechoice', [
 
                     resultValueInit = true;
                     $scope.$broadcast('bind');
-                    //flagDataWatchCancel();
+                    flagDataWatchCancel();
                 });
 
                 /*
@@ -124,7 +123,7 @@ oasgames.mdataDirective.directive('cascadechoice', [
 
                         var val = $select.data('value');
                         if(!val) {
-                            Ui.alert('请先选择');
+                            Ui.alert('please fill out the data');
                             return;
                         }
 
@@ -147,9 +146,7 @@ oasgames.mdataDirective.directive('cascadechoice', [
                     element.on('click', '.flag-icon_delete', function () {
                         var val = $(this).data('value');
 
-                        // resultValue 和 selectedData length一样，记录一下，待优化
-
-                        // 删除值，更新select值
+                        // 删除值，更新结果数据，result是单个表单的值
                         for(var i = 0; i < $scope.resultValue.length; i++) {
                             if($scope.resultValue[i] == val) {
                                 $scope.resultValue.splice(i, 1);
@@ -157,14 +154,14 @@ oasgames.mdataDirective.directive('cascadechoice', [
                         }
                         element.data('value', $scope.resultValue);
 
-                        // 删除值，更新select选择列表
+                        // 删除值，更新select选择列表，selected是多个表单值的集合
                         for(var i = 0; i < $scope.selectedData.length; i++) {
                             if($scope.selectedData[i] == val) {
                                 $scope.selectedData.splice(i, 1);
                             }
                         }
 
-                        // 删除值，更新选择展示列表
+                        // 删除值，更新选择展示列表，result是单个表单的值所属的对象类型
                         for(var i = 0; i < $scope.flagData.length; i++) {
                             if($scope.flagData[i][$scope.flagDataKey] == val) {
                                 $scope.flagData.splice(i, 1);

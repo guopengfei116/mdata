@@ -83,11 +83,17 @@
       "appname" : "sed",
       "report_name" : "test",
       "describe" : "sssss",
-      "dimension" : null,
-      "filter" : null,
       "date_begin" : 1442480984,
       "date_end" : 1442480984,
       "create_time" : 1442480984,
+      "dimension" : [
+        "id",
+        "uuid"
+      ],
+      "filter" : [
+        "id|=|1",
+        "ip|+|1"
+      ],
       "values" : [
         {
           "value_name" : "status age",

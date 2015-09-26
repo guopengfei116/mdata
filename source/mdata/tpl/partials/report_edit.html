@@ -48,10 +48,10 @@
         <legend class="field-title-com">Describe</legend>
         <textarea class="fieldset-text-com report-describe" placeholder="Input massage..." ng-model="reportSourceData['reportData']['describe']"></textarea>
     </fieldset>
-    <fieldset class="field-common">
+    <recombination separator="|" recombination-data="reportSourceData['reportData']['dimension']">
         <legend class="field-title-com">Dimension</legend>
-        <div>
-            <div class="select select-host select-btn">
+        <div class="recombination-menu">
+            <div class="select select-host select-btn recombination-input" required-warn="please fill out the Dimension">
                 <div class="select_main">
                     <input class="select_main_textarea select_target" placeholder="" type="text" value="">
                     <button class="select_main_btn select_target">
@@ -66,19 +66,19 @@
                     </li>
                 </ul>
             </div>
-            <button class="button">add</button>
+            <button class="button add-select">add</button>
         </div>
         <div class="textarea">
             <span class="flag flag-icon" ng-repeat="dimension in reportSourceData['reportData']['dimension']">
-                {{ dimension }}
+                <i class="flag-text" data-value="{{ dimension }}">{{ dimension }}</i>
                 <i class="flag-icon_delete iconfont icon-close" data-value="{{ dimension }}"></i>
             </span>
         </div>
-    </fieldset>
-    <fieldset class="field-common">
+    </recombination>
+    <recombination separator="|" recombination-data="reportSourceData['reportData']['filter']">
         <legend class="field-title-com">Filter</legend>
-        <div>
-            <div class="select select-host select-btn select-btn-small">
+        <div class="recombination-menu">
+            <div class="select select-host select-btn select-btn-small recombination-input" required-warn="please fill out the Filter">
                 <div class="select_main">
                     <input class="select_main_textarea select_target" type="text" value="" />
                     <button class="select_main_btn select_target">
@@ -93,7 +93,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="select select-host select-btn select-btn-small">
+            <div class="select select-host select-btn select-btn-small recombination-input" required-warn="please fill out the Filter Sign">
                 <div class="select_main">
                     <p class="select_main_text select_target"></p>
                     <button class="select_main_btn select_target">
@@ -108,18 +108,16 @@
                     </li>
                 </ul>
             </div>
-            <input class="fieldset-text-com field-text-column" type="text" value="" placeholder="Value" />
-            <button class="button">add</button>
-            <a class="button button-check"><i class="iconfont icon-check"></i></a>
-            <a class="button button-close"><i class="iconfont icon-close"></i></a>
+            <input class="fieldset-text-com field-text-column recombination-input" type="text" value="" placeholder="Filter Value" required-warn="please fill out the Filter Value"/>
+            <button class="button add-select">add</button>
         </div>
         <div class="textarea">
             <span class="flag flag-icon" ng-repeat="filter in reportSourceData['reportData']['filter']">
-                {{ filter }}
+                <i class="flag-text" data-value="{{ filter }}">{{ filter }}</i>
                 <i class="flag-icon_delete iconfont icon-close" data-value="{{ filter }}"></i>
             </span>
         </div>
-    </fieldset>
+    </recombination>
     <fieldset class="field-common">
         <legend class="field-title-com">Value Group</legend>
         <div>
@@ -188,9 +186,7 @@
                     </ul>
                 </div>
             </section>
-            <button class="button">add</button>
-            <a class="button button-check"><i class="iconfont icon-check"></i></a>
-            <a class="button button-close"><i class="iconfont icon-close"></i></a>
+            <button class="button add-select">add</button>
         </div>
         <div class="textarea teatarea-column">
             <span class="flag flag-icon" ng-repeat="value in reportSourceData['reportData']['values']">
@@ -200,10 +196,10 @@
         </div>
         <span class="red-star">*</span>
     </fieldset>
-    <fieldset class="field-common">
+    <cascadechoice select-data="guestUsers" selected-data="selectedGuestUids" flag-data="reportSourceData['reportData']['guestUserValue']"  flag-data-key="uid">
         <legend class="field-title-com">Report Guest</legend>
         <div>
-            <div class="select select-host select-btn">
+            <div class="select select-host select-btn recombination-input" required-warn="please fill out the Guest User">
                 <div class="select_main">
                     <input class="select_main_textarea select_target" type="text" value="">
                     <button class="select_main_btn select_target">
@@ -213,20 +209,20 @@
                 <ul class="select_content">
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
-                    <li class="select_content_list" ng-repeat="guestUser in guestUsers ">
-                        <a class="select_content_list_value" data-value="{{ guestUser.uid }}">{{ guestUser.nickname }}</a>
+                    <li class="select_content_list" ng-repeat="guestUser in guestUsers | exclude:selectedGuestUids:'uid' | orderBy:'nickname' ">
+                        <a class="select_content_list_value" data-value="{{ guestUser }}">{{ guestUser.nickname }}</a>
                     </li>
                 </ul>
             </div>
-            <button class="button">add</button>
+            <button class="button add-select">add</button>
         </div>
         <div class="textarea">
             <span class="flag flag-icon" ng-repeat="guestUser in reportSourceData['reportData']['guestUserValue']">
-                {{ guestUser.nickname }}
+                <i class="flag-text" data-value="{{ guestUser.uid }}">{{ guestUser.nickname }}</i>
                 <i class="flag-icon_delete iconfont icon-close" data-value="{{ guestUser.uid }}"></i>
             </span>
         </div>
-    </fieldset>
+    </cascadechoice>
     <fieldset class="field-common">
         <legend class="field-title-com">Default Date Range</legend>
         <div class="select select-host report-date">

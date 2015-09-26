@@ -1,6 +1,14 @@
 
 /*
- * @用来编辑复合值，复合属性,产出 >> [ a+b+c, c+b+d... ]
+ * @directive 用来编辑复合值，复合属性,产出 >> [ a+b+c, c+b+d... ]
+ *
+ * * @*添加数据绑定在'.add-select'选择器上，
+ * @*删除数据绑定在'.flag-icon_delete'选择器上
+ * @*数据回显绑定在'.flag-text'选择器上
+ *
+ * @* 标签内所有需要处理的表单需要添加"recombination-input"class做标记
+ * @* 指令在回写状态时会在class为"recombination-menu"的DOM中添加两个编辑按钮
+ *
  * */
 oasgames.mdataDirective.directive('recombination', [
     function () {
@@ -12,83 +20,132 @@ oasgames.mdataDirective.directive('recombination', [
 
                 '</fieldset>',
             transclude: true,
+            scope: {
+                recombinationData: '='
+            },
             link: function ($scope, element, attr) {
                 var separator = attr.separator;
-                var $forms = element.find('.recombination-input');
-
-                element.data('value', $scope.appSourceData['processor']);
 
                 /*
-                * 添加processor,
-                * 不允许重复的processor
+                * 所有的表单对象
                 * */
-                element.on('click', '.add-select', function () {
-                    var val = Echo.prototype.getValue($forms, separator);
-                    if(!val) {
+                var $forms = element.find('.recombination-input');
+
+                // 更新复合表单值
+                function upRecombinationData (data) {
+                    element.data('value', data);
+                }
+
+                /*
+                * recombinationData：复合表单初始值
+                * 初始化完毕后绑定事件
+                * */
+                var recombinationDataWatchCancel = $scope.$watch('recombinationData', function (newValue, oldValue, scope) {
+
+                    // recombinationData = undefined
+                    if(!newValue) {
                         return;
                     }
 
-                    // 重复效验
-                    for(var i = 0; i < $scope.appSourceData['processor'].length; i++) {
-                        if($scope.appSourceData['processor'][i] == val) {
-                            Ui.alert('请勿添加重复字段');
-                            return;
-                        }
-                    }
+                    console.log("begin recombinationData");
+                    console.log($scope.recombinationData);
+                    console.log("end recombinationData");
 
-                    // add值
-                    element.data('value', $scope.appSourceData['processor']);
-                    $scope.appSourceData['processor'].push(val);
+                    // 初始化复合表单默认值
+                    upRecombinationData($scope.recombinationData);
+
+                    $scope.$emit('recombinationDataInitFinish', $scope.recombinationData);
+                    recombinationDataWatchCancel();
                 });
 
                 /*
-                * 删除processor
+                * 事件绑定
                 * */
-                element.on('click', '.flag-icon_delete', function () {
-                    var val = $(this).data('value');
-                    for(var i = 0; i < $scope.appSourceData['processor'].length; i++) {
-                        if($scope.appSourceData['processor'][i] == val) {
-                            $scope.appSourceData['processor'].splice(i, 1);
-                            element.data('value', $scope.appSourceData['processor']);
+                $scope.$on('recombinationDataInitFinish', function (event, recombinationData) {
+
+                    if(!recombinationData) {
+                        throw new Error('数据初始化失败');
+                    }
+
+                    /*
+                     * 添加processor,
+                     * 不允许重复的processor
+                     * */
+                    element.on('click', '.add-select', function () {
+                        var val = Echo.prototype.getValue($forms, separator);
+
+                        if(!val) {
                             return;
                         }
-                    }
-                });
 
-                /*
-                * 回显编辑
-                * */
-                element.on('click', '.flag-text', function () {
-                    var val = $(this).data('value');
-                    var $flag = $(this).parent('.flag');
-                    $flag.css('bakcgrountColor', '#65c178');
+                        // 重复效验
+                        for(var i = 0; i < recombinationData.length; i++) {
+                            if(recombinationData[i] == val) {
+                                Ui.alert('请勿添加重复字段');
+                                return;
+                            }
+                        }
 
-                    // 隐藏添加按钮
-                    element.find('.add-select').hide();
+                        // add值
+                        recombinationData.push(val);
+                        upRecombinationData(recombinationData);
+                    });
 
-                    var echo = new Echo(
-                        val,
-                        separator,
-                        element,
-                        function (newVal) {
-                            if(val != newVal) {
-                                for(var i = 0; i < $scope.appSourceData['processor'].length; i++) {
-                                    if($scope.appSourceData['processor'][i] == val) {
-                                        $scope.appSourceData['processor'][i] = newVal;
-                                        element.data('value', $scope.appSourceData['processor']);
-                                        break;
+                    /*
+                     * 删除processor
+                     * */
+                    element.on('click', '.flag-icon_delete', function () {
+                        var val = $(this).data('value');
+
+                        for(var i = 0; i < recombinationData.length; i++) {
+                            if(recombinationData[i] == val) {
+                                recombinationData.splice(i, 1);
+                                upRecombinationData(recombinationData);
+                                return;
+                            }
+                        }
+                    });
+
+                    /*
+                     * 回显编辑
+                     * */
+                    element.on('click', '.flag-text', function () {
+                        var val = $(this).data('value');
+                        var $flag = $(this).parent('.flag');
+
+                        // 隐藏添加按钮，变化样式
+                        $flag.css('bakcgrountColor', '#65c178');
+                        element.find('.add-select').hide();
+
+                        var echo = new Echo(
+                            val,
+                            separator,
+                            element,
+                            function (newVal) {
+
+                                // 判断值是否发生变化
+                                if(val != newVal) {
+                                    for(var i = 0; i < recombinationData.length; i++) {
+                                        if(recombinationData[i] == val) {
+                                            recombinationData[i] = newVal;
+                                            upRecombinationData(recombinationData);
+                                            break;
+                                        }
                                     }
+                                    $flag.find('.flag-text').data('value', newVal).text(newVal);
+                                    $flag.find('.flag-icon_delete').data('value', newVal);
                                 }
-                                $flag.css('bakcgrountColor', '#12afcb').find('.flag-text').data('value', newVal).text(newVal);
-                                $flag.find('.flag-icon_delete').data('value', newVal);
+
+                                // 恢复样式
+                                $flag.css('bakcgrountColor', '#12afcb');
+                                element.find('.add-select').show();
+                            },
+                            function () {
+                                $flag.css('bakcgrountColor', '#12afcb');
                                 element.find('.add-select').show();
                             }
-                        },
-                        function () {
-                            $flag.css('bakcgrountColor', '#12afcb');
-                            element.find('.add-select').show();
-                        }
-                    );
+                        );
+                    });
                 });
 
                 /*
@@ -199,23 +256,29 @@ oasgames.mdataDirective.directive('recombination', [
                         var val = "", temVal = "", temWarn = "";
                         var separator = separator || "";
 
-                        $forms.each(function () {
+                        if(!$forms.length) {
+                            throw new Error('表单对象为空，无法获取表单数据');
+                        }
+
+                        $forms.each(function (i) {
                             if($(this).hasClass('select')) {
                                 temVal = $(this).data('value');
                             }else {
                                 temVal = $(this).val();
                             }
 
-                            // 必填项没有填写，进行提示，并返回""
+                            // 非空效验提示信息
                             temWarn = $(this).attr('required-warn');
+
+                            // 空值效验
                             if(!temVal && temWarn) {
                                 Ui.alert(temWarn);
                                 val = "";
                                 return false;
                             }else {
 
-                                // 第一次直接赋值
-                                if(!val) {
+                                // 第一次赋值不添加分隔符
+                                if(i == 0) {
                                     val = temVal;
                                 }else {
                                     val += separator + temVal;

@@ -1,11 +1,12 @@
 .nav {
     @include border-box();
+    overflow-y: scroll;;
     position: fixed;
     left: 0;
     top: 0;
     padding-top: rem(60);
     width: rem(200);
-    min-height: 100%;
+    height: 100%;
     background-color: #34425a;
     color: #899dc1;
     &_list {

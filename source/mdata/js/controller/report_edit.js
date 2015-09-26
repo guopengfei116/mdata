@@ -67,6 +67,9 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
             // guest_user可选的账户列表
             $scope.guestUsers = [];
 
+            // 已选的guest_user数据列表
+            $scope.selectedGuestUids = [];
+
             /*
              * 如果有id，则说明是编辑状态
              * */
@@ -127,21 +130,31 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
             * 初始化空值
             * */
             function initSelectData () {
-                // 已选的value列表
+                // 当前编辑的report数据信息
                 if(!$scope.reportSourceData['reportData']) {
                     $scope.reportSourceData['reportData'] = {};
                 }
-                // 已选的value列表
+                // 已选的value数据
                 if(!$scope.reportSourceData['reportData']['values']) {
                     $scope.reportSourceData['reportData']['values'] = [];
                 }
-                // 已选的guest用户列表
+                // 已选的guest用户数据
                 if(!$scope.reportSourceData['reportData']['guestUserValue']) {
                     $scope.reportSourceData['reportData']['guestUserValue'] = [];
                 }
+                // 已选的dimension数据
+                if(!$scope.reportSourceData['reportData']['dimension']) {
+                    $scope.reportSourceData['reportData']['dimension'] = []
+                }
+                // 已选的filter数据
+                if(!$scope.reportSourceData['reportData']['filter']) {
+                    $scope.reportSourceData['reportData']['filter'] = []
+                }
+                // 可选的app列表及其数据
                 if(!$scope.appDataList) {
                     $scope.appDataList = [];
                 }
+                // report关联的app数据
                 if(!$scope.appData) {
                     $scope.appData = {};
                 }
@@ -154,6 +167,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 if(!$scope.valueList) {
                     $scope.valueList = {};
                 }
+                // 可选的guest账号列表
                 if(!$scope.guestUsers) {
                     $scope.guestUsers = [];
                 }
