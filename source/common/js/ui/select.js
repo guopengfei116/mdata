@@ -22,6 +22,7 @@ $.extend(Select.prototype, {
     textarea : '.select_main_textarea',
     text : '.select_main_text',
     optionsTarget : '.select_content_list_value',
+    optionsSelector : '.select_content_list',
     initialized : false,
 
     init : function () {
@@ -39,22 +40,23 @@ $.extend(Select.prototype, {
         $(o.trigger).on(o.triggerEvent, self.target, function (e) {
             e.stopPropagation();
             var $this = $(this);
+            var $parentSelect = $this.parents(self.selector);
 
             // disabled
-            if($this.parents(self.selector).hasClass('select-disable')) {
+            if($parentSelect.hasClass('select-disable')) {
+                return;
+            }
+
+            // options == 0
+            if(!$parentSelect.find(self.optionsSelector).length) {
                 return;
             }
 
             self.initPosition();
 
             // 清除其他select的active状态
-            //$(self.selector).removeClass('select-active').find(o.content).hide();
-            $this.parents(self.selector).toggleClass('select-active');
-            /*if($this.parents(self.selector).hasClass('select-active')) {
-                $this.parents(self.selector).find(o.content).show();
-            }else {
-                $this.parents(self.selector).find(o.content).hide();
-            }*/
+            $(self.selector).not($parentSelect).removeClass('select-active');
+            $parentSelect.toggleClass('select-active');
         });
 
         // selected word
