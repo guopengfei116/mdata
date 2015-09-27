@@ -52,6 +52,7 @@ oasgames.mdataDirective = angular.module('mdataDirective', []);
 require('./directive/search.js');
 require('./directive/recombination_select.js');
 require('./directive/cascade_choice.js');
+require('./directive/value_group.js');
 
 /*
  * 控制器

@@ -118,11 +118,11 @@
             </span>
         </div>
     </recombination>
-    <fieldset class="field-common">
+    <valuegroup separator="#@DELIMITER@#" value-list="valueList" flag-data="reportSourceData['reportData']['values']">
         <legend class="field-title-com">Value Group</legend>
         <div>
-            <input class="fieldset-text-com field-text-column" type="text" placeholder="Value Name" />
-            <div class="select select-host select-btn-column">
+            <input class="fieldset-text-com field-text-column recombination-input" type="text" placeholder="Value Name" required-warn="please fill out the Value Name"/>
+            <div class="select select-host select-btn-column recombination-input" required-warn="please fill out the Value Type">
                 <div class="select_main">
                     <p class="select_main_text select_target"></p>
                     <button class="select_main_btn select_target">
@@ -137,8 +137,8 @@
                     </li>
                 </ul>
             </div>
-            <section class="value-group inline-block">
-                <div class="select select-host select-btn-column">
+            <section class="value-group value-group1 inline-block">
+                <div class="select select-host select-btn-column value-group-type recombination-input" required-warn="please fill out the Value">
                     <div class="select_main">
                         <p class="select_main_text select_target"></p>
                         <button class="select_main_btn select_target">
@@ -148,13 +148,29 @@
                     <ul class="select_content">
                         <li class="select_content_arrow"></li>
                         <li class="select_content_arrow select_content_arrow-mask"></li>
-                        <li class="select_content_list" ng-repeat="(valueName, valueFormat) in appData['val_list']">
-                            <a class="select_content_list_value" data-value="{{ valueName }}">{{ valueName }}</a>
+                        <li class="select_content_list" ng-repeat="(valueName, format) in valueList">
+                            <a class="select_content_list_value select_content_list_value-group" data-value="{{ valueName }}">{{ valueName }}</a>
                         </li>
                     </ul>
                 </div>
+                <div class="select select-host select-btn-column value-group-format recombination-input" required-warn="please fill out the complete">
+                    <div class="select_main">
+                        <p class="select_main_text select_target"></p>
+                        <button class="select_main_btn select_target">
+                            <i class="select_main_btn_icon"></i>
+                        </button>
+                    </div>
+                    <ul class="select_content">
+                        <li class="select_content_arrow"></li>
+                        <li class="select_content_arrow select_content_arrow-mask"></li>
+                        <li class="select_content_list" >
+
+                        </li>
+                    </ul>
+                </div>
+                <input class="fieldset-text-com field-text-column recombination-input" type="text" value="" placeholder="" required-warn="please fill out the complete"/>
             </section>
-            <div class="select select-host select-btn-column">
+            <div class="select select-host select-btn-column select-value-operator recombination-input" required-warn="please fill out the Value Operator">
                 <div class="select_main">
                     <p class="select_main_text select_target"></p>
                     <button class="select_main_btn select_target">
@@ -164,13 +180,13 @@
                 <ul class="select_content">
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
-                    <li class="select_content_list" ng-repeat="arithmetic in valueArithmetics ">
-                        <a class="select_content_list_value" data-value="{{ arithmetic.value }}">{{ arithmetic.arithmetic }}</a>
+                    <li class="select_content_list" ng-repeat="operator in valueArithmetics ">
+                        <a class="select_content_list_value" data-value="{{ operator.value }}">{{ operator.arithmetic }}</a>
                     </li>
                 </ul>
             </div>
-            <section class="value-group inline-block">
-                <div class="select select-host select-btn-column">
+            <section class="value-group value-group2 inline-block">
+                <div class="select select-host select-btn-column value-group-type recombination-input" required-warn="please fill out the complete">
                     <div class="select_main">
                         <p class="select_main_text select_target"></p>
                         <button class="select_main_btn select_target">
@@ -180,11 +196,27 @@
                     <ul class="select_content">
                         <li class="select_content_arrow"></li>
                         <li class="select_content_arrow select_content_arrow-mask"></li>
-                        <li class="select_content_list" ng-repeat="(valueName, valueFormat) in appData['val_list']">
-                            <a class="select_content_list_value" data-value="{{ valueName }}">{{ valueName }}</a>
+                        <li class="select_content_list" ng-repeat="(valueName, format) in appData['val_list']">
+                            <a class="select_content_list_value select_content_list_value-group" data-value="{{ valueName }}">{{ valueName }}</a>
                         </li>
                     </ul>
                 </div>
+                <div class="select select-host select-btn-column value-group-format recombination-input" required-warn="please fill out the complete">
+                    <div class="select_main">
+                        <p class="select_main_text select_target"></p>
+                        <button class="select_main_btn select_target">
+                            <i class="select_main_btn_icon"></i>
+                        </button>
+                    </div>
+                    <ul class="select_content">
+                        <li class="select_content_arrow"></li>
+                        <li class="select_content_arrow select_content_arrow-mask"></li>
+                        <li class="select_content_list">
+
+                        </li>
+                    </ul>
+                </div>
+                <input class="fieldset-text-com field-text-column recombination-input" type="text" value="" placeholder="" required-warn="please fill out the complete"/>
             </section>
             <button class="button add-select">add</button>
         </div>
@@ -195,7 +227,7 @@
             </span>
         </div>
         <span class="red-star">*</span>
-    </fieldset>
+    </valuegroup>
     <cascadechoice select-data="guestUsers" selected-data="selectedGuestUids" flag-data="reportSourceData['reportData']['guestUserValue']"  flag-data-key="uid">
         <legend class="field-title-com">Report Guest</legend>
         <div>

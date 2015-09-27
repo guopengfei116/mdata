@@ -51,21 +51,10 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
         // 编辑report获取到的所有数据
         $scope.reportSourceData = {};
 
-        // 与当前所选app相关联的数据
-        $scope.appData = [];
-
         /*
         * 可选列表初始化
         * */
         (function () {
-            // 当前用户可支配的app列表,创建report所需信息
-            $scope.appDataList = [];
-
-            // 可选的value列表
-            $scope.valueList = [];
-
-            // guest_user可选的账户列表
-            $scope.guestUsers = [];
 
             // 已选的guest_user数据列表
             $scope.selectedGuestUids = [];
@@ -90,6 +79,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                             $scope.reportSourceData = result.data;
                             $scope.appData = result.data['appDataList'];
                             $scope.guestUsers = result.data['guestUser'];
+                            $scope.valueList = $scope.appData['val_list'];
                             initSelectData();
                         }else {
                             Ui.alert(result.msg);
@@ -115,6 +105,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                             $scope.appDataList = result.data['appDataList'];
                             $scope.appData = result.data['appDataList'][0];
                             $scope.guestUsers = result.data['guestUser'];
+                            $scope.valueList = $scope.appData['val_list'];
                             initSelectData();
                         }else {
                             Ui.alert(result.msg);
@@ -150,7 +141,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 if(!$scope.reportSourceData['reportData']['filter']) {
                     $scope.reportSourceData['reportData']['filter'] = []
                 }
-                // 可选的app列表及其数据
+                // 可选的app列表及其数据,当前用户可支配的app列表,创建report所需信息
                 if(!$scope.appDataList) {
                     $scope.appDataList = [];
                 }
@@ -161,9 +152,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 if(!$scope.appData['app']) {
                     $scope.appData['app'] = {};
                 }
-                if(!$scope.appData['val_list']) {
-                    $scope.appData['val_list'] = {};
-                }
+                // 可选的value
                 if(!$scope.valueList) {
                     $scope.valueList = {};
                 }

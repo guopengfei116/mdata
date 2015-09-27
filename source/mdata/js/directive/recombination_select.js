@@ -120,8 +120,8 @@ Echo.prototype = {
             // 非空效验提示信息
             temWarn = $(this).attr('required-warn');
 
-            // 空值效验
-            if(!temVal && temWarn) {
+            // 空值效验，可能存在值为0的情况，顾做类型判断
+            if(!temVal && (typeof temVal != 'number') && temWarn) {
                 Ui.alert(temWarn);
                 val = "";
                 return false;
@@ -183,7 +183,7 @@ Echo.prototype = {
 /*
  * @directive 用来编辑复合值，复合属性,产出 >> [ a+b+c, c+b+d... ]
  *
- * * @*添加数据绑定在'.add-select'选择器上，
+ * @*添加数据绑定在'.add-select'选择器上，
  * @*删除数据绑定在'.flag-icon_delete'选择器上
  * @*数据回显绑定在'.flag-text'选择器上
  *
@@ -206,70 +206,47 @@ oasgames.mdataDirective.directive('recombination', [
             },
             link: function ($scope, element, attr) {
                 var separator = attr.separator;
-
-                /*
-                * 所有的表单对象
-                * */
                 var $forms = element.find('.recombination-input');
 
                 // 更新复合表单值
-                function upRecombinationData (data) {
-                    element.data('value', data);
-                }
-
-                /*
-                * recombinationData：复合表单初始值
-                * 初始化完毕后绑定事件
-                * */
-                var recombinationDataWatchCancel = $scope.$watch('recombinationData', function (newValue, oldValue, scope) {
-
-                    // recombinationData = undefined
-                    if(!newValue) {
-                        return;
-                    }
-
-                    console.log("begin recombinationData");
-                    console.log($scope.recombinationData);
-                    console.log("end recombinationData");
-
-                    // 初始化复合表单默认值
-                    upRecombinationData($scope.recombinationData);
-
-                    $scope.$emit('recombinationDataInitFinish', $scope.recombinationData);
-                    recombinationDataWatchCancel();
-                });
+                $scope.upRecombinationData = function (data) {
+                    console.log(element.data('value'));
+                };
 
                 /*
                 * 事件绑定
                 * */
                 $scope.$on('recombinationDataInitFinish', function (event, recombinationData) {
 
-                    if(!recombinationData) {
+                    if(!$scope.recombinationData) {
                         throw new Error('数据初始化失败');
                     }
+
+                    // 初始化复合表单默认值
+                    $scope.upRecombinationData($scope.recombinationData);
 
                     /*
                      * 添加processor,
                      * 不允许重复的processor
                      * */
                     element.on('click', '.add-select', function () {
-                        var val = Echo.prototype.getValue($forms, separator);
 
+                        var val = Echo.prototype.getValue($forms, separator);
                         if(!val) {
                             return;
                         }
 
                         // 重复效验
-                        for(var i = 0; i < recombinationData.length; i++) {
-                            if(recombinationData[i] == val) {
+                        for(var i = 0; i < $scope.recombinationData.length; i++) {
+                            if($scope.recombinationData[i] == val) {
                                 Ui.alert('请勿添加重复字段');
                                 return;
                             }
                         }
 
                         // add值
-                        recombinationData.push(val);
-                        upRecombinationData(recombinationData);
+                        $scope.recombinationData.push(val);
+                        $scope.upRecombinationData($scope.recombinationData);
                     });
 
                     /*
@@ -278,10 +255,10 @@ oasgames.mdataDirective.directive('recombination', [
                     element.on('click', '.flag-icon_delete', function () {
                         var val = $(this).data('value');
 
-                        for(var i = 0; i < recombinationData.length; i++) {
-                            if(recombinationData[i] == val) {
-                                recombinationData.splice(i, 1);
-                                upRecombinationData(recombinationData);
+                        for(var i = 0; i < $scope.recombinationData.length; i++) {
+                            if($scope.recombinationData[i] == val) {
+                                $scope.recombinationData.splice(i, 1);
+                                $scope.upRecombinationData($scope.recombinationData);
                                 return;
                             }
                         }
@@ -306,10 +283,10 @@ oasgames.mdataDirective.directive('recombination', [
 
                                 // 判断值是否发生变化
                                 if(val != newVal) {
-                                    for(var i = 0; i < recombinationData.length; i++) {
-                                        if(recombinationData[i] == val) {
-                                            recombinationData[i] = newVal;
-                                            upRecombinationData(recombinationData);
+                                    for(var i = 0; i < $scope.recombinationData.length; i++) {
+                                        if($scope.recombinationData[i] == val) {
+                                            $scope.recombinationData[i] = newVal;
+                                            $scope.upRecombinationData($scope.recombinationData);
                                             break;
                                         }
                                     }
@@ -328,13 +305,28 @@ oasgames.mdataDirective.directive('recombination', [
                         );
                     });
                 });
-
-
             },
             controller: [
                 '$scope',
                 function ($scope) {
 
+                    /*
+                     * 初始化完毕后绑定事件
+                     * */
+                    var recombinationDataWatchCancel = $scope.$watch('recombinationData', function (newValue, oldValue, scope) {
+
+                        // recombinationData = undefined
+                        if(!newValue) {
+                            return;
+                        }
+
+                        console.log("begin recombinationData");
+                        console.log($scope.recombinationData);
+                        console.log("end recombinationData");
+
+                        $scope.$emit('recombinationDataInitFinish', $scope.recombinationData);
+                        recombinationDataWatchCancel();
+                    });
                 }
             ]
         }

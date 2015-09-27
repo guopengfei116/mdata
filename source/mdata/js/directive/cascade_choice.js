@@ -3,8 +3,7 @@
  * @account和application中的联动指令
  * */
 oasgames.mdataDirective.directive('cascadechoice', [
-    'Exclude',
-    function (Exclude) {
+    function () {
         return {
             restrict: 'E',
             replace: true,
@@ -28,7 +27,7 @@ oasgames.mdataDirective.directive('cascadechoice', [
                 var resultValueInit = false, selectDataInit = false, selectedDataInit = false;
 
                 /*
-                * flagData：当前所属select的已选列表, [{}, {}]
+                * flagData：当前单表单的已选数据, [{}, {}]
                 * 通过flagData初始化resultValue数据,
                 * 因为flagData数据是异步获取的，所以不能保证时实
                 * */
@@ -44,10 +43,8 @@ oasgames.mdataDirective.directive('cascadechoice', [
                     console.log("end flagData");
 
                     var flagData = $scope.flagData;
-                    if(!resultValueInit) {
-                        for(var i = 0; i < flagData.length; i++) {
-                            $scope.resultValue.push(flagData[i][$scope.flagDataKey]);
-                        }
+                    for(var i = 0; i < flagData.length; i++) {
+                        $scope.resultValue.push(flagData[i][$scope.flagDataKey]);
                     }
 
                     resultValueInit = true;
@@ -56,7 +53,7 @@ oasgames.mdataDirective.directive('cascadechoice', [
                 });
 
                 /*
-                * selectData：公共的可选的列表
+                * selectData：多表单共享的可选列表数据，为总数据源 [{}, {}]
                 * 初始化完毕后更新appsViewData
                 * */
                 var selectDataWatchCancel = $scope.$watch('selectData', function (newValue, oldValue, scope) {
@@ -76,7 +73,7 @@ oasgames.mdataDirective.directive('cascadechoice', [
                 });
 
                 /*
-                 * selectedData：已选的列表总和
+                 * selectedData：多表单共享的已选数据，用来过滤可选列表 [val, val]
                  * selectedData初始化完毕后更新appsViewData
                  * */
                 var selectedDataWatchCancel = $scope.$watch('selectedData', function (newValue, oldValue, scope) {
@@ -116,10 +113,6 @@ oasgames.mdataDirective.directive('cascadechoice', [
 
                     // 绑定add事件
                     $addSelect.bind('click', function () {
-                        if(!resultValueInit) {
-                            Ui.alert('数据初始化失败');
-                            return;
-                        }
 
                         var val = $select.data('value');
                         if(!val) {
@@ -127,14 +120,14 @@ oasgames.mdataDirective.directive('cascadechoice', [
                             return;
                         }
 
-                        // 更新select值
+                        // 更新当前所属表单的值
                         $scope.resultValue.push(val[$scope.flagDataKey]);
                         element.data('value', $scope.resultValue);
 
-                        // 更新select选择列表
+                        // 添加到公有已选数据
                         $scope.selectedData.push(val[$scope.flagDataKey]);
 
-                        // 更新选择展示列表
+                        // 更新flag展示列表
                         $scope.flagData.push(val);
 
                         // 清空值
