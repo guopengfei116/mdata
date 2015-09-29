@@ -7,15 +7,13 @@
  *
  * Date: Tue Jan 1 2013
  */
-;(function() {
-	console.log(465565465465465465);
+ ;(function() {
 	$.fn.glDatePicker = function(options) {
 		var pluginName = 'glDatePicker';
 
 		// Find the plugin attached to the element
 		var instance = this.data(pluginName);
-		console.log(11111111111111);
-		console.log(this);
+
 		// If the instance wasn't found, create it...
 		if(!instance) {
 			// Return the element being bound to
@@ -305,8 +303,8 @@
 				var selectableMonths = getSelectableList(0, 11, options.selectableMonths);
 				var selectableYears = getSelectableList(todayVal.year - 5, todayVal.year + 5, options.selectableYears);
 				var selectableDOW = getSelectableList(0, 6, options.selectableDOW);
-				var dowNames = options.dowNames || [ 'Dom', 'Seg', 'Terç', 'Qua', 'Qui', 'Sex', 'Sáb' ];
-				var monthNames = options.monthNames || [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro' ];
+				var dowNames = options.dowNames || [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ];
+				var monthNames = options.monthNames || [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
 
 				// Create cell width based on el size
 				var containerWidth = el.outerWidth();
@@ -330,7 +328,7 @@
 							zIndex: options.zIndex,
 							width: (cellWidth * maxCol) + 'px'
 						});
-					console.log(self.calendar);
+
 					$('body').append(calendar);
 				}
 				else {
@@ -354,16 +352,12 @@
 
 				// Bind to resize event to position calendar
 				var onResize = function() {
-					console.log('onResizeonResizeonResizeonResizeonResizeonResizeonResizeonResize');
 					var elPos = el.offset();
 					calendar.css(
-						{
-							top: (elPos.top + el.outerHeight() + options.calendarOffset.y) + 'px',
-							left: (elPos.left + options.calendarOffset.x) + 'px'
-						});
-					console.log(elPos.top);
-					console.log(el.outerHeight());
-					console.log(options.calendarOffset.y);
+					{
+						top: (elPos.top + el.outerHeight() + options.calendarOffset.y) + 'px',
+						left: (elPos.left + options.calendarOffset.x) + 'px'
+					});
 				};
 				$(window).resize(onResize);
 				onResize();
@@ -381,7 +375,7 @@
 					if(_date) {
 						// Get first date
 						options.firstDate = _date;
-						console.log(options);
+
 						// Update the calendar
 						self.render();
 					}
@@ -446,11 +440,10 @@
 
 				// Offset weekdays
 				var startOffset = startDate.getDay() - dowOffset;
-				startOffset = startOffset < 1 ? -7 - startOffset : -startOffset;
-				dowNames = (dowNames.concat(dowNames))
-					.slice(dowOffset, dowOffset + 7);
-				console.log('dowNamesdowNamesdowNamesdowNamesdowNamesdowNamesdowNames');
-				console.log(dowNames);
+					startOffset = startOffset < 1 ? -7 - startOffset : -startOffset;
+					dowNames = (dowNames.concat(dowNames))
+								.slice(dowOffset, dowOffset + 7);
+
 				// Offset the start date
 				startDate._add(startOffset);
 
@@ -462,60 +455,60 @@
 				var monyearClass = coreClass + 'monyear ';
 
 				var prevCell = $('<div/>')
-					.addClass(monyearClass)
-					.css(
-					$.extend({}, cellCSS,
-						{
-							borderWidth: borderSize + ' 0 0 ' + borderSize
-						})
-				)
-					.append(
-					$('<a/>')
-						.addClass('prev-arrow' + (showPrev ? '' : '-off'))
-						.html(options.prevArrow)
-				)
-					.mousedown(function() { return false; })
-					.click(function(e) {
-						if(options.prevArrow != '' && showPrev) {
-							e.stopPropagation();
-							setFirstDate(prevFirstDate);
-						}
-					});
+								.addClass(monyearClass)
+								.css(
+									$.extend({}, cellCSS,
+									{
+										borderWidth: borderSize + ' 0 0 ' + borderSize
+									})
+								)
+								.append(
+									$('<a/>')
+										.addClass('prev-arrow' + (showPrev ? '' : '-off'))
+										.html(options.prevArrow)
+								)
+								.mousedown(function() { return false; })
+								.click(function(e) {
+									if(options.prevArrow != '' && showPrev) {
+										e.stopPropagation();
+										setFirstDate(prevFirstDate);
+									}
+								});
 
 				var titleCellCount = maxCol - 2;
 				var titleWidth = (cellWidth * titleCellCount) - (titleCellCount * options.borderSize) + (options.borderSize);
 				var titleCell = $('<div/>')
-					.addClass(monyearClass + 'title')
-					.css(
-					$.extend({}, cellCSS,
-						{
-							width: titleWidth + 'px',
-							borderTopWidth: borderSize,
-							marginLeft: '-' + (borderSize)
-						})
-				);
+								.addClass(monyearClass + 'title')
+								.css(
+									$.extend({}, cellCSS,
+									{
+										width: titleWidth + 'px',
+										borderTopWidth: borderSize,
+										marginLeft: '-' + (borderSize)
+									})
+								);
 
 				var nextCell = $('<div/>')
-					.addClass(monyearClass)
-					.css(
-					$.extend({}, cellCSS,
-						{
-							marginLeft: '-' + (borderSize),
-							borderWidth: borderSize + ' ' + borderSize + ' 0 0'
-						})
-				)
-					.append(
-					$('<a/>')
-						.addClass('next-arrow' + (showNext ? '' : '-off'))
-						.html(options.nextArrow)
-				)
-					.mousedown(function() { return false; })
-					.click(function(e) {
-						if(options.nextArrow != '' && showNext) {
-							e.stopPropagation();
-							setFirstDate(nextFirstDate);
-						}
-					});
+								.addClass(monyearClass)
+								.css(
+									$.extend({}, cellCSS,
+									{
+										marginLeft: '-' + (borderSize),
+										borderWidth: borderSize + ' ' + borderSize + ' 0 0'
+									})
+								)
+								.append(
+									$('<a/>')
+										.addClass('next-arrow' + (showNext ? '' : '-off'))
+										.html(options.nextArrow)
+								)
+								.mousedown(function() { return false; })
+								.click(function(e) {
+									if(options.nextArrow != '' && showNext) {
+										e.stopPropagation();
+										setFirstDate(nextFirstDate);
+									}
+								});
 
 				// Add cells for prev/title/next
 				calendar
@@ -662,15 +655,15 @@
 
 						// Update the css for the cell
 						$.extend(cellCSS,
-							{
-								borderTopWidth: borderSize,
-								borderBottomWidth: borderSize,
-								borderLeftWidth: (row > 0 || (!row && !col)) ? borderSize : 0,
-								borderRightWidth: (row > 0 || (!row && col == 6)) ? borderSize : 0,
-								marginLeft: (col > 0) ? '-' + (borderSize) : 0,
-								marginTop: (row > 0) ? '-' + (borderSize) : 0,
-								zIndex: cellZIndex
-							});
+						{
+							borderTopWidth: borderSize,
+							borderBottomWidth: borderSize,
+							borderLeftWidth: (row > 0 || (!row && !col)) ? borderSize : 0,
+							borderRightWidth: (row > 0 || (!row && col == 6)) ? borderSize : 0,
+							marginLeft: (col > 0) ? '-' + (borderSize) : 0,
+							marginTop: (row > 0) ? '-' + (borderSize) : 0,
+							zIndex: cellZIndex
+						});
 
 						// Assign other properties to the cell
 						cell
@@ -709,31 +702,31 @@
 
 				// Build month selector
 				var monthSelect = $('<select/>')
-					.hide()
-					.change(onYearMonthSelect);
+									.hide()
+									.change(onYearMonthSelect);
 
 				// Build year selector
 				var yearSelect = $('<select/>')
-					.hide()
-					.change(onYearMonthSelect);
+									.hide()
+									.change(onYearMonthSelect);
 
 				// Build month label
 				var monthText = $('<span/>')
-					.html(monthNames[firstDateMonth])
-					.mousedown(function() { return false; })
-					.click(function(e) {
-						e.stopPropagation();
-						toggleYearMonthSelect(false);
-					});
+									.html(monthNames[firstDateMonth])
+									.mousedown(function() { return false; })
+									.click(function(e) {
+										e.stopPropagation();
+										toggleYearMonthSelect(false);
+									});
 
 				// Build year label
 				var yearText = $('<span/>')
-					.html(firstDateYear)
-					.mousedown(function() { return false; })
-					.click(function(e) {
-						e.stopPropagation();
-						toggleYearMonthSelect(true);
-					});
+									.html(firstDateYear)
+									.mousedown(function() { return false; })
+									.click(function(e) {
+										e.stopPropagation();
+										toggleYearMonthSelect(true);
+									});
 
 				// Populate month select
 				$.each(monthNames, function(i, v) {
@@ -754,10 +747,10 @@
 				});
 
 				var titleYearMonth = $('<div/>')
-					.append(monthText)
-					.append(monthSelect)
-					.append(yearText)
-					.append(yearSelect);
+										.append(monthText)
+										.append(monthSelect)
+										.append(yearText)
+										.append(yearSelect);
 
 				// Add to title
 				titleCell.children().remove();
@@ -801,7 +794,7 @@
 
 		Date.prototype._first = function() {
 			var date = new Date(this);
-			date.setDate(1);
+				date.setDate(1);
 
 			return date;
 		};
