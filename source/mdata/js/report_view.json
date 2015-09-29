@@ -9,11 +9,13 @@
     "describe": "nimei",
     "dimension": [
       "ip",
-      "uuid"
+      "uuid",
+      "ccd"
     ],
     "filter": [
       "ip=192",
-      "uuid=1"
+      "uuid=1",
+      "dd=1"
     ],
     "values": [
       "status|age",
@@ -26,62 +28,83 @@
     "date_end": 1442480984,
     "create_time": 1442480984,
     "table_list": [
+      [
+        "Date",
+        "ip",
+        "uuid",
+        "status age",
+        "creeate",
+        "install uni",
+        "visituni",
+        "转化率",
+        "pay_count"
+      ],
       {
-        "total": {
-          "values": {
-            "status age": 5,
-            "creeate": 5,
-            "install uni": 3,
-            "visituni": 1,
-            "转化率": 1
-          }
-        }
+        "Date" : "Total",
+        "ip" : "-",
+        "uuid" : "-",
+        "status age" : "8",
+        "creeate" : "8",
+        "install uni" : "3",
+        "visituni" : "1",
+        "转化率" : "1",
+        "pay_count" : "0"
       },
-      {
-        "20150815": {
-          "dims": {
-            "ip": "10.1.9.148",
-            "uuid": "456"
-          },
-          "values": {
-            "status age": "1.00",
-            "creeate": 1,
-            "install uni": null,
-            "visituni": null,
-            "转化率": false
-          }
-        }
-      },
-      {
-        "20150815": {
-          "dims": {
-            "ip": "10.1.9.157",
-            "uuid": "123"
-          },
-          "values": {
-            "status age": "1.00",
-            "creeate": 1,
-            "install uni": "cv",
-            "visituni": "xc",
-            "转化率": "ou"
-          }
-        }
-      },
-      {
-        "20150815": {
-          "dims": {
-            "ip": "10.1.9.168",
-            "uuid": "789"
-          },
-          "values": {
-            "status age": "1.00",
-            "creeate": "25",
-            "install uni": "dfgc",
-            "visituni": "vcv",
-            "转化率": "qwe"
-          }
-        }
-      }
+      [
+        "20150915",
+        "10.1.9.148",
+        "uid",
+        "1.00",
+        1,
+        null,
+        null,
+        false,
+        null
+      ],
+      [
+        "20150912",
+        "10.1.9.148",
+        "uid",
+        "1.00",
+        1,
+        null,
+        null,
+        false,
+        null
+      ],
+      [
+        "20150915",
+        "10.1.9.148",
+        "uid",
+        "1.00",
+        1,
+        null,
+        null,
+        false,
+        null
+      ],
+      [
+        "20150918",
+        "10.1.9.148",
+        "1234",
+        null,
+        null,
+        1,
+        1,
+        1,
+        null
+      ],
+      [
+        "20150919",
+        "10.1.9.148",
+        "asfsdfasdf",
+        null,
+        null,
+        1,
+        null,
+        false,
+        null
+      ]
     ]
   }
 }

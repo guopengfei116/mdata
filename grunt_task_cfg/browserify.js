@@ -9,7 +9,8 @@ exports.options = {
         'Flag': gruntProject.src + '/common/js/ui/flag.js',
         'Tooltip': gruntProject.src + '/common/js/ui/tooltip.js',
         'Dropdown': gruntProject.src + '/common/js/ui/dropdown.js',
-        'Select': gruntProject.src + '/common/js/ui/select.js'
+        'Select': gruntProject.src + '/common/js/ui/select.js',
+        'Checkbox': gruntProject.src + '/common/js/ui/checkbox.js'
     }
 };
 

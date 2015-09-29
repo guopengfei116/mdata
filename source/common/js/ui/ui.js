@@ -4,7 +4,7 @@
  */
 var Ui = function (options) {
     this._o = {
-        initializeList : ['Flag', 'Tooltip', 'Dropdown', 'Select']
+        initializeList : ['Flag', 'Tooltip', 'Dropdown', 'Select', 'Checkbox']
     };
     $.extend(this._o, options);
 };

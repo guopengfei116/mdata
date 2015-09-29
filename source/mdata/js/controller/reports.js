@@ -147,7 +147,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
             },
 
             /*
-            *
+            * 添加收藏
             * */
             addShortcut : function (reportId, appId) {
                 var self = this;
@@ -163,7 +163,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
             },
 
             /*
-             *
+             * 取消收藏
              * */
             cancelShortcut : function (reportId, appId) {
                 var self = this;

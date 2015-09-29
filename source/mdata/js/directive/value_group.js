@@ -422,7 +422,6 @@ oasgames.mdataDirective.directive('valuegroup', [
                         $scope.$broadcast('bind');
                         flagDataWatchCancel();
                     });
-
                 }
             ]
         }

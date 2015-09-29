@@ -16,24 +16,24 @@
         <span class="field-title-com report-title">Report Describe</span>
         <span>{{ reportSourceData.describe }}</span>
     </fieldset>
-    <fieldset class="field-common field-report">
+    <fieldset class="field-common field-report field-dimension">
         <span class="field-title-com report-title">Dimension</span>
         <ul class="inline-block cf">
             <li class="left">
-                <span class="iconfont icon-checkbox-checked"></span>
+                <span class="checkbox iconfont icon-checkbox-checked" disabled="disabled" checked="checked" data-value="Date"></span>
                 <span class="report-dimension">Date</span>
             </li>
             <li class="left" ng-repeat="dimension in reportSourceData.dimension">
-                <span class="iconfont icon-checkbox-checked"></span>
+                <span class="checkbox iconfont icon-checkbox-checked" checked="checked" data-value="{{ dimension }}"></span>
                 <span class="report-dimension">{{ dimension }}</span>
             </li>
         </ul>
     </fieldset>
-    <fieldset class="field-common field-report">
+    <fieldset class="field-common field-report field-filter">
         <span class="field-title-com report-title">Filter</span>
         <ul class="inline-block cf">
             <li class="left" ng-repeat="filter in reportSourceData.filter">
-                <span class="iconfont icon-checkbox-checked"></span>
+                <span class="checkbox iconfont icon-checkbox-checked" checked="checked" data-value="{{ filter }}"></span>
                 <span class="report-dimension">{{ filter }}</span>
             </li>
         </ul>
@@ -67,14 +67,13 @@
             <input class="report-data-text" type="text" value="2015-07-20" id="checkDate" gldp-id="checkDate">
             <span class="iconfont icon-date"></span>
         </div>
-        -
         <div class="report-data-select">
             <input class="report-data-text" type="text" value="2015-07-20" id="leaveDate" gldp-id="leaveDate" >
             <span class="iconfont icon-date"></span>
         </div>
     </fieldset>
     <fieldset class="field-common">
-        <button class="report-blue-btn report-load-btn">Load Report</button>
+        <button class="report-blue-btn report-load-btn" ng-click="loadReport()">Load Report</button>
     </fieldset>
     <fieldset class="field-common cf">
         <div class="left field-title-com">Report Table</div>
@@ -85,23 +84,21 @@
     <fieldset class="report-table">
         <dl class="container">
             <dt class="row row-title row-color-interlaced">
-                <ul>
-                    <li class="row_column row_column-{{ statistics.length }}" ng-repeat="tableItem in reportSourceData['table_list'][0]">{{ statistic }}</li>
+                <ul class="cf">
+                    <li class="row_column row_column-{{ reportSourceData.dimension.length + reportSourceData.values.length + 1 }}"
+                        ng-repeat="titles in reportSourceData['table_list'][0]" ng-click="changeSort('reportTable', $index)">{{ titles }}</li>
                 </ul>
             </dt>
-            <dd class="row row-color-interlaced" ng-repeat="list in reportSourceData['table_list']" ng-init="index = $index">
-                <ul ng-repeat="(type, data) in list">
-                    <li class="row_column row_column-{{ reportSourceData.dimension.length + reportSourceData.values.length + 1 }}">
-                        <a href="#">{{ type }}</a>
+            <dd class="row row-color-interlaced"  ng-init="index = $index">
+                <ul class="cf">
+                    <li class="row_column row_column-{{ reportSourceData.dimension.length + reportSourceData.values.length + 1 }}"
+                        ng-repeat="(title, count) in reportSourceData['table_list'][1]">
+                        <a href="#">{{ count }}</a>
                     </li>
-                    <li class="row_column row_column-{{ reportSourceData.dimension.length + reportSourceData.values.length + 1 }}" ng-if="index == 0" ng-repeat="tempDimension in reportSourceData.dimension">
-                        <a href="#">--</a>
-                    </li>
-                    <li class="row_column row_column-{{ reportSourceData.dimension.length + reportSourceData.values.length + 1 }}" ng-repeat="(key, val) in data.dims">
-                        <a href="#">{{ val }}</a>
-                    </li>
-                    <li class="row_column row_column-{{ reportSourceData.dimension.length + reportSourceData.values.length + 1 }}" ng-repeat="(key, val) in data.values">
-                        <a href="#">{{ val }}</a>
+                </ul>
+                <ul class="cf" ng-repeat="values in reportSourceData['table_list'] | slice:2 | orderBy:sort.reportTable.orderKey:sort.reportTable.isDownOrder">
+                    <li class="row_column row_column-{{ reportSourceData.dimension.length + reportSourceData.values.length + 1 }}" ng-repeat="value in values track by $index">
+                        <a href="#">{{ value }}</a>
                     </li>
                 </ul>
             </dd>

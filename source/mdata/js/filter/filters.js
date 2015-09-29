@@ -27,6 +27,20 @@ oasgames.mdataFilter.filter('capitalize', [
     }
 ]);
 
+/*
+ *  @filter 截取数组
+ *  @param {Number} start 截取字符串的起始位置
+ * */
+oasgames.mdataFilter.filter('slice', [
+    function () {
+        return function (text, start) {
+            if(text) {
+                return text.slice(start);
+            }
+        }
+    }
+]);
+
 
 /*
  * @filter 通过遍历每个对象，判断其属性{key}是否满足{vals}里的任意一个值来过滤掉该对象
