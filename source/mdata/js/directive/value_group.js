@@ -210,22 +210,33 @@ oasgames.mdataDirective.directive('valuegroup', [
                 * value表单根据第一个值来确定是否需要添加第二个值,
                 * */
                 $scope.changeValueGroup = function ($valueGroup, val) {
+                    console.log($valueGroup);
                     var valueProperty = $scope.valueList[val];
-                    var format = valueProperty.format;
-                    var childrenSelectList = [], tmp = '';
+                    var format = null, childrenSelectList = [], tmp = '';
 
+                    // 隐藏其它联动
+                    $valueGroup.find('.recombination-input').not('.value-group-type').removeClass('recombination-input').hide();
+
+                    if(!valueProperty) {
+                        return;
+                    }
+
+                    // 获取format属性值
+                    format = valueProperty.format;
+
+                    // format 为 "" 时保持不变
                     if(!format) {
-                        $valueGroup.find('.recombination-input').not('.value-group-type').removeClass('recombination-input').hide();
 
+                    // format 的值如果包涵,号，则初始化一个select联动列表
                     }else if(format.indexOf(',') > 0){
                         childrenSelectList = format.split(',');
                         for(var i = 0; i < childrenSelectList.length; i++) {
-                            tmp += '<a class="select_content_list_value select_content_list_value-group" data-value="' + childrenSelectList[i] + '">' + childrenSelectList[i] + '</a>';
+                            tmp += '<a class="select_content_list_value" data-value="' + childrenSelectList[i] + '">' + childrenSelectList[i] + '</a>';
                         }
                         $valueGroup.find('.value-group-format').addClass('recombination-input').show().find('.select_content_list').append(tmp);
 
+                    // format 为其它值时，显示一个必填输入框
                     }else {
-                        $valueGroup.find('.value-group-format').removeClass('recombination-input').hide();
                         $valueGroup.find('.fieldset-text-com').addClass('recombination-input').attr('placeholder', format).show();
                     }
                 };
@@ -240,9 +251,10 @@ oasgames.mdataDirective.directive('valuegroup', [
                         return;
                     }
 
-                    $scope.changeOperation(0);
+                    // 初始化两个value表单组
                     $scope.changeValueGroup($('.value-group1'), "");
                     $scope.changeValueGroup($('.value-group2'), "");
+                    $scope.changeOperation(0);
 
                     console.log("begin valueGroup resultValue");
                     console.log($scope.resultValue);
