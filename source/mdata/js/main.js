@@ -6,6 +6,7 @@ window.oasgames = {};
 * 依赖库
 * */
 require('./lib/jquery-1.11.1.js');
+require('./lib/glDatePicker.js');
 require('./lib/angular-1.4.3.js');
 require('./lib/angular-resource.js');
 require('./lib/angular-route.js');

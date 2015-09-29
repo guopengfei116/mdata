@@ -32,6 +32,7 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
             function (result) {
                 if(result && result.code == 200) {
                     $scope.reportSourceData = result.data;
+                    require('reportViewDate')($scope.reportSourceData['date_begin'], $scope.reportSourceData['date_end'], $scope.reportSourceData['create_time']);
                 }else {
                     Ui.alert(result.msg);
                 }

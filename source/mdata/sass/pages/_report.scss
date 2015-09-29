@@ -69,6 +69,7 @@
 		background:#22baa0;
 	}
 	.report-data-select{
+		position: relative;
 		@include inline-block();
 		width:118px;
 		margin:0 10px 0 10px;

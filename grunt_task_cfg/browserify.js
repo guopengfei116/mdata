@@ -10,7 +10,9 @@ exports.options = {
         'Tooltip': gruntProject.src + '/common/js/ui/tooltip.js',
         'Dropdown': gruntProject.src + '/common/js/ui/dropdown.js',
         'Select': gruntProject.src + '/common/js/ui/select.js',
-        'Checkbox': gruntProject.src + '/common/js/ui/checkbox.js'
+        'Checkbox': gruntProject.src + '/common/js/ui/checkbox.js',
+        'Echo': gruntProject.src + '/mdata/js/component/write_back.js',
+        'reportViewDate': gruntProject.src + '/mdata/js/component/report_view_date.js'
     }
 };
 
