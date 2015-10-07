@@ -10,7 +10,7 @@
     <fieldset class="field-common field-report">
         <span class="field-title-com report-title">Report Name</span>
         <span>{{ reportSourceData.report_name }}</span>
-        <a href="#/report/manage/edit/{{ reportSourceData.id }}" class="report-blue-btn report-edit-btn">Edit Report</a>
+        <a ng-if="permission == 1" href="#/report/manage/edit/{{ reportSourceData.id }}" class="report-blue-btn report-edit-btn">Edit Report</a>
     </fieldset>
     <fieldset class="field-common field-report">
         <span class="field-title-com report-title">Report Describe</span>
@@ -48,7 +48,7 @@
     </fieldset>
     <fieldset class="field-common field-report">
         <span class="field-title-com report-title">Date Range</span>
-        <div class="select select-host select-btn report-data-define">
+        <div class="select select-host select-btn select-data report-data-define">
             <div class="select_main">
                 <input class="select_main_textarea select_target" type="text" value="" placeholder="自定义">
                 <button class="select_main_btn select_target">
@@ -64,12 +64,12 @@
             </ul>
         </div>
         <div class="report-data-select">
-            <input id="reportStartDate" class="report-data-text" type="text" value="2015-07-20" id="checkDate" gldp-id="reportStartDate">
+            <input id="reportStartDate" class="report-data-text" type="text" value="" id="checkDate" gldp-id="reportStartDate">
             <span class="iconfont icon-date"></span>
             <div gldp-el="reportStartDate" style="width:240px; height:200px;"></div>
         </div>
         <div class="report-data-select">
-            <input id="reportEndDate" class="report-data-text" type="text" value="2015-07-20" id="leaveDate" gldp-id="reportEndDate">
+            <input id="reportEndDate" class="report-data-text" type="text" value="" id="leaveDate" gldp-id="reportEndDate">
             <span class="iconfont icon-date"></span>
             <div gldp-el="reportEndDate" style="width:240px; height:200px; position:absolute; top:34px; left:50px;"></div>
         </div>

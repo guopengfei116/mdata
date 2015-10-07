@@ -5,7 +5,7 @@
     {
       "appname" : "ddg",
       "appid" : 1,
-      "premission" : 1,
+      "permission" : 1,
       "admin_uid" : "28",
       "user_uid" : "",
       "guest_uid" : "25",
@@ -31,7 +31,7 @@
     {
       "appname" : "pig",
       "appid" : 15,
-      "premission" : 3,
+      "permission" : 3,
       "admin_uid" : "28",
       "user_uid" : "",
       "guest_uid" : "25",
@@ -57,7 +57,7 @@
     {
       "appname" : "cu",
       "appid" : 28,
-      "premission" : 2,
+      "permission" : 2,
       "admin_uid" : "28",
       "user_uid" : "",
       "guest_uid" : "25",

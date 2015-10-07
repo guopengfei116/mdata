@@ -3,12 +3,13 @@
  *  report view控制器
  * */
 oasgames.mdataControllers.controller('reportViewCtrl', [
+    '$rootScope',
     '$scope',
     '$route',
     'REPORT_DATE_RANGE',
     'Report',
     'OrderHandler',
-    function ($scope, $route, reportDateRanges, Report, OrderHandler) {
+    function ($rootScope, $scope, $route, reportDateRanges, Report, OrderHandler) {
 
         // report日期范围
         $scope.reportDateRanges = reportDateRanges;
@@ -26,13 +27,23 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
             $scope.reportId = 'report_view';
         }
 
+        // report权限
+        $scope.permission = $rootScope.reportPermission && $rootScope.reportPermission[$scope.reportId];
+
+        // 日期组件
+        var dataComponent = require('reportViewDate');
+
         // get report数据
         Report.get(
             {reportId: $scope.reportId},
             function (result) {
                 if(result && result.code == 200) {
                     $scope.reportSourceData = result.data;
-                    require('reportViewDate')($scope.reportSourceData['date_begin'], $scope.reportSourceData['date_end'], $scope.reportSourceData['create_time']);
+                    dataComponent = new dataComponent({
+                        startTime : $scope.reportSourceData['date_begin'],
+                        endTime : $scope.reportSourceData['date_end'],
+                        minTime : $scope.reportSourceData['create_time']
+                    });
                 }else {
                     Ui.alert(result.msg);
                 }
@@ -57,6 +68,15 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
             OrderHandler.change($scope.sort, type, orderKey);
         };
 
+        // 事件绑定
+        (function () {
+            $('.select-data').on('click', '.select_content_list_value', function () {
+                var val = $(this).data('value');
+                dataComponent.changeData(val);
+                console.log(typeof val);
+            });
+        })();
+
         // load report
         (function () {
 
@@ -78,8 +98,10 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
                 Report.get(
                     {
                         reportId : $scope.reportId,
-                        dimension : getCheckedBoxValue('.field-dimension'),
-                        filter : getCheckedBoxValue('.field-filter')
+                        dimension : getCheckedBoxValue('.field-dimension').join('&'),
+                        filter : getCheckedBoxValue('.field-filter').join('&'),
+                        date_begin : new Date($('#reportStartDate').val()).getTime(),
+                        date_end : new Date($('#reportEndDate').val()).getTime()
                     },
                     function (result) {
                         if(result && result.code == 200) {

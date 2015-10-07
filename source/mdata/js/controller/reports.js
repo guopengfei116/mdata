@@ -193,6 +193,8 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
 
                     // 初始化展示状态
                     upReportsListShow();
+                    // 记录report权限
+                    setReportPermission();
 
                     // 初始化收藏标记
                     Shortcuts.init();
@@ -216,6 +218,19 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                 }else {
                     for(var i = 0; i < reportsList.length; i++) {
                         $scope.reportsShow[i] = true;
+                    }
+                }
+            }
+
+            /*
+            * 更新report权限记录表
+            * */
+            function setReportPermission () {
+                var reportsList = reportsList || $scope.viewData;
+                $rootScope.reportPermission = {};
+                for(var i = 0; i < reportsList.length; i++) {
+                    for(var j = 0; j < reportsList[i]['reports'].length; j++) {
+                        $rootScope.reportPermission[reportsList[i]['reports'][j]['id']] = reportsList[i]['permission'];
                     }
                 }
             }
