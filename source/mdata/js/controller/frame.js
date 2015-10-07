@@ -65,6 +65,8 @@ oasgames.mdataControllers.controller('HeaderCtrl', [
         // 绑定登出事件
         $rootScope.$on('logout', function () {
             var api = ApiCtrl.get('logout');
+            var Cookie = require('Cookie');
+
             if(api) {
                 $http({
                     method : "GET",
@@ -74,6 +76,9 @@ oasgames.mdataControllers.controller('HeaderCtrl', [
                         $rootScope.user['logined'] = false;
                         $rootScope.user['authority'] = null;
                         $location.path('/login');
+
+                        Cookie.removeCookie('loginedAccount');
+                        Cookie.removeCookie('loginedAccountAuthority');
                     }else {
                         Ui.alert(data.msg);
                     }

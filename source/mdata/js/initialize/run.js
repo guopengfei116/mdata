@@ -10,13 +10,22 @@ oasgames.mdataApp.run([
     'AUTHORITY',
     function ($rootScope, $location, $log, UserAuth, AUTHORITY) {
 
-        //用户初始属性
+        // 用户初始属性
         $rootScope.user = {
             "logined" : false,
             "authority" : null
         };
 
-        //切换页面时权限认证
+        // 获取登录cookie
+        var Cookie = require('Cookie');
+        var loginedAccount = Cookie.getCookie('loginedAccount');
+        var loginedAccountAuthority = Cookie.getCookie('loginedAccountAuthority');
+        if(loginedAccount && loginedAccountAuthority) {
+            $rootScope.user['logined'] = true;
+            $rootScope.user['authority'] = loginedAccountAuthority;
+        }
+
+        // 切换页面时权限认证
         $rootScope.$on('$routeChangeStart', function (event, next, current) {
             $('.tooltip').remove(':not(.common)');
             var nextUrl = next && next.originalPath;

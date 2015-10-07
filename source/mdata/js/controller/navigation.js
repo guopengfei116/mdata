@@ -25,7 +25,7 @@ oasgames.mdataControllers.controller('navigationCtrl', [
             var path = $location.path();
 
             // 用于高亮左侧导航
-            $scope.page = path && path.match(/\w+/)[0];
+            $scope.page = path && path.match(/\w+/) && path.match(/\w+/)[0];
 
             // 获取report页中的id值
             var getReportParam = path && path.match(/\/report\/view\/(\w+)/);
