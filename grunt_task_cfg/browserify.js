@@ -11,9 +11,9 @@ exports.options = {
         'Dropdown': gruntProject.src + '/common/js/ui/dropdown.js',
         'Select': gruntProject.src + '/common/js/ui/select.js',
         'Checkbox': gruntProject.src + '/common/js/ui/checkbox.js',
-        'Echo': gruntProject.src + '/mdata/js/component/write_back.js',
-        'reportViewDate': gruntProject.src + '/mdata/js/component/report_view_date.js',
-        'Cookie': gruntProject.src + '/mdata/js/component/cookie.js'
+        'Echo': gruntProject.src + '/mdata/js/util/write_back.js',
+        'reportViewDate': gruntProject.src + '/mdata/js/util/report_view_date.js',
+        'Cookie': gruntProject.src + '/mdata/js/util/cookie.js'
     }
 };
 
