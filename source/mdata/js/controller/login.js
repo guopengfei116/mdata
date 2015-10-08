@@ -56,7 +56,9 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
             }
 
             if($scope['ndForm'].$valid && api ) {
-                $http.post(api, httpData).success(function (result) {
+                $http.post(api, httpData, {
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                }).success(function (result) {
 
                     if(result.code == 200) {
                         //记录登陆状态
