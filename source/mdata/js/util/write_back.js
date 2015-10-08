@@ -32,8 +32,8 @@ Echo.prototype = {
     btnWrapSelector : '.recombination-menu',
     btnTemplate :
     '<menu class="echo-button inline-block">' +
-    '<a class="echo-button-check button button-check"><i class="iconfont icon-check"></i></a>' +
-    '<a class="echo-button-close button button-close"><i class="iconfont icon-close"></i></a>' +
+        '<a class="echo-button-check button button-check"><i class="iconfont icon-check"></i></a>' +
+        '<a class="echo-button-close button button-close"><i class="iconfont icon-close"></i></a>' +
     '</menu>',
 
     // 初始化

@@ -100,7 +100,7 @@ oasgames.mdataDirective.directive('valuegroup', [
                     });
 
                     // 运算符select事件
-                    element.on('click', '.select-value-operator .select_content_list_value', function () {
+                    element.on('click', '.select_content_list_value-operator', function () {
                         var val = $(this).data('value');
                         $scope.changeOperation(val);
                     });
@@ -164,6 +164,23 @@ oasgames.mdataDirective.directive('valuegroup', [
                         $flag.css('bakcgrountColor', '#65c178');
                         element.find('.add-select').hide();
 
+                        function setValue () {
+                            var vals = val.split(separator);
+                            var $tempInput = null;
+                            if(vals[2]) {
+                                $tempInput = $(element.find('.value-group .select_content_list_value-group')[0]);
+                                $tempInput.data('value', vals[2]).trigger('click');
+                            }
+                            if(vals[3]) {
+                                $tempInput = $(element.find('.value-group .select_content_list_value-group')[0]);
+                                $tempInput.data('value', vals[2]).trigger('click');
+                            }
+                            console.log(vals);
+
+                        }
+
+                        setValue();
+/*
                         var echo = new ValueGroupEcho(
                             val,
                             separator,
@@ -192,6 +209,7 @@ oasgames.mdataDirective.directive('valuegroup', [
                                 element.find('.add-select').show();
                             }
                         );
+*/
                     });
                 });
             },

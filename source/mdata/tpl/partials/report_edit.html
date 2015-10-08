@@ -170,7 +170,7 @@
                 </div>
                 <input class="fieldset-text-com field-text-column recombination-input" type="text" value="" placeholder="" required-warn="please fill out the complete"/>
             </section>
-            <div class="select select-host select-btn-column select-value-operator recombination-input" required-warn="please fill out the Value Operator">
+            <div class="select select-host select-btn-column recombination-input" required-warn="please fill out the Value Operator">
                 <div class="select_main">
                     <p class="select_main_text select_target"></p>
                     <button class="select_main_btn select_target">
@@ -181,7 +181,7 @@
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
                     <li class="select_content_list" ng-repeat="operator in valueArithmetics ">
-                        <a class="select_content_list_value" data-value="{{ operator.value }}">{{ operator.arithmetic }}</a>
+                        <a class="select_content_list_value select_content_list_value-operator" data-value="{{ operator.value }}">{{ operator.arithmetic }}</a>
                     </li>
                 </ul>
             </div>
@@ -222,7 +222,7 @@
         </div>
         <div class="textarea teatarea-column">
             <span class="flag flag-icon" ng-repeat="value in reportSourceData['reportData']['values']">
-                {{ value['value_name'] }}
+                <i class="flag-text" data-value="{{ value['groupValue'] }}">{{ value['value_name'] }}</i>
                 <i class="flag-icon_delete iconfont icon-close" data-value="{{ value['groupValue'] }}"></i>
             </span>
         </div>
