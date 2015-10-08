@@ -72,7 +72,7 @@ Echo.prototype = {
     bind : function () {
         var self = this;
         var $domScope = $(this.domScope);
-        var $echoForms = $domScope.find(this.inputSelector);
+
 
         // 防止重复添加
         if($domScope.find('.echo-button').length) {
@@ -82,15 +82,15 @@ Echo.prototype = {
         // 添加echo操作按钮
         $domScope.find(this.btnWrapSelector).append(this.btnTemplate);
 
-        // 绑定事件
+        // 绑定事件,未放在可选表单动态变化，每次需要获取最新的表单列表$echoForms
         $domScope.on('click', '.echo-button-check', function () {
+            var $echoForms = $domScope.find(self.inputSelector);
             var newVal = self.getValue($echoForms, self.separator);
             self.success(newVal);
             self.destroy();
 
         }).on('click', '.echo-button-close', function () {
-            var newVal = self.getValue($echoForms, self.separator);
-            self.failure(newVal);
+            self.failure('');
             self.destroy();
         })
     },
@@ -123,8 +123,7 @@ Echo.prototype = {
             // 空值效验，可能存在值为0的情况，顾做类型判断
             if(!temVal && (typeof temVal != 'number') && temWarn) {
                 Ui.alert(temWarn);
-                val = "";
-                return false;
+                throw new Error(temWarn);
             }else {
 
                 // 第一次赋值不添加分隔符

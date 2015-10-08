@@ -26,12 +26,11 @@ oasgames.mdataDirective.directive('valuegroup', [
                 * */
                 $scope.changeOperation = function (val) {
                     var $valueGroup2 = element.find('.value-group2');
-                    if(val === 0) {
+                    if(val == 0) {
                         $valueGroup2.find('.recombination-input').removeClass('recombination-input');
                         $valueGroup2.hide();
                     }else {
-                        $valueGroup2.find('.select').removeClass('recombination-input');
-                        $valueGroup2.find('.fieldset-text-com').removeClass('recombination-input');
+                        $($valueGroup2.find('.select')[0]).addClass('recombination-input').show().siblings().removeClass('recombination-input').hide();
                         $valueGroup2.show();
                     }
                 };
@@ -40,11 +39,10 @@ oasgames.mdataDirective.directive('valuegroup', [
                 * value表单根据第一个值来确定是否需要添加第二个值,
                 * */
                 $scope.changeValueGroup = function ($valueGroup, val) {
-                    console.log($valueGroup);
                     var valueProperty = $scope.valueList[val];
                     var format = null, childrenSelectList = [], tmp = '';
 
-                    // 隐藏其它联动
+                    // 隐藏value子表单项
                     $valueGroup.find('.recombination-input').not('.value-group-type').removeClass('recombination-input').hide();
 
                     if(!valueProperty) {
@@ -72,6 +70,15 @@ oasgames.mdataDirective.directive('valuegroup', [
                 };
 
                 /*
+                * 表单样式初始化
+                * */
+                $scope.initForms = function () {
+                    $scope.changeValueGroup($('.value-group1'), "");
+                    $scope.changeValueGroup($('.value-group2'), "");
+                    $scope.changeOperation(0);
+                };
+
+                /*
                  * 初始化dom
                  * */
                 $scope.$on('bind', function () {
@@ -82,9 +89,7 @@ oasgames.mdataDirective.directive('valuegroup', [
                     }
 
                     // 初始化两个value表单组
-                    $scope.changeValueGroup($('.value-group1'), "");
-                    $scope.changeValueGroup($('.value-group2'), "");
-                    $scope.changeOperation(0);
+                    $scope.initForms();
 
                     console.log("begin valueGroup resultValue");
                     console.log($scope.resultValue);
@@ -164,39 +169,58 @@ oasgames.mdataDirective.directive('valuegroup', [
                         $flag.css('bakcgrountColor', '#65c178');
                         element.find('.add-select').hide();
 
-                        function setValue () {
+                        function initForms () {
                             var vals = val.split(separator);
-                            var $tempInput = null;
-                            if(vals[2]) {
-                                $tempInput = $(element.find('.value-group .select_content_list_value-group')[0]);
-                                $tempInput.data('value', vals[2]).trigger('click');
-                            }
-                            if(vals[3]) {
-                                $tempInput = $(element.find('.value-group .select_content_list_value-group')[0]);
-                                $tempInput.data('value', vals[2]).trigger('click');
-                            }
                             console.log(vals);
+                            var $tempInput = null;
+                            var valMark = 2;
+                            while(valMark < vals.length) {
 
+                                // 第一个value
+                                if(valMark == 2) {
+                                    $scope.changeValueGroup(element.find('.value-group1'), vals[valMark]);
+                                    valMark++;
+                                    continue;
+                                }
+
+                                // 运算符，如果是string类型，则证明是上一个value值的子项，需要++获取运算符的值
+                                if(valMark == 3) {
+                                    if(typeof vals[valMark] == 'string') {
+                                        valMark++;
+                                    }
+                                    $scope.changeOperation(vals[valMark]);
+                                    valMark++;
+                                    continue;
+                                }
+
+                                // 第二个value
+                                if(valMark == 4 || valMark == 5) {
+                                    $scope.changeValueGroup(element.find('.value-group2'), vals[valMark]);
+                                    valMark++;
+                                    continue;
+                                }
+                            }
                         }
 
-                        setValue();
-/*
-                        var echo = new ValueGroupEcho(
+                        $scope.initForms();
+                        initForms();
+
+                        var echo = new Echo(
                             val,
                             separator,
                             element,
                             function (newVal) {
 
-                                // 判断值是否发生变化
+                                // 更新复合表单值
                                 if(val != newVal) {
-                                    for(var i = 0; i < recombinationData.length; i++) {
-                                        if(recombinationData[i] == val) {
-                                            recombinationData[i] = newVal;
-                                            upRecombinationData(recombinationData);
+                                    for(var i = 0; i < $scope.resultValue.length; i++) {
+                                        if($scope.resultValue[i] == val) {
+                                            $scope.resultValue[i] = newVal;
+                                            element.data('value', $scope.resultValue);
                                             break;
                                         }
                                     }
-                                    $flag.find('.flag-text').data('value', newVal).text(newVal);
+                                    $flag.find('.flag-text').data('value', newVal).text(newVal.split(separator)[0]);
                                     $flag.find('.flag-icon_delete').data('value', newVal);
                                 }
 
@@ -209,7 +233,6 @@ oasgames.mdataDirective.directive('valuegroup', [
                                 element.find('.add-select').show();
                             }
                         );
-*/
                     });
                 });
             },

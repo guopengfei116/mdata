@@ -99,9 +99,16 @@ oasgames.mdataDirective.directive('recombination', [
                             val,
                             separator,
                             element,
+
+                            /*
+                            * 成功回调函数，
+                            * 如果新值为空或不变则不做任何处理
+                            * */
                             function (newVal) {
 
-                                // 判断值是否发生变化
+                                if(!newVal) {
+                                    newVal = val;
+                                }
                                 if(val != newVal) {
                                     for(var i = 0; i < $scope.recombinationData.length; i++) {
                                         if($scope.recombinationData[i] == val) {
