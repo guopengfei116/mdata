@@ -21,7 +21,7 @@ oasgames.mdataServices.provider('ApiCtrl', [
                             console.log('api--' + name + '不存在');
                             return '';
                         }
-                        return self.localhost + url;
+                        return 'http://' + self.localhost + url;
                     },
                     set : function (name, url) {
                         self.setApi(name, url);
