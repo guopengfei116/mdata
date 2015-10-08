@@ -56,7 +56,7 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
             }
 
             if($scope['ndForm'].$valid && api ) {
-                $http.post(api, httpData, {
+                $http.get(api, httpData, {
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 }).success(function (result) {
 

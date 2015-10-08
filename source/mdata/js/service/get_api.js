@@ -4,11 +4,12 @@
  * @return {Function} 获取接口url
  * */
 oasgames.mdataServices.provider('ApiCtrl', [
+    'RUN_TIME_SYSTEM',
     'API_CONFIG',
-    function (apiAll) {
+    function (runTimeSystem, apiAll) {
         return {
-            localhost : '10.1.7.79',
-            API : apiAll.online,
+            API : runTimeSystem.online ? apiAll.online : apiAll.local,
+            localhost : runTimeSystem.domain ? 'http://10.1.7.79' : '',
             setApi : function (name, url) {
                 this.API[name] = url;
             },
@@ -21,7 +22,7 @@ oasgames.mdataServices.provider('ApiCtrl', [
                             console.log('api--' + name + '不存在');
                             return '';
                         }
-                        return 'http://' + self.localhost + url;
+                        return self.localhost + url;
                     },
                     set : function (name, url) {
                         self.setApi(name, url);
