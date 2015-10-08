@@ -7,7 +7,7 @@ oasgames.mdataServices.provider('ApiCtrl', [
     'API_CONFIG',
     function (apiAll) {
         return {
-            API : apiAll.local,
+            API : apiAll.online,
             setApi : function (name, url) {
                 this.API[name] = url;
             },

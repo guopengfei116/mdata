@@ -118,7 +118,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
             };
 
             // 调试期只能暂用get方法，测试期需要修改method方法为对应fn
-            var submitMethod = 'get';
+            var submitMethod = 'save';
 
             /*
              * 提交
@@ -141,6 +141,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                 $scope.appSourceData.timeZone = $('.select.app-zone').data('value');
                 $scope.appSourceData["reportAdmin"] = $(".field-account").data('value');
                 $scope.appSourceData["reportViewer"] = $(".field-account").next().data('value');
+                $scope.appSourceData["processor"] = $(".field-account").next().next().data('value');
                 Application[submitMethod](
                     {appId: $scope.appId},
                     $scope.appSourceData,
