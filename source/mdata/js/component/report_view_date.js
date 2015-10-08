@@ -79,6 +79,13 @@ var reportViewDate = function (options) {
 
 reportViewDate.prototype = {
     constructor : reportViewDate,
+
+    /*
+    * @method 获取某月天数，必要时需要传入年份
+    * @param {Number} month 月份
+    * @param {Number} year 年份
+    * @return {Number} 天数
+    * */
     getMonthIsDay : function (month, year) {
         var long = '1,3,5,7,8,10,12';
         var normal = '4,6,9,11';
@@ -100,16 +107,25 @@ reportViewDate.prototype = {
             return 28;
         }
     },
+
+    // 更新日期插件select日期 -- 开始时间
     changeStartData : function (time) {
         $.extend(this.startDateComp.options, {
             selectedDate: new Date(time)
         });
     },
+
+    // 更新日期插件select日期 -- 结束时间
     changeEndData : function (time) {
         $.extend(this.endDateComp.options, {
             selectedDate: new Date(time)
         });
     },
+
+    /*
+    * @method 根据类型转换开始时间和结束时间
+    * @param {String} type 类型
+    * */
     changeData : function (type) {
         var current = new Date();
         var year = current.getFullYear(), month = current.getMonth() + 1, day = current.getDate();
@@ -134,7 +150,7 @@ reportViewDate.prototype = {
                     endDataInput.val(year + '-' + month + '-' + day);
                 }else {
                     tempMonth = month - 1;
-                    startTempDay = this.getMonthIsDay(tempMonth) + day - 7;
+                    startTempDay = this.getMonthIsDay(tempMonth) + day - 7; // 当月天数小于7天的部分，从上月总天数中扣除
                     startDataInput.val(year + '-' + tempMonth + '-' + startTempDay);
                     endDataInput.val(year + '-' + month + '-' + day);
                 }
