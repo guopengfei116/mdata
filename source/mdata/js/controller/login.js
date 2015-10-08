@@ -91,7 +91,8 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
         // $scope.toldPassword = new tooltip({'position':'rc'}).getNewTooltip();
         // $scope.tnewPassword = new tooltip({'position':'rc'}).getNewTooltip();
         // $scope.treNewPassword = new tooltip({'position':'rc'}).getNewTooltip();
-        $scope.userPassword = {};
+        var httpData = $scope.userPassword = {};
+        var httpOldPaW = {"password":$scope.userPassword.oldPassword};
         $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
 
         //错误提示
@@ -202,7 +203,7 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
 
             //验证通过、新旧密码不一致并且新密码相同
             if($scope['cPaw'].$valid && api ) {
-                $http.post(api, $scope.userPassword).success(function (result) {
+                $http.post(api,httpData).success(function (result) {
                     if(result.code == 200) {
                         Ui.alert('Your password has been changed successfully');
                     }
