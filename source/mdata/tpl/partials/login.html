@@ -1,7 +1,7 @@
 <form class="form form-panel" name="ndForm" novalidate>
     <fieldset class="fieldset fieldset-group fieldset-account" ng-class="{'fieldset-error':accountError}">
         <label class="fieldset-group_label iconfont icon-user"></label>
-        <input ng-model="account.account" class="fieldset_text" type="text"
+        <input ng-model="account.email" class="fieldset_text" type="text"
                placeholder="Email" required ng-pattern="/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/"
                name="ndAccount" ng-blur="blur('account', ndForm.ndAccount.$error)"
                ng-focus="focus('account')" onpaste="return false;">
