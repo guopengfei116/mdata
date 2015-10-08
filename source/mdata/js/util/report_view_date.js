@@ -134,55 +134,60 @@ reportViewDate.prototype = {
         var tempMonth, startTempDay, endTempDay;
         switch (type) {
             case 0 :
-                endTempDay = day + 1;
                 startDataInput.val(year + '-' + month + '-' + day);
-                endDataInput.val(year + '-' + month + '-' + endTempDay);
+                endDataInput.val(year + '-' + month + '-' + day);
                 break;
             case 1 :
-                startTempDay = day - 1;
+                endTempDay = startTempDay = day - 1;
                 startDataInput.val(year + '-' + month + '-' + startTempDay);
-                endDataInput.val(year + '-' + month + '-' + day);
+                endDataInput.val(year + '-' + month + '-' + endTempDay);
                 break;
             case 7 :
                 if(day > 7) {
                     startTempDay = day - 7;
+                    endTempDay = day - 1;
                     startDataInput.val(year + '-' + month + '-' + startTempDay);
-                    endDataInput.val(year + '-' + month + '-' + day);
+                    endDataInput.val(year + '-' + month + '-' + endTempDay);
                 }else {
                     tempMonth = month - 1;
                     startTempDay = this.getMonthIsDay(tempMonth) + day - 7; // 当月天数小于7天的部分，从上月总天数中扣除
+                    endTempDay = day - 1;
                     startDataInput.val(year + '-' + tempMonth + '-' + startTempDay);
-                    endDataInput.val(year + '-' + month + '-' + day);
+                    endDataInput.val(year + '-' + month + '-' + endTempDay);
                 }
                 break;
             case '7L' :
                 if(day > 7) {
                     startTempDay = day - 7;
+                    endTempDay = day - 1;
                     startDataInput.val(year + '-' + month + '-' + startTempDay);
-                    endDataInput.val(year + '-' + month + '-' + day);
+                    endDataInput.val(year + '-' + month + '-' + endTempDay);
                 }else {
                     tempMonth = month - 1;
                     startTempDay = this.getMonthIsDay(tempMonth) + day - 7;
+                    endTempDay = day - 1;
                     startDataInput.val(year + '-' + tempMonth + '-' + startTempDay);
-                    endDataInput.val(year + '-' + month + '-' + day);
+                    endDataInput.val(year + '-' + month + '-' + endTempDay);
                 }
                 break;
             case 30 :
                 if(day > 30) {
                     startTempDay = day - 30;
+                    endTempDay = day - 1;
                     startDataInput.val(year + '-' + month + '-' + startTempDay);
-                    endDataInput.val(year + '-' + month + '-' + day);
+                    endDataInput.val(year + '-' + month + '-' + endTempDay);
                 }else {
                     tempMonth = month - 1;
                     startTempDay = this.getMonthIsDay(tempMonth) + day - 30;
                     startDataInput.val(year + '-' + tempMonth + '-' + startTempDay);
-                    endDataInput.val(year + '-' + month + '-' + day);
+                    endTempDay = day - 1;
+                    endDataInput.val(year + '-' + month + '-' + endTempDay);
                 }
                 break;
             case '30L' :
                 tempMonth = month - 1;
                 startDataInput.val(year + '-' + tempMonth + '-' + 1);
-                endDataInput.val(year + '-' + month + '-' + 1);
+                endDataInput.val(year + '-' + tempMonth + '-' + this.getMonthIsDay(tempMonth));
                 break;
         }
     }
