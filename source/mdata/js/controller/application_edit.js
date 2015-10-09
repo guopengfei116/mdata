@@ -143,7 +143,6 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                         url: ApiCtrl.get('appUpdate'),
                         method: 'POST',
                         data: {appId: $scope.appId},
-                        httpApp,
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                         transformRequest: function(data){
                             return $.param(data);
