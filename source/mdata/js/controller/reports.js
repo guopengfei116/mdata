@@ -151,15 +151,14 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
             * */
             addShortcut : function (reportId, appId) {
                 var self = this;
-                Shortcut.get(
-                    {reportId : reportId, appId : appId},
-                    function () {
-                        $scope.$emit('addShortcut', self.operationObject.report, self.operationObject.app);
-                    },
-                    function () {
-                        $scope.reportsShortcutStatus[reportId] = !$scope.reportsShortcutStatus[reportId];
-                    }
-                );
+                $http.post(
+                    ApiCtrl.get('shortcutAdd'),
+                    {data: {reportId : reportId, appId : appId}}
+                ).success(function () {
+                    $scope.$emit('addShortcut', self.operationObject.report, self.operationObject.app);
+                }).error(function () {
+                    $scope.reportsShortcutStatus[reportId] = !$scope.reportsShortcutStatus[reportId];
+                });
             },
 
             /*
@@ -167,16 +166,14 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
              * */
             cancelShortcut : function (reportId, appId) {
                 var self = this;
-                Shortcut.get(
-                    {'type' : 'shortcut_cancel'},
-                    {reportId : reportId, appId : appId},
-                    function () {
-                        $scope.$emit('cancelShortcut', self.operationObject.report, self.operationObject.app);
-                    },
-                    function () {
-                        $scope.reportsShortcutStatus[reportId] = !$scope.reportsShortcutStatus[reportId];
-                    }
-                );
+                $http.post(
+                    ApiCtrl.get('shortcutDel'),
+                    {reportId : reportId, appId : appId}
+                ).success(function () {
+                    $scope.$emit('cancelShortcut', self.operationObject.report, self.operationObject.app);
+                }).error(function () {
+                    $scope.reportsShortcutStatus[reportId] = !$scope.reportsShortcutStatus[reportId];
+                });
             }
         };
 
