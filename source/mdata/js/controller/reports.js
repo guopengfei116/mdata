@@ -29,6 +29,9 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
         // 用于存储每个app的report列表展示状态
         $scope.reportsShow = [];
 
+        // 用户权限
+        $scope.userPermission = $rootScope.user['authority'];
+
         /*
         * 收藏对象，
         * 列表五角星初始化，
