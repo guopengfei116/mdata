@@ -46,7 +46,7 @@ oasgames.mdataControllers.controller('systemLogCtrl', [
 
         // 搜索自定义处理函数
         $scope.searchHandler = function (searchVal) {
-            $scope.viewData = Filter($scope.sourceData, {email : ['account', 'email', searchVal], operation : searchVal});
+            $scope.viewData = Filter($scope.sourceData, {username : searchVal, operaevents : searchVal});
         };
 
         // 排序数据模型
