@@ -31,14 +31,13 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
         var httpApp = $scope.appSourceData = {};
         var httpAppUp = $scope.appSourceData;
         // 当前编辑的appId
-        $scope.appId = $route.current.params.applicationId;
+        var httpAppid = $scope.appId = $route.current.params.applicationId;
 
         /*
          * 如果有id，则说明是编辑状态
          * accountId先写死方便调试获取json-data
          * */
         if($scope.appId) {
-            $scope.appId = 'application_info';
             initAppData();
         }else {
             initSelectData();
@@ -46,20 +45,34 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
 
         // getApp数据
         function initAppData () {
-            Application.get(
-                {appId: $scope.appId},
-                function (result) {
-                    if(result && result.code == 200) {
-                        $scope.appSourceData = result.data;
-                        initSelectData();
-                    }else {
-                        Ui.alert(result.msg);
-                    }
-                },
-                function () {
-                    Ui.alert('网络错误');
+            // Application.get(
+            //     {appId: $scope.appId},
+            //     function (result) {
+            //         if(result && result.code == 200) {
+            //             $scope.appSourceData = result.data;
+            //             initSelectData();
+            //         }else {
+            //             Ui.alert(result.msg);
+            //         }
+            //     },
+            //     function () {
+            //         Ui.alert('网络错误');
+            //     }
+            // );
+            $http({
+                url: ApiCtrl.get('appIndex')+'?uid='+httpAppid,
+                method: 'GET',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            }).success(function (result) {
+                if(result && result.code == 200) {
+                    $scope.appSourceData = result.data;
+                    initSelectData();
+                }else {
+                    Ui.alert(result.msg);
                 }
-            );
+            }).error(function (status) {
+                Ui.alert('网络错误！');
+            });
         }
 
         // 排除空值
