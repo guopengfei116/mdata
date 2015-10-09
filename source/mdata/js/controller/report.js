@@ -95,25 +95,25 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
 
             // 重新加载report—view
             $scope.loadReport = function () {
-                Report.get(
-                    {
+                $http({
+                    method : "GET",
+                    url : ApiCtrl.get('reportView'),
+                    data : {
                         reportId : $scope.reportId,
                         dimension : getCheckedBoxValue('.field-dimension').join('&'),
                         filter : getCheckedBoxValue('.field-filter').join('&'),
                         date_begin : new Date($('#reportStartDate').val()).getTime(),
                         date_end : new Date($('#reportEndDate').val()).getTime()
-                    },
-                    function (result) {
-                        if(result && result.code == 200) {
-                            $scope.reportSourceData = result.data;
-                        }else {
-                            Ui.alert(result.msg);
-                        }
-                    },
-                    function () {
-                        Ui.alert('网络错误');
                     }
-                );
+                }).success(function (result) {
+                    if(result && result.code == 200) {
+                        $scope.reportSourceData = result.data;
+                    }else {
+                        Ui.alert(result.msg);
+                    }
+                }).error(function () {
+                    Ui.alert('网络错误');
+                });
             };
         })();
 
