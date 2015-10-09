@@ -23,6 +23,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
         // 当前account的数据
         var httpApp = $scope.accountSourceData = {};
         var httpAppUp = $scope.accountSourceData;
+        var httpName = $scope.accountSourceData.username;
         // 初始account的email值
         $scope.accountEmail = "";
 
@@ -110,7 +111,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 $http({
                     url: ApiCtrl.get('checkEmail'),
                     method: 'POST',
-                    data: {username:$scope.accountSourceData.username},
+                    data: {username:httpName},
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                     transformRequest: function(data){
                         return $.param(data);
@@ -155,22 +156,22 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 if(!MdataVerify.submit('acountPassword', $scope['accountForm']['acountPassword'].$error,$scope)){
                     return;
                 }
-                Account[submitMethod](
-                    {accountId: $scope.accountId},
-                    $scope.accountSourceData,
-                    function (result) {
-                        if(result && result.code == 200) {
-                            Ui.alert('success', function () {
-                                history.back();
-                            });
-                        }else {
-                            Ui.alert(result.msg);
-                        }
-                    },
-                    function () {
-                        Ui.alert('网络错误');
-                    }
-                )
+                // Account[submitMethod](
+                //     {accountId: $scope.accountId},
+                //     $scope.accountSourceData,
+                //     function (result) {
+                //         if(result && result.code == 200) {
+                //             Ui.alert('success', function () {
+                //                 history.back();
+                //             });
+                //         }else {
+                //             Ui.alert(result.msg);
+                //         }
+                //     },
+                //     function () {
+                //         Ui.alert('网络错误');
+                //     }
+                // )
                 if($scope.appId){
                     httpAppUp.appid = $scope.appId;
                     $http({
