@@ -36,7 +36,7 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
             method : "GET",
             url : ApiCtrl.get('reportView'),
             params : {
-                reportId : $scope.reportId,
+                reportId : $scope.reportId
             }
         }).success(function (result) {
             if(result && result.code == 200) {
