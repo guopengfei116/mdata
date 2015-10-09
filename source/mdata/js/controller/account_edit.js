@@ -35,7 +35,6 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
          * accountId先写死方便调试获取json-data
          * */
         if($scope.accountId) {
-            $scope.accountId = 'account_info';
             initAccountData();
         }else {
             initSelectData();
