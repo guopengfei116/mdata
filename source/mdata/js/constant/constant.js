@@ -26,12 +26,13 @@ oasgames.mdataConstant.constant("API_CONFIG", {
         'userAppList' : '/user/app-list',
         'checkEmail' : '/user/check-email',
         'systemLog' : '/log/index',
+        'reports': '/report/view',
+        'reportView' : '/report/view-report',
         'reportUpdate': '/report/update',
-        'reportView' : '/view-report',
-        'checkReportName' : '/check-report-name',
-        'shortcuts' : '/shortcut',
-        'shortcutAdd' : '/favorite-add',
-        'shortcutDel' : '/favorite-del',
+        'checkReportName' : '/report/check-report-name',
+        'shortcuts' : '/report/shortcut',
+        'shortcutAdd' : '/report/favorite-add',
+        'shortcutDel' : '/report/favorite-del',
         'guestUser' : '/report/guest-user'
     },
     "local" : {

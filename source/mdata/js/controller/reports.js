@@ -183,7 +183,29 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
         (function () {
 
             // 展示列表数据初始化
-            Report.query().$promise.then(function (result) {
+            $http({
+                url: ApiCtrl.get('reports'),
+                method: 'GET'
+            }).success(function (result) {
+                if(result.code == 200) {
+                    $scope.sourceData = result.data;
+                    $scope.viewData = result.data;
+
+                    // 初始化展示状态
+                    upReportsListShow();
+                    // 记录report权限
+                    setReportPermission();
+
+                    // 初始化收藏标记
+                    Shortcuts.init();
+                }else {
+                    Ui.alert(result.msg);
+                }
+            }).error(function (status) {
+                Ui.alert('网络错误！');
+            });
+
+            /*Report.query().$promise.then(function (result) {
                 if(result.code == 200) {
                     $scope.sourceData = result.data;
                     $scope.viewData = result.data;
@@ -200,7 +222,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                 }
             }, function () {
                 Ui.alert('网络错误');
-            });
+            });*/
 
             /*
              * 更新report列表的展示状态，

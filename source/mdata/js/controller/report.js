@@ -7,9 +7,10 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
     '$scope',
     '$route',
     'REPORT_DATE_RANGE',
+    'ApiCtrl',
     'Report',
     'OrderHandler',
-    function ($rootScope, $scope, $route, reportDateRanges, Report, OrderHandler) {
+    function ($rootScope, $scope, $route, reportDateRanges, ApiCtrl, Report, OrderHandler) {
 
         // report日期范围
         $scope.reportDateRanges = reportDateRanges;
@@ -34,24 +35,23 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
         var dataComponent = require('reportViewDate');
 
         // get report数据
-        Report.get(
-            {reportId: $scope.reportId},
-            function (result) {
-                if(result && result.code == 200) {
-                    $scope.reportSourceData = result.data;
-                    dataComponent = new dataComponent({
-                        startTime : $scope.reportSourceData['date_begin'],
-                        endTime : $scope.reportSourceData['date_end'],
-                        minTime : $scope.reportSourceData['create_time']
-                    });
-                }else {
-                    Ui.alert(result.msg);
-                }
-            },
-            function () {
-                Ui.alert('网络错误');
+        $http({
+            method : "GET",
+            url : ApiCtrl.get('reportView')
+        }).success(function (result) {
+            if(result && result.code == 200) {
+                $scope.reportSourceData = result.data;
+                dataComponent = new dataComponent({
+                    startTime : $scope.reportSourceData['date_begin'],
+                    endTime : $scope.reportSourceData['date_end'],
+                    minTime : $scope.reportSourceData['create_time']
+                });
+            }else {
+                Ui.alert(result.msg);
             }
-        );
+        }).error(function () {
+            Ui.alert('网络错误');
+        });
 
         // 排序数据模型
         $scope.sort = {
