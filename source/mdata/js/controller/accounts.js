@@ -79,7 +79,7 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
         $scope.delete = function (accountId) {
             Ui.confirm('确定要删除这个账号吗', function () {
                 $http({
-                    url: api,
+                    url:  ApiCtrl.get('userDelete'),
                     method: 'POST',
                     data: {uid : accountId},
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
