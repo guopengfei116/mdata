@@ -21,11 +21,13 @@ oasgames.mdataConstant.constant("API_CONFIG", {
         'appCreate' : '/app/create',
         'account' : '/user/:accountId.json',
         'systemLog' : '/log/index',
-        'report' : '/mdata/js/:reportId.json',
-        'reportName' : '/mdata/js/check_reportName.json',
-        'shortcuts' : '/mdata/js/shortcuts.json',
-        'shortcut' : '/mdata/js/:type.json',
-        'guestUser' : '/mdata/js/guest_user.json'
+        'reportUpdate': '/report/update',
+        'reportView' : '/view-report',
+        'checkReportName' : '/check-report-name',
+        'shortcuts' : '/shortcut',
+        'shortcutAdd' : '/favorite-add',
+        'shortcutDel' : '/favorite-del',
+        'guestUser' : '/report/guest-user'
     },
     "local" : {
         'userAuth' : '/isLogin',

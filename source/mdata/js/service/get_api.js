@@ -9,7 +9,7 @@ oasgames.mdataServices.provider('ApiCtrl', [
     function (runTimeSystem, apiAll) {
         return {
             API : runTimeSystem.online ? apiAll.online : apiAll.local,
-            localhost : runTimeSystem.domain ? 'http://mdata.dev' : '',
+            localhost : runTimeSystem.domain ? 'http://api.mdata.dev' : '',
             setApi : function (name, url) {
                 this.API[name] = url;
             },
