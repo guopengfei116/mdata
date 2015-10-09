@@ -130,34 +130,39 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
                 );
             };
             var getVal = function () {
-                var val = "\ufeff";   // \ufeff防止utf8 bom防止中文乱码
+                var result = [], val = "\ufeff";   // \ufeff防止utf8 bom防止中文乱码
                 var dataSource = $scope.reportSourceData['table_list'];
+                var temp = null;
                 for(var i = 0; i < dataSource.length; i++) {
                     console.log(dataSource[i]);
                     if(Object.prototype.toString.call(dataSource[i]) === '[object Array]') {
                         for(var j = 0; j < dataSource[i].length; j++) {
-                            if(dataSource[i][j] == '') {
+                            if(dataSource[i][j] == '') {  // 排空
                                 dataSource[i][j] = '-';
                             }
-                            if(j !== 0 && j !== dataSource[i].length ) {  // 非第一次和最后一次
+                            if(j !== 0) {  // 非第一次
                                 val += ',' + dataSource[i][j];
                                 continue;
                             }
                             val += dataSource[i][j];
                         }
                     }else {
+                        temp = 1;
                         for(var k in dataSource[i]) {
-                            if(dataSource[i][k] == '') {
+                            if(dataSource[i][k] == '') {  // 排空
                                 dataSource[i][k] = '-';
                             }
+                            if(temp !== 1) {  // 非第一次
+                                val += ',' + dataSource[i][k];
+                                continue;
+                            }
                             val += dataSource[i][k];
+                            temp++
                         }
                     }
-                    val += '/r/n';
+                    result.push(val);
                 }
-                console.log($scope.reportSourceData['table_list']);
-                console.log(val);
-                return ([].push(val));
+                return result;
             };
             $scope.reportExport = function () {
                 exportExcel();
