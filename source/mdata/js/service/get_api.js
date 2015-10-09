@@ -17,13 +17,20 @@ oasgames.mdataServices.provider('ApiCtrl', [
                 var self = this;
                 return {
                     get : function (name) {
-                        var Cookie = require('Cookie');
+                        
                         var url = self.API[name];
                         if(!url) {
                             console.log('api--' + name + '不存在');
                             return '';
                         }
-                        return self.localhost + url + "?mdata-key="+ Cookie.getCookie('MDATA-KEY');
+
+                        var Cookie = require('Cookie');
+                        var cookieVal = Cookie.getCookie('MDATA-KEY');
+                        if(!cookieVal || name == 'login'){
+                            return self.localhost + url ;
+                        }else{
+                            return self.localhost + url + "?mdata-key="+ cookieVal;
+                        }
                     },
                     set : function (name, url) {
                         self.setApi(name, url);
