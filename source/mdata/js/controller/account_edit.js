@@ -41,7 +41,6 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
         }
 
         // getAccount数据
-        // 异步获取
             $http({
                 url: ApiCtrl.get('userIndex'), //?uid=11
                 method: 'GET',

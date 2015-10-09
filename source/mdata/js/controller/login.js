@@ -63,6 +63,7 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                     method: 'POST',
                     data: httpData,
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    withCredentials:true,
                     transformRequest: function(data){
                         return $.param(data);
                     }
