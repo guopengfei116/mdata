@@ -29,7 +29,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
 
         // 当前app的信息
         var httpApp = $scope.appSourceData = {};
-
+        var httpAppUp = $scope.appSourceData;
         // 当前编辑的appId
         $scope.appId = $route.current.params.applicationId;
 
@@ -139,10 +139,11 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                 $scope.appSourceData["appuser"] = $(".field-account").next().data('value');
                 $scope.appSourceData["proce"] = $(".field-account").next().next().data('value');
                 if($scope.appId){
+                    httpAppUp.appid = $scope.appId;
                     $http({
                         url: ApiCtrl.get('appUpdate'),
                         method: 'POST',
-                        data: {appId: $scope.appId},
+                        data: httpAppUp,
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                         transformRequest: function(data){
                             return $.param(data);

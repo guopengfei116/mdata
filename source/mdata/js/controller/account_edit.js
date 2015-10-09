@@ -7,10 +7,12 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
     '$scope',
     '$cacheFactory',
     '$route',
+    '$http',
     'Account',
     'Application',
     'MdataVerify',
-    function ($scope, $cacheFactory, $route, Account, Application, MdataVerify) {
+    'ApiCtrl',
+    function ($scope, $cacheFactory, $route, $http, Account, Application, MdataVerify, ApiCtrl) {
 
         // 所有的app列表
         $scope.appsData = [];
@@ -39,23 +41,22 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
         }
 
         // getAccount数据
-        function initAccountData () {
-            Account.get(
-                {accountId: $scope.accountId},
-                function (result) {
-                    if(result && result.code == 200) {
-                        $scope.accountSourceData = result.data;
-                        $scope.accountEmail = result.data.username;
-                        initSelectData();
-                    }else {
-                        Ui.alert(result.msg);
-                    }
-                },
-                function () {
-                    Ui.alert('网络错误');
+        // 异步获取
+            $http({
+                url: ApiCtrl.get('userIndex'), //?uid=11
+                method: 'GET',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            }).success(function (result) {
+                if(result && result.code == 200) {
+                    $scope.sourceData = result.data;
+                    $scope.viewData = result.data;
+                    accountCache.put('list', result.data);
+                }else {
+                    Ui.alert(result.msg);
                 }
-            );
-        }
+            }).error(function (status) {
+                Ui.alert('网络错误');
+            });
 
         // 排除空值
         function initSelectData () {
@@ -73,21 +74,27 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
             if(AppCache && AppCache.get('list')) {
                 $scope.appsData = AppCache.get('list');
             }else {
-                AppCache = $cacheFactory('app');
+                if(AppCache) {
+                    console.log(AppCache);
+                }else {
+                    AppCache = $cacheFactory('app');
+                }
+                
                 // 异步获取
-                Application.query().$promise.then(
-                    function (result) {
-                        if(result && result.code == 200) {
-                            $scope.appsData = result.data;
-                            AppCache.put('list', result.data);
-                        }else {
-                            Ui.alert(result.msg);
-                        }
-                    },
-                    function () {
-                        Ui.alert('网络错误');
+                $http({
+                    url: ApiCtrl.get('userAppList'),
+                    method: 'GET',
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                }).success(function (result) {
+                    if(result && result.code == 200) {
+                        $scope.appsData = result.data;
+                        AppCache.put('list', result.data);
+                    }else {
+                        Ui.alert(result.msg);
                     }
-                );
+                }).error(function (status) {
+                    Ui.alert('网络错误');
+                });
             }
         })();
 
@@ -97,11 +104,27 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
 
             // 调试期只能暂用get方法，测试期需要修改method方法为对应fn
             var submitMethod = 'get';
-
+            var flag = 0;
             //表单失去焦点时错误提示
             $scope.blur = function(type, $errors){
-
                 MdataVerify.blur(type, $errors, $scope);
+                ///验证是否重复
+                $http({
+                    url: ApiCtrl.get('checkEmail'),
+                    method: 'POST',
+                    data: {username:$scope.accountSourceData.username},
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    transformRequest: function(data){
+                        return $.param(data);
+                    }
+                }).success(function (result) {
+                    if(result.code == 200) {                      
+                        flag = 1;
+                    }else{
+                        Ui.alert(result.msg);
+                        flag = 0;
+                    }
+                }); 
             };
 
             //表单焦点时清除错误提示
@@ -120,6 +143,10 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
             $scope.submit = function () {
                 //判断邮箱
                 if(!MdataVerify.submit('email', $scope['accountForm']['email'].$error,$scope)){
+                    return;
+                }
+                if(flag == 0){
+                    Ui.alert('用户名重复');
                     return;
                 }
                 //判断用户名

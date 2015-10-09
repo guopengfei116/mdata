@@ -6,10 +6,12 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
     '$scope',
     '$timeout',
     '$cacheFactory',
+    '$http',
     'Account',
     'Filter',
     'OrderHandler',
-    function ($scope, $timeout, $cacheFactory, Account, Filter, OrderHandler) {
+    'ApiCtrl',
+    function ($scope, $timeout, $cacheFactory, $http, Account, Filter, OrderHandler, ApiCtrl) {
 
         // 定义default数据
         $scope.searchPlaceholder = 'Search Name Email...';
@@ -22,22 +24,28 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
             $scope.sourceData = accountCache.get('list');
             $scope.viewData = $scope.sourceData;
         }else {
-            accountCache = $cacheFactory('account');
+            if(accountCache) {
+                console.log(accountCache);
+            }else {
+                accountCache = $cacheFactory('account');
+            }
+            
             // 异步获取
-            Account.query().$promise.then(
-                function (result) {
-                    if(result && result.code == 200) {
-                        $scope.sourceData = result.data;
-                        $scope.viewData = result.data;
-                        accountCache.put('list', result.data);
-                    }else {
-                        Ui.alert(result.msg);
-                    }
-                },
-                function () {
-                    Ui.alert('网络错误');
+            $http({
+                url: ApiCtrl.get('userIndex'),
+                method: 'GET',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            }).success(function (result) {
+                if(result && result.code == 200) {
+                    $scope.sourceData = result.data;
+                    $scope.viewData = result.data;
+                    accountCache.put('list', result.data);
+                }else {
+                    Ui.alert(result.msg);
                 }
-            );
+            }).error(function (status) {
+                Ui.alert('网络错误');
+            });
         }
 
         // 搜索自定义处理函数
@@ -70,20 +78,23 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
         // 删除account
         $scope.delete = function (accountId) {
             Ui.confirm('确定要删除这个账号吗', function () {
-                Account.save(
-                    {accountId : accountId},
-                    {accountId : accountId},
-                    function (result) {
-                        if(result && result.code == 200) {
-                            Ui.alert('删除成功');
-                        }else {
-                            Ui.alert('删除失败');
-                        }
-                    },
-                    function () {
-                        Ui.alert('网络错误');
+                $http({
+                    url: api,
+                    method: 'POST',
+                    data: {uid : accountId},
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    transformRequest: function(data){
+                        return $.param(data);
                     }
-                );
+                }).success(function (result) {
+                    if(result && result.code == 200) {
+                        Ui.alert('删除成功');
+                    }else {
+                        Ui.alert('删除失败');
+                    }
+                }).error(function (status) {
+                    Ui.alert('网络错误！');
+                });
             });
         };
     }
