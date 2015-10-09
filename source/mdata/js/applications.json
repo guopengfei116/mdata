@@ -6,41 +6,41 @@
       "appid" : "12",
       "appadmin" : [
         {
-          "name" : "bibi",
-          "email" : "1@1.com",
-          "id" : "12"
+          "nickname" : "bibi",
+          "username" : "1@1.com",
+          "uid" : "12"
         },
         {
-          "name" : "join",
-          "email" : "1@1.com",
-          "id" : "12"
+          "nickname" : "join",
+          "username" : "1@1.com",
+          "uid" : "12"
         },
         {
-          "name" : "saxi",
-          "email" : "1@1.com",
-          "id" : "12"
+          "nickname" : "saxi",
+          "username" : "1@1.com",
+          "uid" : "12"
         }
       ],
       "appuser" : [
         {
-          "name" : "baode",
-          "email" : "4@4.com",
-          "app" : "444"
+          "nickname" : "baode",
+          "username" : "4@4.com",
+          "uid" : "444"
         },
         {
-          "name" : "zirke",
-          "email" : "1@1.com",
-          "id" : "128"
+          "nickname" : "zirke",
+          "username" : "1@1.com",
+          "uid" : "128"
         },
         {
-          "name" : "jon",
-          "email" : "1dfg@1d.com",
-          "id" : "18"
+          "nickname" : "jon",
+          "username" : "1dfg@1d.com",
+          "uid" : "18"
         },
         {
-          "name" : "saxi",
-          "email" : "aa@mv.com",
-          "id" : "132"
+          "nickname" : "saxi",
+          "username" : "aa@mv.com",
+          "uid" : "132"
         }
       ]
     },
