@@ -6,11 +6,12 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
     '$rootScope',
     '$scope',
     '$route',
+    '$http',
     'REPORT_DATE_RANGE',
     'ApiCtrl',
     'Report',
     'OrderHandler',
-    function ($rootScope, $scope, $route, reportDateRanges, ApiCtrl, Report, OrderHandler) {
+    function ($rootScope, $scope, $route, $http, reportDateRanges, ApiCtrl, Report, OrderHandler) {
 
         // report日期范围
         $scope.reportDateRanges = reportDateRanges;
@@ -24,10 +25,6 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
         // 当前编辑的reportId
         $scope.reportId = $route.current.params.reportId;
 
-        if($scope.reportId) {
-            $scope.reportId = 'report_view';
-        }
-
         // report权限
         $scope.permission = $rootScope.reportPermission && $rootScope.reportPermission[$scope.reportId];
 
@@ -37,7 +34,10 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
         // get report数据
         $http({
             method : "GET",
-            url : ApiCtrl.get('reportView')
+            url : ApiCtrl.get('reportView'),
+            params : {
+                reportId : $scope.reportId,
+            }
         }).success(function (result) {
             if(result && result.code == 200) {
                 $scope.reportSourceData = result.data;
@@ -95,25 +95,25 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
 
             // 重新加载report—view
             $scope.loadReport = function () {
-                Report.get(
-                    {
+                $http({
+                    method : "GET",
+                    url : ApiCtrl.get('reportView'),
+                    params : {
                         reportId : $scope.reportId,
                         dimension : getCheckedBoxValue('.field-dimension').join('&'),
                         filter : getCheckedBoxValue('.field-filter').join('&'),
                         date_begin : new Date($('#reportStartDate').val()).getTime(),
                         date_end : new Date($('#reportEndDate').val()).getTime()
-                    },
-                    function (result) {
-                        if(result && result.code == 200) {
-                            $scope.reportSourceData = result.data;
-                        }else {
-                            Ui.alert(result.msg);
-                        }
-                    },
-                    function () {
-                        Ui.alert('网络错误');
                     }
-                );
+                }).success(function (result) {
+                    if(result && result.code == 200) {
+                        $scope.reportSourceData = result.data;
+                    }else {
+                        Ui.alert(result.msg);
+                    }
+                }).error(function () {
+                    Ui.alert('网络错误');
+                });
             };
         })();
 
