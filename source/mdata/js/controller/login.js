@@ -73,7 +73,7 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                         $rootScope.user['logined'] = true;
                         $rootScope.user['authority'] = result.data.authority;
                         $rootScope.$emit('$routeChangeStart');
-                        Cookie.setCookie('MDATA-KEY', result.token);
+                        Cookie.setCookie('MDATA-KEY', result.data.token);
                         Cookie.setCookie('loginedAccount', $scope.account.account);
                         Cookie.setCookie('loginedAccountAuthority', result.data.authority);
                     }
