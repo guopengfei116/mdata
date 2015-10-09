@@ -49,7 +49,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 if(result && result.code == 200) {
                     $scope.sourceData = result.data;
                     $scope.viewData = result.data;
-                    accountCache.put('list', result.data);
+                    AppCache.put('list', result.data);
                 }else {
                     Ui.alert(result.msg);
                 }

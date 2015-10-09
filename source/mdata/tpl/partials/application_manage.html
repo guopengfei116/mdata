@@ -20,7 +20,7 @@
         </dt>
         <dd class="row row-color-interlaced" ng-repeat="app in viewData | orderBy:sort.appList.orderKey:sort.appList.isDownOrder ">
             <ul>
-                <li class="row_column row_column-5">{{ app.name }}</li>
+                <li class="row_column row_column-5">{{ app.appname }}</li>
                 <li class="row_column row_column-5">{{ app.appid }}</li>
                 <li class="row_column row_column-5">
                     <span ng-repeat="user in app['appadmin'] | orderBy:sort.adminUsers.orderKey:sort.adminUsers.isDownOrder ">

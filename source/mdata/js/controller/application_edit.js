@@ -60,7 +60,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
             //     }
             // );
             $http({
-                url: ApiCtrl.get('appIndex')+'?uid='+httpAppid,
+                url: ApiCtrl.get('appIndex')+'?appid='+httpAppid,
                 method: 'GET',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             }).success(function (result) {
