@@ -39,7 +39,7 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
         $http({
             method : "GET",
             url : ApiCtrl.get('reportView'),
-            data : {
+            params : {
                 reportId : $scope.reportId,
             }
         }).success(function (result) {
@@ -102,7 +102,7 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
                 $http({
                     method : "GET",
                     url : ApiCtrl.get('reportView'),
-                    data : {
+                    params : {
                         reportId : $scope.reportId,
                         dimension : getCheckedBoxValue('.field-dimension').join('&'),
                         filter : getCheckedBoxValue('.field-filter').join('&'),
