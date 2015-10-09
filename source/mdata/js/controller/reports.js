@@ -182,6 +182,29 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
         * */
         (function () {
 
+            $http({
+                url: ApiCtrl.get(''),
+                method: 'POST',
+                data: httpData,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                transformRequest: function(data){
+                    return $.param(data);
+                }
+            }).success(function (result) {
+                var Cookie = require('Cookie');
+                if(result.code == 200) {
+                    //记录登陆状态
+                    $rootScope.user['logined'] = true;
+                    $rootScope.user['authority'] = result.data.authority;
+                    $rootScope.$emit('$routeChangeStart');
+                    Cookie.setCookie('MDATA-KEY', result.data.token);
+                    Cookie.setCookie('loginedAccount', $scope.account.account);
+                    Cookie.setCookie('loginedAccountAuthority', result.data.authority);
+                }
+
+            }).error(function (status) {
+                Ui.alert('网络错误！');
+            });
             // 展示列表数据初始化
             Report.query().$promise.then(function (result) {
                 if(result.code == 200) {

@@ -19,7 +19,7 @@
 
         setCookie : function (key, value, options) {
             options = $.extend({},{
-                domain : '.mdata.dev',
+                domain : 'mdata.dev',
                 path : '/'
             }, options);
 
