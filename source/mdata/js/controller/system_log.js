@@ -25,7 +25,9 @@ oasgames.mdataControllers.controller('systemLogCtrl', [
             $scope.sourceData = systemCache.get('list');
             $scope.viewData = $scope.sourceData;
         }else {
-            systemCache = $cacheFactory('system');
+            if(!systemCache) {
+                systemCache = $cacheFactory('system');
+            }
             $http({
                 method: 'GET',
                 url : ApiCtrl.get('systemLog')
