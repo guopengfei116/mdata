@@ -116,5 +116,52 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
                 );
             };
         })();
+
+        // export Excel
+        (function () {
+            var FileSaveAs = require('FileSaveAs').saveAs;
+            var exportExcel = function () {
+                FileSaveAs(
+                    new Blob(
+                        getVal(),
+                        {type: "text/plain;charset=utf8"}
+                    ),
+                    'ReportTable.xls'
+                );
+            };
+            var getVal = function () {
+                var val = "\ufeff";   // \ufeff防止utf8 bom防止中文乱码
+                var dataSource = $scope.reportSourceData['table_list'];
+                for(var i = 0; i < dataSource.length; i++) {
+                    console.log(dataSource[i]);
+                    if(Object.prototype.toString.call(dataSource[i]) === '[object Array]') {
+                        for(var j = 0; j < dataSource[i].length; j++) {
+                            if(dataSource[i][j] == '') {
+                                dataSource[i][j] = '-';
+                            }
+                            if(j !== 0 && j !== dataSource[i].length ) {  // 非第一次和最后一次
+                                val += ',' + dataSource[i][j];
+                                continue;
+                            }
+                            val += dataSource[i][j];
+                        }
+                    }else {
+                        for(var k in dataSource[i]) {
+                            if(dataSource[i][k] == '') {
+                                dataSource[i][k] = '-';
+                            }
+                            val += dataSource[i][k];
+                        }
+                    }
+                    val += '/r/n';
+                }
+                console.log($scope.reportSourceData['table_list']);
+                console.log(val);
+                return ([].push(val));
+            };
+            $scope.reportExport = function () {
+                exportExcel();
+            };
+        })();
     }
 ]);

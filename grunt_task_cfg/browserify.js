@@ -4,6 +4,8 @@
  * */
 exports.options = {
     alias : {
+        'FileSaveAs': gruntProject.src + '/mdata/js/lib/FileSaver.js',
+        'Blob': gruntProject.src + '/mdata/js/lib/Blob.js',
         'common': gruntProject.src + '/common/js/common.js',
         'Ui': gruntProject.src + '/common/js/ui/ui.js',
         'Flag': gruntProject.src + '/common/js/ui/flag.js',
