@@ -116,5 +116,58 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
                 );
             };
         })();
+
+        // export Excel
+        (function () {
+            var FileSaveAs = require('FileSaveAs').saveAs;
+            var exportExcel = function () {
+                FileSaveAs(
+                    new Blob(
+                        getVal(),
+                        {type: "text/plain;charset=utf8"}
+                    ),
+                    'ReportTable.xls'
+                );
+            };
+            var getVal = function () {
+                var result = [], val = "\ufeff";   // \ufeff防止utf8 bom防止中文乱码
+                var dataSource = $scope.reportSourceData['table_list'];
+                var temp = null;
+                for(var i = 0; i < dataSource.length; i++) {
+                    console.log(dataSource[i]);
+                    if(Object.prototype.toString.call(dataSource[i]) === '[object Array]') {
+                        for(var j = 0; j < dataSource[i].length; j++) {
+                            if(dataSource[i][j] == null) {  // 排空
+                                dataSource[i][j] = '-';
+                            }
+                            if(j !== 0) {  // 非第一次
+                                val += ',' + dataSource[i][j];
+                                continue;
+                            }
+                            val += dataSource[i][j];
+                        }
+                    }else {
+                        temp = 1;
+                        for(var k in dataSource[i]) {
+                            if(dataSource[i][k] == '') {  // 排空
+                                dataSource[i][k] = '-';
+                            }
+                            if(temp !== 1) {  // 非第一次
+                                val += ',' + dataSource[i][k];
+                                continue;
+                            }
+                            val += dataSource[i][k];
+                            temp++
+                        }
+                    }
+                    val += ',\r\n';
+                }
+                result.push(val);
+                return result;
+            };
+            $scope.reportExport = function () {
+                exportExcel();
+            };
+        })();
     }
 ]);
