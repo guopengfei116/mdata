@@ -35,16 +35,19 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
          * accountId先写死方便调试获取json-data
          * */
         if($scope.accountId) {
-            $scope.accountId = 'account_info';
             initAccountData();
         }else {
             initSelectData();
         }
 
         // getAccount数据
+        function initAccountData () {
             $http({
-                url: ApiCtrl.get('userIndex')+'?uid='+httpAccountId,
+                url: ApiCtrl.get('userIndex'),
                 method: 'GET',
+                params : {
+                    uid : httpAccountId
+                },
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             }).success(function (result) {
                 if(result && result.code == 200) {
@@ -57,6 +60,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
             }).error(function (status) {
                 Ui.alert('网络错误');
             });
+        }
 
         // 排除空值
         function initSelectData () {
