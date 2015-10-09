@@ -27,7 +27,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
         $scope.accountEmail = "";
 
         // 当前编辑的accountId
-        $scope.accountId = $route.current.params.accountId;
+        var httpAccountId = $scope.accountId = $route.current.params.accountId;
 
         /*
          * 如果有id，则说明是编辑状态
@@ -42,7 +42,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
 
         // getAccount数据
             $http({
-                url: ApiCtrl.get('userIndex'), //?uid=11
+                url: ApiCtrl.get('userIndex')+'?uid='+httpAccountId,
                 method: 'GET',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             }).success(function (result) {

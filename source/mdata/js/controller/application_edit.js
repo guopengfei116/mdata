@@ -31,7 +31,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
         var httpApp = $scope.appSourceData = {};
         var httpAppUp = $scope.appSourceData;
         // 当前编辑的appId
-        var httpAppid = $scope.appId = $route.current.params.applicationId;
+        var httpAppId = $scope.appId = $route.current.params.applicationId;
 
         /*
          * 如果有id，则说明是编辑状态
@@ -60,7 +60,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
             //     }
             // );
             $http({
-                url: ApiCtrl.get('appIndex')+'?appid='+httpAppid,
+                url: ApiCtrl.get('appIndex')+'?appid='+httpAppId,
                 method: 'GET',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             }).success(function (result) {
