@@ -182,31 +182,30 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
         * */
         (function () {
 
+            // 展示列表数据初始化
             $http({
-                url: ApiCtrl.get(''),
-                method: 'POST',
-                data: httpData,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                transformRequest: function(data){
-                    return $.param(data);
-                }
+                url: ApiCtrl.get('reports'),
+                method: 'GET'
             }).success(function (result) {
-                var Cookie = require('Cookie');
                 if(result.code == 200) {
-                    //记录登陆状态
-                    $rootScope.user['logined'] = true;
-                    $rootScope.user['authority'] = result.data.authority;
-                    $rootScope.$emit('$routeChangeStart');
-                    Cookie.setCookie('MDATA-KEY', result.data.token);
-                    Cookie.setCookie('loginedAccount', $scope.account.account);
-                    Cookie.setCookie('loginedAccountAuthority', result.data.authority);
-                }
+                    $scope.sourceData = result.data;
+                    $scope.viewData = result.data;
 
+                    // 初始化展示状态
+                    upReportsListShow();
+                    // 记录report权限
+                    setReportPermission();
+
+                    // 初始化收藏标记
+                    Shortcuts.init();
+                }else {
+                    Ui.alert(result.msg);
+                }
             }).error(function (status) {
                 Ui.alert('网络错误！');
             });
-            // 展示列表数据初始化
-            Report.query().$promise.then(function (result) {
+
+            /*Report.query().$promise.then(function (result) {
                 if(result.code == 200) {
                     $scope.sourceData = result.data;
                     $scope.viewData = result.data;
@@ -223,7 +222,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                 }
             }, function () {
                 Ui.alert('网络错误');
-            });
+            });*/
 
             /*
              * 更新report列表的展示状态，
