@@ -59,7 +59,9 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                     reportShortcutIdList = shortcutCache.get('list');
                     processor();
                 }else {
-                    shortcutCache = $cacheFactory('shortcut');
+                    if(!shortcutCache) {
+                        shortcutCache = $cacheFactory('shortcut');
+                    }
                     $http({
                         method : "GET",
                         url : ApiCtrl.get('shortcuts')
