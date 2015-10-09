@@ -28,7 +28,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
         $scope.selectedAccountuids = [];
 
         // 当前app的信息
-        $scope.appSourceData = {};
+        var httpApp = $scope.appSourceData = {};
 
         // 当前编辑的appId
         $scope.appId = $route.current.params.applicationId;
@@ -64,14 +64,14 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
 
         // 排除空值
         function initSelectData () {
-            if(!$scope.appSourceData['reportAdmin']) {
-                $scope.appSourceData['reportAdmin'] = [];
+            if(!$scope.appSourceData['appadmin']) {
+                $scope.appSourceData['appadmin'] = [];
             }
-            if(!$scope.appSourceData['reportViewer']) {
-                $scope.appSourceData['reportViewer'] = [];
+            if(!$scope.appSourceData['appuser']) {
+                $scope.appSourceData['appuser'] = [];
             }
-            if(!$scope.appSourceData['processor']) {
-                $scope.appSourceData['processor'] = [];
+            if(!$scope.appSourceData['proce']) {
+                $scope.appSourceData['proce'] = [];
             }
         }
 
@@ -117,9 +117,6 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                 }
             };
 
-            // 调试期只能暂用get方法，测试期需要修改method方法为对应fn
-            var submitMethod = 'save';
-
             /*
              * 提交
              * 创建提交的数据中id为空，
@@ -133,19 +130,24 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                     Ui.alert('Time Zone must not be empty');
                     return;
                 }
-                if($.trim($(".fieldset-processor").html()) == ""){
+                if($scope.appSourceData.proce.length == 0){
                     Ui.alert("Processor must not be empty");
                     return;
                 }
-                console.log($scope.appSourceData);
-                $scope.appSourceData.timeZone = $('.select.app-zone').data('value');
-                $scope.appSourceData["reportAdmin"] = $(".field-account").data('value');
-                $scope.appSourceData["reportViewer"] = $(".field-account").next().data('value');
-                $scope.appSourceData["processor"] = $(".field-account").next().next().data('value');
-                Application[submitMethod](
-                    {appId: $scope.appId},
-                    $scope.appSourceData,
-                    function (result) {
+                $scope.appSourceData.timezone = $('.select.app-zone').data('value');
+                $scope.appSourceData["appadmin"] = $(".field-account").data('value');
+                $scope.appSourceData["appuser"] = $(".field-account").next().data('value');
+                $scope.appSourceData["proce"] = $(".field-account").next().next().data('value');
+                if($scope.appId){
+                    $http({
+                        url: ApiCtrl.get('appUpdate'),
+                        method: 'POST',
+                        data: {appId: $scope.appId},
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                        transformRequest: function(data){
+                            return $.param(data);
+                        }
+                    }).success(function (result) {
                         if(result && result.code == 200) {
                             Ui.alert('success', function () {
                                 history.back();
@@ -153,11 +155,30 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                         }else {
                             Ui.alert(result.msg);
                         }
-                    },
-                    function () {
-                        Ui.alert('网络错误');
-                    }
-                )
+                    }).error(function (status) {
+                        Ui.alert('网络错误！');
+                    });
+                }else{
+                    $http({
+                        url: ApiCtrl.get('appCreate'),
+                        method: 'POST',
+                        data: httpApp,
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                        transformRequest: function(data){
+                            return $.param(data);
+                        }
+                    }).success(function (result) {
+                        if(result && result.code == 200) {
+                            Ui.alert('success', function () {
+                                history.back();
+                            });
+                        }else {
+                            Ui.alert(result.msg);
+                        }
+                    }).error(function (status) {
+                        Ui.alert('网络错误！');
+                    });
+                }
             };
         })();
     }
