@@ -67,13 +67,13 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                         return $.param(data);
                     }
                 }).success(function (result) {
-
+                    var Cookie = require('Cookie');
                     if(result.code == 200) {
                         //记录登陆状态
                         $rootScope.user['logined'] = true;
                         $rootScope.user['authority'] = result.data.authority;
                         $rootScope.$emit('$routeChangeStart');
-
+                        Cookie.setCookie('TOKEN', result.token);
                         Cookie.setCookie('loginedAccount', $scope.account.account);
                         Cookie.setCookie('loginedAccountAuthority', result.data.authority);
                     }

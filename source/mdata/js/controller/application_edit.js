@@ -81,7 +81,12 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
             if(accountCache && accountCache.get('list')) {
                 $scope.accountsData = accountCache.get('list');
             }else {
-                accountCache = $cacheFactory('account');
+                if(accountCache){
+
+                }else{
+                    accountCache = $cacheFactory('account');
+                }
+                
                 // 异步获取
                 Account.query().$promise.then(
                     function (result) {

@@ -21,8 +21,8 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
         $scope.selectedAppids = [];
 
         // 当前account的数据
-        $scope.accountSourceData = {};
-
+        var httpApp = $scope.accountSourceData = {};
+        var httpAppUp = $scope.accountSourceData;
         // 初始account的email值
         $scope.accountEmail = "";
 
@@ -102,8 +102,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
         (function () {
             $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
 
-            // 调试期只能暂用get方法，测试期需要修改method方法为对应fn
-            var submitMethod = 'get';
+            // 邮箱是否重复标识
             var flag = 0;
             //表单失去焦点时错误提示
             $scope.blur = function(type, $errors){
@@ -173,6 +172,48 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                         Ui.alert('网络错误');
                     }
                 )
+                if($scope.appId){
+                    httpAppUp.appid = $scope.appId;
+                    $http({
+                        url: ApiCtrl.get('userUpdate'),
+                        method: 'POST',
+                        data: httpAppUp,
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                        transformRequest: function(data){
+                            return $.param(data);
+                        }
+                    }).success(function (result) {
+                        if(result && result.code == 200) {
+                            Ui.alert('success', function () {
+                                history.back();
+                            });
+                        }else {
+                            Ui.alert(result.msg);
+                        }
+                    }).error(function (status) {
+                        Ui.alert('网络错误！');
+                    });
+                }else{
+                    $http({
+                        url: ApiCtrl.get('userCreate'),
+                        method: 'POST',
+                        data: httpApp,
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                        transformRequest: function(data){
+                            return $.param(data);
+                        }
+                    }).success(function (result) {
+                        if(result && result.code == 200) {
+                            Ui.alert('success', function () {
+                                history.back();
+                            });
+                        }else {
+                            Ui.alert(result.msg);
+                        }
+                    }).error(function (status) {
+                        Ui.alert('网络错误！');
+                    });
+                }
             };
         })();
     }
