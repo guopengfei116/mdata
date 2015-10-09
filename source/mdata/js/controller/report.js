@@ -137,7 +137,7 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
                     console.log(dataSource[i]);
                     if(Object.prototype.toString.call(dataSource[i]) === '[object Array]') {
                         for(var j = 0; j < dataSource[i].length; j++) {
-                            if(dataSource[i][j] == '') {  // 排空
+                            if(dataSource[i][j] == null) {  // 排空
                                 dataSource[i][j] = '-';
                             }
                             if(j !== 0) {  // 非第一次
@@ -160,8 +160,9 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
                             temp++
                         }
                     }
-                    result.push(val);
+                    val += ',\r\n';
                 }
+                result.push(val);
                 return result;
             };
             $scope.reportExport = function () {
