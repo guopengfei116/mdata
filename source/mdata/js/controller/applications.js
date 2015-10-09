@@ -8,7 +8,9 @@ oasgames.mdataControllers.controller('ApplicationManageCtrl', [
     'Application',
     'Filter',
     'OrderHandler',
-    function ($scope, $cacheFactory, Application, Filter, OrderHandler) {
+    'ApiCtrl',
+    '$http',
+    function ($scope, $cacheFactory, Application, Filter, OrderHandler,ApiCtrl,$http) {
 
         // 定义default数据
         $scope.searchPlaceholder = 'Search AppName AppId...';
@@ -21,22 +23,28 @@ oasgames.mdataControllers.controller('ApplicationManageCtrl', [
             $scope.sourceData = appCache.get('list');
             $scope.viewData = $scope.sourceData;
         }else {
-            appCache = $cacheFactory('app');
+            if(appCache) {
+                console.log(appCache);
+            }else {
+                appCache = $cacheFactory('app');
+            }
+            console.log(ApiCtrl.get('appIndex'));
             // 异步获取
-            Application.query().$promise.then(
-                function (result) {
-                    if(result && result.code == 200) {
-                        $scope.sourceData = result.data;
-                        $scope.viewData = result.data;
-                        appCache.put('list', result.data);
-                    }else {
-                        Ui.alert(result.msg);
-                    }
-                },
-                function () {
-                    Ui.alert('网络错误');
+            $http({
+                url: ApiCtrl.get('appIndex'),
+                method: 'GET',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            }).success(function (result) {
+                if(result && result.code == 200) {
+                    $scope.sourceData = result.data;
+                    $scope.viewData = result.data;
+                    appCache.put('list', result.data);
+                }else {
+                    Ui.alert(result.msg);
                 }
-            );
+            }).error(function (status) {
+                Ui.alert('网络错误');
+            });
         }
 
         // 搜索自定义处理函数
@@ -69,21 +77,7 @@ oasgames.mdataControllers.controller('ApplicationManageCtrl', [
         (function () {
             // 删除app
             $scope.delete = function (appId) {
-                Ui.confirm('确定要删除这个app吗', function () {
-                    Application.save(
-                        {appId : appId},
-                        {appId : appId},
-                        function (result) {
-                            if(result && result.code == 200) {
-                                Ui.alert('删除成功');
-                            }else {
-                                Ui.alert('删除失败');
-                            }
-                        },
-                        function () {
-                            Ui.alert('网络错误');
-                        }
-                    );
+                Ui.alert('请联系系统管理员进行删除app操作');
                 });
             };
         })();

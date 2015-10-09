@@ -39,7 +39,7 @@ require('./service/verify_form.js');
  * */
 oasgames.mdataServicesConfig = angular.module('mdataServicesConfig', []);
 require('./service_config/route_config.js');
-
+require('./service_config/http_config.js');
 /*
  * 过滤器
  * */

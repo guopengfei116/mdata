@@ -43,6 +43,7 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
         //登陆
         $scope.submit = function () {
             var api = ApiCtrl.get('login');
+            console.log(api);
             var Cookie = require('Cookie');
 
             //判断用户名
@@ -56,8 +57,15 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
             }
 
             if($scope['ndForm'].$valid && api ) {
-                $http.get(api, httpData, {
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                  
+                $http({
+                    url: api,
+                    method: 'POST',
+                    data: httpData,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    transformRequest: function(data){
+                        return $.param(data);
+                    }
                 }).success(function (result) {
 
                     if(result.code == 200) {
@@ -92,7 +100,7 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
         // $scope.tnewPassword = new tooltip({'position':'rc'}).getNewTooltip();
         // $scope.treNewPassword = new tooltip({'position':'rc'}).getNewTooltip();
         var httpData = $scope.userPassword = {};
-        var httpOldPaW = {"password":$scope.userPassword.oldPassword};
+        
         $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
 
         //错误提示
@@ -135,9 +143,17 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
                         return false;
                     }
                 }
-
-                ///验证旧密码是否正确  
-                $http.post(ApiCtrl.get('checkPaw'),{"password":$scope.userPassword.oldPassword}).success(function (result) {
+                var httpOldPaW = {"password":$scope.userPassword.oldPassword};
+                ///验证旧密码是否正确 
+                $http({
+                    url: ApiCtrl.get('checkPaw'),
+                    method: 'POST',
+                    data: httpOldPaW,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    transformRequest: function(data){
+                        return $.param(data);
+                    }
+                }).success(function (result) {
                     if(result.code != 200) {                      
                         $scope.showError(type, errorInfo[type]['error']);
                         flag = 1;
@@ -203,7 +219,15 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
 
             //验证通过、新旧密码不一致并且新密码相同
             if($scope['cPaw'].$valid && api ) {
-                $http.post(api,httpData).success(function (result) {
+                $http({
+                    url: api,
+                    method: 'POST',
+                    data: httpData,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    transformRequest: function(data){
+                        return $.param(data);
+                    }
+                }).success(function (result) {
                     if(result.code == 200) {
                         Ui.alert('Your password has been changed successfully');
                     }

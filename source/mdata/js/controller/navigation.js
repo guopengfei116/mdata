@@ -63,7 +63,11 @@ oasgames.mdataControllers.controller('navigationCtrl', [
                 $scope.shortcuts = shortcutCache.get('list');
                 init();
             }else {
-                shortcutCache = $cacheFactory('shortcut');
+                if(shortcutCache) {
+                    console.log(shortcutCache);
+                }else {
+                    shortcutCache = $cacheFactory('shortcut');
+                }               
                 $http({
                     method : "GET",
                     url : ApiCtrl.get('shortcuts'),
