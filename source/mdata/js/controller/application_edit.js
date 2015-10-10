@@ -57,7 +57,9 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
             }).success(function (result) {
                 if(result && result.code == 200) {
                     $scope.appSourceData = result.data[0];
-                    $scope.appSourceData['processors']
+                    // for(var i=0; i< $scope.appSourceData.processors.length; i++){
+                    //     $scope.proce.push($scope.appSourceData['processors'][i].name +"#@DELIMITER@#" +$scope.appSourceData['processors'][i].event);
+                    // }
                     initSelectData();
                 }else {
                     Ui.alert(result.msg);
@@ -75,8 +77,8 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
             if(!$scope.appSourceData['appuser']) {
                 $scope.appSourceData['appuser'] = [];
             }
-            if(!$scope.appSourceData['proce']) {
-                $scope.appSourceData['proce'] = [];
+            if(!$scope.appSourceData['processors']) {
+                $scope.appSourceData['processors'] = [];
             }
         }
 

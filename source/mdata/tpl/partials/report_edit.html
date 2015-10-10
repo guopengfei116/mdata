@@ -1,6 +1,6 @@
 <form class="report-page" name="reportFrom" novalidate >
     <section ng-if="reportIsExisting">
-        <fieldset class="field-common">
+        <fieldset class="field-common ">
             <legend class="field-title-com">Application Name</legend>
             <input class="fieldset-text-com report-app" type="text" value="" ng-model="reportSourceData['reportData']['appname']"
                    ng-readonly="true" />
@@ -13,7 +13,7 @@
         </fieldset>
     </section>
     <section ng-if="!reportIsExisting">
-        <fieldset class="field-common">
+        <fieldset class="field-common fieldset-appName">
             <legend class="field-title-com">Application Name</legend>
             <div class="select select-host select-btn">
                 <div class="select_main">

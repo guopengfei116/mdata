@@ -223,7 +223,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                             if(result.code != 200) {                      
                                 $scope[type + 'Error'] = true;
                                 $scope.tooltip.errorType = type;
-                                $scope.tooltip.setContent("report name 重复");
+                                $scope.tooltip.setContent(result.msg);
                                 $scope.tooltip.setPosition('.fieldset-' + type, $scope.tooltip.toolTipLooks);
                                 $scope.tooltip.toolTipLooks.css({'color': 'rgba(255, 0, 0, 0.7)'});
                                 $scope.tooltip.show();
@@ -249,13 +249,16 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
             * 编辑提交
             * */
             $scope.submit = function () {
-
+                //判断app Name
+                if($.trim($(".fieldset-appName p.select_main_text").html()) == ""){
+                     Ui.alert("Application Name must not be empty");
+                     return false;
+                }
                 //判断Report Name
                 if($.trim($(".fieldset-reportName").val()) == ""){
                      Ui.alert("Report Name must not be empty");
                      return false;
                 }
-
                 //判断name重复
                 if(flag == 1){
                     Ui.alert("report name 重复");
@@ -263,7 +266,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 }
 
                 //判断Column
-                if($.trim($(".teatarea-column").html()) == ""){
+                if($.trim( $('.field-common-value').data('value')) == ""){
                      Ui.alert("Column must not be empty");
                      return;
                 }

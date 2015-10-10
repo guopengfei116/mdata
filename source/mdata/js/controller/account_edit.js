@@ -65,7 +65,6 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                     $scope.accountSourceData = result.data[0];
                     $scope.accountEmail = result.data[0].username;
                     AppCache.put('list', result.data);
-                    console.log(result.data[0].username+"ddddddddddddddddd");
                 }else {
                     Ui.alert(result.msg);
                 }
