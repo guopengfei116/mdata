@@ -76,11 +76,11 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
 
         // 排除空值
         function initSelectData () {
-            if(!$scope.accountSourceData['as_report_admin']) {
-                $scope.accountSourceData['as_report_admin'] = [];
+            if(!$scope.accountSourceData['reportAdmin']) {
+                $scope.accountSourceData['reportAdmin'] = [];
             }
-            if(!$scope.accountSourceData['as_report_viewer']) {
-                $scope.accountSourceData['as_report_viewer'] = [];
+            if(!$scope.accountSourceData['reportViewer']) {
+                $scope.accountSourceData['reportViewer'] = [];
             }
         }
 

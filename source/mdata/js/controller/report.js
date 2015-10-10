@@ -76,6 +76,25 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
             });
         })();
 
+        // report复制
+        (function () {
+            $http({
+                method : "POST",
+                url : ApiCtrl.get('reportSave'),
+                data : result
+            }).success(function (result) {
+                if(result.code == 200) {
+                    Ui.alert('success', function () {
+                        history.back();
+                    });
+                }else {
+                    Ui.alert(result.msg);
+                }
+            }).error(function () {
+                Ui.alert('网络错误');
+            });
+        })();
+
         // load report
         (function () {
 
@@ -119,8 +138,6 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
         // export Excel
         (function () {
 
-            console.log(Blob);
-            console.log(require('FileSaveAs'));
             var exportExcel = function () {
                 var FileSaveAs = require('FileSaveAs').saveAs;
                 FileSaveAs(
