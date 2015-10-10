@@ -77,7 +77,7 @@
     <fieldset class="field-common">
         <button class="report-blue-btn report-load-btn" ng-click="loadReport()">Load Report</button>
     </fieldset>
-    <fieldset class="field-common cf">
+    <fieldset class="field-common cf" ng-if="reportSourceData['table_list']">
         <div class="left field-title-com">Report Table</div>
         <div class="right button-group">
             <a class="report-export" ng-click="reportExport()">Export</a>
