@@ -30,6 +30,7 @@ oasgames.mdataConstant.constant("API_CONFIG", {
         'reports': '/report/view',
         'reportView' : '/report/view-report',
         'reportUpdate': '/report/update',
+        'reportDel': '/report/del',
         'checkReportName' : '/report/check-report-name',
         'shortcuts' : '/report/shortcut',
         'shortcutAdd' : '/report/favorite-add',
