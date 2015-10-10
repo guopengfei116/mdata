@@ -15,7 +15,7 @@ oasgames.mdataServicesConfig.config([
                     var Cookie = require('Cookie');
                     if(config && config.headers) {
                         config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-                        config.headers['MDATA-KEY'] = Cookie.get('MDATA-KEY');
+                        config.headers['MDATA-KEY'] = Cookie.getCookie('MDATA-KEY');
                     }
                     return config;
                 },
