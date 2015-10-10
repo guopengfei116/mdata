@@ -21,7 +21,6 @@ oasgames.mdataDirective.directive('cascadechoice', [
             link: function ($scope, element, attr, reScope) {
                 var $select = element.find('.select');
                 var $selectInput = element.find('.select_main_textarea');
-                var $addSelect = element.find('.add-select');
 
                 // 记录数据初始化的状态
                 var resultValueInit = false, selectDataInit = false, selectedDataInit = false;
@@ -89,14 +88,13 @@ oasgames.mdataDirective.directive('cascadechoice', [
 
                     selectedDataInit = true;
                     $scope.$broadcast('bind');
-                    selectDataWatchCancel();
+                    selectedDataWatchCancel();
                 });
 
                 /*
                 * 初始化dom
                 * */
                 $scope.$on('bind', function () {
-
                     if(!resultValueInit || !selectDataInit || !selectedDataInit) {
                         console.log('未初始化完成');
                         return;
@@ -112,8 +110,7 @@ oasgames.mdataDirective.directive('cascadechoice', [
                     $scope.selectedData.push.apply($scope.selectedData, $scope.resultValue);
 
                     // 绑定add事件
-                    $addSelect.bind('click', function () {
-
+                    element.on('click', '.add-select', function () {
                         var val = $select.data('value');
                         if(!val) {
                             Ui.alert('please fill out the data');

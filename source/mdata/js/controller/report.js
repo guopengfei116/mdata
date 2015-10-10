@@ -68,12 +68,11 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
             OrderHandler.change($scope.sort, type, orderKey);
         };
 
-        // 事件绑定
+        // 日期select联动更新
         (function () {
             $('.select-data').on('click', '.select_content_list_value', function () {
                 var val = $(this).data('value');
                 dataComponent.changeData(val);
-                console.log(typeof val);
             });
         })();
 
@@ -119,8 +118,11 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
 
         // export Excel
         (function () {
-            var FileSaveAs = require('FileSaveAs').saveAs;
+
+            console.log(Blob);
+            console.log(require('FileSaveAs'));
             var exportExcel = function () {
+                var FileSaveAs = require('FileSaveAs').saveAs;
                 FileSaveAs(
                     new Blob(
                         getVal(),
