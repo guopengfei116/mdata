@@ -164,6 +164,13 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
             }
         })();
 
+        // 选择application
+        (function () {
+            $('.select-app .select_content_list_value').on('click', function () {
+                $scope.selectedAppId = $(this).data('value');
+            });
+        })();
+
         // getGuestUser数据
         function upGuestUserData () {
             $http({
@@ -229,7 +236,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
             * 编辑提交
             * */
             $scope.submit = function () {
-                
+
                 //判断Report Name
                 if($.trim($(".fieldset-reportName").val()) == ""){
                      Ui.alert("Report Name must not be empty");
@@ -247,6 +254,36 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                      Ui.alert("Column must not be empty");
                      return;
                 }
+
+                // 提交数据
+                var result = {}, submitApi = ApiCtrl.get('reportCreate');
+                if($scope.reportId) {
+                    result.id = $scope.reportId;
+                    submitApi = ApiCtrl.get('reportUpdate')
+                }
+                result.appid = $scope.selectedAppId;
+                result.report_name = $scope.reportSourceData['reportData']['report_name'];
+                result.describe = $scope.reportSourceData['reportData']['describe'];
+                result.dimension = $('.field-common-dimension').data('value');
+                result.filter = $('.field-common-filter').data('value');
+                result.guest_uid = $('.field-common-guest').data('value');
+                result.values = $('.field-common-value').data('value');
+                result.date = $('.select-date').data('value');
+
+                $http({
+                    method : "GET",
+                    url : submitApi
+                }).success(function (result) {
+                    if(result.code == 200) {
+                        Ui.alert('success', function () {
+                            history.back();
+                        });
+                    }else {
+                        Ui.alert(result.msg);
+                    }
+                }).error(function () {
+                    Ui.alert('网络错误');
+                });
             };
         })();
     }

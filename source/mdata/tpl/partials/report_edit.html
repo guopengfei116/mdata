@@ -15,7 +15,7 @@
     <section ng-if="!reportIsExisting">
         <fieldset class="field-common">
             <legend class="field-title-com">Application Name</legend>
-            <div class="select select-host select-btn">
+            <div class="select select-host select-btn select-app">
                 <div class="select_main">
                     <p class="select_main_text select_target"></p>
                     <button class="select_main_btn select_target">
@@ -31,10 +31,10 @@
                 </ul>
             </div>
         </fieldset>
-        <fieldset class="field-common">
+        <fieldset class="field-common" ng-if="selectedAppId">
             <p>
                 <span class="field-title-com">Application ID</span>
-                <span class="flag">{{ reportSourceData['reportData']['appid'] }}</span>
+                <span class="flag">{{ selectedAppId }}</span>
             </p>
         </fieldset>
     </section>
@@ -48,7 +48,7 @@
         <legend class="field-title-com">Describe</legend>
         <textarea class="fieldset-text-com report-describe" placeholder="Input massage..." ng-model="reportSourceData['reportData']['describe']"></textarea>
     </fieldset>
-    <recombination separator="|" recombination-data="reportSourceData['reportData']['dimension']">
+    <recombination class="field-common-dimension" separator="|" recombination-data="reportSourceData['reportData']['dimension']">
         <legend class="field-title-com">Dimension</legend>
         <div class="recombination-menu">
             <div class="select select-host select-btn recombination-input" required-warn="please fill out the Dimension">
@@ -75,7 +75,7 @@
             </span>
         </div>
     </recombination>
-    <recombination separator="|" recombination-data="reportSourceData['reportData']['filter']">
+    <recombination class="field-common-filter" separator="|" recombination-data="reportSourceData['reportData']['filter']">
         <legend class="field-title-com">Filter</legend>
         <div class="recombination-menu">
             <div class="select select-host select-btn select-btn-small recombination-input" required-warn="please fill out the Filter">
@@ -118,7 +118,7 @@
             </span>
         </div>
     </recombination>
-    <valuegroup separator="#@DELIMITER@#" value-list="valueList" flag-data="reportSourceData['reportData']['values']">
+    <valuegroup class="field-common-value" separator="#@DELIMITER@#" value-list="valueList" flag-data="reportSourceData['reportData']['values']">
         <legend class="field-title-com">Value Group</legend>
         <div class="recombination-menu">
             <input class="fieldset-text-com field-text-column recombination-input" type="text" placeholder="Value Name" required-warn="please fill out the Value Name"/>
@@ -228,7 +228,7 @@
         </div>
         <span class="red-star">*</span>
     </valuegroup>
-    <cascadechoice select-data="guestUsers" selected-data="selectedGuestUids" flag-data="reportSourceData['reportData']['guestUserValue']"  flag-data-key="uid">
+    <cascadechoice class="field-common-guest" select-data="guestUsers" selected-data="selectedGuestUids" flag-data="reportSourceData['reportData']['guestUserValue']"  flag-data-key="uid">
         <legend class="field-title-com">Report Guest</legend>
         <div>
             <div class="select select-host select-btn recombination-input" required-warn="please fill out the Guest User">
@@ -257,7 +257,7 @@
     </cascadechoice>
     <fieldset class="field-common">
         <legend class="field-title-com">Default Date Range</legend>
-        <div class="select select-host report-date">
+        <div class="select select-host report-date select-date">
             <div class="select_main">
                 <p class="select_main_text select_target"></p>
                 <button class="select_main_btn select_target">
