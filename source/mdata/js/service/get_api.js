@@ -24,13 +24,7 @@ oasgames.mdataServices.provider('ApiCtrl', [
                             return '';
                         }
 
-                        var Cookie = require('Cookie');
-                        var cookieVal = Cookie.getCookie('MDATA-KEY');
-                        if(!cookieVal || name == 'login'){
-                            return self.localhost + url ;
-                        }else{
-                            return self.localhost + url + "?mdata-key="+ cookieVal;
-                        }
+                        return self.localhost + url;
                     },
                     set : function (name, url) {
                         self.setApi(name, url);
