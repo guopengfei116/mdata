@@ -31,6 +31,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
 
         // 用户权限
         $scope.userPermission = $rootScope.user['authority'];
+        console.log($scope.userPermission);
 
         /*
         * 收藏对象，
@@ -325,21 +326,23 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
         (function () {
             // 删除account
             $scope.delete = function (reportId) {
+
                 Ui.confirm('确定要删除这个report吗', function () {
-                    Report.save(
-                        {reportId : reportId},
-                        {reportId : reportId},
-                        function (result) {
-                            if(result && result.code == 200) {
-                                Ui.alert('删除成功');
-                            }else {
-                                Ui.alert('删除失败');
-                            }
+                    $http({
+                        url: ApiCtrl.get('reportDel'),
+                        method: 'GET',
+                        param: {
+                            reportId : reportId
                         },
-                        function () {
-                            Ui.alert('网络错误');
+                    }).success(function (result) {
+                        if(result && result.code == 200) {
+                            Ui.alert('删除成功');
+                        }else {
+                            Ui.alert('删除失败');
                         }
-                    );
+                    }).error(function (status) {
+                        Ui.alert('网络错误！');
+                    });
                 });
             };
         })();
