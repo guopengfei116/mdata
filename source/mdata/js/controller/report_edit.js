@@ -166,6 +166,11 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 if(!$scope.guestUsers) {
                     $scope.guestUsers = [];
                 }
+                // 已选的date值
+                $scope.selectedDateValue = $scope.reportSourceData['reportData']['date'] || '';
+                if($scope.selectedDateValue) {
+                    $scope.selectedDateValue = reportDateRanges[$scope.selectedDateValue];
+                }
             }
         })();
 

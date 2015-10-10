@@ -12,8 +12,10 @@ oasgames.mdataServicesConfig.config([
         $httpProvider.interceptors.push(function(){
             var interceptor = {
                 'request':function(config){
+                    var Cookie = require('Cookie');
                     if(config && config.headers) {
                         config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+                        config.headers['MDATA-KEY'] = Cookie.get('MDATA-KEY');
                     }
                     return config;
                 },

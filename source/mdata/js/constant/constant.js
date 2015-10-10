@@ -99,14 +99,14 @@ oasgames.mdataConstant.constant("PROCESSOR", [
 /*
  * report查看的日期范围
  * */
-oasgames.mdataConstant.constant("REPORT_DATE_RANGE", [
-    { meaning : '今天', value : 0 },
-    { meaning : '昨天', value : 1 },
-    { meaning : '过去7天', value : 7 },
-    { meaning : '上周', value : '7L' },
-    { meaning : '过去30天', value : 30 },
-    { meaning : '上月', value : '30L' }
-]);
+oasgames.mdataConstant.constant("REPORT_DATE_RANGE", {
+    '0' : '今天',
+    '1' : '昨天',
+    '7' : '过去7天',
+    '7L' : '上周',
+    '30' : '过去30天',
+    '30L' : '上月'
+});
 
 /*
  * report_dimension可选列表

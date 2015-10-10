@@ -1,6 +1,8 @@
 
 /*
  * @account和application中的联动指令
+ * @* 本指令和cascadechoice指令最大区别是需要维护多组数据进行维护，不支持回显
+ *
  * */
 oasgames.mdataDirective.directive('cascadechoice', [
     function () {
