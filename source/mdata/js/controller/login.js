@@ -76,6 +76,8 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                         Cookie.setCookie('MDATA-KEY', result.data.token, {domain: ''});
                         Cookie.setCookie('loginedAccount', $scope.account.account, {domain: ''});
                         Cookie.setCookie('loginedAccountAuthority', result.data.authority, {domain: ''});
+                    }else{
+                        Ui.alert(result.msg);
                     }
 
                 }).error(function (status) {
@@ -229,7 +231,9 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
                     }
                 }).success(function (result) {
                     if(result.code == 200) {
-                        Ui.alert('Your password has been changed successfully');
+                        Ui.alert(result.msg);
+                    }else{
+                        Ui.alert(result.msg);
                     }
                 }).error(function (status) {
                     Ui.alert('网络错误！');

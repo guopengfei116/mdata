@@ -83,7 +83,7 @@
             </span>
         </div>
     </cascadechoice>
-    <recombination separator="|" recombination-data="appSourceData['proce']">
+    <recombination separator="#@DELIMITER@#" recombination-data="appSourceData['processors']">
         <legend class="field-title-com">Processor(s)</legend>
         <div class="recombination-menu">
             <div class="select select-host processor-select recombination-input" required-warn="please fill out the processor">
@@ -105,7 +105,7 @@
             <button class="button add-select">add</button>
         </div>
         <div class="textarea textarea-processor fieldset-processor">
-            <span class="flag flag-icon" ng-repeat="processor in appSourceData['proce']">
+            <span class="flag flag-icon" ng-repeat="processor in appSourceData['processors']">
                 <i class="flag-text" data-value="{{ processor }}">{{ processor }}</i>
                 <i class="flag-icon_delete iconfont icon-close" data-value="{{ processor }}"></i>
             </span>

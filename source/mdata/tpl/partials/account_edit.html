@@ -3,7 +3,7 @@
         <legend class="field-title-com">Email</legend>
         <input class="fieldset-text-com  fieldset-email" type="text" name="email" ng-model="accountSourceData.username"
                required ng-pattern="/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/" ng-blur="blur('email', accountForm.email.$error)"
-               ng-focus="focus('email')" ng-class="{'account-email': accountEmail}" ng-readonly="accountEmail">
+               ng-focus="focus('email')" ng-class="{'account-email': accountEmail}" ng-disabled="accountEmail">
         <span class="red-star" ng-class="{'account-red-start': accountEmail}">*</span>
     </fieldset>
     <fieldset class="field-common">
@@ -18,7 +18,7 @@
     </fieldset>
     <legend class="field-title-com account-authority">Authority</legend>
     <section>
-        <cascadechoice select-data="appsData" selected-data="selectedAppids" select-search-data="reportAdminSearch" flag-data="accountSourceData['as_report_admin']" flag-data-key="appid">
+        <cascadechoice select-data="appsData" selected-data="selectedAppids" select-search-data="reportAdminSearch" flag-data="accountSourceData['reportAdmin']" flag-data-key="appid">
             <legend class="field-title-account">As Report Admin</legend>
             <div>
                 <div class="select select-host select-btn">
@@ -39,13 +39,13 @@
                 <button class="button add-select">add</button>
             </div>
             <div class="textarea">
-                <span class="flag flag-icon" ng-repeat="app in accountSourceData['as_report_admin']">
+                <span class="flag flag-icon" ng-repeat="app in accountSourceData['reportAdmin']">
                     {{ app.appname }}
                     <i class="flag-icon_delete iconfont icon-close" data-value="{{ app.appid }}"></i>
                 </span>
             </div>
         </cascadechoice>
-        <cascadechoice select-data="appsData" selected-data="selectedAppids" select-search-data="reportViewerSearch" flag-data="accountSourceData['as_report_viewer']"  flag-data-key="appid">
+        <cascadechoice select-data="appsData" selected-data="selectedAppids" select-search-data="reportViewerSearch" flag-data="accountSourceData['reportViewer']"  flag-data-key="appid">
             <legend class="field-title-account">As Report Viewer</legend>
             <div>
                 <div class="select select-host select-btn">
@@ -66,7 +66,7 @@
                 <button class="button add-select">add</button>
             </div>
             <div class="textarea">
-                <span class="flag flag-icon" ng-repeat="app in accountSourceData['as_report_viewer']">
+                <span class="flag flag-icon" ng-repeat="app in accountSourceData['reportViewer']">
                     {{ app.appname }}
                     <i class="flag-icon_delete iconfont icon-close" data-value="{{ app.appid }}"></i>
                 </span>

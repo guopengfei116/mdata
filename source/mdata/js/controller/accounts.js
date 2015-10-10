@@ -20,33 +20,32 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
 
         // getAccount列表数据
         var accountCache = $cacheFactory.get('account');
-        if(accountCache && accountCache.get('list')) {
-            $scope.sourceData = accountCache.get('list');
-            $scope.viewData = $scope.sourceData;
-        }else {
+        // if(accountCache && accountCache.get('list')) {
+        //     $scope.sourceData = accountCache.get('list');
+        //     $scope.viewData = $scope.sourceData;
+        // }else {
             if(accountCache) {
                 console.log(accountCache);
             }else {
                 accountCache = $cacheFactory('account');
             }
             
-            // 异步获取
-            $http({
-                url: ApiCtrl.get('userIndex'),
-                method: 'GET',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            }).success(function (result) {
-                if(result && result.code == 200) {
-                    $scope.sourceData = result.data;
-                    $scope.viewData = result.data;
-                    accountCache.put('list', result.data);
-                }else {
-                    Ui.alert(result.msg);
-                }
-            }).error(function (status) {
-                Ui.alert('网络错误');
-            });
-        }
+        // 异步获取
+        $http({
+            url: ApiCtrl.get('userIndex'),
+            method: 'GET',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        }).success(function (result) {
+            if(result && result.code == 200) {
+                $scope.sourceData = result.data;
+                $scope.viewData = result.data;
+                accountCache.put('list', result.data);
+            }else {
+                Ui.alert(result.msg);
+            }
+        }).error(function (status) {
+            Ui.alert('网络错误');
+        });
 
         // 搜索自定义处理函数
         $scope.searchHandler = function (searchVal) {

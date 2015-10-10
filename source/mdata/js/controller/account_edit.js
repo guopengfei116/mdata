@@ -24,7 +24,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
         var httpApp = $scope.accountSourceData = {};
         var httpAppUp = $scope.accountSourceData;
         var httpName = $scope.accountSourceData.username;
-        // 初始account的email值
+        // 初始account的email值，username是否可编辑
         $scope.accountEmail = "";
 
         // 当前编辑的accountId
@@ -43,34 +43,35 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
         // getAccount数据
         function initAccountData () {
             var AppCache = $cacheFactory.get('app');
-            if(AppCache && AppCache.get('list')) {
-                $scope.appsData = AppCache.get('list');
-            }else {
+            // if(AppCache && AppCache.get('list')) {
+            //     $scope.appsData = AppCache.get('list');
+            // }else {
                 if(AppCache) {
                     console.log(AppCache);
                 }else {
                     AppCache = $cacheFactory('app');
                 }
-                $http({
-                    url: ApiCtrl.get('userIndex'),
-                    method: 'GET',
-                    params : {
-                        uid : httpAccountId
-                    },
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                }).success(function (result) {
-                    if(result && result.code == 200) {
-                        $scope.sourceData = result.data;
-                        $scope.viewData = result.data;
-                        $scope.accountSourceData = result.data[0];
-                        AppCache.put('list', result.data);
-                    }else {
-                        Ui.alert(result.msg);
-                    }
-                }).error(function (status) {
-                    Ui.alert('网络错误');
-                });
-            }
+            $http({
+                url: ApiCtrl.get('userIndex'),
+                method: 'GET',
+                params : {
+                    uid : httpAccountId
+                },
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            }).success(function (result) {
+                if(result && result.code == 200) {
+                    $scope.sourceData = result.data;
+                    $scope.viewData = result.data;
+                    $scope.accountSourceData = result.data[0];
+                    $scope.accountEmail = result.data[0].username;
+                    AppCache.put('list', result.data);
+                    console.log(result.data[0].username+"ddddddddddddddddd");
+                }else {
+                    Ui.alert(result.msg);
+                }
+            }).error(function (status) {
+                Ui.alert('网络错误');
+            });
         }
 
         // 排除空值
@@ -86,9 +87,9 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
         // getApp列表数据
         (function () {
             var AppCache = $cacheFactory.get('app');
-            if(AppCache && AppCache.get('list')) {
-                $scope.appsData = AppCache.get('list');
-            }else {
+            // if(AppCache && AppCache.get('list')) {
+            //     $scope.appsData = AppCache.get('list');
+            // }else {
                 if(AppCache) {
                     console.log(AppCache);
                 }else {
@@ -96,50 +97,58 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 }
                 
                 // 异步获取
-                $http({
-                    url: ApiCtrl.get('userAppList'),
-                    method: 'GET',
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                }).success(function (result) {
-                    if(result && result.code == 200) {
-                        $scope.appsData = result.data;
-                        AppCache.put('list', result.data);
-                    }else {
-                        Ui.alert(result.msg);
-                    }
-                }).error(function (status) {
-                    Ui.alert('网络错误');
-                });
-            }
+            $http({
+                url: ApiCtrl.get('userAppList'),
+                method: 'GET',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            }).success(function (result) {
+                if(result && result.code == 200) {
+                    $scope.appsData = result.data;
+                    AppCache.put('list', result.data);
+                }else {
+                    Ui.alert(result.msg);
+                }
+            }).error(function (status) {
+                Ui.alert('网络错误');
+            });
         })();
 
         // 事件处理、表单效验
         (function () {
             $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
 
-            // 邮箱是否重复标识
-            var flag = 0;
+            // 邮箱是否重复标识  1不重复
+            var flag = 0; 
             //表单失去焦点时错误提示
             $scope.blur = function(type, $errors){
                 MdataVerify.blur(type, $errors, $scope);
-                //验证是否重复
-                $http({
-                    url: ApiCtrl.get('checkEmail'),
-                    method: 'POST',
-                    data: {username:httpName},
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                    transformRequest: function(data){
-                        return $.param(data);
-                    }
-                }).success(function (result) {
-                    if(result.code == 200) {                      
-                        flag = 1;
-                    }else{
-                        Ui.alert(result.msg);
-                        flag = 0;
-                    }
-                }); 
+                if(type == 'email'){
+                    httpName = $scope.accountSourceData.username;
+                    //验证是否重复
+                    $http({
+                        url: ApiCtrl.get('checkEmail'),
+                        method: 'POST',
+                        data: {username:httpName},
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                        transformRequest: function(data){
+                            return $.param(data);
+                        }
+                    }).success(function (result) {
+                        if(result.code == 200) {                      
+                            flag = 1;
+                        }else{
+                            Ui.alert(result.msg);
+                            flag = 0;
+                        }
+                    });
+                }
             };
+            //app提交用户名不修改
+            console.log($scope.accountEmail+"fffffffffffff");
+            if($scope.accountEmail){
+                console.log("dddddddd");
+                flag = 1;
+            }
 
             //表单焦点时清除错误提示
             $scope.focus = function (type) {
@@ -159,15 +168,16 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 if(!MdataVerify.submit('email', $scope['accountForm']['email'].$error,$scope)){
                     return;
                 }
+                
 
                 //判断用户名
                 if(!MdataVerify.submit('accountName', $scope['accountForm']['accountName'].$error,$scope)){
                     return;
                 }
-                if(flag == 0){
-                    Ui.alert('用户名重复');
-                    return;
-                }
+                // if(flag == 0){
+                //     Ui.alert('用户名重复');
+                //     return;
+                // }
                 //判断密码
                 if(!MdataVerify.submit('acountPassword', $scope['accountForm']['acountPassword'].$error,$scope)){
                     return;
@@ -188,12 +198,17 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 //         Ui.alert('网络错误');
                 //     }
                 // )
-                if($scope.appId){
+                $scope.accountSourceData["reportAdmin"] = $(".field-account").data('value');
+                $scope.accountSourceData["reportViewer"] = $(".field-account").next().data('value');
+                httpApp = $scope.accountSourceData;
+                    console.log(httpApp);
+                if($scope.accountId){
+                    console.log("ddddddd");
                     httpAppUp.appid = $scope.appId;
                     $http({
                         url: ApiCtrl.get('userUpdate'),
                         method: 'POST',
-                        data: httpAppUp,
+                        data: httpApp,
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                         transformRequest: function(data){
                             return $.param(data);
@@ -210,6 +225,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                         Ui.alert('网络错误！');
                     });
                 }else{
+                    console.log("fffffffffff");
                     $http({
                         url: ApiCtrl.get('userCreate'),
                         method: 'POST',

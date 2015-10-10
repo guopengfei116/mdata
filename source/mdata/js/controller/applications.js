@@ -19,16 +19,15 @@ oasgames.mdataControllers.controller('ApplicationManageCtrl', [
 
         // getApp列表数据
         var appCache = $cacheFactory.get('app');
-        if(appCache && appCache.get('list')) {
-            $scope.sourceData = appCache.get('list');
-            $scope.viewData = $scope.sourceData;
-        }else {
+        // if(appCache && appCache.get('list')) {
+        //     $scope.sourceData = appCache.get('list');
+        //     $scope.viewData = $scope.sourceData;
+        // }else {
             if(appCache) {
                 console.log(appCache);
             }else {
                 appCache = $cacheFactory('app');
             }
-            console.log(ApiCtrl.get('appIndex'));
             // 异步获取
             $http({
                 url: ApiCtrl.get('appIndex'),
@@ -45,7 +44,6 @@ oasgames.mdataControllers.controller('ApplicationManageCtrl', [
             }).error(function (status) {
                 Ui.alert('网络错误');
             });
-        }
 
         // 搜索自定义处理函数
         $scope.searchHandler = function (searchVal) {

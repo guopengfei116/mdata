@@ -47,20 +47,6 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
 
         // getApp数据
         function initAppData () {
-            // Application.get(
-            //     {appId: $scope.appId},
-            //     function (result) {
-            //         if(result && result.code == 200) {
-            //             $scope.appSourceData = result.data;
-            //             initSelectData();
-            //         }else {
-            //             Ui.alert(result.msg);
-            //         }
-            //     },
-            //     function () {
-            //         Ui.alert('网络错误');
-            //     }
-            // );
             $http({
                 url: ApiCtrl.get('appIndex'),
                 method: 'GET',
@@ -71,6 +57,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
             }).success(function (result) {
                 if(result && result.code == 200) {
                     $scope.appSourceData = result.data[0];
+                    $scope.appSourceData['processors']
                     initSelectData();
                 }else {
                     Ui.alert(result.msg);
@@ -78,7 +65,6 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
             }).error(function (status) {
                 Ui.alert('网络错误！');
             });
-            console.log($scope.appSourceData);
         }
 
         // 排除空值
@@ -97,44 +83,29 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
         // getAccount列表数据
         (function () {
             var accountCache = $cacheFactory.get('account');
-            if(accountCache && accountCache.get('list')) {
-                $scope.accountsData = accountCache.get('list');
-            }else {
-                if(accountCache){
+            // if(accountCache && accountCache.get('list')) {
+            //     $scope.accountsData = accountCache.get('list');
+            // }else {
+            if(accountCache){
 
-                }else{
-                    accountCache = $cacheFactory('account');
-                }
-                
-                // 异步获取
-                // Account.query().$promise.then(
-                //     function (result) {
-                //         if(result && result.code == 200) {
-                //             $scope.accountsData = result.data;
-                //             accountCache.put('list', result.data);
-                //         }else {
-                //             Ui.alert(result.msg);
-                //         }
-                //     },
-                //     function () {
-                //         Ui.alert('网络错误');
-                //     }
-                // );
-                $http({
-                    url: ApiCtrl.get('appUserList'),
-                    method: 'GET',
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                }).success(function (result) {
-                    if(result && result.code == 200) {
-                        $scope.accountsData = result.data;
-                        accountCache.put('list', result.data);
-                    }else {
-                        Ui.alert(result.msg);
-                    }
-                }).error(function (status) {
-                    Ui.alert('网络错误');
-                });
+            }else{
+                accountCache = $cacheFactory('account');
             }
+        
+            $http({
+                url: ApiCtrl.get('appUserList'),
+                method: 'GET',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            }).success(function (result) {
+                if(result && result.code == 200) {
+                    $scope.accountsData = result.data;
+                    accountCache.put('list', result.data);
+                }else {
+                    Ui.alert(result.msg);
+                }
+            }).error(function (status) {
+                Ui.alert('网络错误');
+            });
         })();
 
         // 事件处理、表单效验
@@ -161,6 +132,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
              * 编辑提交的数据不为空
              * */
             $scope.submit = function () {
+
                 if(!MdataVerify.submit('appName',$scope["appCreate"]["appName"].$error,$scope)){
                     return;
                 }
@@ -168,15 +140,15 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                     Ui.alert('Time Zone must not be empty');
                     return;
                 }
-                console.log($scope.appSourceData.proce);
-                if(!$scope.appSourceData.proce){
-                    Ui.alert("Processor must not be empty");
-                    return;
-                }
                 $scope.appSourceData.timezone = $('.select.app-zone').data('value');
                 $scope.appSourceData["appadmin"] = $(".field-account").data('value');
                 $scope.appSourceData["appuser"] = $(".field-account").next().data('value');
                 $scope.appSourceData["proce"] = $(".field-account").next().next().data('value');
+                if($.trim($(".field-account").next().next().data('value')) == ""){
+                    Ui.alert("Processor must not be empty");
+                    return;
+                }
+
                 if($scope.appId){
                     httpApp = $scope.appSourceData;
                     $http({
