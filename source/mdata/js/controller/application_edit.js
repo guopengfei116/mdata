@@ -62,12 +62,15 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
             //     }
             // );
             $http({
-                url: ApiCtrl.get('appIndex')+'?appid='+httpAppId,
+                url: ApiCtrl.get('appIndex'),
                 method: 'GET',
+                params : {
+                        appid : httpAppId
+                    },
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             }).success(function (result) {
                 if(result && result.code == 200) {
-                    $scope.appSourceData = result.data;
+                    $scope.appSourceData = result.data[0];
                     initSelectData();
                 }else {
                     Ui.alert(result.msg);
@@ -75,6 +78,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
             }).error(function (status) {
                 Ui.alert('网络错误！');
             });
+            console.log($scope.appSourceData);
         }
 
         // 排除空值
@@ -164,7 +168,8 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                     Ui.alert('Time Zone must not be empty');
                     return;
                 }
-                if($scope.appSourceData.proce.length == 0){
+                console.log($scope.appSourceData.proce);
+                if(!$scope.appSourceData.proce){
                     Ui.alert("Processor must not be empty");
                     return;
                 }
@@ -173,11 +178,11 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                 $scope.appSourceData["appuser"] = $(".field-account").next().data('value');
                 $scope.appSourceData["proce"] = $(".field-account").next().next().data('value');
                 if($scope.appId){
-                    httpAppUp.appid = $scope.appId;
+                    httpApp = $scope.appSourceData;
                     $http({
                         url: ApiCtrl.get('appUpdate'),
                         method: 'POST',
-                        data: httpAppUp,
+                        data: httpApp,
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                         transformRequest: function(data){
                             return $.param(data);

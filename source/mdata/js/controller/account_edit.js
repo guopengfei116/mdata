@@ -42,21 +42,35 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
 
         // getAccount数据
         function initAccountData () {
-            $http({
-                url: ApiCtrl.get('userIndex'),
-                method: 'GET',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            }).success(function (result) {
-                if(result && result.code == 200) {
-                    $scope.sourceData = result.data;
-                    $scope.viewData = result.data;
-                    AppCache.put('list', result.data);
+            var AppCache = $cacheFactory.get('app');
+            if(AppCache && AppCache.get('list')) {
+                $scope.appsData = AppCache.get('list');
+            }else {
+                if(AppCache) {
+                    console.log(AppCache);
                 }else {
-                    Ui.alert(result.msg);
+                    AppCache = $cacheFactory('app');
                 }
-            }).error(function (status) {
-                Ui.alert('网络错误');
-            });
+                $http({
+                    url: ApiCtrl.get('userIndex'),
+                    method: 'GET',
+                    params : {
+                        uid : httpAccountId
+                    },
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                }).success(function (result) {
+                    if(result && result.code == 200) {
+                        $scope.sourceData = result.data;
+                        $scope.viewData = result.data;
+                        $scope.accountSourceData = result.data[0];
+                        AppCache.put('list', result.data);
+                    }else {
+                        Ui.alert(result.msg);
+                    }
+                }).error(function (status) {
+                    Ui.alert('网络错误');
+                });
+            }
         }
 
         // 排除空值
