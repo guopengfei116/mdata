@@ -45,7 +45,7 @@ $.extend(Tooltip.prototype, {
     },
 
     _bind: function () {
-        self = this;
+        var self = this;
 
         $(this.trigger).on('mouseenter', Tooltip.prototype.target, function () {
             var $this = $(this);

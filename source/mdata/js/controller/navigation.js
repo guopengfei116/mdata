@@ -74,6 +74,9 @@ oasgames.mdataControllers.controller('navigationCtrl', [
                     data : { "reportId" : 1, }
                 }).success(function (result, status) {
                     if(result.code == 200) {
+                        if(!result.data) {
+                            return;
+                        }
                         $scope.shortcuts = result.data;
                         shortcutCache.put('list', result.data);
                         init();

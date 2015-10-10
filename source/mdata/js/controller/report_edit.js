@@ -172,6 +172,10 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
 
             // 根据选择的appId更新valueList
             $scope.$watch('selectedAppId', function () {
+                if(!$scope.selectedAppId || !$scope.appDataList.length) {
+                    console.log('无法更新valueList，selectedAppId：' + $scope.selectedAppId + ',appDataList：' + $scope.appDataList);
+                    return;
+                }
                 for(var i = 0; i < $scope.appDataList.length; i++) {
                     if($scope.selectedAppId == $scope.appDataList[i]['app'].appid) {
                         $scope.valueList = $scope.appDataList[i]['val_list'];

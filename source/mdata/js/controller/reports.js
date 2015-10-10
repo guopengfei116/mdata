@@ -160,7 +160,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                 var self = this;
                 $http.post(
                     ApiCtrl.get('shortcutAdd'),
-                    {data: {reportId : reportId, appId : appId}}
+                    {reportId : reportId, appId : appId}
                 ).success(function () {
                     $scope.$emit('addShortcut', self.operationObject.report, self.operationObject.app);
                 }).error(function () {
@@ -211,25 +211,6 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
             }).error(function (status) {
                 Ui.alert('网络错误！');
             });
-
-            /*Report.query().$promise.then(function (result) {
-                if(result.code == 200) {
-                    $scope.sourceData = result.data;
-                    $scope.viewData = result.data;
-
-                    // 初始化展示状态
-                    upReportsListShow();
-                    // 记录report权限
-                    setReportPermission();
-
-                    // 初始化收藏标记
-                    Shortcuts.init();
-                }else {
-                    Ui.alert(result.msg);
-                }
-            }, function () {
-                Ui.alert('网络错误');
-            });*/
 
             /*
              * 更新report列表的展示状态，
