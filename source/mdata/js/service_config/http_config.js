@@ -12,6 +12,9 @@ oasgames.mdataServicesConfig.config([
         $httpProvider.interceptors.push(function(){
             var interceptor = {
                 'request':function(config){
+                    if(config && config.headers) {
+                        config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+                    }
                     return config;
                 },
                 'response':function(resp){
@@ -32,7 +35,8 @@ oasgames.mdataServicesConfig.config([
         /*delete $httpProvider.defaults.headers.common['X-Requested-With'];*/
         //$httpProvider.defaults.xhrFields = {'withCredentials': true};
         //$httpProvider.defaults.crossDomain = true;
-        $httpProvider.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        console.log($httpProvider.defaults);
+        console.log($httpProvider);
     }
 ]);
 

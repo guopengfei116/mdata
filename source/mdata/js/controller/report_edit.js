@@ -64,19 +64,19 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
              * */
             if($scope.reportId) {
                 $scope.reportIsExisting = true;
-                initReportData();
+                initReportData($scope.reportId);
             }else {
                 initAppData();
             }
 
             // 编辑Report时获取某report的数据
-            function initReportData () {
+            function initReportData (reportId) {
                 $http({
                     url: ApiCtrl.get('reportUpdate'),
                     method: 'POST',
                     params: {
                         reportId : reportId
-                    },
+                    }
                 }).success(function (result) {
                     if(result && result.code == 200) {
                         $scope.reportSourceData = result.data;
@@ -101,9 +101,10 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
             function initAppData () {
                 $http({
                     url: ApiCtrl.get('reportCreate'),
-                    method: 'POST',
+                    method: 'POST'
                 }).success(function (result) {
                     if(result && result.code == 200) {
+                        console.log(result);
                         $scope.appDataList = result.data['appDataList'];
                         $scope.appData = result.data['appDataList'][0];
                         $scope.guestUsers = result.data['guestUser'];
@@ -182,13 +183,14 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
         // 事件处理、表单效验
         (function () {
             $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
+            var flag = 0;
 
             //表单失去焦点时错误提示
             $scope.blur = function(type, $errors){
                 if(type == "reportName"){
                     if(MdataVerify.blur(type, $errors, $scope)){
+
                         //验证report name是否重复  
-                        var flag = 0;
                         var report_name = $scope.reportSourceData['reportData']['report_name'];
                         $http({
                             url: ApiCtrl.get('checkReportName'),
@@ -197,6 +199,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                                 'report_name' : report_name
                             }
                         }).success(function (result) {
+                            console.log(result);
                             if(result.code != 200) {                      
                                 $scope[type + 'Error'] = true;
                                 $scope.tooltip.errorType = type;
@@ -205,11 +208,10 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                                 $scope.tooltip.toolTipLooks.css({'color': 'rgba(255, 0, 0, 0.7)'});
                                 $scope.tooltip.show();
                                 flag = 1;
+                            }else {
+                                flag = 0;
                             }
-                        }); 
-                        if(flag == 1){
-                            return false;
-                        } 
+                        });
                     }              
                 }
                 MdataVerify.blur(type, $errors, $scope);                
@@ -222,31 +224,24 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                     $scope.tooltip.hide();
                 }
             };
+
             /*
             * 编辑提交
             * */
             $scope.submit = function () {
+                
                 //判断Report Name
                 if($.trim($(".fieldset-reportName").val()) == ""){
                      Ui.alert("Report Name must not be empty");
                      return false;
-                }else{//判断重复
-                    $http({
-                        url: ApiCtrl.get('checkReportName'),
-                        method: 'POST',
-                        data: {
-                            report_name : $scope.reportSourceData['reportData']['report_name']
-                        }
-                    }).success(function (result) {
-                        if(result.code != 200) {                      
-                            Ui.alert("Report Name 重复");
-                            flag = 1;
-                        }
-                    }); 
-                    if(flag == 1){
-                        return false;
-                    } 
                 }
+
+                //判断name重复
+                if(flag == 1){
+                    Ui.alert("report name 重复");
+                    return false;
+                }
+
                 //判断Column
                 if($.trim($(".teatarea-column").html()) == ""){
                      Ui.alert("Column must not be empty");
