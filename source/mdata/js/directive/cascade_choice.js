@@ -88,14 +88,13 @@ oasgames.mdataDirective.directive('cascadechoice', [
 
                     selectedDataInit = true;
                     $scope.$broadcast('bind');
-                    selectDataWatchCancel();
+                    selectedDataWatchCancel();
                 });
 
                 /*
                 * 初始化dom
                 * */
                 $scope.$on('bind', function () {
-
                     if(!resultValueInit || !selectDataInit || !selectedDataInit) {
                         console.log('未初始化完成');
                         return;
@@ -112,7 +111,6 @@ oasgames.mdataDirective.directive('cascadechoice', [
 
                     // 绑定add事件
                     element.on('click', '.add-select', function () {
-
                         var val = $select.data('value');
                         if(!val) {
                             Ui.alert('please fill out the data');

@@ -166,9 +166,18 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
 
         // 选择application
         (function () {
-            $('.select-app .select_content_list_value').on('click', function () {
+            $('.report-page').on('click', '.select_content_list_value-select-app', function () {
                 $scope.selectedAppId = $(this).data('value');
             });
+
+            // 根据选择的appId更新valueList
+            $scope.$watch('selectedAppId', function () {
+                for(var i = 0; i < $scope.appDataList.length; i++) {
+                    if($scope.selectedAppId == $scope.appDataList[i]['app'].appid) {
+                        $scope.valueList = $scope.appDataList[i]['val_list'];
+                    }
+                }
+            })
         })();
 
         // getGuestUser数据
@@ -256,10 +265,9 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 }
 
                 // 提交数据
-                var result = {}, submitApi = ApiCtrl.get('reportCreate');
+                var result = {}, submitApi = ApiCtrl.get('reportSave');
                 if($scope.reportId) {
                     result.id = $scope.reportId;
-                    submitApi = ApiCtrl.get('reportUpdate')
                 }
                 result.appid = $scope.selectedAppId;
                 result.report_name = $scope.reportSourceData['reportData']['report_name'];
@@ -271,8 +279,9 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 result.date = $('.select-date').data('value');
 
                 $http({
-                    method : "GET",
-                    url : submitApi
+                    method : "POST",
+                    url : submitApi,
+                    data : result
                 }).success(function (result) {
                     if(result.code == 200) {
                         Ui.alert('success', function () {

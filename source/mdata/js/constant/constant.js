@@ -29,6 +29,7 @@ oasgames.mdataConstant.constant("API_CONFIG", {
         'systemLog' : '/log/index',
         'reports': '/report/view',
         'reportView' : '/report/view-report',
+        'reportSave': '/report/report-save',
         'reportCreate': '/report/create',
         'reportUpdate': '/report/update',
         'reportDel': '/report/del',

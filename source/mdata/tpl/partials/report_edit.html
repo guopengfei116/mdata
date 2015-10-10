@@ -15,7 +15,7 @@
     <section ng-if="!reportIsExisting">
         <fieldset class="field-common">
             <legend class="field-title-com">Application Name</legend>
-            <div class="select select-host select-btn select-app">
+            <div class="select select-host select-btn">
                 <div class="select_main">
                     <p class="select_main_text select_target"></p>
                     <button class="select_main_btn select_target">
@@ -26,7 +26,7 @@
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
                     <li class="select_content_list" ng-repeat="appData in appDataList ">
-                        <a class="select_content_list_value" data-value="{{ appData.app.appid }}">{{ appData.app.name }}</a>
+                        <a class="select_content_list_value select_content_list_value-select-app" data-value="{{ appData.app.appid }}">{{ appData.app.name }}</a>
                     </li>
                 </ul>
             </div>
@@ -196,7 +196,7 @@
                     <ul class="select_content">
                         <li class="select_content_arrow"></li>
                         <li class="select_content_arrow select_content_arrow-mask"></li>
-                        <li class="select_content_list" ng-repeat="(valueName, format) in appData['val_list']">
+                        <li class="select_content_list" ng-repeat="(valueName, format) in valueList">
                             <a class="select_content_list_value select_content_list_value-group" data-value="{{ valueName }}">{{ valueName }}</a>
                         </li>
                     </ul>

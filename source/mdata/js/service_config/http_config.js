@@ -36,7 +36,6 @@ oasgames.mdataServicesConfig.config([
         //$httpProvider.defaults.xhrFields = {'withCredentials': true};
         //$httpProvider.defaults.crossDomain = true;
         console.log($httpProvider.defaults);
-        console.log($httpProvider);
     }
 ]);
 
