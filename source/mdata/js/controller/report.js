@@ -29,23 +29,34 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
         $scope.permission = $rootScope.reportPermission && $rootScope.reportPermission[$scope.reportId];
 
         // 日期组件
-        var dataComponent = require('reportViewDate');
+        var dataInstance = null;
 
         // get report数据
         $http({
             method : "GET",
             url : ApiCtrl.get('reportView'),
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             params : {
                 reportId : $scope.reportId
             }
         }).success(function (result) {
             if(result && result.code == 200) {
                 $scope.reportSourceData = result.data;
-                dataComponent = new dataComponent({
-                    startTime : $scope.reportSourceData['date_begin'],
-                    endTime : $scope.reportSourceData['date_end'],
-                    minTime : $scope.reportSourceData['create_time']
-                });
+
+                // 初始化日期插件
+                var dataComponent = require('reportViewDate');
+                var config = {}, tempConfig = {};
+                tempConfig.startTime = $scope.reportSourceData['date_begin'];
+                tempConfig.endTime = $scope.reportSourceData['date_end'];
+                tempConfig.minTime = $scope.reportSourceData['create_time'];
+
+                // time == null
+                for(var timeK in tempConfig) {
+                    if(tempConfig[timeK]) {
+                        config[timeK] = tempConfig[timeK];
+                    }
+                }
+                dataInstance = new dataComponent(config);
             }else {
                 Ui.alert(result.msg);
             }
@@ -72,7 +83,7 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
         (function () {
             $('.select-data').on('click', '.select_content_list_value', function () {
                 var val = $(this).data('value');
-                dataComponent.changeData(val);
+                dataInstance.changeData(val);
             });
         })();
 

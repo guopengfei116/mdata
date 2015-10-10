@@ -20,6 +20,7 @@ $.extend(Select.prototype, {
     host: '.select-host',
     target : '.select_target',
     textarea : '.select_main_textarea',
+    textarea_value : '.select_main_textarea-value',
     text : '.select_main_text',
     optionsTarget : '.select_content_list_value',
     optionsSelector : '.select_content_list',
@@ -69,6 +70,14 @@ $.extend(Select.prototype, {
             $select.data('value', val).toggleClass('select-active');
             $select.find(self.textarea).val($this.text());
             $select.find(self.text).text($this.text());
+        });
+
+        // text change
+        $(o.trigger).on('blur', self.textarea_value, function (e) {
+            e.stopPropagation();
+            var $this = $(this);
+            var $select = $this.parents(self.selector);
+            var val = $this.val();
         });
 
         // select阻止事件外流

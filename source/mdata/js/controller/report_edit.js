@@ -81,6 +81,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                     if(result && result.code == 200) {
                         $scope.reportSourceData = result.data;
                         $scope.appData = result.data['appDataList'];
+                        $scope.guestUserValue = result.data['guestUserValue'];
                         $scope.guestUsers = result.data['guestUser'];
                         $scope.valueList = $scope.appData['val_list'];
                         initSelectData();
@@ -156,6 +157,10 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 // 可选的value
                 if(!$scope.valueList) {
                     $scope.valueList = {};
+                }
+                // 已选的guest账号列表
+                if(!$scope.guestUserValue) {
+                    $scope.guestUserValue = [];
                 }
                 // 可选的guest账号列表
                 if(!$scope.guestUsers) {
@@ -249,16 +254,19 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
             * 编辑提交
             * */
             $scope.submit = function () {
-                //判断app Name
-                if($.trim($(".fieldset-appName p.select_main_text").html()) == ""){
+
+                //判断app Name，只在创建report时进行判断
+                if(!$scope.selectedAppId && !$scope.reportId){
                      Ui.alert("Application Name must not be empty");
                      return false;
                 }
+
                 //判断Report Name
-                if($.trim($(".fieldset-reportName").val()) == ""){
+                if(!$scope.reportSourceData['reportData']['report_name']){
                      Ui.alert("Report Name must not be empty");
                      return false;
                 }
+
                 //判断name重复
                 if(flag == 1){
                     Ui.alert("report name 重复");

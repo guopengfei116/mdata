@@ -1,6 +1,6 @@
 <form class="report-page" name="reportFrom" novalidate >
     <section ng-if="reportIsExisting">
-        <fieldset class="field-common ">
+        <fieldset class="field-common fieldset-common-appName">
             <legend class="field-title-com">Application Name</legend>
             <input class="fieldset-text-com report-app" type="text" value="" ng-model="reportSourceData['reportData']['appname']"
                    ng-readonly="true" />
@@ -13,7 +13,7 @@
         </fieldset>
     </section>
     <section ng-if="!reportIsExisting">
-        <fieldset class="field-common fieldset-appName">
+        <fieldset class="field-common fieldset-common-appName">
             <legend class="field-title-com">Application Name</legend>
             <div class="select select-host select-btn">
                 <div class="select_main">
@@ -53,7 +53,7 @@
         <div class="recombination-menu">
             <div class="select select-host select-btn recombination-input" required-warn="please fill out the Dimension">
                 <div class="select_main">
-                    <input class="select_main_textarea select_target" placeholder="" type="text" value="">
+                    <input class="select_main_textarea select_main_textarea-value" placeholder="" type="text" value="">
                     <button class="select_main_btn select_target">
                         <i class="select_main_btn_icon"></i>
                     </button>
@@ -80,7 +80,7 @@
         <div class="recombination-menu">
             <div class="select select-host select-btn select-btn-small recombination-input" required-warn="please fill out the Filter">
                 <div class="select_main">
-                    <input class="select_main_textarea select_target" type="text" value="" />
+                    <input class="select_main_textarea select_main_textarea-value" type="text" value="" />
                     <button class="select_main_btn select_target">
                         <i class="select_main_btn_icon"></i>
                     </button>
@@ -228,12 +228,12 @@
         </div>
         <span class="red-star">*</span>
     </valuegroup>
-    <cascadechoice class="field-common-guest" select-data="guestUsers" selected-data="selectedGuestUids" flag-data="reportSourceData['reportData']['guestUserValue']"  flag-data-key="uid">
+    <cascadechoice class="field-common-guest" select-data="guestUsers" selected-data="selectedGuestUids" flag-data="guestUserValue"  flag-data-key="uid">
         <legend class="field-title-com">Report Guest</legend>
         <div>
             <div class="select select-host select-btn recombination-input" required-warn="please fill out the Guest User">
                 <div class="select_main">
-                    <input class="select_main_textarea select_target" type="text" value="">
+                    <input class="select_main_textarea" type="text" value="">
                     <button class="select_main_btn select_target">
                         <i class="select_main_btn_icon"></i>
                     </button>
@@ -249,7 +249,7 @@
             <button class="button add-select">add</button>
         </div>
         <div class="textarea">
-            <span class="flag flag-icon" ng-repeat="guestUser in reportSourceData['reportData']['guestUserValue']">
+            <span class="flag flag-icon" ng-repeat="guestUser in guestUserValue">
                 <i class="flag-text" data-value="{{ guestUser.uid }}">{{ guestUser.nickname }}</i>
                 <i class="flag-icon_delete iconfont icon-close" data-value="{{ guestUser.uid }}"></i>
             </span>
