@@ -11,30 +11,32 @@
     <dl class="container">
         <dt class="row row-title">
             <ul>
-                <li class="row_column row_column-5" ng-click="changeSort('appList', 'name')">App Name</li>
+                <li class="row_column row_column-5" ng-click="changeSort('appList', 'appname')">App Name</li>
                 <li class="row_column row_column-5" ng-click="changeSort('appList', 'appid')">App ID</li>
-                <li class="row_column row_column-5" ng-click="changeSort('adminUsers', 'name')">Report Admin</li>
-                <li class="row_column row_column-5" ng-click="changeSort('viewerUsers', 'name')">Report Viewer</li>
+                <li class="row_column row_column-5" ng-click="changeSort('adminUsers', 'username')">Report Admin</li>
+                <li class="row_column row_column-5" ng-click="changeSort('viewerUsers', 'username')">Report Viewer</li>
                 <li class="row_column row_column-5">Manage</li>
             </ul>
         </dt>
         <dd class="row row-color-interlaced" ng-repeat="app in viewData | orderBy:sort.appList.orderKey:sort.appList.isDownOrder ">
             <ul>
-                <li class="row_column row_column-5" ng-if='app.appname? app.appname : app.appname = "-"'>{{ app.appname }}</li>
-                <li class="row_column row_column-5" ng-if='app.appid? app.appid : app.appid = "-"'>{{ app.appid }}</li>
+                <li class="row_column row_column-5">{{ app.appname }}</li>
+                <li class="row_column row_column-5">{{ app.appid }}</li>
                 <li class="row_column row_column-5">
-                    <span ng-repeat="user in app['appadmin'] | orderBy:sort.adminUsers.orderKey:sort.adminUsers.isDownOrder " if='user.name? user.name : user.name = "-"'>
-                        {{ user.name }}
+                    <span ng-if="app['appadmin'].length == 0">-</span>
+                    <span ng-repeat="user in app['appadmin'] | orderBy:sort.adminUsers.orderKey:sort.adminUsers.isDownOrder ">
+                        {{ user.username }}
                     </span>
                 </li>
                 <li class="row_column row_column-5">
-                    <span ng-repeat="user in app['appuser'] | orderBy:sort.viewerUsers.orderKey:sort.viewerUsers.isDownOrder " if='user.name? user.name : user.name = "-"'>
-                        {{ user.name }}
+                    <span ng-if="app['appuser'].length == 0">-</span>
+                    <span ng-repeat="user in app['appuser'] | orderBy:sort.viewerUsers.orderKey:sort.viewerUsers.isDownOrder ">
+                        {{ user.username }}
                     </span>
                 </li>
                 <li class="row_column row_column-5">
                     <a href="#/application/manage/edit/{{ app.appid }}" class="iconfont icon-edit tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></a>
-                    <i class="iconfont icon-delete tooltip-host" data-tooltip-position="bc" data-tooltip-info="Delete" ng-click="delete(app.id)"></i>
+                    <i class="iconfont icon-delete tooltip-host" data-tooltip-position="bc" data-tooltip-info="Delete" ng-click="delete(app.appid)"></i>
                 </li>
             </ul>
         </dd>

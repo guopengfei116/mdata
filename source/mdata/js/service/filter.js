@@ -63,8 +63,8 @@ oasgames.mdataServices.factory('Filter', [
         /*
         * 暴漏方法
         * @parm {Array} data
-        * @parm {Object} config
-        * config：其每个属性值必须为String||Array，如果为arr，则认为比较的是一个深度嵌套对象，会依次向下找，直到倒数第二项作为比较值，最后一项作为正则条件
+        * @parm {Object} config 多个过滤配置 >> {username : searchVal, operaevents : searchVal}
+        * config：其每个属性的过滤值必须为String||Array，如果为arr，则认为比较的是一个深度嵌套对象，会依次向下找，直到倒数第二项作为比较值，最后一项作为正则条件
         * */
         var filter = function (data, config) {
             var result = [], tempReg = null, tempResultObj, tempObj = null, tempVal = '';

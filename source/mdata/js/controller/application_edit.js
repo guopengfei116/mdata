@@ -7,6 +7,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
     '$scope',
     '$cacheFactory',
     '$route',
+    '$http',
     'PROCESSOR',
     'TIME_ZONE',
     'Application',

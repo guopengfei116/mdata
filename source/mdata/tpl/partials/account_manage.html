@@ -23,14 +23,16 @@
                 <li class="row_column row_column-5">{{ account.nickname }}</li>
                 <li class="row_column row_column-5">{{ account.username }}</li>
                 <li class="row_column row_column-5">
-                <span ng-repeat="app in account['as_report_admin'] | orderBy:sort.adminReports.orderKey:sort.adminReports.isDownOrder ">
-                    {{ app.appname }}
-                </span>
+                    <span ng-if="account['as_report_admin'].length == 0">-</span>
+                    <span ng-repeat="app in account['as_report_admin'] | orderBy:sort.adminReports.orderKey:sort.adminReports.isDownOrder ">
+                        {{ app.appname }}
+                    </span>
                 </li>
                 <li class="row_column row_column-5">
-                <span ng-repeat="app in account['as_report_viewer'] | orderBy:sort.viewerReports.orderKey:sort.viewerReports.isDownOrder ">
-                    {{ app.appname }}
-                </span>
+                    <span ng-if="account['as_report_viewer'].length == 0">-</span>
+                    <span ng-repeat="app in account['as_report_viewer'] | orderBy:sort.viewerReports.orderKey:sort.viewerReports.isDownOrder ">
+                        {{ app.appname }}
+                    </span>
                 </li>
                 <li class="row_column row_column-5">
                     <a href="#/account/manage/edit/{{ account.uid }}" class="iconfont icon-edit tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></a>
