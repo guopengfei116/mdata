@@ -19,6 +19,7 @@ oasgames.mdataConstant.constant("API_CONFIG", {
         'appIndex' : '/app/index',
         'appUpdate' : '/app/update',
         'appCreate' : '/app/create',
+        'appUserList' : '/user/get-users',
         'userIndex' : '/user/index',
         'userUpdate' : '/user/update',
         'userCreate' : '/user/create',

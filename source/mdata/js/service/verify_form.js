@@ -39,6 +39,9 @@ oasgames.mdataServices.factory('MdataVerify', [
             },
             blur : function(type, $errors, $scope){
                 var self = this;
+                if(!$errors) {
+                    return true;
+                }
                 for(var $error in $errors) {
                     if($errors[$error]) {
                         $scope[type + 'Error'] = true;
