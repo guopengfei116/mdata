@@ -45,9 +45,6 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
             $http({
                 url: ApiCtrl.get('userIndex'),
                 method: 'GET',
-                params : {
-                    uid : httpAccountId
-                },
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             }).success(function (result) {
                 if(result && result.code == 200) {
@@ -111,7 +108,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
             //表单失去焦点时错误提示
             $scope.blur = function(type, $errors){
                 MdataVerify.blur(type, $errors, $scope);
-                ///验证是否重复
+                //验证是否重复
                 $http({
                     url: ApiCtrl.get('checkEmail'),
                     method: 'POST',
@@ -148,12 +145,13 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 if(!MdataVerify.submit('email', $scope['accountForm']['email'].$error,$scope)){
                     return;
                 }
-                if(flag == 0){
-                    Ui.alert('用户名重复');
-                    return;
-                }
+
                 //判断用户名
                 if(!MdataVerify.submit('accountName', $scope['accountForm']['accountName'].$error,$scope)){
+                    return;
+                }
+                if(flag == 0){
+                    Ui.alert('用户名重复');
                     return;
                 }
                 //判断密码

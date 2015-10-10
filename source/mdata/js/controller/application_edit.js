@@ -14,7 +14,8 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
     'Account',
     'Filter',
     'MdataVerify',
-    function ($scope, $cacheFactory, $route, processors, timeZone, Application, Account, Filter, MdataVerify) {
+    'ApiCtrl',
+    function ($scope, $cacheFactory, $route, $http, processors, timeZone, Application, Account, Filter, MdataVerify,ApiCtrl) {
 
         // processor可选列表-常量
         $scope.processors = processors;
@@ -102,19 +103,33 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                 }
                 
                 // 异步获取
-                Account.query().$promise.then(
-                    function (result) {
-                        if(result && result.code == 200) {
-                            $scope.accountsData = result.data;
-                            accountCache.put('list', result.data);
-                        }else {
-                            Ui.alert(result.msg);
-                        }
-                    },
-                    function () {
-                        Ui.alert('网络错误');
+                // Account.query().$promise.then(
+                //     function (result) {
+                //         if(result && result.code == 200) {
+                //             $scope.accountsData = result.data;
+                //             accountCache.put('list', result.data);
+                //         }else {
+                //             Ui.alert(result.msg);
+                //         }
+                //     },
+                //     function () {
+                //         Ui.alert('网络错误');
+                //     }
+                // );
+                $http({
+                    url: ApiCtrl.get('appUserList'),
+                    method: 'GET',
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                }).success(function (result) {
+                    if(result && result.code == 200) {
+                        $scope.accountsData = result.data;
+                        accountCache.put('list', result.data);
+                    }else {
+                        Ui.alert(result.msg);
                     }
-                );
+                }).error(function (status) {
+                    Ui.alert('网络错误');
+                });
             }
         })();
 
