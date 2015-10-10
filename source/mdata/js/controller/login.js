@@ -63,6 +63,8 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                     method: 'POST',
                     data: httpData,
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    xhrFields: {'withCredentials': true},
+                    crossDomain: true,
                     transformRequest: function(data){
                         return $.param(data);
                     }
@@ -74,6 +76,7 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                         $rootScope.user['authority'] = result.data.authority;
                         $rootScope.$emit('$routeChangeStart');
                         Cookie.setCookie('MDATA-KEY', result.data.token, {domain: ''});
+                        Cookie.setCookie('MDATA_KEY', result.data.token, {domain: '.mdata.dev'});
                         Cookie.setCookie('loginedAccount', $scope.account.account, {domain: ''});
                         Cookie.setCookie('loginedAccountAuthority', result.data.authority, {domain: ''});
                     }

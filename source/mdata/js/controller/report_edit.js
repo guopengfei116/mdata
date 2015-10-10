@@ -64,7 +64,6 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
              * */
             if($scope.reportId) {
                 $scope.reportIsExisting = true;
-                $scope.reportId = 'report_info';
                 initReportData();
             }else {
                 initAppData();
@@ -72,23 +71,25 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
 
             // 编辑Report时获取某report的数据
             function initReportData () {
-                Report.get(
-                    {reportId: $scope.reportId},
-                    function (result) {
-                        if(result && result.code == 200) {
-                            $scope.reportSourceData = result.data;
-                            $scope.appData = result.data['appDataList'];
-                            $scope.guestUsers = result.data['guestUser'];
-                            $scope.valueList = $scope.appData['val_list'];
-                            initSelectData();
-                        }else {
-                            Ui.alert(result.msg);
-                        }
+                $http({
+                    url: ApiCtrl.get('reportUpdate'),
+                    method: 'POST',
+                    params: {
+                        reportId : reportId
                     },
-                    function () {
-                        Ui.alert('网络错误');
+                }).success(function (result) {
+                    if(result && result.code == 200) {
+                        $scope.reportSourceData = result.data;
+                        $scope.appData = result.data['appDataList'];
+                        $scope.guestUsers = result.data['guestUser'];
+                        $scope.valueList = $scope.appData['val_list'];
+                        initSelectData();
+                    }else {
+                        Ui.alert(result.msg);
                     }
-                );
+                }).error(function (status) {
+                    Ui.alert('网络错误！');
+                });
             }
 
             /*
@@ -98,23 +99,22 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
              * 同时含有第一个app对应的guest_account可选列表数据
              * */
             function initAppData () {
-                Report.get(
-                    {reportId: 'report_create'},
-                    function (result) {
-                        if(result && result.code == 200) {
-                            $scope.appDataList = result.data['appDataList'];
-                            $scope.appData = result.data['appDataList'][0];
-                            $scope.guestUsers = result.data['guestUser'];
-                            $scope.valueList = $scope.appData['val_list'];
-                            initSelectData();
-                        }else {
-                            Ui.alert(result.msg);
-                        }
-                    },
-                    function () {
-                        Ui.alert('网络错误');
+                $http({
+                    url: ApiCtrl.get('reportCreate'),
+                    method: 'POST',
+                }).success(function (result) {
+                    if(result && result.code == 200) {
+                        $scope.appDataList = result.data['appDataList'];
+                        $scope.appData = result.data['appDataList'][0];
+                        $scope.guestUsers = result.data['guestUser'];
+                        $scope.valueList = $scope.appData['val_list'];
+                        initSelectData();
+                    }else {
+                        Ui.alert(result.msg);
                     }
-                );
+                }).error(function (status) {
+                    Ui.alert('网络错误！');
+                });
             }
 
             /*
@@ -189,7 +189,14 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                     if(MdataVerify.blur(type, $errors, $scope)){
                         //验证report name是否重复  
                         var flag = 0;
-                        $http.get(ApiCtrl.get('reportName'),$scope.reportSourceData['reportData']['report_name']).success(function (result) {
+                        var report_name = $scope.reportSourceData['reportData']['report_name'];
+                        $http({
+                            url: ApiCtrl.get('checkReportName'),
+                            method: 'POST',
+                            data: {
+                                'report_name' : report_name
+                            }
+                        }).success(function (result) {
                             if(result.code != 200) {                      
                                 $scope[type + 'Error'] = true;
                                 $scope.tooltip.errorType = type;
@@ -224,7 +231,13 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                      Ui.alert("Report Name must not be empty");
                      return false;
                 }else{//判断重复
-                    $http.get(ApiCtrl.get('reportName'),$scope.reportSourceData['reportData']['report_name']).success(function (result) {
+                    $http({
+                        url: ApiCtrl.get('checkReportName'),
+                        method: 'POST',
+                        data: {
+                            report_name : $scope.reportSourceData['reportData']['report_name']
+                        }
+                    }).success(function (result) {
                         if(result.code != 200) {                      
                             Ui.alert("Report Name 重复");
                             flag = 1;
@@ -239,9 +252,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                      Ui.alert("Column must not be empty");
                      return;
                 }
-
             };
-
         })();
     }
 ]);

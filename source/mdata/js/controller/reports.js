@@ -326,12 +326,11 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
         (function () {
             // 删除account
             $scope.delete = function (reportId) {
-
                 Ui.confirm('确定要删除这个report吗', function () {
                     $http({
                         url: ApiCtrl.get('reportDel'),
                         method: 'GET',
-                        param: {
+                        params: {
                             reportId : reportId
                         },
                     }).success(function (result) {
