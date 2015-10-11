@@ -104,6 +104,9 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
                         val.push($this.data("value"));
                     }
                 });
+                if(!val.length) {
+                    val = 0;
+                }
                 return val;
             }
 
