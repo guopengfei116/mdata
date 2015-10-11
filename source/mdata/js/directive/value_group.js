@@ -116,12 +116,12 @@ oasgames.mdataDirective.directive('valuegroup', [
                         var val = Echo.prototype.getValue($forms, separator);
 
                         if(!val) {
+                            Ui.alert('please fill out the data');
                             return;
                         }
 
-                        var valName = val.split(separator)[0];
-
                         // name重复效验
+                        var valName = val.split(separator)[0];
                         for(var i = 0; i < $scope.resultValue.length; i++) {
                             if(valName === $scope.resultValue[i].split(separator)[0]) {
                                 Ui.alert('name can not repeat');

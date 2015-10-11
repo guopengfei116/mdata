@@ -1,7 +1,7 @@
 
 /*
  * @directive 用来编辑复合值，复合属性,产出 >> [ a+b+c, c+b+d... ]
- * @* 本指令和cascadechoice指令最大区别是该指令只维护一组自有数据，节省内存开销，并支持回显
+ * @* 本指令和cascadechoice指令最大区别是该指令只维护一组自有数据，并且不会记录value的name值，故无法进行name值的过滤，比较节省内存开销和效率，支持回显操作
  *
  * @*添加数据绑定在'.add-select'选择器上，
  * @*删除数据绑定在'.flag-icon_delete'选择器上
@@ -52,8 +52,8 @@ oasgames.mdataDirective.directive('recombination', [
                      * 不允许重复的processor
                      * */
                     element.on('click', '.add-select', function () {
-
                         var val = Echo.prototype.getValue($forms, separator);
+
                         if(!val) {
                             return;
                         }
@@ -64,13 +64,22 @@ oasgames.mdataDirective.directive('recombination', [
                             return;
                         }
 
-                        // 重复效验
+                        // name重复效验
+                        var valName = val.split(separator)[0];
+                        for(var i = 0; i < $scope.recombinationData.length; i++) {
+                            if(valName === $scope.recombinationData[i].split(separator)[0]) {
+                                Ui.alert('name can not repeat');
+                                return;
+                            }
+                        }
+
+                        /*// 重复效验
                         for(var i = 0; i < $scope.recombinationData.length; i++) {
                             if($scope.recombinationData[i] == val) {
                                 Ui.alert('请勿添加重复字段');
                                 return;
                             }
-                        }
+                        }*/
 
                         // add值
                         $scope.recombinationData.push(val);

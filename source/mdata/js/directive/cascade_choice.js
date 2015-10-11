@@ -1,7 +1,7 @@
 
 /*
  * @account和application中的联动指令
- * @* 本指令和cascadechoice指令最大区别是需要维护多组数据进行维护，不支持回显
+ * @* 本指令和cascadechoice指令最大区别是需要维护多组数据，不支持回显
  *
  * */
 oasgames.mdataDirective.directive('cascadechoice', [
@@ -108,15 +108,25 @@ oasgames.mdataDirective.directive('cascadechoice', [
 
                     // 添加未编辑时的初始值
                     element.data('value', $scope.resultValue);
+
                     // 把初始值添加进入已选值总和
                     $scope.selectedData.push.apply($scope.selectedData, $scope.resultValue);
 
                     // 绑定add事件
                     element.on('click', '.add-select', function () {
                         var val = $select.data('value');
+
                         if(!val) {
                             Ui.alert('please fill out the data');
                             return;
+                        }
+
+                        // 值重复效验
+                        for(var i = 0; i < $scope.resultValue.length; i++) {
+                            if(val[$scope.flagDataKey] === $scope.resultValue[i]) {
+                                Ui.alert('can not repeat');
+                                return;
+                            }
                         }
 
                         // 更新当前所属表单的值
