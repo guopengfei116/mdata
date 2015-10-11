@@ -12,9 +12,9 @@
                 <span class="dropdown_list-group_iconfont iconfont icon-wrench"></span>
                 <a href="#/change_password">Change&nbsp;password</a>
             </li>
-            <li class="dropdown_list dropdown_list-group">
+            <li class="dropdown_list dropdown_list-group" ng-click="logout()">
                 <span class="dropdown_list-group_iconfont iconfont icon-goout"></span>
-                <a href="javascript:void(0);" ng-click="logout()">Log&nbsp;out</a>
+                <a href="javascript:void(0);">Log&nbsp;out</a>
             </li>
         </ul>
     </menu>
