@@ -41,8 +41,8 @@
     <fieldset class="field-common field-report">
         <span class="field-title-com report-title">Value</span>
         <ul class="inline-block cf">
-            <li class="left" ng-repeat="value in reportSourceData.values">
-                <span class="flag">{{ value }}</span>
+            <li class="left" ng-repeat="(valueName, format) in reportSourceData.values">
+                <span class="flag">{{ valueName }}</span>
             </li>
         </ul>
     </fieldset>
