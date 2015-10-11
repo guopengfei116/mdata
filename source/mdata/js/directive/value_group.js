@@ -176,6 +176,10 @@ oasgames.mdataDirective.directive('valuegroup', [
                             var valMark = 2;
                             while(valMark < vals.length) {
 
+                                if(!vals.length || !valMark) {
+                                    break;
+                                }
+
                                 // 第一个value
                                 if(valMark == 2) {
                                     $scope.changeValueGroup(element.find('.value-group1'), vals[valMark]);
