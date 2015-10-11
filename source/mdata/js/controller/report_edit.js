@@ -230,7 +230,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                             }
                         }).success(function (result) {
                             console.log(result);
-                            if(result.code == 200) {                      
+                            if(result.code == 200) {
                                 flag = 0;
                             }else {
                                 $scope[type + 'Error'] = true;
