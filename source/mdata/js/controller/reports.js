@@ -313,9 +313,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                     }
                 }).success(function (result) {
                     if(result.code == 200) {
-                        if(reportId && newReportName) {
-                            $scope.requestDuplicate(reportId, newReportName);
-                        }
+                        $scope.requestDuplicate(reportId, newReportName);
                     }else {
                         Ui.alert('report name already exists');
                     }
@@ -324,7 +322,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
 
             // 提交duplicate
             $scope.requestDuplicate = function (reportId, newReportName) {
-                if(reportNameIsExist) {
+                if(!reportId || !newReportName) {
                     return;
                 }
                 $http({
