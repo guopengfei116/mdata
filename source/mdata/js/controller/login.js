@@ -74,13 +74,12 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                         $rootScope.user['logined'] = true;
                         $rootScope.user['authority'] = result.data.authority;
                         $rootScope.user['username'] = result.data.username;
-                        $rootScope.$emit('$routeChangeStart');
-                        Cookie.setCookie('MDATA-KEY', result.data.token, {domain: ''});
+                        Cookie.setCookie('MDATA-KEY', result.data.token);
                         Cookie.setCookie('MDATA_KEY', result.data.token, {domain: '.mdata.dev'});
-                        Cookie.setCookie('loginedAccount', $scope.account.account, {domain: ''});
-                        Cookie.setCookie('loginedAccountAuthority', result.data.authority, {domain: ''});
-                        Cookie.setCookie('loginedAccountName', result.data.username, {domain: ''});
-                        console.log(result.data.token);
+                        Cookie.setCookie('loginedAccount', $scope.account.account);
+                        Cookie.setCookie('loginedAccountAuthority', result.data.authority);
+                        Cookie.setCookie('loginedAccountName', result.data.username);
+                        $rootScope.$emit('$routeChangeStart');
                     }else{
                         Ui.alert(result.msg);
                     }

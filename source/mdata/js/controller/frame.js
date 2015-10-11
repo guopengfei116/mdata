@@ -60,11 +60,10 @@ oasgames.mdataControllers.controller('HeaderCtrl', [
 
         // 登出
         $scope.logout = function () {
-            $scope.$emit('logout');
+            logout();
         };
 
-        // 绑定登出事件
-        $rootScope.$on('logout', function () {
+        function logout() {
             var api = ApiCtrl.get('logout');
             var Cookie = require('Cookie');
 
@@ -77,9 +76,9 @@ oasgames.mdataControllers.controller('HeaderCtrl', [
                         $rootScope.user['logined'] = false;
                         $rootScope.user['authority'] = null;
                         $location.path('/login');
-                        Cookie.removeCookie('MDATA-KEY');
-                        Cookie.removeCookie('loginedAccount');
-                        Cookie.removeCookie('loginedAccountAuthority');
+                        Cookie.setCookie('MDATA-KEY');
+                        Cookie.setCookie('loginedAccount');
+                        Cookie.setCookie('loginedAccountAuthority');
                     }else {
                         Ui.alert(data.msg);
                     }
@@ -87,6 +86,11 @@ oasgames.mdataControllers.controller('HeaderCtrl', [
                     Ui.alert('网络错误');
                 });
             }
+        }
+
+        // 绑定登出事件
+        $rootScope.$on('logout', function () {
+            logout();
         });
     }
 ]);

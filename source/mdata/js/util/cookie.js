@@ -19,7 +19,7 @@
 
         setCookie : function (key, value, options) {
             options = $.extend({},{
-                domain : 'mdata.dev',
+                domain : '',
                 path : '/'
             }, options);
 
@@ -78,7 +78,7 @@
             while (len--) {
                 tmp = keys[len].split('=');
                 if (tmp[0] === key) {
-                    Cookie.setCookie(key, "", 1);
+                    Cookie.oldSetCookie(key, "", 1);
                     //DelCookie(tmp[0]);
                 }
             }
