@@ -116,7 +116,7 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
                 $http({
                     method : "POST",
                     url : ApiCtrl.get('reportView'),
-                    params : {
+                    data : {
                         reportId : $scope.reportId,
                         dimension : getCheckedBoxValue('.field-dimension'),
                         filter : getCheckedBoxValue('.field-filter'),
