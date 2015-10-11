@@ -87,8 +87,6 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
             });
         })();
 
-
-
         // load report
         (function () {
 
@@ -112,8 +110,8 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
                     url : ApiCtrl.get('reportView'),
                     params : {
                         reportId : $scope.reportId,
-                        dimension : getCheckedBoxValue('.field-dimension').join('&'),
-                        filter : getCheckedBoxValue('.field-filter').join('&'),
+                        dimension : getCheckedBoxValue('.field-dimension'),
+                        filter : getCheckedBoxValue('.field-filter'),
                         date_begin : new Date($('#reportStartDate').val()).getTime(),
                         date_end : new Date($('#reportEndDate').val()).getTime()
                     }
