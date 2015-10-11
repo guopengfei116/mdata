@@ -157,6 +157,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
 
                 if($scope.appId){  //编辑
                     httpApp = $scope.appSourceData;
+                    console.log(httpApp);
                     $http({
                         url: ApiCtrl.get('appUpdate'),
                         method: 'POST',

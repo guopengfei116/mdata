@@ -230,7 +230,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                             }
                         }).success(function (result) {
                             console.log(result);
-                            if(result.code != 200) {                      
+                            if(result.code == 200) {                      
                                 $scope[type + 'Error'] = true;
                                 $scope.tooltip.errorType = type;
                                 $scope.tooltip.setContent(result.msg);

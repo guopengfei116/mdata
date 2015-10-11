@@ -264,11 +264,14 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                 var tpl =
                     '<ul class="row row-report-duplicate">' +
                     '<li class="row_column row_column-2">' +
-                    '<input class="input-report-duplicate" />' +
+                    '<p class="report-duplicate-wrap">' +
+                    '<input class="input-report-duplicate" value="Copy of '+reportName+'"/>' +
+                    '<span class="iconfont icon-close icon-duplicate"></span>' +
+                    '</p>' +
                     '</li>' +
                     '<li class="row_column row_column-2">' +
-                    '<span class="iconfont icon-copy confirm-report-duplicate"></span>' +
-                    '<span class="iconfont icon-edit cancel-report-duplicate"></span>' +
+                    '<span class="iconfont icon-check confirm-report-duplicate"></span>' +
+                    '<span class="iconfont icon-close cancel-report-duplicate"></span>' +
                     '</li>' +
                     '</ul>';
                 var $duplicateReport = $('.container-app-' + appIndex + ' .row-report-' + $index);
@@ -278,7 +281,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                 var $duplicateEdit = $(tpl);
                 $('.report-manage').on('click', '.confirm-report-duplicate', function () {
                     var newReportName = $('.input-report-duplicate').val();
-                    $scope.requestCheckReportName(reportName);
+                    $scope.requestCheckReportName(newReportName);
                     $scope.requestDuplicate(reportId, newReportName);
                     clearDuplicateEdit();
                 });
@@ -292,6 +295,9 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                     $(".report-manage").off("click", '.confirm-report-duplicate');
                     $(".report-manage").off("click", '.cancel-report-duplicate');
                 }
+                $('.report-manage').on('click', '.icon-duplicate', function () {
+                    $('.input-report-duplicate').val("");
+                });
             };
 
             // name重复效验
@@ -304,10 +310,10 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                     }
                 }).success(function (result) {
                     if(result.code == 200) {
-                        reportNameIsExist = false;
+                        reportNameIsExist = true;
                         Ui.alert('report name already exists');
                     }else {
-                        reportNameIsExist = true;
+                        reportNameIsExist = false;
                     }
                 });
             };
