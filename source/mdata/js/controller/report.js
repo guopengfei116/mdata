@@ -90,7 +90,11 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
         // load report
         (function () {
 
-            // 获取一组checkbox的值
+            /*
+            * @method 获取含有checked属性值的checkbox的值
+            * @param {Selector} wrapSelector checkbox的作用域Dom选择器
+            * @return {Array}
+            * */
             function getCheckedBoxValue (wrapSelector) {
                 var val = [];
                 var $checkboxs = $(wrapSelector).find('.checkbox');
@@ -117,7 +121,7 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
                     }
                 }).success(function (result) {
                     if(result && result.code == 200) {
-                        $scope.reportSourceData = result.data;
+                        $scope.reportSourceData['table_list'] = result.data['table_list'];
                     }else {
                         Ui.alert(result.msg);
                     }
