@@ -23,13 +23,13 @@
                 <li class="row_column row_column-5">{{ account.nickname }}</li>
                 <li class="row_column row_column-5">{{ account.username }}</li>
                 <li class="row_column row_column-5">
-                    <span ng-if="account['reportAdmin'].length == 0">-</span>
+                    <span ng-if="account['reportAdmin'].length == 0 || !account['reportAdmin']['appname']">-</span>
                     <span ng-repeat="app in account['reportAdmin'] | orderBy:sort.adminReports.orderKey:sort.adminReports.isDownOrder ">
                         {{ app.appname }}
                     </span>
                 </li>
                 <li class="row_column row_column-5">
-                    <span ng-if="account['reportViewer'].length == 0">-</span>
+                    <span ng-if="account['reportViewer'].length == 0 || !account['reportViewer']['appname']">-</span>
                     <span ng-repeat="app in account['reportViewer'] | orderBy:sort.viewerReports.orderKey:sort.viewerReports.isDownOrder ">
                         {{ app.appname }}
                     </span>
