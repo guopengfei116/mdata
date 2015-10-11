@@ -2,8 +2,8 @@
 * 配置测试或线上环境
 * */
 oasgames.mdataConstant.constant("RUN_TIME_SYSTEM", {
-    online : false,
-    domain : false
+    online : true,
+    domain : true
 });
 
 /*
