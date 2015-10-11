@@ -2,8 +2,8 @@
 * 配置测试或线上环境
 * */
 oasgames.mdataConstant.constant("RUN_TIME_SYSTEM", {
-    online : true,
-    domain : true
+    online : false,
+    domain : false
 });
 
 /*
@@ -51,6 +51,7 @@ oasgames.mdataConstant.constant("API_CONFIG", {
         'systemLog' : '/mdata/js/system_log.json',
         'report' : '/mdata/js/:reportId.json',
         'reports': '/mdata/js/reports.json',
+        'reportUpdate': '/mdata/js/report_info.json',
         'reportCopy': '/mdata/js/reports_duplicate',
         'reportName' : '/mdata/js/check_reportName.json',
         'checkReportName' : '/mdata/js/check_reportName.json',

@@ -234,6 +234,31 @@ oasgames.mdataDirective.directive('valuegroup', [
                             }
                         );
                     });
+
+                    // 拖拽
+                    $scope.$on('valuesRenderFinished', function (e) {
+                        var sortableContainer = $('.value-sortable');
+                        sortableContainer.sortable().bind('sortupdate', function () {
+                            var flagText = sortableContainer.find('.flag-text');
+
+                            // 重构resultValue值
+                            console.log($scope.resultValue);
+                            flagText.each(function (i, e) {
+                                var val = $(this).data('value');
+                                $scope.resultValue[i] = val;
+                            });
+                            console.log($scope.resultValue);
+
+                            // 重构flagData和Domvalue值
+                            for(var i = 0; i < $scope.resultValue.length; i++) {
+                                $scope.flagData[i] = {
+                                    value_name : $scope.resultValue[i].split(separator)[0],
+                                    groupValue : $scope.resultValue[i]
+                                };
+                            }
+                            element.data('value', $scope.resultValue);
+                        });
+                    });
                 });
             },
             controller: [

@@ -6,6 +6,7 @@ window.oasgames = {};
 * 依赖库
 * */
 require('./lib/jquery-1.11.1.js');
+require('./lib/jquery.sortable.js');
 require('./lib/glDatePicker.js');
 require('./lib/angular-1.4.3.js');
 require('./lib/angular-resource.js');
@@ -54,6 +55,7 @@ require('./directive/search.js');
 require('./directive/recombination_select.js');
 require('./directive/cascade_choice.js');
 require('./directive/value_group.js');
+require('./directive/value_sortable.js');
 
 /*
  * 控制器

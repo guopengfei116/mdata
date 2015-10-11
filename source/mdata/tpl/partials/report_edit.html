@@ -220,8 +220,8 @@
             </section>
             <button class="button add-select">add</button>
         </div>
-        <div class="textarea teatarea-column">
-            <span class="flag flag-icon" ng-repeat="value in reportSourceData['reportData']['values']">
+        <div class="textarea teatarea-column value-sortable">
+            <span class="flag flag-icon" ng-repeat="value in reportSourceData['reportData']['values']" on-finish-render-values>
                 <i class="flag-text" data-value="{{ value['groupValue'] }}">{{ value['value_name'] }}</i>
                 <i class="flag-icon_delete iconfont icon-close" data-value="{{ value['groupValue'] }}"></i>
             </span>

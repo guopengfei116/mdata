@@ -73,7 +73,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
             function initReportData (reportId) {
                 $http({
                     url: ApiCtrl.get('reportUpdate'),
-                    method: 'POST',
+                    method: 'GET',
                     params: {
                         reportId : reportId
                     }
