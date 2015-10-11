@@ -19,7 +19,6 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
 
         //表单失去焦点时错误提示
         $scope.blur = function(type, $errors){
-
             MdataVerify.blur(type, $errors, $scope);
         };
 
@@ -74,7 +73,7 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                         $rootScope.user['logined'] = true;
                         $rootScope.user['authority'] = result.data.authority;
                         $rootScope.user['username'] = result.data.username;
-                        Cookie.setCookie('MDATA-KEY', result.data.token);
+                        Cookie.oldSetCookie('MDATA-KEY', result.data.token);
                         Cookie.setCookie('MDATA_KEY', result.data.token, {domain: '.mdata.dev'});
                         Cookie.setCookie('loginedAccount', $scope.account.account);
                         Cookie.setCookie('loginedAccountAuthority', result.data.authority);
