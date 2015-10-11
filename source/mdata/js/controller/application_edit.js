@@ -35,11 +35,14 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
         // 当前编辑的appId
         var httpAppId = $scope.appId = $route.current.params.applicationId;
 
+        // 用于区分创建和编辑状态
+        $scope.appIsExisting = false;
         /*
          * 如果有id，则说明是编辑状态
          * accountId先写死方便调试获取json-data
          * */
         if($scope.appId) {
+            $scope.appIsExisting = true;
             initAppData();
         }else {
             initSelectData();
@@ -57,9 +60,11 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
             }).success(function (result) {
                 if(result && result.code == 200) {
                     $scope.appSourceData = result.data[0];
-                    // for(var i=0; i< $scope.appSourceData.processors.length; i++){
-                    //     $scope.proce.push($scope.appSourceData['processors'][i].name +"#@DELIMITER@#" +$scope.appSourceData['processors'][i].event);
-                    // }
+                    var proce = [];
+                    for(var i=0; i< $scope.appSourceData.proce.length; i++){
+                        proce.push($scope.appSourceData['proce'][i].name +"#@DELIMITER@#" +$scope.appSourceData['proce'][i].event);
+                    }
+                    $scope.appSourceData['proce'] = proce;
                     initSelectData();
                 }else {
                     Ui.alert(result.msg);
@@ -77,8 +82,8 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
             if(!$scope.appSourceData['appuser']) {
                 $scope.appSourceData['appuser'] = [];
             }
-            if(!$scope.appSourceData['processors']) {
-                $scope.appSourceData['processors'] = [];
+            if(!$scope.appSourceData['proce']) {
+                $scope.appSourceData['proce'] = [];
             }
         }
 
@@ -138,20 +143,18 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                 if(!MdataVerify.submit('appName',$scope["appCreate"]["appName"].$error,$scope)){
                     return;
                 }
-                if($.trim($('.select.app-zone').data('value')) == ""){
-                    Ui.alert('Time Zone must not be empty');
-                    return;
-                }
-                $scope.appSourceData.timezone = $('.select.app-zone').data('value');
+                
+                
                 $scope.appSourceData["appadmin"] = $(".field-account").data('value');
                 $scope.appSourceData["appuser"] = $(".field-account").next().data('value');
                 $scope.appSourceData["proce"] = $(".field-account").next().next().data('value');
+
                 if($.trim($(".field-account").next().next().data('value')) == ""){
                     Ui.alert("Processor must not be empty");
                     return;
                 }
 
-                if($scope.appId){
+                if($scope.appId){  //编辑
                     httpApp = $scope.appSourceData;
                     $http({
                         url: ApiCtrl.get('appUpdate'),
@@ -172,7 +175,12 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                     }).error(function (status) {
                         Ui.alert('网络错误！');
                     });
-                }else{
+                }else{ //创建
+                    $scope.appSourceData.timezone = $('.select.app-zone').data('value');
+                    if($.trim($scope.appSourceData.timezone) == ""){
+                        Ui.alert('Time Zone must not be empty');
+                        return;
+                    }
                     $http({
                         url: ApiCtrl.get('appCreate'),
                         method: 'POST',

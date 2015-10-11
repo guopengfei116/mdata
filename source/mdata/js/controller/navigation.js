@@ -73,16 +73,16 @@ oasgames.mdataControllers.controller('navigationCtrl', [
                     url : ApiCtrl.get('shortcuts'),
                     data : { "reportId" : 1, }
                 }).success(function (result, status) {
-                    if(result.code == 200) {
-                        if(!result.data) {
-                            return;
-                        }
-                        $scope.shortcuts = result.data;
-                        shortcutCache.put('list', result.data);
-                        init();
-                    }else {
-                        Ui.alert(result.msg);
-                    }
+                    // if(result.code == 200) {
+                    //     if(!result.data) {
+                    //         return;
+                    //     }
+                    //     $scope.shortcuts = result.data;
+                    //     shortcutCache.put('list', result.data);
+                    //     init();
+                    // }else {
+                    //     Ui.alert(result.msg);
+                    // }
                 }).error(function () {
                     Ui.alert('网络错误');
                 });

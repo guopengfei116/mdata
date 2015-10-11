@@ -173,36 +173,16 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 if(!MdataVerify.submit('accountName', $scope['accountForm']['accountName'].$error,$scope)){
                     return;
                 }
-                // if(flag == 0){
-                //     Ui.alert('用户名重复');
-                //     return;
-                // }
+
                 //判断密码
                 if(!MdataVerify.submit('acountPassword', $scope['accountForm']['acountPassword'].$error,$scope)){
                     return;
                 }
-                // Account[submitMethod](
-                //     {accountId: $scope.accountId},
-                //     $scope.accountSourceData,
-                //     function (result) {
-                //         if(result && result.code == 200) {
-                //             Ui.alert('success', function () {
-                //                 history.back();
-                //             });
-                //         }else {
-                //             Ui.alert(result.msg);
-                //         }
-                //     },
-                //     function () {
-                //         Ui.alert('网络错误');
-                //     }
-                // )
                 $scope.accountSourceData["reportAdmin"] = $(".field-account").data('value');
                 $scope.accountSourceData["reportViewer"] = $(".field-account").next().data('value');
                 httpApp = $scope.accountSourceData;
-                    console.log(httpApp);
-                if($scope.accountId){
-                    console.log("ddddddd");
+
+                if($scope.accountId){ //编辑
                     httpAppUp.appid = $scope.appId;
                     $http({
                         url: ApiCtrl.get('userUpdate'),
@@ -223,8 +203,11 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                     }).error(function (status) {
                         Ui.alert('网络错误！');
                     });
-                }else{
-                    console.log("fffffffffff");
+                }else{  //创建
+                    if(flag == 0){
+                        Ui.alert('用户名重复');
+                        return;
+                    }
                     $http({
                         url: ApiCtrl.get('userCreate'),
                         method: 'POST',
