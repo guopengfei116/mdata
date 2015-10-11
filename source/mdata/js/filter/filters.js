@@ -44,10 +44,10 @@ oasgames.mdataFilter.filter('slice', [
 
 /*
  * @filter 通过遍历每个对象，判断其属性{key}是否满足{vals}里的任意一个值，满足则过滤掉该对象
- * @param {Array} text 待过滤的对象数组集合
- * @param {Array} vals 要过滤的数值集合
- * @param {String} key 过滤对象的参考属性值
- * @return {Array} 返回一个新数组
+ * @param {Array} text 待过滤的对象数组集合，数据源 [{key:1, key:2, key:3}]
+ * @param {Array} vals 要过滤的数值集合，[1,2]
+ * @param {String} key 过滤对象的参考属性值，过滤的关键字 key
+ * @return {Array} 返回一个新数组 [{key:3}]
  * */
 oasgames.mdataFilter.filter('exclude', [
     function () {
