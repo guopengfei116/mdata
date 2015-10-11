@@ -237,9 +237,9 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                                 $scope.tooltip.setPosition('.fieldset-' + type, $scope.tooltip.toolTipLooks);
                                 $scope.tooltip.toolTipLooks.css({'color': 'rgba(255, 0, 0, 0.7)'});
                                 $scope.tooltip.show();
-                                flag = 1;
-                            }else {
                                 flag = 0;
+                            }else {
+                                flag = 1;
                             }
                         });
                     }              
