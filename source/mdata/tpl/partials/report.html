@@ -87,7 +87,7 @@
         <dl class="container">
             <dt class="row row-title row-color-interlaced">
                 <ul class="cf">
-                    <li class="row_column row_column-{{ reportSourceData.dimension.length + reportSourceData.values.length + 1 }}"
+                    <li class="row_column row_column-{{ reportSourceData['table_list'][0].length }}"
                         ng-repeat="titles in reportSourceData['table_list'][0]" ng-click="changeSort('reportTable', $index)">{{ titles }}</li>
                 </ul>
             </dt>
@@ -99,7 +99,7 @@
                     </li>
                 </ul>
                 <ul class="cf" ng-repeat="values in reportSourceData['table_list'] | slice:2 | orderBy:sort.reportTable.orderKey:sort.reportTable.isDownOrder">
-                    <li class="row_column row_column-{{ reportSourceData.dimension.length + reportSourceData.values.length + 1 }}" ng-repeat="value in values track by $index">
+                    <li class="row_column row_column-{{ reportSourceData['table_list'][0].length }}" ng-repeat="value in values track by $index">
                         <a href="#">{{ value }}</a>
                     </li>
                 </ul>
