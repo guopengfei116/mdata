@@ -1,7 +1,7 @@
 
 /*
  * @directive 用来编辑复合值，复合属性,产出 >> [ a+b+c, c+b+d... ]
- * @* 本指令和cascadechoice指令最大区别是改指令只维护一组数据进行添加，节省内存开销，支持回显
+ * @* 本指令和cascadechoice指令最大区别是该指令只维护一组自有数据，节省内存开销，并支持回显
  *
  * @*添加数据绑定在'.add-select'选择器上，
  * @*删除数据绑定在'.flag-icon_delete'选择器上
@@ -26,6 +26,7 @@ oasgames.mdataDirective.directive('recombination', [
             },
             link: function ($scope, element, attr) {
                 var separator = attr.separator;
+                var maxlength = attr.maxlength || null;
                 var $forms = element.find('.recombination-input');
                 var Echo = require('Echo');
 
@@ -54,6 +55,12 @@ oasgames.mdataDirective.directive('recombination', [
 
                         var val = Echo.prototype.getValue($forms, separator);
                         if(!val) {
+                            return;
+                        }
+
+                        // 最大数量效验
+                        if(maxlength && $scope.recombinationData.length >= maxlength) {
+                            Ui.alert('最多添加' + maxlength + '项值');
                             return;
                         }
 

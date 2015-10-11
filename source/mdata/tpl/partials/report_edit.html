@@ -48,7 +48,7 @@
         <legend class="field-title-com">Describe</legend>
         <textarea class="fieldset-text-com report-describe" placeholder="Input massage..." ng-model="reportSourceData['reportData']['describe']"></textarea>
     </fieldset>
-    <recombination class="field-common-dimension" separator="|" recombination-data="reportSourceData['reportData']['dimension']">
+    <recombination class="field-common-dimension" separator="|" maxlength="2" recombination-data="reportSourceData['reportData']['dimension']">
         <legend class="field-title-com">Dimension</legend>
         <div class="recombination-menu">
             <div class="select select-host select-btn recombination-input" required-warn="please fill out the Dimension">

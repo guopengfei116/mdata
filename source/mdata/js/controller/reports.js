@@ -189,28 +189,30 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
         * */
         (function () {
 
-            // 展示列表数据初始化
-            $http({
-                url: ApiCtrl.get('reports'),
-                method: 'GET'
-            }).success(function (result) {
-                if(result.code == 200) {
-                    $scope.sourceData = result.data;
-                    $scope.viewData = result.data;
+            $scope.loadReports = function () {
+                // 展示列表数据初始化
+                $http({
+                    url: ApiCtrl.get('reports'),
+                    method: 'GET'
+                }).success(function (result) {
+                    if(result.code == 200) {
+                        $scope.sourceData = result.data;
+                        $scope.viewData = result.data;
 
-                    // 初始化展示状态
-                    upReportsListShow();
-                    // 记录report权限
-                    setReportPermission();
+                        // 初始化展示状态
+                        upReportsListShow();
+                        // 记录report权限
+                        setReportPermission();
 
-                    // 初始化收藏标记
-                    Shortcuts.init();
-                }else {
-                    Ui.alert(result.msg);
-                }
-            }).error(function (status) {
-                Ui.alert('网络错误！');
-            });
+                        // 初始化收藏标记
+                        Shortcuts.init();
+                    }else {
+                        Ui.alert(result.msg);
+                    }
+                }).error(function (status) {
+                    Ui.alert('网络错误！');
+                });
+            };
 
             /*
              * 更新report列表的展示状态，
@@ -241,6 +243,97 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                     }
                 }
             }
+
+            $scope.loadReports();
+        })();
+
+        // report复制
+        (function () {
+            var reportNameIsExist = true;
+
+            /*
+             * @method duplicate点击事件
+             * @param {Number} reportId  复制的reportId
+             * @param {String} reportName  复制的report名称
+             * @param {Number} appIndex  复制的report所属app列表对象的index值
+             * @param {Number} $index  复制的report列表dom对象的index值
+             * */
+            $scope.reportCopyEvent = function (reportId, reportName, appIndex, $index) {
+
+                // add编辑模板
+                var tpl =
+                    '<ul class="row row-report-duplicate">' +
+                    '<li class="row_column row_column-2">' +
+                    '<input class="input-report-duplicate" />' +
+                    '</li>' +
+                    '<li class="row_column row_column-2">' +
+                    '<span class="iconfont icon-copy confirm-report-duplicate"></span>' +
+                    '<span class="iconfont icon-edit cancel-report-duplicate"></span>' +
+                    '</li>' +
+                    '</ul>';
+                var $duplicateReport = $('.container-app-' + appIndex + ' .row-report-' + $index);
+                $duplicateReport.after(tpl);
+
+                // 绑定duplicate编辑事件
+                var $duplicateEdit = $(tpl);
+                $('.report-manage').on('click', '.confirm-report-duplicate', function () {
+                    var newReportName = $('.input-report-duplicate').val();
+                    $scope.requestCheckReportName(reportName);
+                    $scope.requestDuplicate(reportId, newReportName);
+                    clearDuplicateEdit();
+                });
+
+                $('.report-manage').on('click', '.cancel-report-duplicate', function () {
+                    clearDuplicateEdit();
+                });
+
+                function clearDuplicateEdit () {
+                    $('.row-report-duplicate').remove();
+                    $(".report-manage").off("click", '.confirm-report-duplicate');
+                    $(".report-manage").off("click", '.cancel-report-duplicate');
+                }
+            };
+
+            // name重复效验
+            $scope.requestCheckReportName = function (reportName) {
+                $http({
+                    url: ApiCtrl.get('checkReportName'),
+                    method: 'POST',
+                    data: {
+                        'report_name' : reportName
+                    }
+                }).success(function (result) {
+                    if(result.code == 200) {
+                        reportNameIsExist = false;
+                        Ui.alert('report name already exists');
+                    }else {
+                        reportNameIsExist = true;
+                    }
+                });
+            };
+
+            // 提交duplicate
+            $scope.requestDuplicate = function (reportId, newReportName) {
+                if(reportNameIsExist) {
+                    return;
+                }
+                $http({
+                    method : "POST",
+                    url : ApiCtrl.get('reportCopy'),
+                    data : {
+                        'reportId' : reportId,
+                        'report_name' : newReportName
+                    }
+                }).success(function (result) {
+                    if(result.code == 200) {
+                        $scope.loadReports();
+                    }else {
+                        Ui.alert(result.msg);
+                    }
+                }).error(function () {
+                    Ui.alert('网络错误');
+                });
+            };
         })();
 
         /*
@@ -303,9 +396,8 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
             $scope.viewData = matchedApps;
         };
 
-        // 事件处理
+        // 删除report
         (function () {
-            // 删除account
             $scope.delete = function (reportId) {
                 Ui.confirm('确定要删除这个report吗', function () {
                     $http({
