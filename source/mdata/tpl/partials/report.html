@@ -41,8 +41,8 @@
     <fieldset class="field-common field-report">
         <span class="field-title-com report-title">Value</span>
         <ul class="inline-block cf">
-            <li class="left" ng-repeat="(valueName, format) in reportSourceData.values">
-                <span class="flag">{{ valueName }}</span>
+            <li class="left" ng-repeat="valueObj in reportSourceData.values">
+                <span class="flag">{{ valueObj.value_name }}</span>
             </li>
         </ul>
     </fieldset>
@@ -93,7 +93,7 @@
             </dt>
             <dd class="row row-color-interlaced"  ng-init="index = $index">
                 <ul class="cf">
-                    <li class="row_column row_column-{{ reportSourceData.dimension.length + reportSourceData.values.length + 1 }}"
+                    <li class="row_column row_column-{{ reportSourceData['table_list'][0].length }}"
                         ng-repeat="(title, count) in reportSourceData['table_list'][1]">
                         <a href="#">{{ count }}</a>
                     </li>
