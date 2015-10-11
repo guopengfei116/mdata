@@ -71,7 +71,6 @@ oasgames.mdataControllers.controller('navigationCtrl', [
                 $http({
                     method : "GET",
                     url : ApiCtrl.get('shortcuts'),
-                    data : { "reportId" : 1, }
                 }).success(function (result, status) {
                     if(result.code == 200) {
                         if(!result.data) {

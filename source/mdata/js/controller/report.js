@@ -112,8 +112,9 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
 
             // 重新加载report—view
             $scope.loadReport = function () {
+                console.log(getCheckedBoxValue('.field-dimension'));
                 $http({
-                    method : "GET",
+                    method : "POST",
                     url : ApiCtrl.get('reportView'),
                     params : {
                         reportId : $scope.reportId,
