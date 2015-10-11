@@ -7,7 +7,7 @@ oasgames.mdataConstant.constant("RUN_TIME_SYSTEM", {
 });
 
 /*
- * 用户权限对照表
+ * 接口
  * */
 oasgames.mdataConstant.constant("API_CONFIG", {
     "online" : {
