@@ -54,7 +54,8 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                 url: ApiCtrl.get('appIndex'),
                 method: 'GET',
                 params : {
-                        appid : httpAppId
+                        appid : httpAppId,
+                        time: new Date().getTime()
                     },
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             }).success(function (result) {
