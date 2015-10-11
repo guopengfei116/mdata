@@ -20,9 +20,12 @@ oasgames.mdataApp.run([
         var Cookie = require('Cookie');
         var loginedAccount = Cookie.getCookie('loginedAccount');
         var loginedAccountAuthority = Cookie.getCookie('loginedAccountAuthority');
+        var loginedAccountAuthority = Cookie.getCookie('loginedAccountAuthority');
+        var loginedAccountName = Cookie.getCookie('loginedAccountName');
         if(loginedAccount && loginedAccountAuthority) {
             $rootScope.user['logined'] = true;
             $rootScope.user['authority'] = loginedAccountAuthority;
+            $rootScope.user['username'] = loginedAccountName;
         }
 
         // 切换页面时权限认证

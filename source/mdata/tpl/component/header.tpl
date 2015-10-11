@@ -2,7 +2,7 @@
     <h1 class="header_logo sprite sprite-mdata_logo"></h1>
     <menu class="header_settings dropdown-host">
         <a class="header_settings_user dropdown-target" href="javascript:void(0);"
-           ng-click="show()">guopengfei</a>
+           ng-click="show()">{{ username }}</a>
         <i class="header_settings_arrow iconfont"
            ng-class="{'icon-arrow-small-down': !isshow, 'icon-arrow-small-up': isshow}"></i>
         <ul class="dropdown dropdown-br" data-dropdown-position="br">

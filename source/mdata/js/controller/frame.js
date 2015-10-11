@@ -25,6 +25,7 @@ oasgames.mdataControllers.controller('PageFrameCtrl', [
         $scope.$on('$routeChangeSuccess', function () {
             $scope.authority = $rootScope.user['authority'];
             $scope.logined = $rootScope.user['logined'];
+            $scope.username = $rootScope.user['username'];
             $scope.outlineHide = PageOutline.outlineHide($location.path());
         });
     }
@@ -45,7 +46,7 @@ oasgames.mdataControllers.controller('HeaderCtrl', [
         // 权限
         $scope.authority = $rootScope.user['authority'];
         $scope.logined = $rootScope.user['logined'];
-
+        $scope.username = $rootScope.user['username'];
         // 未登录
         if(!$scope.logined) {
             return;

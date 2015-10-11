@@ -13,7 +13,6 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
     'MdataVerify',
     function ($rootScope, $scope, $http, $location, ApiCtrl, AUTHORITY, MdataVerify) {
 
-        //$scope.account = '';
         //$scope.password = '';
         var httpData = $scope.account = {};
         $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
@@ -74,11 +73,13 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                         //记录登陆状态
                         $rootScope.user['logined'] = true;
                         $rootScope.user['authority'] = result.data.authority;
+                        $rootScope.user['username'] = result.data.username;
                         $rootScope.$emit('$routeChangeStart');
                         Cookie.setCookie('MDATA-KEY', result.data.token, {domain: ''});
                         Cookie.setCookie('MDATA_KEY', result.data.token, {domain: '.mdata.dev'});
                         Cookie.setCookie('loginedAccount', $scope.account.account, {domain: ''});
                         Cookie.setCookie('loginedAccountAuthority', result.data.authority, {domain: ''});
+                        Cookie.setCookie('loginedAccountName', result.data.username, {domain: ''});
                     }else{
                         Ui.alert(result.msg);
                     }
