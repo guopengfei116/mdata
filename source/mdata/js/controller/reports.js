@@ -15,6 +15,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
 
         // 权限
         $scope.authority = $rootScope.user['authority'];
+        $scope.createAppAuthority = false;
 
         // 定义default数据
         $scope.searchPlaceholder = 'Search AppName ReportName...';
@@ -240,6 +241,11 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                 for(var i = 0; i < reportsList.length; i++) {
                     for(var j = 0; j < reportsList[i]['reports'].length; j++) {
                         $rootScope.reportPermission[reportsList[i]['reports'][j]['id']] = reportsList[i]['permission'];
+
+                        // 如果有任意一个app的管理员权限，则有权限创建report
+                        if(reportsList[i]['permission'] == 1 || !$scope.createAppAuthority) {
+                            $scope.createAppAuthority = true;
+                        }
                     }
                 }
             }
@@ -263,16 +269,16 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                 // add编辑模板
                 var tpl =
                     '<ul class="row row-report-duplicate">' +
-                    '<li class="row_column row_column-2">' +
-                    '<p class="report-duplicate-wrap">' +
-                    '<input class="input-report-duplicate" value="Copy of '+reportName+'"/>' +
-                    '<span class="iconfont icon-close icon-duplicate"></span>' +
-                    '</p>' +
-                    '</li>' +
-                    '<li class="row_column row_column-2">' +
-                    '<span class="iconfont icon-check confirm-report-duplicate"></span>' +
-                    '<span class="iconfont icon-close cancel-report-duplicate"></span>' +
-                    '</li>' +
+                        '<li class="row_column row_column-2">' +
+                            '<p class="report-duplicate-wrap">' +
+                                '<input class="input-report-duplicate" value="Copy of '+reportName+'"/>' +
+                                '<span class="iconfont icon-close icon-duplicate"></span>' +
+                            '</p>' +
+                        '</li>' +
+                        '<li class="row_column row_column-2">' +
+                            '<span class="iconfont icon-check confirm-report-duplicate"></span>' +
+                            '<span class="iconfont icon-close cancel-report-duplicate"></span>' +
+                        '</li>' +
                     '</ul>';
                 var $duplicateReport = $('.container-app-' + appIndex + ' .row-report-' + $index);
                 $duplicateReport.after(tpl);
