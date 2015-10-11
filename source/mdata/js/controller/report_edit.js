@@ -231,14 +231,14 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                         }).success(function (result) {
                             console.log(result);
                             if(result.code == 200) {                      
+                                flag = 0;
+                            }else {
                                 $scope[type + 'Error'] = true;
                                 $scope.tooltip.errorType = type;
                                 $scope.tooltip.setContent(result.msg);
                                 $scope.tooltip.setPosition('.fieldset-' + type, $scope.tooltip.toolTipLooks);
                                 $scope.tooltip.toolTipLooks.css({'color': 'rgba(255, 0, 0, 0.7)'});
                                 $scope.tooltip.show();
-                                flag = 0;
-                            }else {
                                 flag = 1;
                             }
                         });
