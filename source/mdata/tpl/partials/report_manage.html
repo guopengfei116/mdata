@@ -8,21 +8,29 @@
             <search></search>
         </div>
     </section>
-    <dl class="container" ng-repeat="app in viewData">
+    <dl class="container container-app-{{ appIndex }}" ng-init="appIndex = $index" ng-repeat="app in viewData">
         <dt class="row row-title">
             <ul>
                 <li class="row_column row_column-1"><a href="javascript: void (0);" ng-click="reportsShow[$index] = !reportsShow[$index]">{{ app.appname }}</a></li>
             </ul>
         </dt>
         <dd ng-show="reportsShow[$index]">
-            <ul class="row" ng-repeat="report in app.reports">
-                <li class="row_column row_column-2"><a href="#/report/view/{{ report.id }}">{{ report.report_name }}</a></li>
+            <ul class="row row-report-{{ $index }}" ng-repeat="report in app.reports">
                 <li class="row_column row_column-2">
-                    <span ng-if="userPermission < 2 || app.permission < 2" ng-click="copy(report.id)" class="iconfont icon-copy tooltip-host" data-tooltip-position="bc" data-tooltip-info="Duplicate"></span>
-                    <a ng-if="userPermission < 2 || app.permission < 2" href="#/report/manage/edit/{{ report.id }}"  class="iconfont icon-edit tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></a>
-                    <span ng-if="userPermission < 2 || app.permission < 2" class="iconfont icon-delete tooltip-host" data-tooltip-position="bc" data-tooltip-info="Delete" ng-click="delete(report.id)"></span>
-                    <span class="iconfont tooltip-host" ng-class="{ 'icon-collection-unchecked' : !reportsShortcutStatus[report.id], 'icon-collection-checked' : reportsShortcutStatus[report.id] }"
-                          ng-click="shortcutChange(report, app)" data-tooltip-position="bc" data-tooltip-info="Shortcut"></span>
+                    <a href="#/report/view/{{ report.id }}">{{ report.report_name }}</a>
+                </li>
+                <li class="row_column row_column-2">
+                    <span ng-if="userPermission < 2 || app.permission < 2" ng-click="reportCopyEvent(report.id, report.report_name, appIndex, $index)"
+                          class="iconfont icon-copy tooltip-host" data-tooltip-position="bc" data-tooltip-info="Duplicate"></span>
+
+                    <a ng-if="userPermission < 2 || app.permission < 2" href="#/report/manage/edit/{{ report.id }}"
+                       class="iconfont icon-edit tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></a>
+
+                    <span ng-if="userPermission < 2 || app.permission < 2" ng-click="delete(report.id)"
+                          class="iconfont icon-delete tooltip-host" data-tooltip-position="bc" data-tooltip-info="Delete" ></span>
+
+                    <span ng-click="shortcutChange(report, app)" ng-class="{ 'icon-collection-unchecked' : !reportsShortcutStatus[report.id], 'icon-collection-checked' : reportsShortcutStatus[report.id] }"
+                          class="iconfont tooltip-host" data-tooltip-position="bc" data-tooltip-info="Shortcut"></span>
                 </li>
             </ul>
         </dd>

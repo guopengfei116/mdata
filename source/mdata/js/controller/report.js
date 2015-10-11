@@ -79,7 +79,7 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
             OrderHandler.change($scope.sort, type, orderKey);
         };
 
-        // 日期select联动更新
+        // 日期select与input联动更新
         (function () {
             $('.select-data').on('click', '.select_content_list_value', function () {
                 var val = $(this).data('value');
@@ -87,31 +87,7 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
             });
         })();
 
-        // report复制
-        (function () {
-            $scope.reportCopyEvent = function () {
 
-            };
-            $scope.reportCopy = function (reportId) {
-                var name = $('#report_copy_name').val();
-                $http({
-                    method : "POST",
-                    url : ApiCtrl.get('reportCopy'),
-                    data : {
-                        'reportId' : reportId,
-                        'report_name' : name
-                    }
-                }).success(function (result) {
-                    if(result.code == 200) {
-                        $scope.loadReport();
-                    }else {
-                        Ui.alert(result.msg);
-                    }
-                }).error(function () {
-                    Ui.alert('网络错误');
-                });
-            };
-        })();
 
         // load report
         (function () {

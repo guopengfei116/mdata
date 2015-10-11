@@ -1,4 +1,8 @@
 {
-  "duplicateId" : 33,
-  "name" : "fdsfs"
+  "msg" : "success",
+  "code" : 200,
+  "data" : {
+    "duplicateId" : 33,
+    "name" : "fdsfs"
+  }
 }
