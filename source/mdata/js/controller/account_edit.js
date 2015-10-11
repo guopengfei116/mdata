@@ -57,7 +57,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 params : {
                     uid : httpAccountId
                 },
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).success(function (result) {
                 if(result && result.code == 200) {
                     $scope.sourceData = result.data;
@@ -99,7 +99,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
             $http({
                 url: ApiCtrl.get('userAppList'),
                 method: 'GET',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).success(function (result) {
                 if(result && result.code == 200) {
                     $scope.appsData = result.data;
@@ -142,12 +142,6 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                     });
                 }
             };
-            //app提交用户名不修改
-            console.log($scope.accountEmail+"fffffffffffff");
-            if($scope.accountEmail){
-                console.log("dddddddd");
-                flag = 1;
-            }
 
             //表单焦点时清除错误提示
             $scope.focus = function (type) {
@@ -187,11 +181,11 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                     $http({
                         url: ApiCtrl.get('userUpdate'),
                         method: 'POST',
-                        data: httpApp,
-                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                        transformRequest: function(data){
-                            return $.param(data);
-                        }
+                        data: httpApp
+                        // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                        // transformRequest: function(data){
+                        //     return $.param(data);
+                        // }
                     }).success(function (result) {
                         if(result && result.code == 200) {
                             Ui.alert('success', function () {
@@ -211,11 +205,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                     $http({
                         url: ApiCtrl.get('userCreate'),
                         method: 'POST',
-                        data: httpApp,
-                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                        transformRequest: function(data){
-                            return $.param(data);
-                        }
+                        data: httpApp
                     }).success(function (result) {
                         if(result && result.code == 200) {
                             Ui.alert('success', function () {

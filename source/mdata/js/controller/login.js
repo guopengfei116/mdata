@@ -80,6 +80,7 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                         Cookie.setCookie('loginedAccount', $scope.account.account, {domain: ''});
                         Cookie.setCookie('loginedAccountAuthority', result.data.authority, {domain: ''});
                         Cookie.setCookie('loginedAccountName', result.data.username, {domain: ''});
+                        console.log(result.data.token);
                     }else{
                         Ui.alert(result.msg);
                     }

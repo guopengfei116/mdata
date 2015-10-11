@@ -77,7 +77,7 @@ oasgames.mdataControllers.controller('HeaderCtrl', [
                         $rootScope.user['logined'] = false;
                         $rootScope.user['authority'] = null;
                         $location.path('/login');
-
+                        Cookie.removeCookie('MDATA-KEY');
                         Cookie.removeCookie('loginedAccount');
                         Cookie.removeCookie('loginedAccountAuthority');
                     }else {

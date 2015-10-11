@@ -11,10 +11,14 @@
         <input class="fieldset-text-com fieldset-accountName" autocomplete="off" type="text" name="accountName" ng-model="accountSourceData.nickname"  required ng-pattern="/^[\u4e00-\u9fa5a-zA-Z0-9]+$/" ng-blur="blur('accountName', accountForm.accountName.$error)"   ng-focus="focus('accountName')" >
         <span class="red-star">*</span>
     </fieldset>
-    <fieldset class="field-common">
+    <fieldset class="field-common" ng-if="accountEmail">
         <legend class="field-title-com">Password</legend>
-        <input class="fieldset-text-com fieldset-acountPassword" autocomplete="off" type="password" ng-model="accountSourceData.password" name="acountPassword" required ng-pattern="/^[a-zA-Z0-9]{6,20}$/" required ng-pattern="/^[\u4e00-\u9fa5a-zA-Z0-9]+$/" ng-blur="blur('acountPassword', accountForm.acountPassword.$error)"  ng-focus="focus('acountPassword')" onpaste="return false;" >
-        <span class="red-star">*</span>
+        <input class="fieldset-text-com fieldset-acountPassword" autocomplete="off" type="password" ng-model="accountSourceData.password" name="acountPassword" ng-pattern="/^[a-zA-Z0-9]{6,20}$/" ng-blur="blur('acountPassword', accountForm.acountPassword.$error)"  ng-focus="focus('acountPassword')" onpaste="return false;" >
+    </fieldset>
+    <fieldset class="field-common" ng-if="!accountEmail">
+        <legend class="field-title-com">Password</legend>
+        <input class="fieldset-text-com fieldset-acountPassword" autocomplete="off" type="password" ng-model="accountSourceData.password" name="acountPassword" required ng-pattern="/^[a-zA-Z0-9]{6,20}$/"  ng-blur="blur('acountPassword', accountForm.acountPassword.$error)"  ng-focus="focus('acountPassword')" onpaste="return false;" >
+        <span class="red-star" ng-class="{'account-red-start': accountEmail}">*</span>
     </fieldset>
     <legend class="field-title-com account-authority">Authority</legend>
     <section>

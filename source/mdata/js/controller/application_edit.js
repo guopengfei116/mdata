@@ -57,7 +57,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                         appid : httpAppId,
                         time: new Date().getTime()
                     },
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).success(function (result) {
                 if(result && result.code == 200) {
                     $scope.appSourceData = result.data[0];
@@ -103,7 +103,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
             $http({
                 url: ApiCtrl.get('appUserList'),
                 method: 'GET',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).success(function (result) {
                 if(result && result.code == 200) {
                     $scope.accountsData = result.data;
@@ -161,11 +161,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                     $http({
                         url: ApiCtrl.get('appUpdate'),
                         method: 'POST',
-                        data: httpApp,
-                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                        transformRequest: function(data){
-                            return $.param(data);
-                        }
+                        data: httpApp
                     }).success(function (result) {
                         if(result && result.code == 200) {
                             Ui.alert('success', function () {
@@ -179,6 +175,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                     });
                 }else{ //创建
                     $scope.appSourceData.timezone = $('.select.app-zone').data('value');
+                    httpApp = $scope.appSourceData;
                     if($.trim($scope.appSourceData.timezone) == ""){
                         Ui.alert('Time Zone must not be empty');
                         return;
