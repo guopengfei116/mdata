@@ -4,6 +4,7 @@ var tooltip = require('Tooltip');
  *  application create控制器
  * */
 oasgames.mdataControllers.controller('ApplicationEditCtrl', [
+    '$rootScope',
     '$scope',
     '$cacheFactory',
     '$route',
@@ -14,7 +15,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
     'Filter',
     'MdataVerify',
     'ApiCtrl',
-    function ($scope, $cacheFactory, $route, $http, processors, timeZone, Account, Filter, MdataVerify,ApiCtrl) {
+    function ($rootScope, $scope, $cacheFactory, $route, $http, processors, timeZone, Account, Filter, MdataVerify,ApiCtrl) {
 
         // processor可选列表-常量
         $scope.processors = processors;
@@ -165,6 +166,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                         if(result && result.code == 200) {
                             Ui.alert('success', function () {
                                 $location.path('/application/manage');
+                                $rootScope.$apply();
                             });
                         }else {
                             Ui.alert(result.msg);
@@ -191,6 +193,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                         if(result && result.code == 200) {
                             Ui.alert('success', function () {
                                 $location.path('/application/manage');
+                                $rootScope.$apply();
                             });
                         }else {
                             Ui.alert(result.msg);

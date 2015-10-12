@@ -3,13 +3,14 @@
  *  application manage控制器
  * */
 oasgames.mdataControllers.controller('ApplicationManageCtrl', [
+    '$rootScope',
     '$scope',
     '$http',
     '$cacheFactory',
     'Filter',
     'OrderHandler',
     'ApiCtrl',
-    function ($scope, $http, $cacheFactory, Filter, OrderHandler, ApiCtrl) {
+    function ($rootScope, $scope, $http, $cacheFactory, Filter, OrderHandler, ApiCtrl) {
 
         // 定义default数据
         $scope.searchPlaceholder = 'Search AppName AppId...';

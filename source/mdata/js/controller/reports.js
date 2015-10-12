@@ -73,6 +73,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                             shortcutCache.put('list', result.data);
                             processor();
                         }else {
+                            console.log(result);
                             Ui.alert(result.msg);
                         }
                     }).error(function () {

@@ -4,6 +4,7 @@ var tooltip = require('Tooltip');
  *  report edit控制器
  * */
 oasgames.mdataControllers.controller('reportEditCtrl', [
+    '$rootScope',
     '$scope',
     '$route',
     '$http',
@@ -17,7 +18,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
     'VALUE_ARITHMETIC',
     'ApiCtrl',
     'MdataVerify',
-    function ($scope, $route, $http, $location, $cacheFactory, reportDateRanges, reportDimensions, filters, filterComputeSigns, valueTypes, valueArithmetics, ApiCtrl, MdataVerify) {
+    function ($rootScope, $scope, $route, $http, $location, $cacheFactory, reportDateRanges, reportDimensions, filters, filterComputeSigns, valueTypes, valueArithmetics, ApiCtrl, MdataVerify) {
 
         /*
         * 常量
@@ -306,6 +307,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                     if(result.code == 200) {
                         Ui.alert('success', function () {
                             $location.path('/report/manage');
+                            $rootScope.$apply();
                         });
                     }else {
                         Ui.alert(result.msg);
