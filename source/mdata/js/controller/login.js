@@ -37,7 +37,11 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                 $scope[errorCtl[i]] = false;
             }
         };
-
+        $(".main-login input").keypress(function(e) {
+            if(e.keyCode == 13){
+                $scope.submit();
+            }   
+        });
         //登陆
         $scope.submit = function () {
             var api = ApiCtrl.get('login');

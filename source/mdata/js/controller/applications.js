@@ -47,7 +47,7 @@ oasgames.mdataControllers.controller('ApplicationManageCtrl', [
 
         // 搜索自定义处理函数
         $scope.searchHandler = function (searchVal) {
-            $scope.viewData = Filter($scope.sourceData, {name : searchVal, appid : searchVal});
+            $scope.viewData = Filter($scope.sourceData, {appname : searchVal, appid : searchVal});
         };
 
         // 排序规则
