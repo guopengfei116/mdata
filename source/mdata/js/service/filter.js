@@ -103,6 +103,7 @@ oasgames.mdataServices.factory('Filter', [
 
                             //最后一个值作为过滤条件
                             if(j == config[key].length - 1) {
+
                                 tempReg = new RegExp(config[key][j]);
                                 break;
                             }
@@ -126,7 +127,8 @@ oasgames.mdataServices.factory('Filter', [
                             break;
                         }
                     }else {
-                        throw new Error('Filter发生数据错误');
+                        //数据中可能存在空值，不对该数据做搜素处理。
+                        //throw new Error('Filter发生数据错误');
                     }
                 }
             }
