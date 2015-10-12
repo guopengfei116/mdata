@@ -5,8 +5,9 @@ var path = require('path');
  * */
 exports.options = {
     port : 9800,
-    protocal : 'http',
-    hostname : 'localhost',
+    open : false,
+    protocol : 'http',
+    hostname : '0.0.0.0',
     livereload : 79513
 };
 
