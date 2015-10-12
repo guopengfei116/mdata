@@ -2,7 +2,7 @@
  * 配置页面路由
  * */
 oasgames.mdataServicesConfig.config([
-    '$httpProvider', 
+    '$httpProvider',
     function($httpProvider) {
         $httpProvider.defaults.transformRequest = function(data){
             if($ && data) {
