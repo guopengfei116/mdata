@@ -46,7 +46,6 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
                 var config = {}, tempConfig = {};
                 tempConfig.startTime = $scope.reportSourceData['date_begin'];
                 tempConfig.endTime = $scope.reportSourceData['date_end'];
-                tempConfig.minTime = $scope.reportSourceData['create_time'];
 
                 // time == null
                 for(var timeK in tempConfig) {

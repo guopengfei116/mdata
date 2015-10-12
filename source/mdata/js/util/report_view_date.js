@@ -4,6 +4,8 @@
 * */
 var reportViewDate = function (options) {
     var current = new Date();
+    var currentYear = current.getFullYear(), currentMonth = current.getMonth() + 1, currentDay = current.getDate();
+    var startDateInstance, endDateInstance;
     this.o = {
         startTime : current.getTime(),
         endTime : current.getTime(),
@@ -13,30 +15,27 @@ var reportViewDate = function (options) {
     };
     $.extend(this.o, options);
 
-    var startTime = parseInt(this.o.startTime), endTime = parseInt(this.o.endTime), minTime = parseInt(this.o.minTime);
-    var startYear = current.getFullYear(), startMonth = current.getMonth() + 1, startDay = current.getDate();
-    var startDate, endDate;
-
     // 初始化表单值
-    var startDataInput = $(this.o.startDataInputSelector);
-    var endDataInput = $(this.o.endDataInputSelector);
+    var startTime = parseInt(this.o.startTime), endTime = parseInt(this.o.endTime), minTime = parseInt(this.o.minTime);
     var startTimeDate  = new Date(startTime);
     var startTimeYear = startTimeDate.getFullYear(), startTimeMonth = startTimeDate.getMonth() + 1, startTimeDay = startTimeDate.getDate();
     var endTimeDate  = new Date(endTime);
     var endTimeYear = endTimeDate.getFullYear(), endTimeMonth = endTimeDate.getMonth() + 1, endTimeDay = endTimeDate.getDate();
+    var startDataInput = $(this.o.startDataInputSelector);
+    var endDataInput = $(this.o.endDataInputSelector);
     startDataInput.val(startTimeYear + '-' + startTimeMonth + '-' + startTimeDay);
     endDataInput.val(endTimeYear + '-' + endTimeMonth + '-' + endTimeDay);
 
     // 开始时间
-    this.startDateComp = startDate = $('#reportStartDate').glDatePicker({
+    this.startDateComp = startDateInstance = $('#reportStartDate').glDatePicker({
         showAlways: false,
         cssName: 'flatwhite',
         allowMonthSelect: false,
         allowYearSelect: false,
         selectedDate: new Date(startTime),
         selectableDateRange: [
-            { from: new Date(minTime),
-                to: new Date(startYear, startMonth, startDay) }
+            { from: new Date(2000, 1, 1),
+                to: new Date(currentYear, currentMonth, currentDay) }
         ],
 
         onClick: function(target, cell, date, data) {
@@ -50,19 +49,19 @@ var reportViewDate = function (options) {
             }
 
             // 修改结束时间可选范围
-            $.extend(endDate.options, {
-                /*selectedDate: new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1),*/
+            $.extend(endDateInstance.options, {
+                selectedDate: new Date(date.getFullYear(), date.getMonth(), date.getDate()),
                 selectableDateRange: [
-                    { from: new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1),
-                        to: new Date(startYear, startMonth, startDay) }
+                    { from: new Date(date.getFullYear(), date.getMonth(), date.getDate()),
+                        to: new Date(currentYear, currentMonth, currentDay) }
                 ]
             });
-            endDate.render();
+            endDateInstance.render();
         }
     }).glDatePicker(true);
 
     // 结束时间
-    this.endDateComp = endDate = $('#reportEndDate').glDatePicker({
+    this.endDateComp = endDateInstance = $('#reportEndDate').glDatePicker({
         showAlways: false,
         cssName: 'flatwhite',
         allowMonthSelect: false,
