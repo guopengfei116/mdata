@@ -102,13 +102,22 @@
 >>*  url : /api/site/account/'accountId'
 >>*  param : { id: accountId }
 
+>####9.  获取所有app列表
+>>*  method : get
+>>*  url : /user/app-list
+>>*  "data": [
+        {
+            "appid": 777,
+            "name": "zhangxinghe"
+        }...]
+
 ### 3、application
 
 >####1.  app列表
 >>*  method : get
 >>*  url : /app/index
 >>*  data : [{ 
-        name: app名字，appid: appID，
+        appname: app名字，appid: appID，
         appadmin：[ { name: 姓名，email: 邮箱，id: ID }... ]，
         appuser：[ { name: 姓名，email: 邮箱，id: ID }... ] 
     }... ]
@@ -126,8 +135,18 @@
 
 >####3.  获取app信息
 >>*  method : get
->>*  url : /api/site/app/'appId'
->>*  data : 
+>>*  url : /app/index
+>>*  param : { 
+         appid : appid
+     }
+>>*  data : [{
+        appid: 2194828409,
+        appname: haozhongzhi,
+        appadmin: [{uid: uid, username: 邮箱, nickname: 昵称, permissions: permissions, create_time: 1442392564, update_time: 0}...],
+        appuser: [{uid: uid, username:邮箱 , nickname: 昵称, permissions:permissions, create_time: 1444603763, update_time: 1444617999}...],
+        proce: [{name: dau, event: rr}...],
+        timezone: "Asia/Shanghai"
+        }]
 
 >####4.  编辑app
 >>*  method : post
@@ -140,12 +159,10 @@
          proce: [ processor... ]
      }
 
->####5.  删除app
->>*  method : delete
->>*  url : /api/site/app/'appId'
->>*  param : { id: appId }
-
->####6.  创建app所需的select字段列表
+>####5.  创建app所需的select字段列表
+>>*  method : get
+>>*  url : /user/get-users
+>>*  "data":[{nickname: 昵称, username: 邮箱, uid: uid}...]
 
 ### 4、system log
 
