@@ -7,11 +7,10 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
     '$timeout',
     '$cacheFactory',
     '$http',
-    'Account',
     'Filter',
     'OrderHandler',
     'ApiCtrl',
-    function ($scope, $timeout, $cacheFactory, $http, Account, Filter, OrderHandler, ApiCtrl) {
+    function ($scope, $timeout, $cacheFactory, $http, Filter, OrderHandler, ApiCtrl) {
 
         // 定义default数据
         $scope.searchPlaceholder = 'Search Name Email...';

@@ -8,11 +8,10 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
     '$cacheFactory',
     '$route',
     '$http',
-    'Account',
     'Application',
     'MdataVerify',
     'ApiCtrl',
-    function ($scope, $cacheFactory, $route, $http, Account, Application, MdataVerify, ApiCtrl) {
+    function ($scope, $cacheFactory, $route, $http, Application, MdataVerify, ApiCtrl) {
 
         // 所有的app列表
         $scope.appsData = [];

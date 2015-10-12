@@ -8,10 +8,8 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
     '$http',
     '$cacheFactory',
     'ApiCtrl',
-    'Report',
-    'Shortcut',
     'Filter',
-    function ($rootScope, $scope, $http, $cacheFactory, ApiCtrl, Report, Shortcut, Filter) {
+    function ($rootScope, $scope, $http, $cacheFactory, ApiCtrl, Filter) {
 
         // 权限
         $scope.authority = $rootScope.user['authority'];

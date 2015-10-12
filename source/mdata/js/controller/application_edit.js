@@ -10,12 +10,11 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
     '$http',
     'PROCESSOR',
     'TIME_ZONE',
-    'Application',
     'Account',
     'Filter',
     'MdataVerify',
     'ApiCtrl',
-    function ($scope, $cacheFactory, $route, $http, processors, timeZone, Application, Account, Filter, MdataVerify,ApiCtrl) {
+    function ($scope, $cacheFactory, $route, $http, processors, timeZone, Account, Filter, MdataVerify,ApiCtrl) {
 
         // processor可选列表-常量
         $scope.processors = processors;

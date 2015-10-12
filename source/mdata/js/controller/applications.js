@@ -6,11 +6,10 @@ oasgames.mdataControllers.controller('ApplicationManageCtrl', [
     '$scope',
     '$http',
     '$cacheFactory',
-    'Application',
     'Filter',
     'OrderHandler',
     'ApiCtrl',
-    function ($scope, $http, $cacheFactory, Application, Filter, OrderHandler, ApiCtrl) {
+    function ($scope, $http, $cacheFactory, Filter, OrderHandler, ApiCtrl) {
 
         // 定义default数据
         $scope.searchPlaceholder = 'Search AppName AppId...';
