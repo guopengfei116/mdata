@@ -4,7 +4,7 @@ html,body {
 }
 
 body {
-    font: $base-font-size/$base-line-height $base-font-family;
+    font: #{$base-font-size}/#{$base-line-height} $base-font-family;
     color: $base-font-color;
     background-color: $base-background-color;
 }
