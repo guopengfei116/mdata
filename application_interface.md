@@ -24,34 +24,37 @@
 
 >####1.  登录 
 >>*  method : post
->>*  url : /api/site/login
+>>*  url : /site/login
 >>*  param : { email: 账号， password: 密码 }
 >>*  data : { authority: 权限(1-4) }
 
 >####2.  登出
 >>*  method : get
->>*  url : /api/site/logout
+>>*  url : /site/logout
 
 ### 2、account
 
 >####1.  账号唯一性检测
 >>*  method : post
->>*  url : /api/site/account/verify
->>*  param : { email: email }
+>>*  url :  /user/check-email
+>>*  param : { username: 账号 }
 
 >####2.  密码正确性检测
 >>*  method : post
->>*  url : /api/site/account/modify-psw/verify
->>*  param : { password: password }
+>>*  url : /site/modify-psw
+>>*  param : { password: 密码 }
 
 >####3.  修改密码
 >>*  method : post
->>*  url : /api/site/modify-psw
+>>*  url : /modify-psw
 >>*  param : { oldPassword: 旧密码，password: 新密码，confirmPassword: 新密码  }
 
 >####4.  账号列表
 >>*  method : get
->>*  url : /api/site/account/
+>>*  url : /user/index
+>>*  param : { 
+         uid: 11
+     }
 >>*  data : [{ 
         nickname: 姓名，username: 邮箱，uid: ID，
         as_report_admin：[ { appname: appName，appid: appId }... ]，
@@ -60,29 +63,38 @@
 
 >####5.  创建账号
 >>*  method : post
->>*  url : /api/site/account/
+>>*  url : /user/create
 >>*  param : { 
          username: 邮箱，nickname: 姓名，password: 密码，
-         admin_app_id: [ appId... ]，
-         user_app_id: [ appId... ]
+         reportAdmin: [ appId... ]，
+         reportViewer: [ appId... ]
      }
 
->####6.  已存账号信息
+>####6.  获取账号信息
 >>*  method : get
->>*  url : /api/site/account/'accountId'
->>*  data : { 
-        username: 邮箱，nickname: 姓名，password: 密码，
-        admin_app_id: [ appId... ]，
-        user_app_id: [ appId... ]
-    }
+>>*  url : /user/index
+>>*  param : { 
+         uid : uid
+     }
+>>*  data : [{
+        username: 邮箱，nickname: 姓名，uid: uid，
+        reportAdmin: [{
+            appid: appId,
+            appname: appName
+        }... ]，
+        reportViewer: [{
+            appid: appId,
+            appname: appName
+        }... ]
+    }... ]
 
 >####7.  编辑账号
 >>*  method : post
->>*  url : /api/site/account/'accountId'
+>>*  url : /user/update
 >>*  param : { 
-         username: 邮箱，nickname: 姓名，password: 密码，
-         admin_app_id: [ appId... ]，
-         user_app_id: [ appId... ]
+         username: 邮箱，nickname: 姓名，password: 密码，uid: uid
+         reportAdmin: [ appId... ]，
+         reportViewer: [ appId... ]
      }
 
 >####8.  删除账号
@@ -141,7 +153,7 @@
 
 >####1.  report列表
 >>*  method : get
->>*  url : /api/site/report/
+>>*  url : /report/view/
 >>*  data : [{ 
         appname: appName，appid: appID，premission: 用户app权限
         reports: [ { report_name: 名字，id: ID }... ] 
@@ -149,25 +161,32 @@
         
 >####2.  创建report
 >>*  method : post
->>*  url : /api/site/report/
->>*  param : {   }
+>>*  url : /report/update
+>>*  param : { 
+        id:reportId
+     }
 
->####3.  已存report信息
+>####3.  获取report信息
 >>*  method : get
->>*  url : /api/site/report/'reportId'
+>>*  url : /report/report-save
 >>*  data : {   }
 
 >####4.  编辑report
->>*  method : post
->>*  url : /api/site/report/'reportId'
+>>*  method : get
+>>*  url : /report/update
 >>*  param : {   }
 
 >####5.  删除report
->>*  method : delete
->>*  url : /api/site/report/'reportId'
+>>*  method : get
+>>*  url : /report/del
 >>*  param : { id: reportId }
 
->####6.  创建report所需的select字段列表
+>####6.  查看report
+>>*  method : post
+>>*  url :  /report/view-report
+>>*  param : { id: reportId }
+
+>####7.  创建report所需的select字段列表
 
 ### 4、shortcut
 
