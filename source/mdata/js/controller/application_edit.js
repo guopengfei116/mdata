@@ -60,11 +60,16 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                     },
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).success(function (result) {
+                var tempName = '', tempEvent = '';
                 if(result && result.code == 200) {
                     $scope.appSourceData = result.data[0];
                     var proce = [];
                     for(var i=0; i< $scope.appSourceData.proce.length; i++){
-                        proce.push($scope.appSourceData['proce'][i].name +"#@DELIMITER@#" +$scope.appSourceData['proce'][i].event);
+                        tempName = $scope.appSourceData['proce'][i].name;
+                        tempEvent = $scope.appSourceData['proce'][i].event;
+                        if(tempName && tempEvent) {
+                            proce.push(tempName + "#@DELIMITER@#" + tempEvent);
+                        }
                     }
                     $scope.appSourceData['proce'] = proce;
                     initSelectData();
