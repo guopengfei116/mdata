@@ -21,6 +21,7 @@
         &_column {
             @include prefix(box-sizing, border-box);
             float: left;
+            word-break: break-all;
             padding-right: 10px;
             &-2 {
                 width: 1 / 2 * 100%;
