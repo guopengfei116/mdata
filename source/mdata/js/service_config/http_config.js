@@ -20,7 +20,6 @@ oasgames.mdataServicesConfig.config([
                     return config;
                 },
                 'response':function(resp){
-                    console.log(resp);
                     return resp;
                 },
                 'requestError':function(rejection){

@@ -58,8 +58,8 @@
             <ul class="select_content">
                 <li class="select_content_arrow"></li>
                 <li class="select_content_arrow select_content_arrow-mask"></li>
-                <li class="select_content_list" ng-repeat="dateRange in reportDateRanges ">
-                    <a class="select_content_list_value" data-value="{{ dateRange.value }}">{{ dateRange.meaning }}</a>
+                <li class="select_content_list" ng-repeat="(value, meaning) in reportDateRanges ">
+                    <a class="select_content_list_value" data-value="{{ value }}">{{ meaning }}</a>
                 </li>
             </ul>
         </div>

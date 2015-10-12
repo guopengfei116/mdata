@@ -10,7 +10,7 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
     'REPORT_DATE_RANGE',
     'ApiCtrl',
     'OrderHandler',
-    function ($rootScope, $scope, $route, $http, reportDateRanges, ApiCtrl, OrderHandler) {
+    function ($rootScope, $scope, $route, $http, reportDateRanges, ApiCtrl, Report, OrderHandler) {
 
         // report日期范围
         $scope.reportDateRanges = reportDateRanges;
@@ -51,7 +51,7 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
                 // time == null
                 for(var timeK in tempConfig) {
                     if(tempConfig[timeK]) {
-                        config[timeK] = tempConfig[timeK];
+                        config[timeK] = parseInt(tempConfig[timeK]) * 1000; // 服务端传回数值为秒
                     }
                 }
                 dataInstance = new dataComponent(config);
@@ -110,7 +110,6 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
 
             // 重新加载report—view
             $scope.loadReport = function () {
-                console.log(getCheckedBoxValue('.field-dimension'));
                 $http({
                     method : "POST",
                     url : ApiCtrl.get('reportView'),
@@ -118,8 +117,8 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
                         reportId : $scope.reportId,
                         dimension : getCheckedBoxValue('.field-dimension'),
                         filter : getCheckedBoxValue('.field-filter'),
-                        date_begin : new Date($('#reportStartDate').val()).getTime(),
-                        date_end : new Date($('#reportEndDate').val()).getTime()
+                        date_begin : new Date($('#reportStartDate').val()).getTime() / 1000,
+                        date_end : new Date($('#reportEndDate').val()).getTime() / 1000
                     }
                 }).success(function (result) {
                     if(result && result.code == 200) {
