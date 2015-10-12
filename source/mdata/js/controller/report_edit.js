@@ -7,6 +7,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
     '$scope',
     '$route',
     '$http',
+    '$location',
     '$cacheFactory',
     'REPORT_DATE_RANGE',
     'REPORT_DIMENSION',
@@ -16,7 +17,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
     'VALUE_ARITHMETIC',
     'ApiCtrl',
     'MdataVerify',
-    function ($scope, $route, $http, $cacheFactory, reportDateRanges, reportDimensions, filters, filterComputeSigns, valueTypes, valueArithmetics, ApiCtrl, MdataVerify) {
+    function ($scope, $route, $http, $location, $cacheFactory, reportDateRanges, reportDimensions, filters, filterComputeSigns, valueTypes, valueArithmetics, ApiCtrl, MdataVerify) {
 
         /*
         * 常量
@@ -304,7 +305,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 }).success(function (result) {
                     if(result.code == 200) {
                         Ui.alert('success', function () {
-                            history.back();
+                            $location.path('/report/manage');
                         });
                     }else {
                         Ui.alert(result.msg);

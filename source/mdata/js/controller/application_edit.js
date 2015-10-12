@@ -190,7 +190,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                     }).success(function (result) {
                         if(result && result.code == 200) {
                             Ui.alert('success', function () {
-                                history.back();
+                                $location.path('/application/manage');
                             });
                         }else {
                             Ui.alert(result.msg);
