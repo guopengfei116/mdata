@@ -190,6 +190,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                         if(result && result.code == 200) {
                             Ui.alert('success', function () {
                                 $location.path('/account/manage');
+                                $rootScope.$apply();
                             });
                         }else {
                             Ui.alert(result.msg);
@@ -210,6 +211,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                         if(result && result.code == 200) {
                             Ui.alert('success', function () {
                                 $location.path('/account/manage');
+                                $rootScope.$apply();
                             });
                         }else {
                             Ui.alert(result.msg);
