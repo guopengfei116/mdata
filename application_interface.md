@@ -186,20 +186,35 @@
 >>*  url :  /report/view-report
 >>*  param : { id: reportId }
 
->####7.  创建report所需的select字段列表
+>####7.  复制report
+>>*  method : post
+>>*  url :  /report/duplicate
+>>*  param : { id: reportId，name: report_name }
+
+>####8.  report_name唯一性检测
+>>*  method : post
+>>*  url :  /report/check-report-name
+>>*  param : { name: report_name }
+
+>####8.  创建report所需的select字段列表
 
 ### 4、shortcut
 
 >####1.  get收藏列表
 >>*  method : get
->>*  url : /api/site/shortcut/
+>>*  url : /report/shortcut/
 >>*  data : [ { 
         app: { name: appName，id: appID}，
         reports: [ { name: reportName，id: reportId}... ] 
     }... ]
     
->####2.  收藏report
+>####2.  收藏report--添加
 >>*  method : post
->>*  url : /api/site/shortcut/
+>>*  url : /report/favorite-add
+>>*  param : { id: reportId }
+
+>####3.  收藏report--删除
+>>*  method : post
+>>*  url : /report/favorite-del
 >>*  param : { id: reportId }
 
