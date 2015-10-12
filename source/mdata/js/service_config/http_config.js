@@ -20,6 +20,7 @@ oasgames.mdataServicesConfig.config([
                     return config;
                 },
                 'response':function(resp){
+                    console.log(resp);
                     return resp;
                 },
                 'requestError':function(rejection){
@@ -27,7 +28,13 @@ oasgames.mdataServicesConfig.config([
                     return rejection;
                 },
                 'responseError':function(rejection){
-                    console.log(rejection);
+                    if(rejection) {
+                        if(rejection.status === 0) {
+                            Ui.alert('Network connection error');
+                        }else {
+                            console.log(rejection);
+                        }
+                    }
                     return rejection;
                 }
             };
