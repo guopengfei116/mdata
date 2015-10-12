@@ -74,6 +74,7 @@ oasgames.mdataControllers.controller('navigationCtrl', [
                 }).success(function (result, status) {
                     if(result.code == 200) {
                         if(!result.data) {
+                            $scope.shortcuts = [];  // 如果无收藏列表，则初始化一个空数组
                             return;
                         }
                         $scope.shortcuts = result.data;
