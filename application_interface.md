@@ -106,7 +106,7 @@
 
 >####1.  app列表
 >>*  method : get
->>*  url : /api/site/app/
+>>*  url : /app/index
 >>*  data : [{ 
         name: app名字，appid: appID，
         appadmin：[ { name: 姓名，email: 邮箱，id: ID }... ]，
@@ -115,22 +115,30 @@
 
 >####2.  创建app
 >>*  method : post
->>*  url : /api/site/app/
+>>*  url : /app/create
 >>*  param : { 
-        name: app名字，appid: appID，
+        appname: app名字，
         admin_app_id: [ appId... ]，
-        user_app_id: [ appId... ]
+        user_app_id: [ appId... ]，
+        timezone: 时区
+        proce: [ processor... ]
     }
 
->####3.  已存app信息
+>####3.  获取app信息
 >>*  method : get
 >>*  url : /api/site/app/'appId'
 >>*  data : 
 
 >####4.  编辑app
 >>*  method : post
->>*  url : /api/site/app/'appId'
->>*  param : 
+>>*  url : /app/update
+>>*  param : { 
+         appname: app名字，appid: appID，
+         admin_app_id: [ appId... ]，
+         user_app_id: [ appId... ]，
+         timezone: 时区
+         proce: [ processor... ]
+     }
 
 >####5.  删除app
 >>*  method : delete
@@ -143,7 +151,7 @@
 
 >####1.  日志列表
 >>*  method : get
->>*  url : /api/site/systemLog/
+>>*  url : /log/index
 >>*  data : [{ 
         time: 时间戳，operation: 描述，ip: IP，
         account：[ { name: 姓名，email: 邮箱，id: ID }... ] 
