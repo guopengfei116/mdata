@@ -30,7 +30,7 @@ oasgames.mdataServices.factory('MdataVerify', [
                 },
                 acountPassword: {    //account页password
                     required: 'Password must not be empty',
-                    pattern: 'Password must be 6-20 characters in length'
+                    pattern: 'Incorrect Format,Password must be 6-20 characters with English letters and numbers'
                 },
                 reportName: {  //app页用户名
                     required: 'Name must not be empty',

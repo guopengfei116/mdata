@@ -168,7 +168,6 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                     return;
                 }
                 
-
                 //判断用户名
                 if(!MdataVerify.submit('accountName', $scope['accountForm']['accountName'].$error,$scope)){
                     return;
@@ -208,6 +207,16 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                     }
                 });
             };
+            /*
+             * 取消提交
+             * 返回account管理页面
+             * */
+            $scope.cancel = function () {
+                Ui.alert('如果确认则跳转到Account管理页面', function () {
+                    $location.path('/account/manage');
+                    $rootScope && $rootScope.$apply();
+                });
+            }
         })();
     }
 ]);

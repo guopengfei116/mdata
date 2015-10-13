@@ -99,7 +99,8 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
         var httpData = $scope.userPassword = {};
         
         $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
-
+        //密码是否正确 1是不正确
+        var pswFlag = 1;
         //错误提示
         $scope.showError = function(type, pError) {
             $scope[type + 'Error'] = true;
@@ -131,7 +132,6 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
 
             //格式不正确
             if(type == "oldPassword"){  
-                var flag = 0;
 
                 //验证旧密码格式               
                 for(var $error in $errors) {
@@ -149,12 +149,11 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
                 }).success(function (result) {
                     if(result.code != 200) {                      
                         $scope.showError(type, errorInfo[type]['error']);
-                        flag = 1;
+                        pswFlag = 1;
+                    }else{
+                        pswFlag = 0;
                     }
                 }); 
-                if(flag == 1){
-                    return false;
-                } 
             }else{  
                 for(var $error in $errors) {
                     if($errors[$error]) {
@@ -197,10 +196,13 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
 
         //修改密码提交
         $scope.submit = function () {
-            var api = ApiCtrl.get('changePaw');
-
-            //判断旧密码格式
-            if(!$scope.blur("oldPassword",$scope['cPaw']['oldPassword'].$error)){
+            var api = ApiCtrl.get('changePaw');            
+            if($(".text-oldPassword").val() == ""){  //判断旧密码格式
+                Ui.alert("Password must not be empty");
+                return false;
+            }
+            if(pswFlag == 1){  //旧密码错误
+                Ui.alert("Incorrect Password");
                 return false;
             }
             if(!$scope.blur("newPassword",$scope['cPaw']['newPassword'].$error)){  //判断新密码格式
@@ -222,7 +224,6 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
                             window.history.back();
                         });
                     }else{
-                        console.log(result);
                         Ui.alert(result.msg);
                     }
                 });
