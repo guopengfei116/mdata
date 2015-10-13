@@ -142,6 +142,8 @@ oasgames.mdataDirective.directive('cascadechoice', [
                         // 清空值
                         $select.data('value', '');
                         $selectInput.val('');
+
+                        $scope.$apply();
                     });
 
                     // 绑定delete事件

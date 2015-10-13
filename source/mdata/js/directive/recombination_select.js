@@ -84,6 +84,8 @@ oasgames.mdataDirective.directive('recombination', [
                         // add值
                         $scope.recombinationData.push(val);
                         $scope.upRecombinationData($scope.recombinationData);
+
+                        $scope.$apply();
                     });
 
                     /*
@@ -141,6 +143,8 @@ oasgames.mdataDirective.directive('recombination', [
                                 // 恢复样式
                                 $flag.css('bakcgrountColor', '#12afcb');
                                 element.find('.add-select').show();
+
+                                $scope.$apply();
                             },
                             function () {
                                 $flag.css('bakcgrountColor', '#12afcb');
