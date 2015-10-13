@@ -4,6 +4,7 @@ var tooltip = require('Tooltip');
  *  account edit控制器
  * */
 oasgames.mdataControllers.controller('AccountEditCtrl', [
+    '$rootScope',
     '$scope',
     '$cacheFactory',
     '$route',
@@ -12,7 +13,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
     'Application',
     'MdataVerify',
     'ApiCtrl',
-    function ($scope, $cacheFactory, $route, $http, $location, Application, MdataVerify, ApiCtrl) {
+    function ($rootScope, $scope, $cacheFactory, $route, $http, $location, Application, MdataVerify, ApiCtrl) {
 
         // 所有的app列表
         $scope.appsData = [];
