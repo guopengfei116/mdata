@@ -23,7 +23,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
         // 当前account的数据
         $scope.accountSourceData = {};
 
-        // 初始account的username值，username是否可编辑
+        // 初始为空，通过判断username是否存在来设定username表单是否可编辑
         $scope.accountEmail = "";
 
         // 当前编辑的accountId
@@ -79,6 +79,12 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
             if(!$scope.accountSourceData['reportViewer']) {
                 $scope.accountSourceData['reportViewer'] = [];
             }
+            if(!$scope.sourceData) {
+                $scope.sourceData = [];
+            }
+            if(!$scope.viewData) {
+                $scope.viewData = [];
+            }
         }
 
         // getApp列表数据
@@ -123,15 +129,12 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                     $http({
                         url: ApiCtrl.get('checkEmail'),
                         method: 'POST',
-                        data: {username:httpName},
-                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                        transformRequest: function(data){
-                            return $.param(data);
-                        }
+                        data: {username:httpName}
                     }).success(function (result) {
                         if(result.code == 200) {                      
                             flag = 1;
                         }else{
+                            console.log(result);
                             Ui.alert(result.msg);
                             flag = 0;
                         }
@@ -168,7 +171,6 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 if(!MdataVerify.submit('acountPassword', $scope['accountForm']['acountPassword'].$error,$scope)){
                     return;
                 }
-                httpApp = $scope.accountSourceData;
 
                 // 提交数据
                 var result = {}, submitApi = ApiCtrl.get('userCreate');
@@ -176,6 +178,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                     result.uid = $scope.accountId;
                     submitApi = ApiCtrl.get('userUpdate');
                 }
+                console.log($scope.reportSourceData);
                 result.nickname = $scope.reportSourceData['nickname'];
                 result.username = $scope.reportSourceData['username'];
                 result.reportAdmin = $(".field-account").data('value');
@@ -192,6 +195,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                             $rootScope && $rootScope.$apply();
                         });
                     }else {
+                        console.log(result);
                         Ui.alert(result.msg);
                     }
                 });
