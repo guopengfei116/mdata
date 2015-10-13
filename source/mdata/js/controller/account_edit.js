@@ -21,10 +21,9 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
         $scope.selectedAppids = [];
 
         // 当前account的数据
-        var httpApp = $scope.accountSourceData = {};
-        var httpAppUp = $scope.accountSourceData;
-        var httpName = $scope.accountSourceData.username;
-        // 初始account的email值，username是否可编辑
+        $scope.accountSourceData = {};
+
+        // 初始account的username值，username是否可编辑
         $scope.accountEmail = "";
 
         // 当前编辑的accountId
@@ -122,7 +121,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
             $scope.blur = function(type, $errors){
                 MdataVerify.blur(type, $errors, $scope);
                 if(type == 'email'){
-                    httpName = $scope.accountSourceData.username;
+                    var httpName = $scope.accountSourceData.username;
                     //验证是否重复
                     $http({
                         url: ApiCtrl.get('checkEmail'),
@@ -172,54 +171,33 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 if(!MdataVerify.submit('acountPassword', $scope['accountForm']['acountPassword'].$error,$scope)){
                     return;
                 }
-                $scope.accountSourceData["reportAdmin"] = $(".field-account").data('value');
-                $scope.accountSourceData["reportViewer"] = $(".field-account").next().data('value');
                 httpApp = $scope.accountSourceData;
 
-                if($scope.accountId){ //编辑
-                    httpAppUp.appid = $scope.appId;
-                    $http({
-                        url: ApiCtrl.get('userUpdate'),
-                        method: 'POST',
-                        data: httpApp
-                        // headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                        // transformRequest: function(data){
-                        //     return $.param(data);
-                        // }
-                    }).success(function (result) {
-                        if(result && result.code == 200) {
-                            Ui.alert('success', function () {
-                                $location.path('/account/manage');
-                                $rootScope.$apply();
-                            });
-                        }else {
-                            Ui.alert(result.msg);
-                        }
-                    }).error(function (status) {
-                        Ui.alert('网络错误！');
-                    });
-                }else{  //创建
-                    if(flag == 0){
-                        Ui.alert('用户名重复');
-                        return;
-                    }
-                    $http({
-                        url: ApiCtrl.get('userCreate'),
-                        method: 'POST',
-                        data: httpApp
-                    }).success(function (result) {
-                        if(result && result.code == 200) {
-                            Ui.alert('success', function () {
-                                $location.path('/account/manage');
-                                $rootScope.$apply();
-                            });
-                        }else {
-                            Ui.alert(result.msg);
-                        }
-                    }).error(function (status) {
-                        Ui.alert('网络错误！');
-                    });
+                // 提交数据
+                var result = {}, submitApi = ApiCtrl.get('userCreate');
+                if($scope.accountId) {     //accountId === uid
+                    result.uid = $scope.accountId;
+                    submitApi = ApiCtrl.get('userUpdate');
                 }
+                result.nickname = $scope.reportSourceData[0]['nickname'];
+                result.username = $scope.reportSourceData[0]['username'];
+                result.reportAdmin = $(".field-account").data('value');
+                result.reportViewer = $(".field-account").next().data('value');
+
+                $http({
+                    url: submitApi,
+                    method: 'POST',
+                    data: result
+                }).success(function (result) {
+                    if(result && result.code == 200) {
+                        Ui.alert('success', function () {
+                            $location.path('/account/manage');
+                            $rootScope && $rootScope.$apply();
+                        });
+                    }else {
+                        Ui.alert(result.msg);
+                    }
+                });
             };
         })();
     }

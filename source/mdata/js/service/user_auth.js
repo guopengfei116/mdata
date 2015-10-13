@@ -13,7 +13,8 @@ oasgames.mdataServices.provider('UserAuth', [
                     /^\/\w+/
                 ],
                 '2' : [
-                    /^\/report/
+                    /^\/report/,
+                    /^\/change_password$/
                 ],
                 '3' : [
                     /^\/report/
