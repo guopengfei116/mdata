@@ -181,6 +181,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 }
                 result.nickname = $scope.accountSourceData['nickname'];
                 result.username = $scope.accountSourceData['username'];
+                result.password = $scope.accountSourceData['password'];
                 result.reportAdmin = $(".field-account").data('value');
                 result.reportViewer = $(".field-account").next().data('value');
 
