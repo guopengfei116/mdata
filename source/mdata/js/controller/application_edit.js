@@ -154,11 +154,13 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                 }
                 // 提交数据
                 var httpApp = {}, submitApi = ApiCtrl.get('appCreate');
+                httpApp.timezone = $(".field-app-zone .app-zone").data('value');
                 if($scope.appId) {
                     httpApp.appid = $scope.appId;
                     submitApi = ApiCtrl.get('appUpdate');
+                    httpApp.timezone = $scope.appSourceData.timezone;
                 }
-                httpApp.appname = $scope.appSourceData.appname;
+                httpApp.appname = $scope.appSourceData.appname;                
                 httpApp.appadmin = $(".field-account").data('value');
                 httpApp.appuser = $(".field-account").next().data('value');
                 httpApp.proce = $(".field-account").next().next().data('value');
