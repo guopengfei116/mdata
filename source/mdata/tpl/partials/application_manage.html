@@ -13,8 +13,8 @@
             <ul>
                 <li class="row_column row_column-5" ng-click="changeSort('appList', 'appname')">App Name</li>
                 <li class="row_column row_column-5" ng-click="changeSort('appList', 'appid')">App ID</li>
-                <li class="row_column row_column-5" ng-click="changeSort('adminUsers', 'username')">Report Admin</li>
-                <li class="row_column row_column-5" ng-click="changeSort('viewerUsers', 'username')">Report Viewer</li>
+                <li class="row_column row_column-5" ng-click="changeSort('adminUsers', 'nickname')">Report Admin</li>
+                <li class="row_column row_column-5" ng-click="changeSort('viewerUsers', 'nickname')">Report Viewer</li>
                 <li class="row_column row_column-5">Manage</li>
             </ul>
         </dt>
@@ -25,13 +25,13 @@
                 <li class="row_column row_column-5">
                     <span ng-if="app['appadmin'].length == 0">-</span>
                     <span ng-repeat="user in app['appadmin'] | orderBy:sort.adminUsers.orderKey:sort.adminUsers.isDownOrder ">
-                        {{ user.username }}
+                        {{ user.nickname }}
                     </span>
                 </li>
                 <li class="row_column row_column-5">
                     <span ng-if="app['appuser'].length == 0">-</span>
                     <span ng-repeat="user in app['appuser'] | orderBy:sort.viewerUsers.orderKey:sort.viewerUsers.isDownOrder ">
-                        {{ user.username }}
+                        {{ user.nickname }}
                     </span>
                 </li>
                 <li class="row_column row_column-5">

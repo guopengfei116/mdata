@@ -16,7 +16,7 @@
             <span class="flag">{{ appSourceData.timezone }}</span>
         </p>
     </fieldset>
-    <fieldset class="field-common" ng-if="!appSourceData.appid">
+    <fieldset class="field-common field-app-zone" ng-if="!appSourceData.appid">
         <legend class="field-title-com">Time Zone</legend>
         <div class="select select-host app-zone">
                 <div class="select_main">
@@ -49,7 +49,7 @@
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
                     <li class="select_content_list" ng-repeat="account in accountsData | exclude:selectedAccountuids:'uid' | filter:{nickname: reportAdminSearch} | orderBy:'nickname' ">
-                        <a class="select_content_list_value" data-value="{{ account }}">{{ account.nickname }}</a>
+                        <a class="select_content_list_value" data-value="{{ account }}">{{ account.username }}</a>
                     </li>
                 </ul>
             </div>
@@ -76,7 +76,7 @@
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
                     <li class="select_content_list" ng-repeat="account in accountsData | exclude:selectedAccountuids:'uid' | filter:{nickname: reportViewerSearch} | orderBy:'nickname' ">
-                        <a class="select_content_list_value" data-value="{{ account }}">{{ account.nickname }}</a>
+                        <a class="select_content_list_value" data-value="{{ account }}">{{ account.username }}</a>
                     </li>
                 </ul>
             </div>
