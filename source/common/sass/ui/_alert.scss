@@ -5,14 +5,22 @@
     &_panel {
         @include panel(101, 12rem, 7rem);
         @include radius(4px 4px);
-        &_info {
+        &_content {
             z-index: 101;
             position: relative;
-            padding:1.5rem 0;
-            line-height: 1rem;
+            height: 4.5rem;
+            line-height: 4.5rem;
             text-align: center;
-            font-size: 0.8rem;
-            color: #505050;
+            &_info {
+                @include inline-block();
+                word-break: break-all;
+                padding:0 0.5rem;
+                width: 100%;
+                line-height: 1rem;
+                text-align: center;
+                font-size: 0.8rem;
+                color: #505050;
+            }
         }
         &_btn {
             cursor: pointer;
