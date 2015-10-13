@@ -178,9 +178,8 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                     result.uid = $scope.accountId;
                     submitApi = ApiCtrl.get('userUpdate');
                 }
-                console.log($scope.reportSourceData);
-                result.nickname = $scope.reportSourceData['nickname'];
-                result.username = $scope.reportSourceData['username'];
+                result.nickname = $scope.accountSourceData['nickname'];
+                result.username = $scope.accountSourceData['username'];
                 result.reportAdmin = $(".field-account").data('value');
                 result.reportViewer = $(".field-account").next().data('value');
 
