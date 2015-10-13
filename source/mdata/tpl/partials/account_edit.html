@@ -78,7 +78,11 @@
         </cascadechoice>
     </section>
     <fieldset class="field-common">
-        <span class="button-group page-btns" ng-click="submit()">
+        <span class="button-group page-btns" ng-click="submit()" ng-if = "accountEmail">
+            <button class="button button-save-plus"><i class="iconfont icon-plus"></i></button>
+            <button class="button button-save">Save</button>
+        </span>
+        <span class="button-group page-btns" ng-click="submit()" ng-if = "!accountEmail">
             <button class="button button-create-plus"><i class="iconfont icon-plus"></i></button>
             <button class="button button-create">Create</button>
         </span>
