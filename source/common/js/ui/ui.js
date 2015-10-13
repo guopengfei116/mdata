@@ -32,7 +32,8 @@ Ui.prototype = {
                     '<div class="alert">' +
                         '<section class="alert_mask"></section>' +
                         '<aside class="alert_panel">' +
-                            '<section class="alert_panel_info">' +
+                            '<section class="alert_panel_content">' +
+                                '<p class="alert_panel_content_info"></p>' +
                             '</section>' +
                             '<section class="alert_panel_btn">' +
                                 '确定' +
@@ -50,7 +51,7 @@ Ui.prototype = {
                 });
             },
             setInfo: function (info) {
-                Alert.looks.find('.alert_panel_info').html(info);
+                Alert.looks.find('.alert_panel_content_info').html(info);
             },
             show: function (callback) {
                 Alert.looks.show();
