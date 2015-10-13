@@ -65,10 +65,9 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                     $scope.accountEmail = result.data[0].username;
                     AppCache.put('list', result.data);
                 }else {
+                    console.log(result);
                     Ui.alert(result.msg);
                 }
-            }).error(function (status) {
-                Ui.alert('网络错误');
             });
         }
 
@@ -94,7 +93,6 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                     AppCache = $cacheFactory('app');
                 }
                 
-                // 异步获取
             $http({
                 url: ApiCtrl.get('userAppList'),
                 method: 'GET',
@@ -104,10 +102,9 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                     $scope.appsData = result.data;
                     AppCache.put('list', result.data);
                 }else {
+                    console.log(result);
                     Ui.alert(result.msg);
                 }
-            }).error(function (status) {
-                Ui.alert('网络错误');
             });
         })();
 
@@ -179,8 +176,8 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                     result.uid = $scope.accountId;
                     submitApi = ApiCtrl.get('userUpdate');
                 }
-                result.nickname = $scope.reportSourceData[0]['nickname'];
-                result.username = $scope.reportSourceData[0]['username'];
+                result.nickname = $scope.reportSourceData['nickname'];
+                result.username = $scope.reportSourceData['username'];
                 result.reportAdmin = $(".field-account").data('value');
                 result.reportViewer = $(".field-account").next().data('value');
 

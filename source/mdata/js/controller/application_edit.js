@@ -74,10 +74,9 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                     $scope.appSourceData['proce'] = proce;
                     initSelectData();
                 }else {
+                    console.log(result);
                     Ui.alert(result.msg);
                 }
-            }).error(function (status) {
-                Ui.alert('网络错误！');
             });
         }
 
@@ -115,10 +114,9 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                     $scope.accountsData = result.data;
                     accountCache.put('list', result.data);
                 }else {
+                    console.log(result);
                     Ui.alert(result.msg);
                 }
-            }).error(function (status) {
-                Ui.alert('网络错误');
             });
         })();
 
@@ -176,6 +174,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                             $rootScope && $rootScope.$apply();
                         });
                     }else {
+                        console.log(result);
                         Ui.alert(result.msg);
                     }
                 });

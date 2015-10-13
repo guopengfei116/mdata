@@ -113,10 +113,9 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                         $scope.valueList = $scope.appData['val_list'];
                         initSelectData();
                     }else {
+                        console.log(result);
                         Ui.alert(result.msg);
                     }
-                }).error(function (status) {
-                    Ui.alert('网络错误！');
                 });
             }
 
@@ -204,10 +203,9 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 if(result.code == 200) {
                     $scope.guestUsers = result.data;
                 }else {
+                    console.log(result);
                     Ui.alert(result.msg);
                 }
-            }).error(function () {
-                Ui.alert('网络错误');
             });
         }
 
@@ -311,10 +309,9 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                             $rootScope && $rootScope.$apply();
                         });
                     }else {
+                        console.log(result);
                         Ui.alert(result.msg);
                     }
-                }).error(function () {
-                    Ui.alert('网络错误');
                 });
             };
         })();
