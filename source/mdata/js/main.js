@@ -18,6 +18,7 @@ require('./lib/angular-sanitize.js');
 * */
 require('common');
 window.Ui = require('Ui');
+window.authentication = new (require('Authentication'));
 
 /*
  * 加载常量

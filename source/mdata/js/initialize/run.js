@@ -10,27 +10,31 @@ oasgames.mdataApp.run([
     'AUTHORITY',
     function ($rootScope, $location, $log, UserAuth, AUTHORITY) {
 
-        // 用户初始属性
-        $rootScope.user = {
-            "logined" : false,
-            "authority" : null
-        };
+        $rootScope.user = {};
 
-        // 获取登录cookie
-        var Cookie = require('Cookie');
-        var loginedAccount = Cookie.getCookie('loginedAccount');
-        var loginedAccountAuthority = Cookie.getCookie('loginedAccountAuthority');
-        var loginedAccountAuthority = Cookie.getCookie('loginedAccountAuthority');
-        var loginedAccountName = Cookie.getCookie('loginedAccountName');
-        if(loginedAccount && loginedAccountAuthority) {
-            $rootScope.user['logined'] = true;
-            $rootScope.user['authority'] = loginedAccountAuthority;
-            $rootScope.user['username'] = loginedAccountName;
-        }
+        // 初始化用户属性
+        $rootScope.$on('initUserProperty', function () {
+            var userAuthority = authentication.get('authority');
+            var userName = authentication.get('account');
+            var userToken = authentication.get('token');
+            if(userAuthority && userName && userToken) {
+                $rootScope.user['logined'] = true;
+                $rootScope.user['authority'] = userAuthority;
+                $rootScope.user['username'] = userName;
+                $rootScope.user['token'] = userToken;
+            }else {
+                $rootScope.user['logined'] = false;
+            }
+        });
+
+        // 页面初始化时初始化用户属性
+        $rootScope.$emit('initUserProperty');
 
         // 切换页面时权限认证
         $rootScope.$on('$routeChangeStart', function (event, next, current) {
+
             $('.tooltip').remove(':not(.common)');
+
             var nextUrl = next && next.originalPath;
             var currentUrl = current && current.originalPath;
             console.log('当前页：' + currentUrl + ', 下一页：' + nextUrl);
@@ -41,6 +45,7 @@ oasgames.mdataApp.run([
 
                 if(nextUrl && (nextUrl == '/login' || nextUrl === '/')) {
                     // 已经转向登录路由因此无需重定向
+                    $location.path('/login');
                 }else {
                     $location.path('/login');
                 }

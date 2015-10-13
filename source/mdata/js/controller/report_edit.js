@@ -304,9 +304,9 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 }).success(function (result) {
                     if(result.code == 200) {
                         Ui.alert('success', function () {
-                            $location.path('/report/manage');
-                            console.log($rootScope);
-                            $rootScope && $rootScope.$apply();
+                            $scope.$apply(function () {
+                                $location.path('/report/manage');
+                            });
                         });
                     }else {
                         console.log(result);

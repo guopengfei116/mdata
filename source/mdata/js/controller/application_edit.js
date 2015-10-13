@@ -172,8 +172,9 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                 }).success(function (result) {
                     if(result && result.code == 200) {
                         Ui.alert('success', function () {
-                            $location.path('/application/manage');
-                            $rootScope && $rootScope.$apply();
+                            $scope.$apply(function () {
+                                $location.path('/application/manage');
+                            });
                         });
                     }else {
                         console.log(result);
