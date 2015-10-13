@@ -31,8 +31,8 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
         $scope.selectedAccountuids = [];
 
         // 当前app的信息
-        var httpApp = $scope.appSourceData = {};
-        var httpAppUp = $scope.appSourceData;
+        $scope.appSourceData = {};
+
         // 当前编辑的appId
         var httpAppId = $scope.appId = $route.current.params.applicationId;
 
@@ -150,64 +150,35 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                 if(!MdataVerify.submit('appName',$scope["appCreate"]["appName"].$error,$scope)){
                     return;
                 }
-                
-                
-                $scope.appSourceData["appadmin"] = $(".field-account").data('value');
-                $scope.appSourceData["appuser"] = $(".field-account").next().data('value');
-                $scope.appSourceData["proce"] = $(".field-account").next().next().data('value');
-
                 if($.trim($(".field-account").next().next().data('value')) == ""){
                     Ui.alert("Processor must not be empty");
                     return;
                 }
-
-                if($scope.appId){  //编辑
-                    httpApp = $scope.appSourceData;
-                    console.log(httpApp);
-                    $http({
-                        url: ApiCtrl.get('appUpdate'),
-                        method: 'POST',
-                        data: httpApp
-                    }).success(function (result) {
-                        if(result && result.code == 200) {
-                            Ui.alert('success', function () {
-                                $location.path('/application/manage');
-                                $rootScope.$apply();
-                            });
-                        }else {
-                            Ui.alert(result.msg);
-                        }
-                    }).error(function (status) {
-                        Ui.alert('网络错误！');
-                    });
-                }else{ //创建
-                    $scope.appSourceData.timezone = $('.select.app-zone').data('value');
-                    httpApp = $scope.appSourceData;
-                    if($.trim($scope.appSourceData.timezone) == ""){
-                        Ui.alert('Time Zone must not be empty');
-                        return;
-                    }
-                    $http({
-                        url: ApiCtrl.get('appCreate'),
-                        method: 'POST',
-                        data: httpApp,
-                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                        transformRequest: function(data){
-                            return $.param(data);
-                        }
-                    }).success(function (result) {
-                        if(result && result.code == 200) {
-                            Ui.alert('success', function () {
-                                $location.path('/application/manage');
-                                $rootScope.$apply();
-                            });
-                        }else {
-                            Ui.alert(result.msg);
-                        }
-                    }).error(function (status) {
-                        Ui.alert('网络错误！');
-                    });
+                // 提交数据
+                var httpApp = {}, submitApi = ApiCtrl.get('appCreate');
+                if($scope.appId) {
+                    httpApp.appid = $scope.appId;
+                    submitApi = ApiCtrl.get('appUpdate');
                 }
+                httpApp.appname = $scope.appSourceData.appname;
+                httpApp.appadmin = $(".field-account").data('value');
+                httpApp.appuser = $(".field-account").next().data('value');
+                httpApp.proce = $(".field-account").next().next().data('value');
+
+                $http({
+                    url: submitApi,
+                    method: 'POST',
+                    data: httpApp
+                }).success(function (result) {
+                    if(result && result.code == 200) {
+                        Ui.alert('success', function () {
+                            $location.path('/application/manage');
+                            $rootScope.$apply();
+                        });
+                    }else {
+                        Ui.alert(result.msg);
+                    }
+                });
             };
         })();
     }
