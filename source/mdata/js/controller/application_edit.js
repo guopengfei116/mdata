@@ -126,7 +126,6 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
 
             // 表单失去焦点时错误提示
             $scope.blur = function(type, $errors){
-
                 MdataVerify.blur(type, $errors, $scope);
             };
 
@@ -148,10 +147,12 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                 if(!MdataVerify.submit('appName',$scope["appCreate"]["appName"].$error,$scope)){
                     return;
                 }
+
                 if($.trim($(".field-account").next().next().data('value')) == ""){
                     Ui.alert("Processor must not be empty");
                     return;
                 }
+
                 // 提交数据
                 var httpApp = {}, submitApi = ApiCtrl.get('appCreate');
                 httpApp.timezone = $(".field-app-zone .app-zone").data('value');
@@ -182,6 +183,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                     }
                 });
             };
+
             /*
              * 取消提交
              * 返回application管理页面，

@@ -177,7 +177,9 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
         // 选择application
         (function () {
             $('.report-page').on('click', '.select_content_list_value-select-app', function () {
-                $scope.selectedAppId = $(this).data('value');
+                $scope.$apply(function () {
+                    $scope.selectedAppId = $(this).data('value');
+                });
             });
 
             // 根据选择的appId更新valueList
