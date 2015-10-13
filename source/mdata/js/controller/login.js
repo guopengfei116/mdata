@@ -111,6 +111,7 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
         var httpData = $scope.userPassword = {};
         
         $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
+        //密码是否正确 1是不正确
         var pswFlag = 1;
         //错误提示
         $scope.showError = function(type, pError) {
