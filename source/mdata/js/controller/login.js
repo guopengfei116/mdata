@@ -238,12 +238,13 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
                     }
                 }).success(function (result) {
                     if(result.code == 200) {
-                        Ui.alert(result.msg);
+                        Ui.alert(result.msg, function () {
+                            window.history.back();
+                        });
                     }else{
+                        console.log(result);
                         Ui.alert(result.msg);
                     }
-                }).error(function (status) {
-                    Ui.alert('网络错误！');
                 });
             }
         }
