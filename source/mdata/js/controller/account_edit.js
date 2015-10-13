@@ -80,6 +80,12 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
             if(!$scope.accountSourceData['reportViewer']) {
                 $scope.accountSourceData['reportViewer'] = [];
             }
+            if(!$scope.accountSourceData['password']) {
+                $scope.accountSourceData['password'] = '';
+            }
+            if(!$scope.accountSourceData['nickname']) {
+                $scope.accountSourceData['nickname'] = ' ';
+            }
             if(!$scope.sourceData) {
                 $scope.sourceData = [];
             }
@@ -179,9 +185,9 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                     result.uid = $scope.accountId;
                     submitApi = ApiCtrl.get('userUpdate');
                 }
-                result.nickname = $scope.accountSourceData['nickname'];
-                result.username = $scope.accountSourceData['username'];
-                result.password = $scope.accountSourceData['password'];
+                result.nickname = $.trim($scope.accountSourceData['nickname']);
+                result.username = $.trim($scope.accountSourceData['username']);
+                result.password = $.trim($scope.accountSourceData['password']);
                 result.reportAdmin = $(".field-account").data('value');
                 result.reportViewer = $(".field-account").next().data('value');
 
