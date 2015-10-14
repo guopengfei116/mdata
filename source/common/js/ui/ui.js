@@ -36,7 +36,7 @@ Ui.prototype = {
                                 '<p class="alert_panel_content_info"></p>' +
                             '</section>' +
                             '<section class="alert_panel_btn">' +
-                                '确定' +
+                                'Confirm' +
                             '</section>' +
                         '</aside>' +
                     '</div>';
@@ -87,8 +87,8 @@ Ui.prototype = {
                             '<section class="confirm_panel_info">' +
                             '</section>' +
                             '<ul class="confirm_panel_btn">' +
-                                '<li class="confirm_panel_btn_item confirm_panel_btn_item-no">取消</li>' +
-                                '<li class="confirm_panel_btn_item confirm_panel_btn_item-ok">确定</li>' +
+                                '<li class="confirm_panel_btn_item confirm_panel_btn_item-no">Cancel</li>' +
+                                '<li class="confirm_panel_btn_item confirm_panel_btn_item-ok">Confirm</li>' +
                             '</ul>' +
                         '</aside>' +
                     '</div>';

@@ -319,6 +319,18 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                     }
                 });
             };
+
+            /*
+             * 取消提交
+             * 返回report管理页面，
+             * */
+            $scope.cancel = function(){
+                Ui.alert('Confirm to cancel the operation？', function () {
+                    $scope.$apply(function () {
+                        $location.path('/report/manage');
+                    });
+                });
+            }
         })();
     }
 ]);

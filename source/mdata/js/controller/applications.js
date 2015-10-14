@@ -53,15 +53,15 @@ oasgames.mdataControllers.controller('ApplicationManageCtrl', [
         // 排序规则
         $scope.sort = {
             appList : {
-                orderKey : 'name',
+                orderKey : 'appname',
                 isDownOrder : false
             },
             adminUsers : {
-                orderKey : 'name',
+                orderKey : 'nickname',
                 isDownOrder : false
             },
             viewerUsers : {
-                orderKey : 'name',
+                orderKey : 'nickname',
                 isDownOrder : false
             }
         };

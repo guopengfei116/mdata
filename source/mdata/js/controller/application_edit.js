@@ -189,9 +189,10 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
              * 返回application管理页面，
              * */
             $scope.cancel = function(){
-                Ui.alert('如果确认则跳转到application管理页', function () {
-                    $location.path('/application/manage');
-                    $rootScope && $rootScope.$apply();
+                Ui.alert('Confirm to cancel the operation？', function () {
+                    $scope.$apply(function () {
+                        $location.path('/application/manage');
+                    });
                 });
             }
         })();
