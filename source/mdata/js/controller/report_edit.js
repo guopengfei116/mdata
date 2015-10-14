@@ -212,6 +212,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
         // 事件处理、表单效验
         (function () {
             $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
+            //判断report_name重复 1为重复
             var flag = 0;
 
             //表单失去焦点时错误提示
@@ -221,15 +222,16 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
 
                         //验证report name是否重复  
                         var report_name = $scope.reportSourceData['reportData']['report_name'];
+                        var app_id = $scope.selectedAppId;
                         $http({
                             url: ApiCtrl.get('checkReportName'),
                             method: 'POST',
                             data: {
+                                'appId' : app_id,
                                 'report_name' : report_name
                             }
                         }).success(function (result) {
-                            console.log(result);
-                            if(result.code == 200) {
+                            if(result && result.code == 200) {
                                 flag = 0;
                             }else {
                                 $scope[type + 'Error'] = true;
@@ -266,9 +268,8 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 }
 
                 //判断Report Name
-                if(!$scope.reportSourceData['reportData']['report_name']){
-                     Ui.alert("Report Name must not be empty");
-                     return false;
+                if(!MdataVerify.submit('reportName', $scope["reportFrom"]["reportName"].$error, $scope)){
+                    return false;
                 }
 
                 //判断name重复
