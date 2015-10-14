@@ -48,8 +48,8 @@ oasgames.mdataControllers.controller('systemLogCtrl', [
         $scope.sort = {
             systemList : {
                 filter : '',
-                orderKey : 'time',
-                isDownOrder : false
+                orderKey : 'date',
+                isDownOrder : true
             }
         };
 

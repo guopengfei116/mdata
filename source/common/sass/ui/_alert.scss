@@ -3,7 +3,7 @@
         @include mask(99);
     }
     &_panel {
-        @include panel(101, 12rem, 7rem);
+        @include panel(101, 12rem, 7.3rem);
         @include radius(4px 4px);
         &_content {
             z-index: 101;
@@ -42,11 +42,11 @@
             float: left;
             width: 6rem;
             &-no {
-
-            }
-            &-ok {
                 border-left: 1px solid #d9d9d9;
                 margin-left: -1px;
+            }
+            &-ok {
+
             }
         }
     }

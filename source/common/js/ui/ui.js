@@ -84,11 +84,12 @@ Ui.prototype = {
                     '<div class="confirm">' +
                         '<section class="confirm_mask"></section>' +
                         '<aside class="confirm_panel">' +
-                            '<section class="confirm_panel_info">' +
+                            '<section class="confirm_panel_content">' +
+                                '<p class="confirm_panel_content_info"></p>' +
                             '</section>' +
                             '<ul class="confirm_panel_btn">' +
-                                '<li class="confirm_panel_btn_item confirm_panel_btn_item-no">Cancel</li>' +
                                 '<li class="confirm_panel_btn_item confirm_panel_btn_item-ok">Confirm</li>' +
+                                '<li class="confirm_panel_btn_item confirm_panel_btn_item-no">Cancel</li>' +
                             '</ul>' +
                         '</aside>' +
                     '</div>';
@@ -106,7 +107,7 @@ Ui.prototype = {
                 });
             },
             setInfo: function (info) {
-                Confirm.looks.find('.confirm_panel_info').html(info);
+                Confirm.looks.find('.confirm_panel_content_info').html(info);
             },
             show: function () {
                 Confirm.looks.show();

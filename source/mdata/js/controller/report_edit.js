@@ -312,7 +312,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
              * 返回report管理页面，
              * */
             $scope.cancel = function(){
-                Ui.alert('Confirm to cancel the operation？', function () {
+                Ui.confirm('Confirm to cancel the operation？', function () {
                     $scope.$apply(function () {
                         $location.path('/report/manage');
                     });
