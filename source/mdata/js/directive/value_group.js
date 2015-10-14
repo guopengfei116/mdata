@@ -19,6 +19,7 @@ oasgames.mdataDirective.directive('valuegroup', [
             },
             link: function ($scope, element, attr) {
                 var separator = attr.separator;
+                var maxlength = attr.maxlength || null;
                 var Echo = require('Echo');
 
                 /*
@@ -117,6 +118,12 @@ oasgames.mdataDirective.directive('valuegroup', [
 
                         if(!val) {
                             Ui.alert('please fill out the data');
+                            return;
+                        }
+
+                        // 最大数量效验
+                        if(maxlength && $scope.resultValue.length >= maxlength) {
+                            Ui.alert('You can only add 20 Values');
                             return;
                         }
 

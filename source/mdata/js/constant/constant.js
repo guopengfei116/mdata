@@ -179,8 +179,7 @@ oasgames.mdataConstant.constant("FILTER_COMPUTE_SIGN", [
 oasgames.mdataConstant.constant("VALUE_TYPE", [
     { type : 'original', value : '0' },
     { type : 'percent', value : '1' },
-    { type : 'int', value : '2' },
-    { type : 'currency', value : '3' }
+    { type : 'int', value : '2' }
 ]);
 
 /*

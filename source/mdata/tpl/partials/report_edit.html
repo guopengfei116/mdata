@@ -118,7 +118,7 @@
             </span>
         </div>
     </recombination>
-    <valuegroup class="field-common-value" separator="#@DELIMITER@#" value-list="valueList" flag-data="reportSourceData['reportData']['values']">
+    <valuegroup class="field-common-value" separator="#@DELIMITER@#" maxlength="20" value-list="valueList" flag-data="reportSourceData['reportData']['values']">
         <legend class="field-title-com">Value Group</legend>
         <div class="recombination-menu">
             <input class="fieldset-text-com field-text-column recombination-input" type="text" placeholder="Value Name" required-warn="please fill out the Value Name"/>
@@ -241,8 +241,8 @@
                 <ul class="select_content">
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
-                    <li class="select_content_list" ng-repeat="guestUser in guestUsers | exclude:selectedGuestUids:'uid' | orderBy:'nickname' ">
-                        <a class="select_content_list_value" data-value="{{ guestUser }}">{{ guestUser.nickname }}</a>
+                    <li class="select_content_list" ng-repeat="guestUser in guestUsers | exclude:selectedGuestUids:'uid' | orderBy:'username' ">
+                        <a class="select_content_list_value" data-value="{{ guestUser }}">{{ guestUser.username }}</a>
                     </li>
                 </ul>
             </div>
@@ -250,7 +250,7 @@
         </div>
         <div class="textarea">
             <span class="flag flag-icon" ng-repeat="guestUser in guestUserValue">
-                <i class="flag-text" data-value="{{ guestUser.uid }}">{{ guestUser.nickname }}</i>
+                <i class="flag-text" data-value="{{ guestUser.uid }}">{{ guestUser.username }}</i>
                 <i class="flag-icon_delete iconfont icon-close" data-value="{{ guestUser.uid }}"></i>
             </span>
         </div>

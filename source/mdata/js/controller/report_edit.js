@@ -178,23 +178,22 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
         // 选择application
         (function () {
             $('.report-page').on('click', '.select_content_list_value-select-app', function () {
+                $scope.selectedAppId = $(this).data('value');
                 $scope.$apply(function () {
-                    $scope.selectedAppId = $(this).data('value');
+                    if(!$scope.selectedAppId && !$scope.appDataList.length) {
+                        console.log('无法更新valueList，selectedAppId：' + $scope.selectedAppId + ',appDataList：' + $scope.appDataList);
+                        return;
+                    }
+
+                    // 根据选择的appId更新valueList
+                    for(var i = 0; i < $scope.appDataList.length; i++) {
+                        if($scope.selectedAppId == $scope.appDataList[i]['app'].appid) {
+                            $scope.valueList = $scope.appDataList[i]['val_list'];
+                            break;
+                        }
+                    }
                 });
             });
-
-            // 根据选择的appId更新valueList
-            $scope.$watch('selectedAppId', function () {
-                if(!$scope.selectedAppId || !$scope.appDataList.length) {
-                    console.log('无法更新valueList，selectedAppId：' + $scope.selectedAppId + ',appDataList：' + $scope.appDataList);
-                    return;
-                }
-                for(var i = 0; i < $scope.appDataList.length; i++) {
-                    if($scope.selectedAppId == $scope.appDataList[i]['app'].appid) {
-                        $scope.valueList = $scope.appDataList[i]['val_list'];
-                    }
-                }
-            })
         })();
 
         // getGuestUser数据
@@ -225,7 +224,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
 
                         //验证report name是否重复  
                         var report_name = $scope.reportSourceData['reportData']['report_name'];
-                        var app_id = $scope.selectedAppId;
+                        var app_id = $scope.selectedAppId || $scope.reportSourceData['reportData']['appid'];
                         $http({
                             url: ApiCtrl.get('checkReportName'),
                             method: 'POST',
@@ -246,7 +245,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                                 flag = 1;
                             }
                         });
-                    }              
+                    }
                 }
                 MdataVerify.blur(type, $errors, $scope);                
             };
