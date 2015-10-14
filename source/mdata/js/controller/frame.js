@@ -43,10 +43,11 @@ oasgames.mdataControllers.controller('HeaderCtrl', [
     'ApiCtrl',
     function ($rootScope, $scope, $http, $location, ApiCtrl) {
 
-        // 权限
+        // 用户信息，注意登陆页面时会获取不到
         $scope.authority = $rootScope.user['authority'];
         $scope.logined = $rootScope.user['logined'];
         $scope.username = $rootScope.user['username'];
+
         // 未登录
         if(!$scope.logined) {
             return;
@@ -58,39 +59,26 @@ oasgames.mdataControllers.controller('HeaderCtrl', [
             $scope.isshow = !$scope.isshow;
         };
 
-        // 登出
+        /*
+        * @method 退出登录
+        * 发送一个服务器通知，
+        * 清空cookie，
+        * 清空rootScope记录的用户信息，
+        * 跳转到登陆页
+        * */
         $scope.logout = function () {
-            logout();
+            $http({
+                method : "GET",
+                url : ApiCtrl.get('logout')
+            });
+            authentication.delete();
+            $rootScope.$emit('initUserProperty');
+            $location.path('/login');
         };
 
-        function logout() {
-            var api = ApiCtrl.get('logout');
-            var Cookie = require('Cookie');
-
-            if(api) {
-                $http({
-                    method : "GET",
-                    url : api
-                }).success(function (data) {
-                    if(data.code == 200) {
-                        $rootScope.user['logined'] = false;
-                        $rootScope.user['authority'] = null;
-                        $location.path('/login');
-                        Cookie.removeCookie('MDATA-KEY');
-                        Cookie.removeCookie('loginedAccount');
-                        Cookie.removeCookie('loginedAccountAuthority');
-                    }else {
-                        Ui.alert(data.msg);
-                    }
-                }).error(function () {
-                    Ui.alert('网络错误');
-                });
-            }
-        }
-
-        // 绑定登出事件
+        // 对外暴漏的登出事件
         $rootScope.$on('logout', function () {
-            logout();
+            $scope.logout();
         });
     }
 ]);

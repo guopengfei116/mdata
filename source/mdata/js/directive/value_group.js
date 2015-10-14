@@ -136,6 +136,8 @@ oasgames.mdataDirective.directive('valuegroup', [
                             groupValue : val
                         });
                         element.data('value', $scope.resultValue);
+
+                        $scope.$apply();
                     });
 
                     // delete事件

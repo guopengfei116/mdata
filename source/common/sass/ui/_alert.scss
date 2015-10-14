@@ -8,13 +8,13 @@
         &_content {
             z-index: 101;
             position: relative;
+            padding:0 0.5rem;
             height: 4.5rem;
             line-height: 4.5rem;
             text-align: center;
             &_info {
                 @include inline-block();
                 word-break: break-all;
-                padding:0 0.5rem;
                 width: 100%;
                 line-height: 1rem;
                 text-align: center;

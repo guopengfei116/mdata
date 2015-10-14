@@ -126,7 +126,8 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
             $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
 
             // 邮箱是否重复标识  1不重复
-            var flag = 0; 
+            var flag = 0;
+
             //表单失去焦点时错误提示
             $scope.blur = function(type, $errors){
                 MdataVerify.blur(type, $errors, $scope);
@@ -197,8 +198,9 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 }).success(function (result) {
                     if(result && result.code == 200) {
                         Ui.alert('success', function () {
-                            $location.path('/account/manage');
-                            $rootScope && $rootScope.$apply();
+                            $scope.$apply(function () {
+                                $location.path('/account/manage');
+                            });
                         });
                     }else {
                         console.log(result);
@@ -206,6 +208,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                     }
                 });
             };
+
             /*
              * 取消提交
              * 返回account管理页面

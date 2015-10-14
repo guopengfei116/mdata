@@ -13,8 +13,8 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
     'MdataVerify',
     function ($rootScope, $scope, $http, $location, ApiCtrl, AUTHORITY, MdataVerify) {
 
-        //$scope.password = '';
-        var httpData = $scope.account = {};
+        //账号
+        $scope.account = {};
         $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
 
         //表单失去焦点时错误提示
@@ -44,9 +44,6 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
         });
         //登陆
         $scope.submit = function () {
-            var api = ApiCtrl.get('login');
-            console.log(api);
-            var Cookie = require('Cookie');
 
             //判断用户名
             if(!MdataVerify.blur("account", $scope['ndForm']['ndAccount'].$error, $scope)){
@@ -58,37 +55,28 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                 return;
             }
 
+            var api = ApiCtrl.get('login');
             if($scope['ndForm'].$valid && api ) {
-                  
                 $http({
                     url: api,
                     method: 'POST',
-                    data: httpData,
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    data: $scope.account,
                     xhrFields: {'withCredentials': true},
-                    crossDomain: true,
-                    transformRequest: function(data){
-                        return $.param(data);
-                    }
+                    crossDomain: true
                 }).success(function (result) {
-                    var Cookie = require('Cookie');
                     if(result.code == 200) {
-                        //记录登陆状态
-                        $rootScope.user['logined'] = true;
-                        $rootScope.user['authority'] = result.data.authority;
-                        $rootScope.user['username'] = result.data.username;
-                        Cookie.setCookie('MDATA-KEY', result.data.token);
-                        Cookie.setCookie('MDATA_KEY', result.data.token, {domain: '.mdata.dev'});
-                        Cookie.setCookie('loginedAccount', $scope.account.account);
-                        Cookie.setCookie('loginedAccountAuthority', result.data.authority);
-                        Cookie.setCookie('loginedAccountName', result.data.username);
-                        $rootScope.$emit('$routeChangeStart');
-                    }else{
-                        Ui.alert(result.msg);
-                    }
 
-                }).error(function (status) {
-                    Ui.alert('网络错误！');
+                        //记录登陆状态
+                        authentication.set({
+                            token : result.data.token,
+                            authority : result.data.authority,
+                            account : result.data.username
+                        });
+
+                        //初始化用户属性
+                        $rootScope.$emit('initUserProperty');
+                        $rootScope.$emit('$routeChangeStart');
+                    }
                 });
             }
         }
@@ -158,10 +146,6 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
                     url: ApiCtrl.get('checkPaw'),
                     method: 'POST',
                     data: httpOldPaW,
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                    transformRequest: function(data){
-                        return $.param(data);
-                    }
                 }).success(function (result) {
                     if(result.code != 200) {                      
                         $scope.showError(type, errorInfo[type]['error']);

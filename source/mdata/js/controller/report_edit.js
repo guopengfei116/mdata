@@ -177,7 +177,9 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
         // 选择application
         (function () {
             $('.report-page').on('click', '.select_content_list_value-select-app', function () {
-                $scope.selectedAppId = $(this).data('value');
+                $scope.$apply(function () {
+                    $scope.selectedAppId = $(this).data('value');
+                });
             });
 
             // 根据选择的appId更新valueList
@@ -305,9 +307,9 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 }).success(function (result) {
                     if(result.code == 200) {
                         Ui.alert('success', function () {
-                            $location.path('/report/manage');
-                            console.log($rootScope);
-                            $rootScope && $rootScope.$apply();
+                            $scope.$apply(function () {
+                                $location.path('/report/manage');
+                            });
                         });
                     }else {
                         console.log(result);
