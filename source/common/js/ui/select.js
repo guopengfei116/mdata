@@ -18,6 +18,7 @@ var Select = function (options) {
 $.extend(Select.prototype, {
     selector : '.select',
     host: '.select-host',
+    main: '.select_main',
     target : '.select_target',
     textarea : '.select_main_textarea',
     textarea_value : '.select_main_textarea-value',
@@ -54,6 +55,7 @@ $.extend(Select.prototype, {
             }
 
             self.initPosition();
+            self.initStyle($parentSelect);
 
             // 清除其他select的active状态
             $(self.selector).not($parentSelect).removeClass('select-active');
@@ -92,7 +94,12 @@ $.extend(Select.prototype, {
         });
     },
 
-    initPosition: function () {
+    initStyle : function ($select) {
+        var o = this._o, self = this;
+        var width = $select.find(o.)
+    },
+
+    initPosition : function () {
         var o = this._o, self = this;
         $(o.content).each(function () {
             var $looks = $(this);
