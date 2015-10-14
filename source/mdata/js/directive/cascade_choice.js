@@ -154,6 +154,7 @@ oasgames.mdataDirective.directive('cascadechoice', [
                         for(var i = 0; i < $scope.resultValue.length; i++) {
                             if($scope.resultValue[i] == val) {
                                 $scope.resultValue.splice(i, 1);
+                                break;
                             }
                         }
                         element.data('value', $scope.resultValue);
@@ -162,6 +163,7 @@ oasgames.mdataDirective.directive('cascadechoice', [
                         for(var i = 0; i < $scope.selectedData.length; i++) {
                             if($scope.selectedData[i] == val) {
                                 $scope.selectedData.splice(i, 1);
+                                break;
                             }
                         }
 
@@ -169,8 +171,11 @@ oasgames.mdataDirective.directive('cascadechoice', [
                         for(var i = 0; i < $scope.flagData.length; i++) {
                             if($scope.flagData[i][$scope.flagDataKey] == val) {
                                 $scope.flagData.splice(i, 1);
+                                break;
                             }
                         }
+
+                        $scope.$apply();
                     });
                 });
             },

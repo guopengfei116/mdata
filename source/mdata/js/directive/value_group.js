@@ -148,6 +148,7 @@ oasgames.mdataDirective.directive('valuegroup', [
                         for(var i = 0; i < $scope.resultValue.length; i++) {
                             if($scope.resultValue[i] == val) {
                                 $scope.resultValue.splice(i, 1);
+                                break;
                             }
                         }
                         element.data('value', $scope.resultValue);
@@ -156,8 +157,11 @@ oasgames.mdataDirective.directive('valuegroup', [
                         for(var i = 0; i < $scope.flagData.length; i++) {
                             if($scope.flagData[i]['groupValue'] == val) {
                                 $scope.flagData.splice(i, 1);
+                                break;
                             }
                         }
+
+                        $scope.$apply();
                     });
 
                     /*

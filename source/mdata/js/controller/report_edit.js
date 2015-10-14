@@ -85,6 +85,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                         $scope.guestUserValue = result.data['guestUserValue'];
                         $scope.guestUsers = result.data['guestUser'];
                         $scope.valueList = $scope.appData['val_list'];
+
                         initSelectData();
                     }else {
                         Ui.alert(result.msg);
@@ -282,16 +283,18 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
 
                 //判断Column
                 if($.trim( $('.field-common-value').data('value')) == ""){
-                     Ui.alert("Column must not be empty");
+                     Ui.alert("Value group must not be empty");
                      return;
                 }
 
                 // 提交数据
                 var result = {}, submitApi = ApiCtrl.get('reportSave');
+                result.appid = $scope.selectedAppId;
+
                 if($scope.reportId) {
                     result.id = $scope.reportId;
+                    result.appid = $scope.reportSourceData['reportData']['appid'];
                 }
-                result.appid = $scope.selectedAppId;
                 result.report_name = $scope.reportSourceData['reportData']['report_name'];
                 result.describe = $scope.reportSourceData['reportData']['describe'];
                 result.dimension = $('.field-common-dimension').data('value');

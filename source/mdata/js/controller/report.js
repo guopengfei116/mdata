@@ -25,7 +25,7 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
         $scope.reportId = $route.current.params.reportId;
 
         // report权限
-        $scope.permission = $rootScope.reportPermission && $rootScope.reportPermission[$scope.reportId];
+        $scope.permission = $rootScope.user['authority'] == 1 ? 1 : $rootScope.reportPermission && $rootScope.reportPermission[$scope.reportId];
 
         // 日期组件
         var dataInstance = null;
@@ -57,8 +57,6 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
             }else {
                 Ui.alert(result.msg);
             }
-        }).error(function () {
-            Ui.alert('网络错误');
         });
 
         // 排序数据模型
@@ -125,8 +123,6 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
                     }else {
                         Ui.alert(result.msg);
                     }
-                }).error(function () {
-                    Ui.alert('网络错误');
                 });
             };
         })();

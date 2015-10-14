@@ -48,8 +48,8 @@ oasgames.mdataDirective.directive('recombination', [
                     $scope.upRecombinationData($scope.recombinationData);
 
                     /*
-                     * 添加processor,
-                     * 不允许重复的processor
+                     * 添加值组,
+                     * 值组中第一个值不允许重复
                      * */
                     element.on('click', '.add-select', function () {
                         var val = Echo.prototype.getValue($forms, separator);
@@ -73,14 +73,6 @@ oasgames.mdataDirective.directive('recombination', [
                             }
                         }
 
-                        /*// 重复效验
-                        for(var i = 0; i < $scope.recombinationData.length; i++) {
-                            if($scope.recombinationData[i] == val) {
-                                Ui.alert('请勿添加重复字段');
-                                return;
-                            }
-                        }*/
-
                         // add值
                         $scope.recombinationData.push(val);
                         $scope.upRecombinationData($scope.recombinationData);
@@ -94,13 +86,15 @@ oasgames.mdataDirective.directive('recombination', [
                     element.on('click', '.flag-icon_delete', function () {
                         var val = $(this).data('value');
 
-                        for(var i = 0; i < $scope.recombinationData.length; i++) {
-                            if($scope.recombinationData[i] == val) {
-                                $scope.recombinationData.splice(i, 1);
-                                $scope.upRecombinationData($scope.recombinationData);
-                                return;
+                        $scope.$apply(function () {
+                            for(var i = 0; i < $scope.recombinationData.length; i++) {
+                                if($scope.recombinationData[i] == val) {
+                                    $scope.recombinationData.splice(i, 1);
+                                    $scope.upRecombinationData($scope.recombinationData);
+                                    return;
+                                }
                             }
-                        }
+                        });
                     });
 
                     /*

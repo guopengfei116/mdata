@@ -214,9 +214,10 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
              * 返回account管理页面
              * */
             $scope.cancel = function () {
-                Ui.alert('如果确认则跳转到Account管理页面', function () {
-                    $location.path('/account/manage');
-                    $rootScope && $rootScope.$apply();
+                Ui.alert('Confirm to cancel the operation？', function () {
+                    $scope.$apply(function () {
+                        $location.path('/account/manage');
+                    });
                 });
             }
         })();

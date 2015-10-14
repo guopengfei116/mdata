@@ -78,6 +78,7 @@ $.extend(Select.prototype, {
             var $this = $(this);
             var $select = $this.parents(self.selector);
             var val = $this.val();
+            $select.data('value', val);
         });
 
         // select阻止事件外流
