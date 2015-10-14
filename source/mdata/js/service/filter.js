@@ -54,18 +54,16 @@ oasgames.mdataServices.factory('OrderHandler', [
 ]);
 
 /*
- *
+ * @method 查找符合规则的对象, 返回一个新数组
+ * @parm {Array} data
+ * @parm {Object} config 多个过滤配置 >> {username : searchVal, operaevents : searchVal}
+ * config：其每个属性的过滤值必须为String||Array，如果为arr，则认为比较的是一个深度嵌套对象，会依次向下找，直到倒数第二项作为比较值，最后一项作为正则条件
  * @return {Function} filter方法
  * */
 oasgames.mdataServices.factory('Filter', [
     function () {
 
-        /*
-        * 暴漏方法
-        * @parm {Array} data
-        * @parm {Object} config 多个过滤配置 >> {username : searchVal, operaevents : searchVal}
-        * config：其每个属性的过滤值必须为String||Array，如果为arr，则认为比较的是一个深度嵌套对象，会依次向下找，直到倒数第二项作为比较值，最后一项作为正则条件
-        * */
+
         var filter = function (data, config) {
             var result = [], tempReg = null, tempResultObj, tempObj = null, tempVal = '';
 
@@ -141,7 +139,7 @@ oasgames.mdataServices.factory('Filter', [
 
 
 /*
- * 过滤掉对象key == xxx的对象, 返回一个新数组
+ * @method 过滤掉对象key == xxx的对象, 返回一个新数组
  * */
 oasgames.mdataServices.factory('Exclude', [
     function () {
