@@ -72,12 +72,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                             reportShortcutIdList = result.data;
                             shortcutCache.put('list', result.data);
                             processor();
-                        }else {
-                            console.log(result);
-                            Ui.alert(result.msg);
                         }
-                    }).error(function () {
-                        Ui.alert('网络错误');
                     });
                 }
             },
@@ -205,11 +200,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
 
                         // 初始化收藏标记
                         Shortcuts.init();
-                    }else {
-                        Ui.alert(result.msg);
                     }
-                }).error(function (status) {
-                    Ui.alert('网络错误！');
                 });
             };
 
@@ -325,8 +316,6 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                 }).success(function (result) {
                     if(result && result.code == 200) {
                         $scope.requestDuplicate(reportId, newReportName);
-                    }else {
-                        Ui.alert('report name already exists');
                     }
                 });
             });
@@ -344,13 +333,9 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                         'report_name' : newReportName
                     }
                 }).success(function (result) {
-                    if(result.code == 200) {
+                    if(result && result.code == 200) {
                         $scope.loadReports();
-                    }else {
-                        Ui.alert(result.msg);
                     }
-                }).error(function () {
-                    Ui.alert('网络错误');
                 });
             };
         })();
@@ -424,15 +409,11 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                         method: 'GET',
                         params: {
                             reportId : reportId
-                        },
+                        }
                     }).success(function (result) {
                         if(result && result.code == 200) {
                             Ui.alert('删除成功');
-                        }else {
-                            Ui.alert('删除失败');
                         }
-                    }).error(function (status) {
-                        Ui.alert('网络错误！');
                     });
                 });
             };

@@ -65,9 +65,6 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                     $scope.accountSourceData = result.data[0];
                     $scope.accountEmail = result.data[0].username;
                     AppCache.put('list', result.data);
-                }else {
-                    console.log(result);
-                    Ui.alert(result.msg);
                 }
             });
         }
@@ -114,9 +111,6 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 if(result && result.code == 200) {
                     $scope.appsData = result.data;
                     AppCache.put('list', result.data);
-                }else {
-                    console.log(result);
-                    Ui.alert(result.msg);
                 }
             });
         })();
@@ -139,11 +133,9 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                         method: 'POST',
                         data: {username:httpName}
                     }).success(function (result) {
-                        if(result.code == 200) {                      
+                        if(result && result.code == 200) {
                             flag = 1;
                         }else{
-                            console.log(result);
-                            Ui.alert(result.msg);
                             flag = 0;
                         }
                     });
@@ -202,9 +194,6 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                                 $location.path('/account/manage');
                             });
                         });
-                    }else {
-                        console.log(result);
-                        Ui.alert(result.msg);
                     }
                 });
             };

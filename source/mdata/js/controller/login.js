@@ -64,7 +64,7 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                     xhrFields: {'withCredentials': true},
                     crossDomain: true
                 }).success(function (result) {
-                    if(result.code == 200) {
+                    if(result && result.code == 200) {
 
                         //记录登陆状态
                         authentication.set({
@@ -97,10 +97,11 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
         // $scope.tnewPassword = new tooltip({'position':'rc'}).getNewTooltip();
         // $scope.treNewPassword = new tooltip({'position':'rc'}).getNewTooltip();
         var httpData = $scope.userPassword = {};
-        
         $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
+
         //密码是否正确 1是不正确
         var pswFlag = 1;
+
         //错误提示
         $scope.showError = function(type, pError) {
             $scope[type + 'Error'] = true;
@@ -140,18 +141,20 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
                         return false;
                     }
                 }
-                var httpOldPaW = {"password":$scope.userPassword.oldPassword};
+
                 ///验证旧密码是否正确 
                 $http({
                     url: ApiCtrl.get('checkPaw'),
                     method: 'POST',
-                    data: httpOldPaW,
+                    data: {
+                        "password" : $scope.userPassword.oldPassword
+                    }
                 }).success(function (result) {
-                    if(result.code != 200) {                      
-                        $scope.showError(type, errorInfo[type]['error']);
-                        pswFlag = 1;
-                    }else{
+                    if(result && result.code == 200){
                         pswFlag = 0;
+                    }else {
+                        pswFlag = 1;
+                        $scope.showError(type, errorInfo[type]['error']);
                     }
                 }); 
             }else{  
@@ -219,12 +222,10 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
                     method: 'POST',
                     data: httpData
                 }).success(function (result) {
-                    if(result.code == 200) {
+                    if(result && result.code == 200) {
                         Ui.alert(result.msg, function () {
                             window.history.back();
                         });
-                    }else{
-                        Ui.alert(result.msg);
                     }
                 });
             }

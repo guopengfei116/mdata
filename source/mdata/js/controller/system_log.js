@@ -32,15 +32,11 @@ oasgames.mdataControllers.controller('systemLogCtrl', [
                 method: 'GET',
                 url : ApiCtrl.get('systemLog')
             }).success(function (result) {
-                if(result.code == 200) {
+                if(result && result.code == 200) {
                     $scope.sourceData = result.data;
                     $scope.viewData = result.data;
                     systemCache.put('list', result.data);
-                }else {
-                    Ui.alert(result.msg);
                 }
-            }).error(function () {
-                Ui.alert('数据获取失败，请稍后再试！');
             });
 
         // 搜索自定义处理函数

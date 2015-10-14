@@ -87,11 +87,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                         $scope.valueList = $scope.appData['val_list'];
 
                         initSelectData();
-                    }else {
-                        Ui.alert(result.msg);
                     }
-                }).error(function (status) {
-                    Ui.alert('网络错误！');
                 });
             }
 
@@ -113,9 +109,6 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                         $scope.guestUsers = result.data['guestUser'];
                         $scope.valueList = $scope.appData['val_list'];
                         initSelectData();
-                    }else {
-                        console.log(result);
-                        Ui.alert(result.msg);
                     }
                 });
             }
@@ -202,11 +195,8 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 method : "GET",
                 url : ApiCtrl.get('guestUser')
             }).success(function (result) {
-                if(result.code == 200) {
+                if(result && result.code == 200) {
                     $scope.guestUsers = result.data;
-                }else {
-                    console.log(result);
-                    Ui.alert(result.msg);
                 }
             });
         }
@@ -307,15 +297,12 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                     url : submitApi,
                     data : result
                 }).success(function (result) {
-                    if(result.code == 200) {
+                    if(result && result.code == 200) {
                         Ui.alert('success', function () {
                             $scope.$apply(function () {
                                 $location.path('/report/manage');
                             });
                         });
-                    }else {
-                        console.log(result);
-                        Ui.alert(result.msg);
                     }
                 });
             };

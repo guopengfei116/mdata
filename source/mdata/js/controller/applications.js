@@ -38,11 +38,7 @@ oasgames.mdataControllers.controller('ApplicationManageCtrl', [
                     $scope.sourceData = result.data;
                     $scope.viewData = result.data;
                     appCache.put('list', result.data);
-                }else {
-                    Ui.alert(result.msg);
                 }
-            }).error(function (status) {
-                Ui.alert('网络错误');
             });
 
         // 搜索自定义处理函数

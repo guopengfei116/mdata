@@ -73,9 +73,6 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                     }
                     $scope.appSourceData['proce'] = proce;
                     initSelectData();
-                }else {
-                    console.log(result);
-                    Ui.alert(result.msg);
                 }
             });
         }
@@ -113,9 +110,6 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                 if(result && result.code == 200) {
                     $scope.accountsData = result.data;
                     accountCache.put('list', result.data);
-                }else {
-                    console.log(result);
-                    Ui.alert(result.msg);
                 }
             });
         })();
@@ -177,9 +171,6 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                                 $location.path('/application/manage');
                             });
                         });
-                    }else {
-                        console.log(result);
-                        Ui.alert(result.msg);
                     }
                 });
             };

@@ -72,7 +72,7 @@ oasgames.mdataControllers.controller('navigationCtrl', [
                     method : "GET",
                     url : ApiCtrl.get('shortcuts'),
                 }).success(function (result, status) {
-                    if(result.code == 200) {
+                    if(result && result.code == 200) {
                         if(!result.data) {
                             $scope.shortcuts = [];  // 如果无收藏列表，则初始化一个空数组
                             return;
@@ -80,11 +80,7 @@ oasgames.mdataControllers.controller('navigationCtrl', [
                         $scope.shortcuts = result.data;
                         shortcutCache.put('list', result.data);
                         init();
-                    }else {
-                        Ui.alert(result.msg);
                     }
-                }).error(function () {
-                    Ui.alert('网络错误');
                 });
             }
 

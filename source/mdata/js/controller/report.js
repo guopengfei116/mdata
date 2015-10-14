@@ -54,8 +54,6 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
                     }
                 }
                 dataInstance = new dataComponent(config);
-            }else {
-                Ui.alert(result.msg);
             }
         });
 
@@ -70,7 +68,6 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
 
         // 修改排序规则
         $scope.changeSort = function (type, orderKey) {
-            console.log(orderKey);
             OrderHandler.change($scope.sort, type, orderKey);
         };
 
@@ -120,8 +117,6 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
                 }).success(function (result) {
                     if(result && result.code == 200) {
                         $scope.reportSourceData['table_list'] = result.data['table_list'];
-                    }else {
-                        Ui.alert(result.msg);
                     }
                 });
             };

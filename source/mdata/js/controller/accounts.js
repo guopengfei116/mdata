@@ -39,11 +39,7 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
                 $scope.sourceData = result.data;
                 $scope.viewData = result.data;
                 accountCache.put('list', result.data);
-            }else {
-                Ui.alert(result.msg);
             }
-        }).error(function (status) {
-            Ui.alert('网络错误');
         });
 
         // 搜索自定义处理函数
@@ -90,8 +86,6 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
                     }else {
                         Ui.alert('删除失败');
                     }
-                }).error(function (status) {
-                    Ui.alert('网络错误！');
                 });
             });
         };
