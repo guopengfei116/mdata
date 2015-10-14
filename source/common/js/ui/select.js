@@ -96,7 +96,8 @@ $.extend(Select.prototype, {
 
     initStyle : function ($select) {
         var o = this._o, self = this;
-        var width = $select.find(o.)
+        var width = $select.find(self.main).innerWidth();
+        $select.find(o.content).css('width', width);
     },
 
     initPosition : function () {
