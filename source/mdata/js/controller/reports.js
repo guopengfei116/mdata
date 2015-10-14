@@ -283,9 +283,20 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                 // 绑定duplicate编辑事件
                 var $duplicateEdit = $(tpl);
                 $('.report-manage').on('click', '.confirm-report-duplicate', function () {
-                    var newReportName = $('.input-report-duplicate').val();
-                    $scope.$broadcast('requestDuplicate', reportId, newReportName);
-                    clearDuplicateEdit();
+                    var newReportName = $(this).parents(".row-report-duplicate").find(".input-report-duplicate").val();
+                    var appId = $(this).parents(".container").attr("appid");
+                    var reportNameValFliter = /^[\u4e00-\u9fa5a-zA-Z0-9]+$/;                
+                    if(newReportName == ""){  //判断是否为空
+                        Ui.alert('report name must not be empty');
+                        return;
+                    }
+                    if(!reportNameValFliter.test(newReportName)) {
+                        Ui.alert('Name Only accepts English letters and numbers');
+                        return;
+                    }
+                    $scope.$broadcast('requestDuplicate', reportId, newReportName, appId);
+                    clearDuplicateEdit();                   
+                    
                 });
 
                 $('.report-manage').on('click', '.cancel-report-duplicate', function () {
@@ -293,7 +304,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                 });
 
                 $('.report-manage').on('click', '.icon-duplicate', function () {
-                    $('.input-report-duplicate').val("");
+                    $(this).siblings('.input-report-duplicate').val("");
                 });
 
                 function clearDuplicateEdit () {
@@ -303,15 +314,16 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                 }
             };
 
-            $scope.$on('requestDuplicate', function (e, reportId, newReportName) {
+            $scope.$on('requestDuplicate', function (e, reportId, newReportName, appId) {
                 $http({  // name重复效验
                     url: ApiCtrl.get('checkReportName'),
                     method: 'POST',
                     data: {
+                        'appId' : appId,
                         'report_name' : newReportName
                     }
                 }).success(function (result) {
-                    if(result.code == 200) {
+                    if(result && result.code == 200) {
                         $scope.requestDuplicate(reportId, newReportName);
                     }else {
                         Ui.alert('report name already exists');

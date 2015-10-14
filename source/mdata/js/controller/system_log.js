@@ -21,10 +21,10 @@ oasgames.mdataControllers.controller('systemLogCtrl', [
         * 展示列表数据初始化
         * */
         var systemCache = $cacheFactory.get('system');
-        if(systemCache && systemCache.get('list')) {
-            $scope.sourceData = systemCache.get('list');
-            $scope.viewData = $scope.sourceData;
-        }else {
+        // if(systemCache && systemCache.get('list')) {
+        //     $scope.sourceData = systemCache.get('list');
+        //     $scope.viewData = $scope.sourceData;
+        // }else {
             if(!systemCache) {
                 systemCache = $cacheFactory('system');
             }
@@ -42,7 +42,6 @@ oasgames.mdataControllers.controller('systemLogCtrl', [
             }).error(function () {
                 Ui.alert('数据获取失败，请稍后再试！');
             });
-        }
 
         // 搜索自定义处理函数
         $scope.searchHandler = function (searchVal) {
