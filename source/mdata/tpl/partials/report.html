@@ -34,7 +34,7 @@
         <ul class="inline-block cf">
             <li class="left" ng-repeat="filter in reportSourceData.filter">
                 <span class="checkbox iconfont icon-checkbox-checked" checked="checked" data-value="{{ filter }}"></span>
-                <span class="report-dimension">{{ filter }}</span>
+                <span class="report-dimension">{{ filter.split('#@DELIMITER@#').join('') }}</span>
             </li>
         </ul>
     </fieldset>
@@ -42,7 +42,7 @@
         <span class="field-title-com report-title">Value</span>
         <ul class="inline-block cf">
             <li class="left" ng-repeat="valueObj in reportSourceData.values">
-                <span class="flag">{{ valueObj.value_name }}</span>
+                <span class="flag tooltip-host" data-tooltip-position="tc" data-tooltip-info="{{ valueObj.groupValue.split('#@DELIMITER@#').join('') }}">{{ valueObj.value_name }}</span>
             </li>
         </ul>
     </fieldset>

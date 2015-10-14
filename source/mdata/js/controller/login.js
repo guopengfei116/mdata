@@ -224,7 +224,7 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
                 }).success(function (result) {
                     if(result && result.code == 200) {
                         Ui.alert(result.msg, function () {
-                            window.history.back();
+                            $scope.$emit('logout');
                         });
                     }
                 });
