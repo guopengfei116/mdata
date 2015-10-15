@@ -48,8 +48,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 method: 'GET',
                 params : {
                     uid : httpAccountId
-                },
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                }
             }).success(function (result) {
                 if(result && result.code == 200) {
                     $scope.sourceData = result.data;

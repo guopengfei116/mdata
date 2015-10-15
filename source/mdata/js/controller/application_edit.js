@@ -57,7 +57,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                 url: ApiCtrl.get('appIndex'),
                 method: 'GET',
                 params : {
-                        appid : httpAppId
+                    appid : httpAppId
                 }
             }).success(function (result) {
                 var tempName = '', tempEvent = '';
@@ -92,23 +92,12 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
 
         // getAccount列表数据
         (function () {
-            var accountCache = $cacheFactory.get('account');
-            // if(accountCache && accountCache.get('list')) {
-            //     $scope.accountsData = accountCache.get('list');
-            // }else {
-            if(accountCache){
-
-            }else{
-                accountCache = $cacheFactory('account');
-            }
-        
             $http({
                 url: ApiCtrl.get('appUserList'),
                 method: 'GET'
             }).success(function (result) {
                 if(result && result.code == 200) {
                     $scope.accountsData = result.data;
-                    accountCache.put('list', result.data);
                 }
             });
         })();

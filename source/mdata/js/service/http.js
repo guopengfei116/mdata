@@ -9,6 +9,10 @@ oasgames.mdataServices.provider('Http', [
         return {
             get : API_METHOD.get,
             post : API_METHOD.post,
+
+            /*
+            * get api method
+            * */
             getMethod : function (type) {
                 for(var i = this.get.length - 1; i >= 0; i--) {
                     if(type === this.get[i]) {
@@ -22,25 +26,54 @@ oasgames.mdataServices.provider('Http', [
                     }
                 }
 
-                throw Error('Http Method Not found');
+                return null;
             },
+
             $get : [
                 '$http',
                 'ApiCtrl',
                 function ($http, ApiCtrl) {
                     var self = this;
                     return {
-                        login : function (data, fn) {
-                            var method = self.getMethod('login');
-                            $http({
-                                url: ApiCtrl.get('login'),
-                                method: method,
-                                data: data
-                            }).success(function (result) {
+                        /*
+                         * 发送请求
+                         * */
+                        send : function (type, data, fn) {
+                            var xhrPromise = null;
+                            var url = ApiCtrl.get(type);
+                            var method = self.getMethod(type);
+
+                            if(!url || !method) {
+                                throw Error('Interface Not found');
+                            }
+
+                            if(method === 'GET') {
+                                xhrPromise = this.getSend(url, data);
+                            }else {
+                                xhrPromise = this.postSend(url, data);
+                            }
+
+                            xhrPromise.success(function (result) {
                                 if(result && result.code == 200) {
                                     fn && fn(result.data);
                                 }
                             });
+                        },
+
+                        getSend : function (url, data) {
+                            return $http.get(url, data);
+                        },
+
+                        postSend : function (url, data) {
+                            return $http.post(url, data);
+                        },
+
+                        jsonpSend : function () {
+
+                        },
+
+                        login : function (data, fn) {
+                            this.send('login', data, fn);
                         }
                     }
                 }

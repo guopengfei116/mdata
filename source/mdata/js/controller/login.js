@@ -57,18 +57,20 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                 return;
             }
 
-            Http.login($scope.account, function (data) {
-                //记录登陆状态
-                authentication.set({
-                    token : data.token,
-                    authority : data.authority,
-                    account : data.username
-                });
+            if($scope['ndForm'].$valid) {
+                Http.login($scope.account, function (data) {
+                    //记录登陆状态
+                    authentication.set({
+                        token : data.token,
+                        authority : data.authority,
+                        account : data.username
+                    });
 
-                //初始化用户属性
-                $rootScope.$emit('initUserProperty');
-                $rootScope.$emit('$routeChangeStart');
-            });
+                    //初始化用户属性
+                    $rootScope.$emit('initUserProperty');
+                    $rootScope.$emit('$routeChangeStart');
+                });
+            }
 
             /*var api = ApiCtrl.get('login');
             if($scope['ndForm'].$valid && api ) {
