@@ -47,15 +47,30 @@ textarea {
 button, input[type="button"] {
     box-sizing: content-box;
 }
+
 /* touch浮现的半透明层 */
 a, button, input{
     -webkit-tap-highlight-color: rgba(255,255,255,0);
 }
 
 a {
+    noFocusLine:expression(this.onFocus=this.blur());
+    outline:none;
+    -moz-outline-style:none;
+    -webkit-outline-style:none;
     text-decoration: none;
     font-size: inherit;
     line-height: inherit;
     color: inherit;
 }
 
+/* 所有样式都要针对不同的选择器而定，不要打包整体处理，因为其中一个出问题，其他的都会失效。*/
+$placeholder: ('::-webkit-input-placeholder', '::-moz-placeholder', ':-moz-placeholder', ':-ms-input-placeholder');
+@for $i from 1 through length($placeholder) {
+    input#{nth($placeholder, $i)} {
+        color: #999 !important;
+    }
+    textarea#{nth($placeholder, $i)} {
+        color: #999 !important;
+    }
+}

@@ -88,11 +88,6 @@ template {
 
 a {
   background-color: transparent;
-  text-decoration:none; 
-  noFocusLine:expression(this.onFocus=this.blur());
-  outline:none; 
-  -moz-outline-style:none;
-  -webkit-outline-style:none
 }
 
 /**
