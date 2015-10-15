@@ -36,6 +36,7 @@ oasgames.mdataServicesConfig.config([
                         console.log(resp);
                         Ui.alert(resp.data.msg, function () {
                             authentication.delete();
+                            window.location.hash = '#/login';
                         });
                         return resp;
                     }
@@ -44,7 +45,6 @@ oasgames.mdataServicesConfig.config([
                     }
                     return resp;
                 },
-
 
                 /*
                  * 错误统一处理

@@ -105,8 +105,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 
             $http({
                 url: ApiCtrl.get('userAppList'),
-                method: 'GET',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                method: 'GET'
             }).success(function (result) {
                 if(result && result.code == 200) {
                     $scope.appsData = result.data;
