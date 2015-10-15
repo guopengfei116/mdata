@@ -35,6 +35,7 @@ require('./service/application_cache.js');
 require('./service/filter.js');
 require('./service/frame.js');
 require('./service/get_api.js');
+require('./service/http.js');
 require('./service/user_auth.js');
 require('./service/verify_form.js');
 

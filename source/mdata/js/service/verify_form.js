@@ -8,15 +8,15 @@ oasgames.mdataServices.factory('MdataVerify', [
     function () {
         return {
             errorInfo : {
-                account: {  //登陆用户名
+                account: {    //登陆用户名
                     required: 'E-mail must not be empty',
                     pattern: 'This user does not exist'
                 },
-                password: { //登陆密码
+                password: {    //登陆密码
                     required: 'Password must not be empty',
                     pattern: 'Incorrect Password '
                 },
-                appName: {  //app页用户名
+                appName: {    //app页用户名
                     required: 'Name must not be empty',
                     pattern: 'Name Only accepts English letters and numbers'
                 },
@@ -32,7 +32,7 @@ oasgames.mdataServices.factory('MdataVerify', [
                     required: 'Password must not be empty',
                     pattern: 'Incorrect Format,Password must be 6-20 characters with English letters and numbers'
                 },
-                reportName: {  //app页用户名
+                reportName: {    //app页用户名
                     required: 'Name must not be empty',
                     pattern: 'Name Only accepts English letters and numbers'
                 }

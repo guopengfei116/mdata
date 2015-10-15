@@ -11,7 +11,8 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
     'ApiCtrl',
     'AUTHORITY',
     'MdataVerify',
-    function ($rootScope, $scope, $http, $location, ApiCtrl, AUTHORITY, MdataVerify) {
+    'Http',
+    function ($rootScope, $scope, $http, $location, ApiCtrl, AUTHORITY, MdataVerify, Http) {
 
         //账号
         $scope.account = {};
@@ -42,6 +43,7 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                 $scope.submit();
             }   
         });
+
         //登陆
         $scope.submit = function () {
 
@@ -55,7 +57,20 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                 return;
             }
 
-            var api = ApiCtrl.get('login');
+            Http.login($scope.account, function (data) {
+                //记录登陆状态
+                authentication.set({
+                    token : data.token,
+                    authority : data.authority,
+                    account : data.username
+                });
+
+                //初始化用户属性
+                $rootScope.$emit('initUserProperty');
+                $rootScope.$emit('$routeChangeStart');
+            });
+
+            /*var api = ApiCtrl.get('login');
             if($scope['ndForm'].$valid && api ) {
                 $http({
                     url: api,
@@ -78,7 +93,7 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                         $rootScope.$emit('$routeChangeStart');
                     }
                 });
-            }
+            }*/
         }
     }
 ]);

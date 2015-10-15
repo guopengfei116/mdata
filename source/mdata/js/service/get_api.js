@@ -6,10 +6,10 @@
 oasgames.mdataServices.provider('ApiCtrl', [
     'RUN_TIME_SYSTEM',
     'API_CONFIG',
-    function (runTimeSystem, apiAll) {
+    function (RUN_TIME_SYSTEM, API_CONFIG) {
         return {
-            API : runTimeSystem.online ? apiAll.online : apiAll.local,
-            localhost : runTimeSystem.domain ? 'http://api.mdata.com' : '',
+            API : RUN_TIME_SYSTEM.online ? API_CONFIG.online : API_CONFIG.local,
+            localhost : RUN_TIME_SYSTEM.domain ? 'http://api.mdata.com' : '',
             setApi : function (name, url) {
                 this.API[name] = url;
             },
@@ -17,13 +17,11 @@ oasgames.mdataServices.provider('ApiCtrl', [
                 var self = this;
                 return {
                     get : function (name) {
-                        
                         var url = self.API[name];
                         if(!url) {
                             console.log('api--' + name + '不存在');
                             return '';
                         }
-
                         return self.localhost + url;
                     },
                     set : function (name, url) {

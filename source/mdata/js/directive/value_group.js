@@ -187,11 +187,12 @@ oasgames.mdataDirective.directive('valuegroup', [
                             console.log(vals);
                             var $tempInput = null;
                             var valMark = 2;
-                            while(valMark < vals.length) {
 
-                                if(!vals.length || !valMark) {
-                                    break;
-                                }
+                            if(!vals || !vals.length) {
+                                return;
+                            }
+
+                            while(valMark < vals.length) {
 
                                 // 第一个value
                                 if(valMark == 2) {
@@ -216,6 +217,8 @@ oasgames.mdataDirective.directive('valuegroup', [
                                     valMark++;
                                     continue;
                                 }
+
+                                valMark++;
                             }
                         }
 
