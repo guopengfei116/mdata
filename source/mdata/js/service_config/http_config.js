@@ -76,9 +76,10 @@ oasgames.mdataServicesConfig.config([
             return interceptor;
         });
 
-        $httpProvider.defaults.useXDomain = false;
-        $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-        $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded';
+        $httpProvider.defaults.useXDomain = true;
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded, charset=UTF-8';
+        $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded, charset=UTF-8';
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
         //$httpProvider.defaults.xhrFields = {'withCredentials': true};
         //$httpProvider.defaults.crossDomain = true;
     }
