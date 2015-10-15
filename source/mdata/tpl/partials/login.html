@@ -9,8 +9,7 @@
     <fieldset class="fieldset fieldset-group fieldset-password" ng-class="{'fieldset-error':passwordError}">
         <label class="fieldset-group_label iconfont icon-key"></label>
         <input ng-model="account.password" class="fieldset_text" type="password"
-               placeholder="Password" required ng-pattern="/^\w{6,20}$/"
-               name="ndPassword" ng-blur="blur('password', ndForm.ndPassword.$error)"
+               placeholder="Password" required name="ndPassword" ng-blur="blur('password', ndForm.ndPassword.$error)"
                ng-focus="focus('password')" >
     </fieldset>
     <fieldset class="fieldset">
