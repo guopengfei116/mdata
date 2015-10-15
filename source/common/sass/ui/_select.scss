@@ -20,6 +20,7 @@
         line-height: 32px;
         &_textarea, &_text {
             padding: 0 6px;
+            width: 100%;
             background-color: transparent;
             @include ellipsis();
         }
