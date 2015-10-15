@@ -75,6 +75,14 @@ oasgames.mdataConstant.constant("AUTHORITY", {
 });
 
 /*
+ * 缓存启用开关
+ * */
+oasgames.mdataConstant.constant("CACHE_SETTINGS", {
+    applicationListCache : true,
+    accountListCache : true
+});
+
+/*
  * app创建time_zone选项
  * */
 oasgames.mdataConstant.constant("TIME_ZONE", [
