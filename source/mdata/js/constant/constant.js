@@ -6,6 +6,7 @@ oasgames.mdataConstant.constant("RUN_TIME_SYSTEM", {
     domain : true
 });
 
+
 /*
  * 接口
  * */
@@ -60,6 +61,45 @@ oasgames.mdataConstant.constant("API_CONFIG", {
         'guestUser' : '/mdata/js/guest_user.json'
     }
 });
+
+
+/*
+ * 接口method
+ * */
+oasgames.mdataConstant.constant("API_METHOD", {
+    get : [
+        'logout',
+        'appIndex',
+        'appUserList',
+        'userIndex',
+        'userAppList',
+        'checkEmail',
+        'systemLog',
+        'reportDel',
+        'shortcuts',
+        'guestUser'
+    ],
+    post : [
+        'login',
+        'changePaw',
+        'checkPaw',
+        'appUpdate',
+        'appCreate',
+        'userUpdate',
+        'userCreate',
+        'userDelete',
+        'reports',
+        'reportView',
+        'reportSave',
+        'reportCreate',
+        'reportUpdate',
+        'reportCopy',
+        'checkReportName',
+        'shortcutAdd',
+        'shortcutDel'
+    ]
+});
+
 
 /*
  * 用户权限对照表

@@ -4,16 +4,11 @@
  * @return {Function} 获取接口url
  * */
 oasgames.mdataServices.provider('Http', [
-    function () {
+    'API_METHOD',
+    function (API_METHOD) {
         return {
-            get : [
-
-            ],
-
-            post : [
-                'login'
-            ],
-
+            get : API_METHOD.get,
+            post : API_METHOD.post,
             getMethod : function (type) {
                 for(var i = this.get.length - 1; i >= 0; i--) {
                     if(type === this.get[i]) {
@@ -29,7 +24,6 @@ oasgames.mdataServices.provider('Http', [
 
                 throw Error('Http Method Not found');
             },
-
             $get : [
                 '$http',
                 'ApiCtrl',
