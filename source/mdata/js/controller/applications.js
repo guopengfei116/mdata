@@ -10,7 +10,8 @@ oasgames.mdataControllers.controller('ApplicationManageCtrl', [
     'Filter',
     'OrderHandler',
     'ApiCtrl',
-    function ($rootScope, $scope, $http, $cacheFactory, Filter, OrderHandler, ApiCtrl) {
+    'ApplicationCache',
+    function ($rootScope, $scope, $http, $cacheFactory, Filter, OrderHandler, ApiCtrl, ApplicationCache) {
 
         // 定义default数据
         $scope.searchPlaceholder = 'Search AppName AppId...';
@@ -18,16 +19,11 @@ oasgames.mdataControllers.controller('ApplicationManageCtrl', [
         $scope.viewData = [];
 
         // getApp列表数据
-        var appCache = $cacheFactory.get('app');
-        // if(appCache && appCache.get('list')) {
-        //     $scope.sourceData = appCache.get('list');
-        //     $scope.viewData = $scope.sourceData;
-        // }else {
-            if(appCache) {
-                console.log(appCache);
-            }else {
-                appCache = $cacheFactory('app');
-            }
+        var appListCache = ApplicationCache.get();
+        if(appListCache && $rootScope.applicationListCache) {
+            $scope.sourceData = appListCache;
+            $scope.viewData = appListCache;
+        }else {
             // 异步获取
             $http({
                 url: ApiCtrl.get('appIndex'),
@@ -36,9 +32,11 @@ oasgames.mdataControllers.controller('ApplicationManageCtrl', [
                 if(result && result.code == 200) {
                     $scope.sourceData = result.data;
                     $scope.viewData = result.data;
-                    appCache.put('list', result.data);
+                    ApplicationCache.set(result.data);
                 }
             });
+        }
+
 
         // 搜索自定义处理函数
         $scope.searchHandler = function (searchVal) {

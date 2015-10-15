@@ -1,7 +1,7 @@
 
 /*
  * @account和application中的联动指令
- * @* 本指令和cascadechoice指令最大区别是需要维护多组数据，不支持回显
+ * @* 本指令和cascadechoice指令最大区别是需要维护多组数据，不支持回显，支持源数据缓存
  *
  * */
 oasgames.mdataDirective.directive('cascadechoice', [
@@ -18,7 +18,8 @@ oasgames.mdataDirective.directive('cascadechoice', [
                 flagDataKey : '@',
                 flagData : '=',
                 selectData : '=',
-                selectedData : '='
+                selectedData : '=',
+                cache : '='
             },
             link: function ($scope, element, attr, reScope) {
                 var $select = element.find('.select');
@@ -109,6 +110,12 @@ oasgames.mdataDirective.directive('cascadechoice', [
                     // 添加未编辑时的初始值
                     element.data('value', $scope.resultValue);
 
+                    if($scope.cache) {
+                        element.data('cacheValue', $scope.flagData);
+                        console.log($scope.flagData);
+                        console.log(element.data('cacheValue'));
+                    }
+
                     // 把初始值添加进入已选值总和
                     $scope.selectedData.push.apply($scope.selectedData, $scope.resultValue);
 
@@ -138,6 +145,10 @@ oasgames.mdataDirective.directive('cascadechoice', [
 
                         // 更新flag展示列表
                         $scope.flagData.push(val);
+
+                        if($scope.cache) {
+                            element.data('cacheValue', $scope.flagData);
+                        }
 
                         // 清空值
                         $select.data('value', '');
@@ -173,6 +184,10 @@ oasgames.mdataDirective.directive('cascadechoice', [
                                 $scope.flagData.splice(i, 1);
                                 break;
                             }
+                        }
+
+                        if($scope.cache) {
+                            element.data('cacheValue', $scope.flagData);
                         }
 
                         $scope.$apply();

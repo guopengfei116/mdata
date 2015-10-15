@@ -3,14 +3,14 @@
  *  account manage控制器
  * */
 oasgames.mdataControllers.controller('AccountManageCtrl', [
+    '$rootScope',
     '$scope',
-    '$timeout',
-    '$cacheFactory',
     '$http',
     'Filter',
     'OrderHandler',
     'ApiCtrl',
-    function ($scope, $timeout, $cacheFactory, $http, Filter, OrderHandler, ApiCtrl) {
+    'AccountCache',
+    function ($rootScope, $scope, $http, Filter, OrderHandler, ApiCtrl, AccountCache) {
 
         // 定义default数据
         $scope.searchPlaceholder = 'Search Name Email...';
@@ -18,28 +18,22 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
         $scope.viewData = [];
 
         // getAccount列表数据
-        var accountCache = $cacheFactory.get('account');
-        // if(accountCache && accountCache.get('list')) {
-        //     $scope.sourceData = accountCache.get('list');
-        //     $scope.viewData = $scope.sourceData;
-        // }else {
-            if(accountCache) {
-                console.log(accountCache);
-            }else {
-                accountCache = $cacheFactory('account');
-            }
-            
-        // 异步获取
-        $http({
-            url: ApiCtrl.get('userIndex'),
-            method: 'GET'
-        }).success(function (result) {
-            if(result && result.code == 200) {
-                $scope.sourceData = result.data;
-                $scope.viewData = result.data;
-                accountCache.put('list', result.data);
-            }
-        });
+        var accountListCache = AccountCache.get();
+        if(accountListCache && $rootScope.accountListCache) {
+            $scope.sourceData = accountListCache;
+            $scope.viewData = accountListCache;
+        }else {
+            $http({
+                url: ApiCtrl.get('userIndex'),
+                method: 'GET'
+            }).success(function (result) {
+                if(result && result.code == 200) {
+                    $scope.sourceData = result.data;
+                    $scope.viewData = result.data;
+                    AccountCache.set(result.data);
+                }
+            });
+        }
 
         // 搜索自定义处理函数
         $scope.searchHandler = function (searchVal) {
@@ -74,13 +68,10 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
                 $http({
                     url:  ApiCtrl.get('userDelete'),
                     method: 'POST',
-                    data: {uid : accountId},
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                    transformRequest: function(data){
-                        return $.param(data);
-                    }
+                    data: {uid : accountId}
                 }).success(function (result) {
                     if(result && result.code == 200) {
+                        AccountCache.deleteItem(accountId);
                         Ui.alert('删除成功');
                     }else {
                         Ui.alert('删除失败');

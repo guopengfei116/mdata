@@ -13,7 +13,8 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
     'Application',
     'MdataVerify',
     'ApiCtrl',
-    function ($rootScope, $scope, $cacheFactory, $route, $http, $location, Application, MdataVerify, ApiCtrl) {
+    'AccountCache',
+    function ($rootScope, $scope, $cacheFactory, $route, $http, $location, Application, MdataVerify, ApiCtrl, AccountCache) {
 
         // 所有的app列表
         $scope.appsData = [];
@@ -42,15 +43,6 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
 
         // getAccount数据
         function initAccountData () {
-            var AppCache = $cacheFactory.get('app');
-            // if(AppCache && AppCache.get('list')) {
-            //     $scope.appsData = AppCache.get('list');
-            // }else {
-                if(AppCache) {
-                    console.log(AppCache);
-                }else {
-                    AppCache = $cacheFactory('app');
-                }
             $http({
                 url: ApiCtrl.get('userIndex'),
                 method: 'GET',
@@ -64,7 +56,6 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                     $scope.viewData = result.data;
                     $scope.accountSourceData = result.data[0];
                     $scope.accountEmail = result.data[0].username;
-                    AppCache.put('list', result.data);
                 }
             });
         }
@@ -188,6 +179,13 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                     data: result
                 }).success(function (result) {
                     if(result && result.code == 200) {
+                        httpApp.reportAdmin = $(".field-account").data('cacheValue');
+                        httpApp.reportViewer = $(".field-account").next().data('cacheValue');
+                        if(AccountCache.addItem(httpApp)) {
+                            $rootScope.accountListCache = true;
+                        }else {
+                            $rootScope.accountListCache = false;
+                        }
                         Ui.alert('success', function () {
                             $scope.$apply(function () {
                                 $location.path('/account/manage');

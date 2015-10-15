@@ -16,7 +16,8 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
     'Filter',
     'MdataVerify',
     'ApiCtrl',
-    function ($rootScope, $scope, $cacheFactory, $route, $http, $location, processors, timeZone, Account, Filter, MdataVerify,ApiCtrl) {
+    'ApplicationCache',
+    function ($rootScope, $scope, $cacheFactory, $route, $http, $location, processors, timeZone, Account, Filter, MdataVerify, ApiCtrl, ApplicationCache) {
 
         // processor可选列表-常量
         $scope.processors = processors;
@@ -38,6 +39,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
 
         // 用于区分创建和编辑状态
         $scope.appIsExisting = false;
+
         /*
          * 如果有id，则说明是编辑状态
          * accountId先写死方便调试获取json-data
@@ -163,6 +165,14 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                     data: httpApp
                 }).success(function (result) {
                     if(result && result.code == 200) {
+                        delete httpApp.proce;
+                        httpApp.appadmin = $(".field-account").data('cacheValue');
+                        httpApp.appuser = $(".field-account").next().data('cacheValue');
+                        if(ApplicationCache.addItem(httpApp)) {
+                            $rootScope.applicationListCache = true;
+                        }else {
+                            $rootScope.applicationListCache = false;
+                        }
                         Ui.alert('success', function () {
                             $scope.$apply(function () {
                                 $location.path('/application/manage');

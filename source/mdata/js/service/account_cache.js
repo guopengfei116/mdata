@@ -1,29 +1,29 @@
 
 /*
- * application 列表缓存处理
+ * account 列表缓存处理
  * @return {Object} functions
  * */
-oasgames.mdataServices.factory('ApplicationCache', [
+oasgames.mdataServices.factory('AccountCache', [
     '$cacheFactory',
     function ($cacheFactory) {
         return {
 
             /*
-            * cache application list
-            * */
+             * cache account list
+             * */
             set : function (data) {
-                var cache = $cacheFactory.get('application');
+                var cache = $cacheFactory.get('account');
                 if(!cache) {
-                    cache = $cacheFactory('application');
+                    cache = $cacheFactory('account');
                 }
                 cache.put('list', data);
             },
 
             /*
-             * get application list
+             * get account list
              * */
             get : function () {
-                var cache = $cacheFactory.get('application'),
+                var cache = $cacheFactory.get('account'),
                     listCache = null;
                 if(cache && cache.get('list')) {
                     listCache = cache.get('list');
@@ -32,7 +32,7 @@ oasgames.mdataServices.factory('ApplicationCache', [
             },
 
             /*
-             * add application list
+             * add account list
              * @return {Boole} 添加结果
              * */
             addItem : function (data) {
@@ -41,7 +41,7 @@ oasgames.mdataServices.factory('ApplicationCache', [
                     return false;
                 }
                 for(var i = listCache.length - 1; i >= 0; i--) {
-                    if(data['appid'] == listCache[i]['appid']) {
+                    if(data['uid'] == listCache[i]['uid']) {
                         listCache.splice(i, 1, data);
                         return true;
                     }
@@ -51,16 +51,16 @@ oasgames.mdataServices.factory('ApplicationCache', [
             },
 
             /*
-             * delete application list
+             * delete account list
              * @return {Boole} 删除结果
              * */
-            deleteItem : function (appid) {
+            deleteItem : function (uid) {
                 var listCache = this.get();
-                if(!listCache || !appid) {
+                if(!listCache || !uid) {
                     return false;
                 }
                 for(var i = listCache.length - 1; i >= 0; i--) {
-                    if(appid == listCache[i]['appid']) {
+                    if(uid == listCache[i]['uid']) {
                         listCache.splice(i, 1);
                         return true;
                     }

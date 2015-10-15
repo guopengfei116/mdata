@@ -30,6 +30,8 @@ require('./constant/constant.js');
  * 服务
  * */
 oasgames.mdataServices = angular.module('mdataServices', ['ngResource']);
+require('./service/account_cache.js');
+require('./service/application_cache.js');
 require('./service/filter.js');
 require('./service/frame.js');
 require('./service/get_api.js');

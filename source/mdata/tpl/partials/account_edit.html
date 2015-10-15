@@ -22,7 +22,7 @@
     </fieldset>
     <legend class="field-title-com account-authority">Authority</legend>
     <section>
-        <cascadechoice select-data="appsData" selected-data="selectedAppids" select-search-data="reportAdminSearch" flag-data="accountSourceData['reportAdmin']" flag-data-key="appid">
+        <cascadechoice select-data="appsData" selected-data="selectedAppids" select-search-data="reportAdminSearch" flag-data="accountSourceData['reportAdmin']" flag-data-key="appid" cache="true">
             <legend class="field-title-account">As Report Admin</legend>
             <div>
                 <div class="select select-host select-btn">
@@ -49,7 +49,7 @@
                 </span>
             </div>
         </cascadechoice>
-        <cascadechoice select-data="appsData" selected-data="selectedAppids" select-search-data="reportViewerSearch" flag-data="accountSourceData['reportViewer']"  flag-data-key="appid">
+        <cascadechoice select-data="appsData" selected-data="selectedAppids" select-search-data="reportViewerSearch" flag-data="accountSourceData['reportViewer']"  flag-data-key="appid" cache="true">
             <legend class="field-title-account">As Report Viewer</legend>
             <div>
                 <div class="select select-host select-btn">
