@@ -30,14 +30,14 @@ oasgames.mdataServices.factory('PageOutline', [
 /*
  * @provider {String} breadcrumbSeparator 分隔符
  * @provider {Array} endSign 结束路径
- * @provider {Object} parseMethod 自定义生成breadcrumb，key为正值，value为处理方法
- * @return {Function} 解析path为breadcrumb
+ * @provider {Object} parseMethod 自定义生成breadcrumb，key为正则，value为处理方法
+ * @return {Function} 解析path对应的breadcrumb
  * */
 oasgames.mdataServices.provider('Breadcrumb', [
     function () {
         return {
             breadcrumbSeparator : '&nbsp;&gt;&nbsp;',
-            endSign : ['edit'],
+            endSign : ['edit', 'view'],
             parseMethod : {
                 '^\\/system\\/log$' : function () {
                     return ['systemLog'];
@@ -73,6 +73,7 @@ oasgames.mdataServices.provider('Breadcrumb', [
                                     continue;
                                 }
 
+                                //奇数添加分隔符
                                 if(breadcrumbs.length % 2 == 1) {
                                     breadcrumbs.push(self.breadcrumbSeparator);
                                 }
@@ -84,7 +85,7 @@ oasgames.mdataServices.provider('Breadcrumb', [
                                     breadcrumbs.push(pathChildren[i]);
                                 }
 
-                                //结束标记
+                                //路径结束标记
                                 for(var j = 0; j < self.endSign.length; j++) {
                                     if(pathChildren[i] == self.endSign[j]) {
                                         break outerloop;

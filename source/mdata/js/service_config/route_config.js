@@ -69,7 +69,7 @@ oasgames.mdataServicesConfig.config([
                 templateUrl: '/mdata/tpl/partials/report_edit.html',
                 controller: 'reportEditCtrl'
             })
-            .when('/report/view/:reportId', {
+            .when('/report/manage/view/:reportId', {
                 templateUrl: '/mdata/tpl/partials/report.html',
                 controller: 'reportViewCtrl'
             })

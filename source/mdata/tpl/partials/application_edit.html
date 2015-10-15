@@ -48,7 +48,7 @@
                 <ul class="select_content">
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
-                    <li class="select_content_list" ng-repeat="account in accountsData | exclude:selectedAccountuids:'uid' | filter:{nickname: reportAdminSearch} | orderBy:'nickname' ">
+                    <li class="select_content_list" ng-repeat="account in accountsData | exclude:selectedAccountuids:'uid' | filter:{username: reportAdminSearch} | orderBy:'username' ">
                         <a class="select_content_list_value" data-value="{{ account }}">{{ account.username }}</a>
                     </li>
                 </ul>
@@ -75,7 +75,7 @@
                 <ul class="select_content">
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
-                    <li class="select_content_list" ng-repeat="account in accountsData | exclude:selectedAccountuids:'uid' | filter:{nickname: reportViewerSearch} | orderBy:'nickname' ">
+                    <li class="select_content_list" ng-repeat="account in accountsData | exclude:selectedAccountuids:'uid' | filter:{username: reportViewerSearch} | orderBy:'username' ">
                         <a class="select_content_list_value" data-value="{{ account }}">{{ account.username }}</a>
                     </li>
                 </ul>

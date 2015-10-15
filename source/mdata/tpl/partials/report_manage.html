@@ -17,7 +17,7 @@
         <dd ng-show="reportsShow[$index]">
             <ul class="row row-report-{{ $index }}" ng-repeat="report in app.reports">
                 <li class="row_column row_column-2">
-                    <a href="#/report/view/{{ report.id }}">{{ report.report_name }}</a>
+                    <a href="#/report/manage/view/{{ report.id }}">{{ report.report_name }}</a>
                 </li>
                 <li class="row_column row_column-2">
                     <span ng-if="userPermission < 2 || app.permission < 2" ng-click="reportCopyEvent(report.id, report.report_name, appIndex, $index)"

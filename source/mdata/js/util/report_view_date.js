@@ -41,7 +41,7 @@ var reportViewDate = function (options) {
         onClick: function(target, cell, date, data) {
 
             target.val(date.getFullYear() + '-' +
-                date.getMonth() + '-' +
+                (date.getMonth() + 1) + '-' +
                 date.getDate());
 
             if(data != null) {
@@ -71,7 +71,7 @@ var reportViewDate = function (options) {
         onClick: function(target, cell, date, data) {
 
             target.val(date.getFullYear() + '-' +
-                date.getMonth() + '-' +
+                (date.getMonth() + 1) + '-' +
                 date.getDate());
 
             if(data != null) {
