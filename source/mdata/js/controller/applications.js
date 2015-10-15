@@ -31,8 +31,7 @@ oasgames.mdataControllers.controller('ApplicationManageCtrl', [
             // 异步获取
             $http({
                 url: ApiCtrl.get('appIndex'),
-                method: 'GET',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                method: 'GET'
             }).success(function (result) {
                 if(result && result.code == 200) {
                     $scope.sourceData = result.data;

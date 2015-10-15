@@ -55,10 +55,8 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                 url: ApiCtrl.get('appIndex'),
                 method: 'GET',
                 params : {
-                        appid : httpAppId,
-                        time: new Date().getTime()
-                    },
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                        appid : httpAppId
+                }
             }).success(function (result) {
                 var tempName = '', tempEvent = '';
                 if(result && result.code == 200) {
@@ -104,8 +102,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
         
             $http({
                 url: ApiCtrl.get('appUserList'),
-                method: 'GET',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                method: 'GET'
             }).success(function (result) {
                 if(result && result.code == 200) {
                     $scope.accountsData = result.data;
