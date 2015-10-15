@@ -68,7 +68,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                         method : "GET",
                         url : ApiCtrl.get('shortcuts')
                     }).success(function (result) {
-                        if(result.code == 200) {
+                        if(result && result.code == 200) {
                             reportShortcutIdList = result.data;
                             shortcutCache.put('list', result.data);
                             processor();
@@ -141,7 +141,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                 };
             },
 
-            // 修改当前收藏操作的report和所属app对象
+            // 记录收藏的report和所属app对象
             changeOperationObject : function (report, app) {
                 this.operationObject.report = report;
                 this.operationObject.app = app;
@@ -158,6 +158,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                 ).success(function () {
                     $scope.$emit('addShortcut', self.operationObject.report, self.operationObject.app);
                 }).error(function () {
+                        console.log('addShortcutError');
                     $scope.reportsShortcutStatus[reportId] = !$scope.reportsShortcutStatus[reportId];
                 });
             },
@@ -173,6 +174,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                 ).success(function () {
                     $scope.$emit('cancelShortcut', self.operationObject.report, self.operationObject.app);
                 }).error(function () {
+                        console.log('cancelShortcutError');
                     $scope.reportsShortcutStatus[reportId] = !$scope.reportsShortcutStatus[reportId];
                 });
             }
@@ -189,7 +191,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                     url: ApiCtrl.get('reports'),
                     method: 'GET'
                 }).success(function (result) {
-                    if(result.code == 200) {
+                    if(result && result.code == 200) {
                         $scope.sourceData = result.data;
                         $scope.viewData = result.data;
 
@@ -230,11 +232,10 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                 for(var i = 0; i < reportsList.length; i++) {
                     for(var j = 0; j < reportsList[i]['reports'].length; j++) {
                         $rootScope.reportPermission[reportsList[i]['reports'][j]['id']] = reportsList[i]['permission'];
-
-                        // 如果有任意一个app的管理员权限，则有权限创建report
-                        if(reportsList[i]['permission'] == 1 || !$scope.createAppAuthority) {
-                            $scope.createAppAuthority = true;
-                        }
+                    }
+                    // 如果有任意一个app的管理员权限，则有权限创建report
+                    if(reportsList[i]['permission'] == 1) {
+                        $scope.createAppAuthority = true;
                     }
                 }
             }

@@ -33,6 +33,7 @@ oasgames.mdataServicesConfig.config([
                         statusCode = resp.data.code;
                     }
                     if(statusCode == 401) {
+                        console.log(resp);
                         Ui.alert(resp.data.msg, function () {
                             authentication.delete();
                         });
