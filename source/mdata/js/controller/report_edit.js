@@ -85,7 +85,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                         $scope.guestUserValue = result.data['guestUserValue'];
                         $scope.guestUsers = result.data['guestUser'];
                         $scope.valueList = $scope.appData['val_list'];
-
+                        $scope.reportName = result.data['reportData']['report_name'];
                         initSelectData();
                     }
                 });
@@ -214,6 +214,10 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
 
                         //验证report name是否重复  
                         var report_name = $scope.reportSourceData['reportData']['report_name'];
+                        if($scope.reportName === report_name) {
+                            flag = 0;
+                            return;
+                        }
                         var app_id = $scope.selectedAppId || $scope.reportSourceData['reportData']['appid'];
                         $http({
                             url: ApiCtrl.get('checkReportName'),
