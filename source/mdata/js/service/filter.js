@@ -2,7 +2,7 @@
  * 过滤器排序方法
  * */
 oasgames.mdataServices.factory('OrderHandler', [
-    function ($resource, ApiCtrl) {
+    function () {
         return {
             up : function (key) {
 
@@ -62,7 +62,6 @@ oasgames.mdataServices.factory('OrderHandler', [
  * */
 oasgames.mdataServices.factory('Filter', [
     function () {
-
 
         var filter = function (data, config) {
             var result = [], tempReg = null, tempResultObj, tempObj = null, tempVal = '';

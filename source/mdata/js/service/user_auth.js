@@ -2,7 +2,6 @@
 /*
  * 用户登录验证
  * @return {Object} UserAuth
- *
  * */
 oasgames.mdataServices.provider('UserAuth', [
     function () {
