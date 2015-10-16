@@ -40,8 +40,34 @@ oasgames.mdataServices.provider('Http', [
                 function ($http, ApiCtrl) {
                     var self = this;
                     return {
+
                         /*
-                         * 发送请求
+                         * 原始方法
+                         * */
+                        getSend : function (url, data) {
+                            if(!data) {
+                                return $http.get(url);
+                            }
+                            return $http.get(url, {params: data});
+                        },
+
+                        postSend : function (url, data) {
+                            if(!data) {
+                                return $http.post(url);
+                            }
+                            return $http.post(url, data);
+                        },
+
+                        jsonpSend : function (url, data) {
+                            if(!data) {
+                                return $http.jsonp(url);
+                            }
+                            return $http.jsonp(url, data);
+                        },
+
+
+                        /*
+                         * 公共方法
                          * */
                         send : function (type, data, fn) {
                             var xhrPromise = null;
@@ -73,33 +99,16 @@ oasgames.mdataServices.provider('Http', [
                             return xhrPromise;
                         },
 
-                        getSend : function (url, data) {
-                            if(!data) {
-                                return $http.get(url);
-                            }
-                            return $http.get(url, {params: data});
-                        },
 
-                        postSend : function (url, data) {
-                            if(!data) {
-                                return $http.post(url);
-                            }
-                            return $http.post(url, data);
-                        },
-
-                        jsonpSend : function (url, data) {
-                            if(!data) {
-                                return $http.jsonp(url);
-                            }
-                            return $http.jsonp(url, data);
-                        },
-
+                        /*
+                         * login interface method
+                         * */
                         login : function (data, fn) {
                             return this.send('login', data, fn);
                         },
 
-                        reports : function (fn) {
-                            return this.send('reports', null, fn);
+                        logout : function () {
+                            return this.send('logout');
                         },
 
 
@@ -118,11 +127,11 @@ oasgames.mdataServices.provider('Http', [
                         },
 
                         appCreate : function (data, fn) {
-                            return this.send('userCreate', data, fn);
+                            return this.send('appCreate', data, fn);
                         },
 
                         appUpdate : function (data, fn) {
-                            return this.send('userUpdate', data, fn);
+                            return this.send('appUpdate', data, fn);
                         },
 
 
@@ -154,7 +163,15 @@ oasgames.mdataServices.provider('Http', [
 
                         userDelete : function (data, fn) {
                             return this.send('userDelete', data, fn);
-                        }
+                        },
+
+
+                        /*
+                         * report interface method
+                         * */
+                        reports : function (fn) {
+                            return this.send('reports', null, fn);
+                        },
                     }
                 }
             ]
