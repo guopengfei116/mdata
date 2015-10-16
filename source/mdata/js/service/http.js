@@ -181,6 +181,14 @@ oasgames.mdataServices.provider('Http', [
                             return this.send('shortcuts', null, fn);
                         },
 
+                        shortcutAdd : function (data, fn) {
+                            return this.send('shortcutAdd', data, fn);
+                        },
+
+                        shortcutDel : function (data, fn) {
+                            return this.send('shortcutDel', data, fn);
+                        },
+
 
                         /*
                          * report interface method
@@ -188,6 +196,46 @@ oasgames.mdataServices.provider('Http', [
                         reports : function (fn) {
                             return this.send('reports', null, fn);
                         },
+
+                        reportView : function (data, fn) {
+                            return this.send('reportView', data, fn);
+                        },
+
+                        reportUpdate : function (data, fn) {
+                            return this.send('reportUpdate', data, fn);
+                        },
+
+                        reportCreate : function (fn) {
+                            return this.send('reportCreate', null, fn);
+                        },
+
+                        reportSave : function (data, fn) {
+                            return this.send('reportSave', data, fn);
+                        },
+
+                        reportDuplicate : function (data, fn) {
+                            return this.send('reportDuplicate', data, fn);
+                        },
+
+                        reportDel : function (data, fn) {
+                            return this.send('reportDel', data, fn);
+                        },
+
+                        guestUser : function (fn) {
+                            return this.send('guestUser', null, fn);
+                        },
+
+                        checkReportName : function (data, fn) {
+                            return this.send('checkReportName', data, fn);
+                        },
+
+
+                        /*
+                         * log interface method
+                         * */
+                        systemLog : function (data, fn) {
+                            return this.send('checkReportName', data, fn);
+                        }
                     }
                 }
             ]

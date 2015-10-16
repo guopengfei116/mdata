@@ -73,22 +73,16 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
 
             // 编辑Report时获取某report的数据
             function initReportData (reportId) {
-                $http({
-                    url: ApiCtrl.get('reportUpdate'),
-                    method: 'POST',
-                    params: {
-                        reportId : reportId
-                    }
-                }).success(function (result) {
-                    if(result && result.code == 200) {
-                        $scope.reportSourceData = result.data;
-                        $scope.appData = result.data['appDataList'];
-                        $scope.guestUserValue = result.data['guestUserValue'];
-                        $scope.guestUsers = result.data['guestUser'];
-                        $scope.valueList = $scope.appData['val_list'];
-                        $scope.reportName = result.data['reportData']['report_name'];
-                        initSelectData();
-                    }
+                Http.reportUpdate({
+                    reportId : reportId
+                }, function (data) {
+                    $scope.reportSourceData = data;
+                    $scope.appData = data['appDataList'];
+                    $scope.guestUserValue = data['guestUserValue'];
+                    $scope.guestUsers = data['guestUser'];
+                    $scope.valueList = $scope.appData['val_list'];
+                    $scope.reportName = data['reportData']['report_name'];
+                    initSelectData();
                 });
             }
 
@@ -99,18 +93,12 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
              * 同时含有第一个app对应的guest_account可选列表数据
              * */
             function initAppData () {
-                $http({
-                    url: ApiCtrl.get('reportCreate'),
-                    method: 'POST'
-                }).success(function (result) {
-                    if(result && result.code == 200) {
-                        console.log(result);
-                        $scope.appDataList = result.data['appDataList'];
-                        $scope.appData = result.data['appDataList'][0];
-                        $scope.guestUsers = result.data['guestUser'];
-                        $scope.valueList = $scope.appData['val_list'];
-                        initSelectData();
-                    }
+                Http.reportCreate(function (data) {
+                    $scope.appDataList = data['appDataList'];
+                    $scope.appData = data['appDataList'][0];
+                    $scope.guestUsers = data['guestUser'];
+                    $scope.valueList = $scope.appData['val_list'];
+                    initSelectData();
                 });
             }
 
@@ -192,13 +180,8 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
 
         // getGuestUser数据
         function upGuestUserData () {
-            $http({
-                method : "GET",
-                url : ApiCtrl.get('guestUser')
-            }).success(function (result) {
-                if(result && result.code == 200) {
-                    $scope.guestUsers = result.data;
-                }
+            Http.guestUser(function (data) {
+                $scope.guestUsers = data;
             });
         }
 
@@ -220,24 +203,21 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                             return;
                         }
                         var app_id = $scope.selectedAppId || $scope.reportSourceData['reportData']['appid'];
-                        $http({
-                            url: ApiCtrl.get('checkReportName'),
-                            method: 'POST',
-                            data: {
-                                'appId' : app_id,
-                                'report_name' : report_name
-                            }
-                        }).success(function (result) {
+
+                        Http.checkReportName({
+                            'appId' : app_id,
+                            'report_name' : report_name
+                        }).success(function () {
                             if(result && result.code == 200) {
                                 flag = 0;
                             }else {
+                                flag = 1;
                                 $scope[type + 'Error'] = true;
                                 $scope.tooltip.errorType = type;
                                 $scope.tooltip.setContent(result.msg);
                                 $scope.tooltip.setPosition('.fieldset-' + type, $scope.tooltip.toolTipLooks);
                                 $scope.tooltip.toolTipLooks.css({'color': 'rgba(255, 0, 0, 0.7)'});
                                 $scope.tooltip.show();
-                                flag = 1;
                             }
                         });
                     }
@@ -282,9 +262,8 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 }
 
                 // 提交数据
-                var result = {}, submitApi = ApiCtrl.get('reportSave');
+                var result = {};
                 result.appid = $scope.selectedAppId;
-
                 if($scope.reportId) {
                     result.id = $scope.reportId;
                     result.appid = $scope.reportSourceData['reportData']['appid'];
@@ -297,18 +276,12 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 result.values = $('.field-common-value').data('value');
                 result.date = $('.select-date').data('value');
 
-                $http({
-                    method : "POST",
-                    url : submitApi,
-                    data : result
-                }).success(function (result) {
-                    if(result && result.code == 200) {
-                        Ui.alert('success', function () {
-                            $scope.$apply(function () {
-                                $location.path('/report/manage');
-                            });
+                Http.reportSave(result, function () {
+                    Ui.alert('success', function () {
+                        $scope.$apply(function () {
+                            $location.path('/report/manage');
                         });
-                    }
+                    });
                 });
             };
 

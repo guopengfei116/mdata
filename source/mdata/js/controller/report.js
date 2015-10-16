@@ -32,30 +32,24 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
         var dataInstance = null;
 
         // get report数据
-        $http({
-            method : "POST",
-            url : ApiCtrl.get('reportView'),
-            data : {
-                reportId : $scope.reportId
-            }
-        }).success(function (result) {
-            if(result && result.code == 200) {
-                $scope.reportSourceData = result.data;
+        Http.reportView({
+            reportId : $scope.reportId
+        }, function (data) {
+            $scope.reportSourceData = data;
 
-                // 初始化日期插件
-                var dataComponent = require('reportViewDate');
-                var config = {}, tempConfig = {};
-                tempConfig.startTime = $scope.reportSourceData['date_begin'];
-                tempConfig.endTime = $scope.reportSourceData['date_end'];
+            // 初始化日期插件
+            var dataComponent = require('reportViewDate');
+            var config = {}, tempConfig = {};
+            tempConfig.startTime = $scope.reportSourceData['date_begin'];
+            tempConfig.endTime = $scope.reportSourceData['date_end'];
 
-                // time == null
-                for(var timeK in tempConfig) {
-                    if(tempConfig[timeK]) {
-                        config[timeK] = parseInt(tempConfig[timeK]) * 1000; // 服务端传回数值为秒
-                    }
+            // time == null
+            for(var timeK in tempConfig) {
+                if(tempConfig[timeK]) {
+                    config[timeK] = parseInt(tempConfig[timeK]) * 1000; // 服务端传回数值为秒
                 }
-                dataInstance = new dataComponent(config);
             }
+            dataInstance = new dataComponent(config);
         });
 
         // 排序数据模型
@@ -105,20 +99,14 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
 
             // 重新加载report—view
             $scope.loadReport = function () {
-                $http({
-                    method : "POST",
-                    url : ApiCtrl.get('reportView'),
-                    data : {
-                        reportId : $scope.reportId,
-                        dimension : getCheckedBoxValue('.field-dimension'),
-                        filter : getCheckedBoxValue('.field-filter'),
-                        date_begin : new Date($('#reportStartDate').val()).getTime() / 1000,
-                        date_end : new Date($('#reportEndDate').val()).getTime() / 1000
-                    }
-                }).success(function (result) {
-                    if(result && result.code == 200) {
-                        $scope.reportSourceData['table_list'] = result.data['table_list'];
-                    }
+                Http.reportView({
+                    reportId : $scope.reportId,
+                    dimension : getCheckedBoxValue('.field-dimension'),
+                    filter : getCheckedBoxValue('.field-filter'),
+                    date_begin : new Date($('#reportStartDate').val()).getTime() / 1000,
+                    date_end : new Date($('#reportEndDate').val()).getTime() / 1000
+                }, function (data) {
+                    $scope.reportSourceData['table_list'] = data['table_list'];
                 });
             };
         })();

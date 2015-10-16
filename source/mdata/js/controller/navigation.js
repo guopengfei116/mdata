@@ -9,8 +9,9 @@ oasgames.mdataControllers.controller('navigationCtrl', [
     '$http',
     '$location',
     'ApiCtrl',
+    'ShortcutCache',
     'Http',
-    function ($rootScope, $scope, $cacheFactory, $http, $location, ApiCtrl, Http) {
+    function ($rootScope, $scope, $cacheFactory, $http, $location, ApiCtrl, ShortcutCache, Http) {
 
         // 权限
         $scope.authority = $rootScope.user['authority'];
@@ -58,30 +59,18 @@ oasgames.mdataControllers.controller('navigationCtrl', [
             $scope.reportsShow = [];
 
             // get_shortcuts列表数据
-            $scope.shortcuts = [];
-            var shortcutCache = $cacheFactory.get('shortcut');
-            if(shortcutCache && shortcutCache.get('list')) {
-                $scope.shortcuts = shortcutCache.get('list');
-                init();
+            var shortcutListCache = ShortcutCache.get();
+            if(shortcutListCache && $rootScope.shortcutListCache) {
+                $scope.shortcuts = shortcutListCache;
             }else {
-                if(shortcutCache) {
-                    console.log(shortcutCache);
-                }else {
-                    shortcutCache = $cacheFactory('shortcut');
-                }               
-                $http({
-                    method : "GET",
-                    url : ApiCtrl.get('shortcuts'),
-                }).success(function (result, status) {
-                    if(result && result.code == 200) {
-                        if(!result.data) {
-                            $scope.shortcuts = [];  // 如果无收藏列表，则初始化一个空数组
-                            return;
-                        }
-                        $scope.shortcuts = result.data;
-                        shortcutCache.put('list', result.data);
-                        init();
+                Http.shortcuts(function (data) {
+                    // 如果无收藏列表，则初始化一个空数组
+                    if(!data) {
+                        data = [];
                     }
+                    ShortcutCache.set(data);
+                    $scope.shortcuts = data;
+                    init();
                 });
             }
 

@@ -21,14 +21,9 @@ oasgames.mdataControllers.controller('systemLogCtrl', [
         /*
         * 展示列表数据初始化
         * */
-        $http({
-            method: 'GET',
-            url : ApiCtrl.get('systemLog')
-        }).success(function (result) {
-            if(result && result.code == 200) {
-                $scope.sourceData = result.data;
-                $scope.viewData = result.data;
-            }
+        Http.systemLog(function (data) {
+            $scope.sourceData = data;
+            $scope.viewData = data;
         });
 
         // 搜索自定义处理函数

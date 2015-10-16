@@ -53,7 +53,7 @@ oasgames.mdataConstant.constant("API_CONFIG", {
         'report' : '/mdata/js/:reportId.json',
         'reports': '/mdata/js/reports.json',
         'reportUpdate': '/mdata/js/report_info.json',
-        'reportCopy': '/mdata/js/reports_duplicate',
+        'reportDuplicate': '/mdata/js/reports_duplicate',
         'reportName' : '/mdata/js/check_reportName.json',
         'checkReportName' : '/mdata/js/check_reportName.json',
         'shortcuts' : '/mdata/js/shortcuts.json',
@@ -101,7 +101,7 @@ oasgames.mdataConstant.constant("API_METHOD", {
         'reportSave',
         'reportCreate',
         'reportUpdate',
-        'reportCopy',
+        'reportDuplicate',
         'checkReportName',
         'shortcutAdd',
         'shortcutDel'
@@ -131,7 +131,9 @@ oasgames.mdataConstant.constant("CACHE_SETTINGS", {
     accountListCache : true,
     accountListCacheTime : 20,
     reportListCache : true,
-    reportListCacheTime : 20
+    reportListCacheTime : 20,
+    shortcutListCache : true,
+    shortcutListCacheTime : 20
 });
 
 /*
