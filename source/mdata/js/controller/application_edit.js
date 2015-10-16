@@ -136,7 +136,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                 result.proce = $(".field-account").next().next().data('value');
 
                 Http[subMethod](result, function (data) {
-                    delete httpApp.proce;
+                    delete result.proce;
                     result.appid = $scope.appId || data.appid;
                     result.appadmin = $(".field-account").data('cacheValue');
                     result.appuser = $(".field-account").next().data('cacheValue');
