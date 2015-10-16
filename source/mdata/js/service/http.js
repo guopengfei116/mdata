@@ -74,6 +74,10 @@ oasgames.mdataServices.provider('Http', [
 
                         login : function (data, fn) {
                             this.send('login', data, fn);
+                        },
+
+                        reports : function (data, fn) {
+                            this.send('reports', data, fn);
                         }
                     }
                 }

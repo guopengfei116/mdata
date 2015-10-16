@@ -75,6 +75,7 @@ oasgames.mdataConstant.constant("API_METHOD", {
         'userAppList',
         'checkEmail',
         'systemLog',
+        'reports',
         'reportDel',
         'shortcuts',
         'guestUser'
@@ -88,7 +89,6 @@ oasgames.mdataConstant.constant("API_METHOD", {
         'userUpdate',
         'userCreate',
         'userDelete',
-        'reports',
         'reportView',
         'reportSave',
         'reportCreate',
@@ -115,11 +115,15 @@ oasgames.mdataConstant.constant("AUTHORITY", {
 });
 
 /*
- * 缓存启用开关
+ * 缓存开关、缓存时间(分钟)
  * */
 oasgames.mdataConstant.constant("CACHE_SETTINGS", {
     applicationListCache : true,
-    accountListCache : true
+    applicationListCacheTime : 20,
+    accountListCache : true,
+    accountListCacheTime : 20,
+    reportListCache : true,
+    reportListCacheTime : 20
 });
 
 /*
