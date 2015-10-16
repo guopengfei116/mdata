@@ -10,7 +10,8 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
     'OrderHandler',
     'ApiCtrl',
     'AccountCache',
-    function ($rootScope, $scope, $http, Filter, OrderHandler, ApiCtrl, AccountCache) {
+    'Http',
+    function ($rootScope, $scope, $http, Filter, OrderHandler, ApiCtrl, AccountCache, Http) {
 
         // 定义default数据
         $scope.searchPlaceholder = 'Search Name Email...';
@@ -23,15 +24,10 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
             $scope.sourceData = accountListCache;
             $scope.viewData = accountListCache;
         }else {
-            $http({
-                url: ApiCtrl.get('userIndex'),
-                method: 'GET'
-            }).success(function (result) {
-                if(result && result.code == 200) {
-                    $scope.sourceData = result.data;
-                    $scope.viewData = result.data;
-                    AccountCache.set(result.data);
-                }
+            Http.userIndex(function (data) {
+                AccountCache.set(data);
+                $scope.sourceData = data;
+                $scope.viewData = data;
             });
         }
 

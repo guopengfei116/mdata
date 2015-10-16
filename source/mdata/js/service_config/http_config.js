@@ -1,18 +1,28 @@
+
 /*
  * 配置页面路由
  * */
 oasgames.mdataServicesConfig.config([
     '$httpProvider',
     function($httpProvider) {
+        $httpProvider.defaults.useXDomain = true;
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded, charset=UTF-8';
+        $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded, charset=UTF-8';
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+        //$httpProvider.defaults.xhrFields = {'withCredentials': true};
+        //$httpProvider.defaults.crossDomain = true;
+
         $httpProvider.defaults.transformRequest = function(data){
             if($ && data) {
                 return $.param(data);
             }
         };
+
         $httpProvider.interceptors.push(function(){
             var interceptor = {
 
                 /*
+                * request公共请求头设置
                 * 设定Content-Type，
                 * 添加token认证信息
                 * */
@@ -25,7 +35,7 @@ oasgames.mdataServicesConfig.config([
                 },
 
                 /*
-                * 公共部分统一处理
+                * response公共部分统一处理
                 * */
                 'response':function(resp){
                     var statusCode = '';
@@ -47,7 +57,7 @@ oasgames.mdataServicesConfig.config([
                 },
 
                 /*
-                 * 错误统一处理
+                 * request错误统一处理
                  * */
                 'requestError':function(rejection){
                     console.log(rejection);
@@ -55,7 +65,7 @@ oasgames.mdataServicesConfig.config([
                 },
 
                 /*
-                 * 错误统一处理
+                 * response错误统一处理
                  * */
                 'responseError':function(rejection){
                     var matchedApi = [], urlSummary = '';
@@ -64,7 +74,7 @@ oasgames.mdataServicesConfig.config([
                         if(matchedApi.length && matchedApi[1]) {
                             urlSummary = matchedApi[1];
                         }
-                        if(rejection.status === 0) {
+                        if(rejection.status === 0 || rejection.status === -1) {
                             Ui.alert('Network connection error, Error url: ' + urlSummary);
                         }else {
                             console.log(rejection);
@@ -76,13 +86,5 @@ oasgames.mdataServicesConfig.config([
 
             return interceptor;
         });
-
-        $httpProvider.defaults.useXDomain = true;
-        $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded, charset=UTF-8';
-        $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded, charset=UTF-8';
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
-        //$httpProvider.defaults.xhrFields = {'withCredentials': true};
-        //$httpProvider.defaults.crossDomain = true;
     }
 ]);
-

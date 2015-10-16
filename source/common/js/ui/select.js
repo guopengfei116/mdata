@@ -41,6 +41,11 @@ $.extend(Select.prototype, {
         // select开关
         $(o.trigger).on(o.triggerEvent, self.target, function (e) {
             e.stopPropagation();
+
+            if(e && !e.offsetX && !e.offsetY && !e.pageX && !e.pageY) {
+                return;
+            }
+
             var $this = $(this);
             var $parentSelect = $this.parents(self.selector);
 

@@ -5,7 +5,8 @@
  * */
 oasgames.mdataServices.provider('Http', [
     'API_METHOD',
-    function (API_METHOD) {
+    'CROSS_ORIGIN_METHOD',
+    function (API_METHOD, CROSS_ORIGIN_METHOD) {
         return {
             get : API_METHOD.get,
             post : API_METHOD.post,
@@ -14,6 +15,10 @@ oasgames.mdataServices.provider('Http', [
             * get api method
             * */
             getMethod : function (type) {
+                if(CROSS_ORIGIN_METHOD.jsonp) {
+                    return 'JSONP'
+                }
+
                 for(var i = this.get.length - 1; i >= 0; i--) {
                     if(type === this.get[i]) {
                         return 'GET';
@@ -49,35 +54,59 @@ oasgames.mdataServices.provider('Http', [
 
                             if(method === 'GET') {
                                 xhrPromise = this.getSend(url, data);
-                            }else {
+                            }else if(method === 'POST'){
                                 xhrPromise = this.postSend(url, data);
+                            }else if(method === 'JSONP'){
+                                xhrPromise = this.jsonpSend(url, data);
                             }
 
                             xhrPromise.success(function (result) {
                                 if(result && result.code == 200) {
                                     fn && fn(result.data);
+                                }else {
+                                    console.log(result);
+                                    console.log('请求错误');
                                 }
                             });
+
+                            return xhrPromise;
                         },
 
                         getSend : function (url, data) {
+                            if(!data) {
+                                return $http.get(url);
+                            }
                             return $http.get(url, data);
                         },
 
                         postSend : function (url, data) {
+                            if(!data) {
+                                return $http.post(url);
+                            }
                             return $http.post(url, data);
                         },
 
-                        jsonpSend : function () {
-
+                        jsonpSend : function (url, data) {
+                            if(!data) {
+                                return $http.jsonp(url);
+                            }
+                            return $http.jsonp(url, data);
                         },
 
                         login : function (data, fn) {
-                            this.send('login', data, fn);
+                            return this.send('login', data, fn);
                         },
 
-                        reports : function (data, fn) {
-                            this.send('reports', data, fn);
+                        reports : function (fn) {
+                            return this.send('reports', null, fn);
+                        },
+
+                        appIndex : function (fn) {
+                            return this.send('appIndex', null, fn);
+                        },
+
+                        userIndex : function (fn) {
+                            return this.send('userIndex', null, fn);
                         }
                     }
                 }

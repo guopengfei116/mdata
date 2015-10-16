@@ -38,7 +38,7 @@ oasgames.mdataServices.factory('ReportCache', [
              * @param {Number} reportid
              * @return {Boole} 添加结果
              * */
-            addItem : function (data, reportid) {
+            addItem : function (reportid, data) {
                 var listCache = this.get();
                 if(!listCache || !data || !reportid) {
                     return false;
@@ -69,7 +69,7 @@ oasgames.mdataServices.factory('ReportCache', [
              * delete report list item
              * @return {Boole} 删除结果
              * */
-            deleteItem : function (appid, reportid) {
+            deleteItem : function (reportid, appid) {
                 var listCache = this.get();
                 if(!listCache || !appid || !reportid) {
                     return false;

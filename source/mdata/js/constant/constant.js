@@ -64,7 +64,15 @@ oasgames.mdataConstant.constant("API_CONFIG", {
 
 
 /*
- * 接口method
+* 设置跨域请求方式
+* */
+oasgames.mdataConstant.constant("CROSS_ORIGIN_METHOD", {
+    jsonp : false
+});
+
+
+/*
+ * 接口对应的method
  * */
 oasgames.mdataConstant.constant("API_METHOD", {
     get : [

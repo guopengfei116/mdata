@@ -10,7 +10,8 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
     'ApiCtrl',
     'Filter',
     'ReportCache',
-    function ($rootScope, $scope, $http, $cacheFactory, ApiCtrl, Filter, ReportCache) {
+    'Http',
+    function ($rootScope, $scope, $http, $cacheFactory, ApiCtrl, Filter, ReportCache, Http) {
 
         // 权限
         $scope.authority = $rootScope.user['authority'];
@@ -193,6 +194,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                     $scope.viewData = reportListCache;
                 }else {
                     Http.reports(function (data) {
+                        ReportCache.set(data);
                         $scope.sourceData = data;
                         $scope.viewData = data;
                         // 初始化展示状态
@@ -203,14 +205,6 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                         Shortcuts.init();
                     });
                 }
-                /*$http({
-                    url: ApiCtrl.get('reports'),
-                    method: 'GET'
-                }).success(function (result) {
-                    if(result && result.code == 200) {
-
-                    }
-                });*/
             };
 
             /*
@@ -410,7 +404,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
 
         // 删除report
         (function () {
-            $scope.delete = function (reportId) {
+            $scope.delete = function (reportId, appId) {
                 Ui.confirm('确定要删除这个report吗', function () {
                     $http({
                         url: ApiCtrl.get('reportDel'),
@@ -420,6 +414,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                         }
                     }).success(function (result) {
                         if(result && result.code == 200) {
+                            ReportCache.deleteItem(reportId, appId);
                             Ui.alert('删除成功');
                         }
                     });
