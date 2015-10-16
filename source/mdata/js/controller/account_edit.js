@@ -138,8 +138,8 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 // 提交数据
                 var result = {}, subMethod = 'userCreate';
                 if($scope.accountId) {     //accountId === uid
-                    result.uid = $scope.accountId;
                     subMethod = 'userUpdate';
+                    result.uid = $scope.accountId;
                 }
                 result.nickname = $.trim($scope.accountSourceData['nickname']);
                 result.username = $.trim($scope.accountSourceData['username']);

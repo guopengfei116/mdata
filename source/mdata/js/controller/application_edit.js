@@ -123,24 +123,24 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                 }
 
                 // 提交数据
-                var httpApp = {}, subMethod = 'appCreate';
-                httpApp.timezone = $(".field-app-zone .app-zone").data('value');
+                var result = {}, subMethod = 'appCreate';
+                result.timezone = $(".field-app-zone .app-zone").data('value');
                 if($scope.appId) {
-                    httpApp.appid = $scope.appId;
                     subMethod = 'appUpdate';
-                    httpApp.timezone = $scope.appSourceData.timezone;
+                    result.appid = $scope.appId;
+                    result.timezone = $scope.appSourceData.timezone;
                 }
-                httpApp.appname = $scope.appSourceData.appname;                
-                httpApp.appadmin = $(".field-account").data('value');
-                httpApp.appuser = $(".field-account").next().data('value');
-                httpApp.proce = $(".field-account").next().next().data('value');
+                result.appname = $scope.appSourceData.appname;
+                result.appadmin = $(".field-account").data('value');
+                result.appuser = $(".field-account").next().data('value');
+                result.proce = $(".field-account").next().next().data('value');
 
                 Http[subMethod](result, function (data) {
                     delete httpApp.proce;
                     result.appid = $scope.appId || data.appid;
-                    httpApp.appadmin = $(".field-account").data('cacheValue');
-                    httpApp.appuser = $(".field-account").next().data('cacheValue');
-                    if(ApplicationCache.addItem(httpApp)) {
+                    result.appadmin = $(".field-account").data('cacheValue');
+                    result.appuser = $(".field-account").next().data('cacheValue');
+                    if(ApplicationCache.addItem(result)) {
                         $rootScope.applicationListCache = true;
                     }else {
                         $rootScope.applicationListCache = false;
