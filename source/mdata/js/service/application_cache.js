@@ -32,7 +32,7 @@ oasgames.mdataServices.factory('ApplicationCache', [
             },
 
             /*
-             * add application list
+             * add application list item
              * @return {Boole} 添加结果
              * */
             addItem : function (data) {
@@ -51,7 +51,7 @@ oasgames.mdataServices.factory('ApplicationCache', [
             },
 
             /*
-             * delete application list
+             * delete application list item
              * @return {Boole} 删除结果
              * */
             deleteItem : function (appid) {

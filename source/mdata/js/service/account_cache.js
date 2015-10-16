@@ -32,7 +32,7 @@ oasgames.mdataServices.factory('AccountCache', [
             },
 
             /*
-             * add account list
+             * add account list item
              * @return {Boole} 添加结果
              * */
             addItem : function (data) {
@@ -51,7 +51,7 @@ oasgames.mdataServices.factory('AccountCache', [
             },
 
             /*
-             * delete account list
+             * delete account list item
              * @return {Boole} 删除结果
              * */
             deleteItem : function (uid) {
