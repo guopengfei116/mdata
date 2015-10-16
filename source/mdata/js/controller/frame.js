@@ -41,7 +41,8 @@ oasgames.mdataControllers.controller('HeaderCtrl', [
     '$http',
     '$location',
     'ApiCtrl',
-    function ($rootScope, $scope, $http, $location, ApiCtrl) {
+    'Http',
+    function ($rootScope, $scope, $http, $location, ApiCtrl, Http) {
 
         // 用户信息，注意登陆页面时会获取不到
         $scope.authority = $rootScope.user['authority'];
@@ -67,10 +68,7 @@ oasgames.mdataControllers.controller('HeaderCtrl', [
         * 跳转到登陆页
         * */
         $scope.logout = function () {
-            $http({
-                method : "GET",
-                url : ApiCtrl.get('logout')
-            });
+            Http.logout();
             authentication.delete();
             $rootScope.$emit('initUserProperty');
             $location.path('/login');

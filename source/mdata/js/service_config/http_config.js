@@ -5,19 +5,19 @@
 oasgames.mdataServicesConfig.config([
     '$httpProvider',
     function($httpProvider) {
-        $httpProvider.defaults.useXDomain = true;
-        $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded, charset=UTF-8';
-        $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded, charset=UTF-8';
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
-        //$httpProvider.defaults.xhrFields = {'withCredentials': true};
-        //$httpProvider.defaults.crossDomain = true;
 
+        // header 默认值
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+        $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded, charset=UTF-8';
+
+        // request 默认数据处理函数
         $httpProvider.defaults.transformRequest = function(data){
             if($ && data) {
                 return $.param(data);
             }
         };
 
+        // 配置拦截器
         $httpProvider.interceptors.push(function(){
             var interceptor = {
 
@@ -28,7 +28,10 @@ oasgames.mdataServicesConfig.config([
                 * */
                 'request':function(config){
                     if(config && config.headers) {
-                        config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+                        config.crossDomain = true;
+                        config.useXDomain = true;
+                        config.xhrFields = {'withCredentials': true};
+                        config.headers['Content-Type'] = 'application/x-www-form-urlencoded, charset=UTF-8';
                         config.headers['MDATA-KEY'] = authentication.get('token');
                     }
                     return config;
