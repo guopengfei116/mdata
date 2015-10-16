@@ -28,6 +28,9 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
         // 初始为空，通过判断username是否存在来设定username表单是否可编辑
         $scope.accountEmail = "";
 
+        $scope.reportAdminSearch = '';
+        $scope.reportViewerSearch = '';
+
         // 当前编辑的accountId
         var httpAccountId = $scope.accountId = $route.current.params.accountId;
 

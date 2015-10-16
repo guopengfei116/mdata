@@ -19,11 +19,17 @@ oasgames.mdataDirective.directive('cascadechoice', [
                 flagData : '=',
                 selectData : '=',
                 selectedData : '=',
-                cache : '='
+                cache : '=',
+                searchModel : '@'
             },
             link: function ($scope, element, attr, reScope) {
                 var $select = element.find('.select');
                 var $selectInput = element.find('.select_main_textarea');
+
+                $scope.$watch('searchModel', function (newV) {
+                   console.log('searchModel');
+                   console.log(newV);
+                });
 
                 // 记录数据初始化的状态
                 var resultValueInit = false, selectDataInit = false, selectedDataInit = false;
@@ -153,7 +159,9 @@ oasgames.mdataDirective.directive('cascadechoice', [
                         // 清空值
                         $select.data('value', '');
                         $selectInput.val('');
-
+                        if($scope.$$childHead && $scope.$$childHead[$scope.searchModel]) {
+                            $scope.$$childHead[$scope.searchModel] = '';
+                        }
                         $scope.$apply();
                     });
 
