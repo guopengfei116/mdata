@@ -40,7 +40,7 @@ oasgames.mdataServices.factory('ReportCache', [
              * */
             addItem : function (reportid, data) {
                 var listCache = this.get();
-                if(!listCache || !data || !reportid) {
+                if(!listCache || !data || !reportid || !data['appid']) {
                     return false;
                 }
                 try {

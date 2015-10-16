@@ -17,7 +17,8 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
     'MdataVerify',
     'ApiCtrl',
     'ApplicationCache',
-    function ($rootScope, $scope, $cacheFactory, $route, $http, $location, processors, timeZone, Account, Filter, MdataVerify, ApiCtrl, ApplicationCache) {
+    'Http',
+    function ($rootScope, $scope, $cacheFactory, $route, $http, $location, processors, timeZone, Account, Filter, MdataVerify, ApiCtrl, ApplicationCache, Http) {
 
         // processor可选列表-常量
         $scope.processors = processors;
@@ -35,7 +36,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
         $scope.appSourceData = {};
 
         // 当前编辑的appId
-        var httpAppId = $scope.appId = $route.current.params.applicationId;
+        $scope.appId = $route.current.params.applicationId;
 
         // 用于区分创建和编辑状态
         $scope.appIsExisting = false;
@@ -53,27 +54,20 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
 
         // getApp数据
         function initAppData () {
-            $http({
-                url: ApiCtrl.get('appIndex'),
-                method: 'GET',
-                params : {
-                    appid : httpAppId
-                }
-            }).success(function (result) {
-                var tempName = '', tempEvent = '';
-                if(result && result.code == 200) {
-                    $scope.appSourceData = result.data[0];
-                    var proce = [];
-                    for(var i=0; i< $scope.appSourceData.proce.length; i++){
-                        tempName = $scope.appSourceData['proce'][i].name;
-                        tempEvent = $scope.appSourceData['proce'][i].event;
-                        if(tempName && tempEvent) {
-                            proce.push(tempName + "#@DELIMITER@#" + tempEvent);
-                        }
+            Http.appIndex({
+                appid : $scope.appId
+            }, function (data) {
+                $scope.appSourceData = data[0];
+                var proce = [];
+                for(var i=0; i< $scope.appSourceData.proce.length; i++){
+                    tempName = $scope.appSourceData['proce'][i].name;
+                    tempEvent = $scope.appSourceData['proce'][i].event;
+                    if(tempName && tempEvent) {
+                        proce.push(tempName + "#@DELIMITER@#" + tempEvent);
                     }
-                    $scope.appSourceData['proce'] = proce;
-                    initSelectData();
                 }
+                $scope.appSourceData['proce'] = proce;
+                initSelectData();
             });
         }
 
@@ -91,16 +85,9 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
         }
 
         // getAccount列表数据
-        (function () {
-            $http({
-                url: ApiCtrl.get('appUserList'),
-                method: 'GET'
-            }).success(function (result) {
-                if(result && result.code == 200) {
-                    $scope.accountsData = result.data;
-                }
-            });
-        })();
+        Http.appUserList(function (data) {
+            $scope.accountsData = data;
+        });
 
         // 事件处理、表单效验
         (function () {
@@ -136,11 +123,11 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                 }
 
                 // 提交数据
-                var httpApp = {}, submitApi = ApiCtrl.get('appCreate');
+                var httpApp = {}, subMethod = 'appCreate';
                 httpApp.timezone = $(".field-app-zone .app-zone").data('value');
                 if($scope.appId) {
                     httpApp.appid = $scope.appId;
-                    submitApi = ApiCtrl.get('appUpdate');
+                    subMethod = 'appUpdate';
                     httpApp.timezone = $scope.appSourceData.timezone;
                 }
                 httpApp.appname = $scope.appSourceData.appname;                
@@ -148,26 +135,21 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                 httpApp.appuser = $(".field-account").next().data('value');
                 httpApp.proce = $(".field-account").next().next().data('value');
 
-                $http({
-                    url: submitApi,
-                    method: 'POST',
-                    data: httpApp
-                }).success(function (result) {
-                    if(result && result.code == 200) {
-                        delete httpApp.proce;
-                        httpApp.appadmin = $(".field-account").data('cacheValue');
-                        httpApp.appuser = $(".field-account").next().data('cacheValue');
-                        if(ApplicationCache.addItem(httpApp)) {
-                            $rootScope.applicationListCache = true;
-                        }else {
-                            $rootScope.applicationListCache = false;
-                        }
-                        Ui.alert('success', function () {
-                            $scope.$apply(function () {
-                                $location.path('/application/manage');
-                            });
-                        });
+                Http[subMethod](result, function (data) {
+                    delete httpApp.proce;
+                    result.appid = $scope.appId || data.appid;
+                    httpApp.appadmin = $(".field-account").data('cacheValue');
+                    httpApp.appuser = $(".field-account").next().data('cacheValue');
+                    if(ApplicationCache.addItem(httpApp)) {
+                        $rootScope.applicationListCache = true;
+                    }else {
+                        $rootScope.applicationListCache = false;
                     }
+                    Ui.alert('success', function () {
+                        $scope.$apply(function () {
+                            $location.path('/application/manage');
+                        });
+                    });
                 });
             };
 

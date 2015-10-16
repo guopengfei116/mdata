@@ -61,17 +61,11 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
         // 删除account
         $scope.delete = function (accountId) {
             Ui.confirm('确定要删除这个账号吗', function () {
-                $http({
-                    url:  ApiCtrl.get('userDelete'),
-                    method: 'POST',
-                    data: {uid : accountId}
-                }).success(function (result) {
-                    if(result && result.code == 200) {
-                        AccountCache.deleteItem(accountId);
-                        Ui.alert('删除成功');
-                    }else {
-                        Ui.alert('删除失败');
-                    }
+                Http.userDelete({
+                    uid : accountId
+                }, function () {
+                    AccountCache.deleteItem(accountId);
+                    Ui.alert('success');
                 });
             });
         };

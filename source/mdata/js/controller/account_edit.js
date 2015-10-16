@@ -33,7 +33,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
         $scope.reportViewerSearch = '';
 
         // 当前编辑的accountId
-        var httpAccountId = $scope.accountId = $route.current.params.accountId;
+        $scope.accountId = $route.current.params.accountId;
 
         /*
          * 如果有id，则说明是编辑状态
@@ -147,7 +147,8 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 result.reportAdmin = $(".field-account").data('value');
                 result.reportViewer = $(".field-account").next().data('value');
 
-                Http[subMethod](result, function () {
+                Http[subMethod](result, function (data) {
+                    result.uid = $scope.accountId || data.uid;
                     result.reportAdmin = $(".field-account").data('cacheValue');
                     result.reportViewer = $(".field-account").next().data('cacheValue');
                     if(AccountCache.addItem(result)) {

@@ -52,6 +52,10 @@ oasgames.mdataServices.provider('Http', [
                                 throw Error('Interface Not found');
                             }
 
+                            if(data && typeof data !== 'object') {
+                                throw Error('Http Data Illegal');
+                            }
+
                             if(method === 'GET') {
                                 xhrPromise = this.getSend(url, data);
                             }else if(method === 'POST'){
@@ -62,7 +66,7 @@ oasgames.mdataServices.provider('Http', [
 
                             xhrPromise.success(function (result) {
                                 if(result && result.code == 200) {
-                                    fn && fn(result.data);
+                                    fn && typeof fn === 'function' && fn(result.data);
                                 }
                             });
 
@@ -98,10 +102,33 @@ oasgames.mdataServices.provider('Http', [
                             return this.send('reports', null, fn);
                         },
 
-                        appIndex : function (fn) {
-                            return this.send('appIndex', null, fn);
+
+                        /*
+                        * application interface method
+                        * */
+                        appIndex : function () {
+                            if(arguments.length == 1) {
+                                return this.send('appIndex', null, arguments[0]);
+                            }
+                            return this.send('appIndex', arguments[0], arguments[1]);
                         },
 
+                        appUserList : function (fn) {
+                            return this.send('appUserList', null, fn);
+                        },
+
+                        appCreate : function (data, fn) {
+                            return this.send('userCreate', data, fn);
+                        },
+
+                        appUpdate : function (data, fn) {
+                            return this.send('userUpdate', data, fn);
+                        },
+
+
+                        /*
+                         * account interface method
+                         * */
                         userIndex : function () {
                             if(arguments.length == 1) {
                                 return this.send('userIndex', null, arguments[0]);
@@ -123,6 +150,10 @@ oasgames.mdataServices.provider('Http', [
 
                         userUpdate : function (data, fn) {
                             return this.send('userUpdate', data, fn);
+                        },
+
+                        userDelete : function (data, fn) {
+                            return this.send('userDelete', data, fn);
                         }
                     }
                 }

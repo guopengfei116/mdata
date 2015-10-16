@@ -37,7 +37,7 @@ oasgames.mdataServices.factory('ApplicationCache', [
              * */
             addItem : function (data) {
                 var listCache = this.get();
-                if(!listCache || !data) {
+                if(!listCache || !data || !data['appid']) {
                     return false;
                 }
                 for(var i = listCache.length - 1; i >= 0; i--) {
