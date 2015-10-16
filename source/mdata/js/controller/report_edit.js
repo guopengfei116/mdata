@@ -18,7 +18,8 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
     'VALUE_ARITHMETIC',
     'ApiCtrl',
     'MdataVerify',
-    function ($rootScope, $scope, $route, $http, $location, $cacheFactory, reportDateRanges, reportDimensions, filters, filterComputeSigns, valueTypes, valueArithmetics, ApiCtrl, MdataVerify) {
+    'Http',
+    function ($rootScope, $scope, $route, $http, $location, $cacheFactory, reportDateRanges, reportDimensions, filters, filterComputeSigns, valueTypes, valueArithmetics, ApiCtrl, MdataVerify, Http) {
 
         /*
         * 常量

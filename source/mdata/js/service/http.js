@@ -175,6 +175,14 @@ oasgames.mdataServices.provider('Http', [
 
 
                         /*
+                         * shortcut interface method
+                         * */
+                        shortcuts : function (fn) {
+                            return this.send('shortcuts', null, fn);
+                        },
+
+
+                        /*
                          * report interface method
                          * */
                         reports : function (fn) {

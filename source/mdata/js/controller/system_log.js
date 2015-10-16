@@ -10,7 +10,8 @@ oasgames.mdataControllers.controller('systemLogCtrl', [
     'ApiCtrl',
     'Filter',
     'OrderHandler',
-    function ($scope, $http, $cacheFactory, $timeout, ApiCtrl, Filter, OrderHandler) {
+    'Http',
+    function ($scope, $http, $cacheFactory, $timeout, ApiCtrl, Filter, OrderHandler, Http) {
 
         // 定义default数据
         $scope.searchPlaceholder = 'Search Account Operation...';
@@ -20,24 +21,15 @@ oasgames.mdataControllers.controller('systemLogCtrl', [
         /*
         * 展示列表数据初始化
         * */
-        var systemCache = $cacheFactory.get('system');
-        // if(systemCache && systemCache.get('list')) {
-        //     $scope.sourceData = systemCache.get('list');
-        //     $scope.viewData = $scope.sourceData;
-        // }else {
-            if(!systemCache) {
-                systemCache = $cacheFactory('system');
+        $http({
+            method: 'GET',
+            url : ApiCtrl.get('systemLog')
+        }).success(function (result) {
+            if(result && result.code == 200) {
+                $scope.sourceData = result.data;
+                $scope.viewData = result.data;
             }
-            $http({
-                method: 'GET',
-                url : ApiCtrl.get('systemLog')
-            }).success(function (result) {
-                if(result && result.code == 200) {
-                    $scope.sourceData = result.data;
-                    $scope.viewData = result.data;
-                    systemCache.put('list', result.data);
-                }
-            });
+        });
 
         // 搜索自定义处理函数
         $scope.searchHandler = function (searchVal) {
