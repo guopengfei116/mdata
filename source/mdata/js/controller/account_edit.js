@@ -14,7 +14,8 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
     'MdataVerify',
     'ApiCtrl',
     'AccountCache',
-    function ($rootScope, $scope, $cacheFactory, $route, $http, $location, Application, MdataVerify, ApiCtrl, AccountCache) {
+    'Http',
+    function ($rootScope, $scope, $cacheFactory, $route, $http, $location, Application, MdataVerify, ApiCtrl, AccountCache, Http) {
 
         // 所有的app列表
         $scope.appsData = [];
@@ -46,19 +47,13 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
 
         // getAccount数据
         function initAccountData () {
-            $http({
-                url: ApiCtrl.get('userIndex'),
-                method: 'GET',
-                params : {
-                    uid : httpAccountId
-                }
-            }).success(function (result) {
-                if(result && result.code == 200) {
-                    $scope.sourceData = result.data;
-                    $scope.viewData = result.data;
-                    $scope.accountSourceData = result.data[0];
-                    $scope.accountEmail = result.data[0].username;
-                }
+            Http.userIndex({
+                uid : $scope.accountId
+            }, function (data) {
+                $scope.sourceData = data;
+                $scope.viewData = data;
+                $scope.accountSourceData = data[0];
+                $scope.accountEmail = data[0].username;
             });
         }
 
@@ -85,27 +80,9 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
         }
 
         // getApp列表数据
-        (function () {
-            var AppCache = $cacheFactory.get('app');
-            // if(AppCache && AppCache.get('list')) {
-            //     $scope.appsData = AppCache.get('list');
-            // }else {
-                if(AppCache) {
-                    console.log(AppCache);
-                }else {
-                    AppCache = $cacheFactory('app');
-                }
-                
-            $http({
-                url: ApiCtrl.get('userAppList'),
-                method: 'GET'
-            }).success(function (result) {
-                if(result && result.code == 200) {
-                    $scope.appsData = result.data;
-                    AppCache.put('list', result.data);
-                }
-            });
-        })();
+        Http.userAppList(function (data) {
+            $scope.appsData = data;
+        });
 
         // 事件处理、表单效验
         (function () {
@@ -114,22 +91,17 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
             // 邮箱是否重复标识  1不重复
             var flag = 0;
 
-            //表单失去焦点时错误提示
+            /*
+            * 表单失去焦点时错误提示及验证
+            * */
             $scope.blur = function(type, $errors){
                 MdataVerify.blur(type, $errors, $scope);
-                if(type == 'email'){
-                    var httpName = $scope.accountSourceData.username;
-                    //验证是否重复
-                    $http({
-                        url: ApiCtrl.get('checkEmail'),
-                        method: 'POST',
-                        data: {username:httpName}
-                    }).success(function (result) {
-                        if(result && result.code == 200) {
-                            flag = 1;
-                        }else{
-                            flag = 0;
-                        }
+                if(type == 'email' && $scope.accountSourceData.username){
+                    flag = 0;
+                    Http.checkEmail({
+                        username : $scope.accountSourceData.username
+                    }, function () {
+                        flag = 1;
                     });
                 }
             };
@@ -164,10 +136,10 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 }
 
                 // 提交数据
-                var result = {}, submitApi = ApiCtrl.get('userCreate');
+                var result = {}, subMethod = 'userCreate';
                 if($scope.accountId) {     //accountId === uid
                     result.uid = $scope.accountId;
-                    submitApi = ApiCtrl.get('userUpdate');
+                    subMethod = 'userUpdate';
                 }
                 result.nickname = $.trim($scope.accountSourceData['nickname']);
                 result.username = $.trim($scope.accountSourceData['username']);
@@ -175,25 +147,19 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                 result.reportAdmin = $(".field-account").data('value');
                 result.reportViewer = $(".field-account").next().data('value');
 
-                $http({
-                    url: submitApi,
-                    method: 'POST',
-                    data: result
-                }).success(function (result) {
-                    if(result && result.code == 200) {
-                        httpApp.reportAdmin = $(".field-account").data('cacheValue');
-                        httpApp.reportViewer = $(".field-account").next().data('cacheValue');
-                        if(AccountCache.addItem(httpApp)) {
-                            $rootScope.accountListCache = true;
-                        }else {
-                            $rootScope.accountListCache = false;
-                        }
-                        Ui.alert('success', function () {
-                            $scope.$apply(function () {
-                                $location.path('/account/manage');
-                            });
-                        });
+                Http[subMethod](result, function () {
+                    result.reportAdmin = $(".field-account").data('cacheValue');
+                    result.reportViewer = $(".field-account").next().data('cacheValue');
+                    if(AccountCache.addItem(result)) {
+                        $rootScope.accountListCache = true;
+                    }else {
+                        $rootScope.accountListCache = false;
                     }
+                    Ui.alert('success', function () {
+                        $scope.$apply(function () {
+                            $location.path('/account/manage');
+                        });
+                    });
                 });
             };
 

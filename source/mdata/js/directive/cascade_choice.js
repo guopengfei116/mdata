@@ -26,11 +26,6 @@ oasgames.mdataDirective.directive('cascadechoice', [
                 var $select = element.find('.select');
                 var $selectInput = element.find('.select_main_textarea');
 
-                $scope.$watch('searchModel', function (newV) {
-                   console.log('searchModel');
-                   console.log(newV);
-                });
-
                 // 记录数据初始化的状态
                 var resultValueInit = false, selectDataInit = false, selectedDataInit = false;
 
@@ -118,8 +113,6 @@ oasgames.mdataDirective.directive('cascadechoice', [
 
                     if($scope.cache) {
                         element.data('cacheValue', $scope.flagData);
-                        console.log($scope.flagData);
-                        console.log(element.data('cacheValue'));
                     }
 
                     // 把初始值添加进入已选值总和

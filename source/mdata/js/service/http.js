@@ -63,9 +63,6 @@ oasgames.mdataServices.provider('Http', [
                             xhrPromise.success(function (result) {
                                 if(result && result.code == 200) {
                                     fn && fn(result.data);
-                                }else {
-                                    console.log(result);
-                                    console.log('请求错误');
                                 }
                             });
 
@@ -76,7 +73,7 @@ oasgames.mdataServices.provider('Http', [
                             if(!data) {
                                 return $http.get(url);
                             }
-                            return $http.get(url, data);
+                            return $http.get(url, {params: data});
                         },
 
                         postSend : function (url, data) {
@@ -105,8 +102,27 @@ oasgames.mdataServices.provider('Http', [
                             return this.send('appIndex', null, fn);
                         },
 
-                        userIndex : function (fn) {
-                            return this.send('userIndex', null, fn);
+                        userIndex : function () {
+                            if(arguments.length == 1) {
+                                return this.send('userIndex', null, arguments[0]);
+                            }
+                            return this.send('userIndex', arguments[0], arguments[1]);
+                        },
+
+                        userAppList : function (fn) {
+                            return this.send('userAppList', null, fn);
+                        },
+
+                        checkEmail : function (data, fn) {
+                            return this.send('checkEmail', data, fn);
+                        },
+
+                        userCreate : function (data, fn) {
+                            return this.send('userCreate', data, fn);
+                        },
+
+                        userUpdate : function (data, fn) {
+                            return this.send('userUpdate', data, fn);
                         }
                     }
                 }
