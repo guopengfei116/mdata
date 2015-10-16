@@ -153,6 +153,14 @@ oasgames.mdataServices.provider('Http', [
                             return this.send('checkEmail', data, fn);
                         },
 
+                        checkPaw : function (data, fn) {
+                            return this.send('checkPaw', data, fn);
+                        },
+
+                        changePaw : function (data, fn) {
+                            return this.send('changePaw', data, fn);
+                        },
+
                         userCreate : function (data, fn) {
                             return this.send('userCreate', data, fn);
                         },
