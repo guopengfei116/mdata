@@ -15,6 +15,7 @@ oasgames.mdataApp.run([
         $rootScope.applicationListCache = CACHE_SETTINGS.applicationListCache; // applicationList页面切换时默认缓存开关
         $rootScope.accountListCache = CACHE_SETTINGS.accountListCache; // accountList页面切换时默认缓存开关
         $rootScope.reportListCache = CACHE_SETTINGS.reportListCache; // reportList页面切换时默认缓存开关
+        $rootScope.shortcutListCache = CACHE_SETTINGS.shortcutListCache; // 导航栏shortcutList默认缓存开关
 
         // 初始化用户属性
         $rootScope.$on('initUserProperty', function () {
