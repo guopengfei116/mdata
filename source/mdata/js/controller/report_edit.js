@@ -276,10 +276,11 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 result.values = $('.field-common-value').data('value');
                 result.date = $('.select-date').data('value');
 
-                Http.reportSave(result, function () {
+                Http.reportSave(result, function (data) {
+                    result.id = data.id || result.id;
                     Ui.alert('success', function () {
                         $scope.$apply(function () {
-                            $location.path('/report/manage');
+                            $location.path('/report/manage/view/' + result.id);
                         });
                     });
                 });
