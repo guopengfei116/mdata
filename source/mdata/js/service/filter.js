@@ -61,8 +61,9 @@ oasgames.mdataServices.factory('OrderHandler', [
  * @return {Function} filter方法
  * */
 oasgames.mdataServices.factory('Filter', [
-    function () {
 
+    function () {
+        var regPattern = 'i';
         var filter = function (data, config) {
             var result = [], tempReg = null, tempResultObj, tempObj = null, tempVal = '';
 
@@ -101,7 +102,7 @@ oasgames.mdataServices.factory('Filter', [
                             //最后一个值作为过滤条件
                             if(j == config[key].length - 1) {
 
-                                tempReg = new RegExp(config[key][j]);
+                                tempReg = new RegExp(config[key][j], regPattern);
                                 break;
                             }
 
@@ -112,7 +113,7 @@ oasgames.mdataServices.factory('Filter', [
                     // config[key] == string
                     }else if(Object.prototype.toString.call(key) == '[object String]'){
                         tempVal = tempResultObj[key];
-                        tempReg = new RegExp(config[key]);
+                        tempReg = new RegExp(config[key], regPattern);
                     }else {
                         throw new Error('不合法的Filter过滤条件');
                     }

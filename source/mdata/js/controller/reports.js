@@ -198,8 +198,8 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                         ReportCache.set(data);
                         $scope.sourceData = data;
                         $scope.viewData = data;
-                        upReportsListShow();  // 初始化展示状态
-                        setReportPermission();  // 记录report权限
+                        $scope.upReportsListShow();  // 初始化展示状态
+                        $scope.setReportPermission();  // 记录report权限
                         Shortcuts.init();  // 初始化收藏标记
                     });
                 }
@@ -209,7 +209,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
              * 更新report列表的展示状态，
              * 一个app时展开，多个app时合并列表
              * */
-            function upReportsListShow (reportsList) {
+            $scope.upReportsListShow = function (reportsList) {
                 var reportsList = reportsList || $scope.sourceData;
                 if(reportsList && reportsList.length > 1) {
                     for(var i = 0; i < reportsList.length; i++) {
@@ -225,7 +225,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
             /*
             * 更新report权限记录表
             * */
-            function setReportPermission (reportsList) {
+            $scope.setReportPermission = function (reportsList) {
                 var reportsList = reportsList || $scope.sourceData;
                 $rootScope.reportPermission = {};
                 for(var i = 0; i < reportsList.length; i++) {
@@ -385,7 +385,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                 }
             }
 
-            upReportsListShow(matchedApps);
+            $scope.upReportsListShow(matchedApps);
             $scope.viewData = matchedApps;
         };
 
