@@ -124,6 +124,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
             bind : function () {
                 var self = this;
                 $scope.shortcutChange = function (report, app) {
+                    console.log(22222);
                     var reportId = report.id;
                     var appId = app.appid;
 
@@ -191,6 +192,9 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                     $scope.viewData = reportListCache;
                 }else {
                     Http.reports(function (data) {
+                        if(!data) {
+                            data = [];
+                        }
                         ReportCache.set(data);
                         $scope.sourceData = data;
                         $scope.viewData = data;
