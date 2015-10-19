@@ -42,7 +42,11 @@ oasgames.mdataControllers.controller('HeaderCtrl', [
     '$location',
     'ApiCtrl',
     'Http',
-    function ($rootScope, $scope, $http, $location, ApiCtrl, Http) {
+    'AccountCache',
+    'ApplicationCache',
+    'ReportCache',
+    'ShortcutCache',
+    function ($rootScope, $scope, $http, $location, ApiCtrl, Http, AccountCache, ApplicationCache, ReportCache, ShortcutCache) {
 
         // 用户信息，注意登陆页面时会获取不到
         $scope.authority = $rootScope.user['authority'];
@@ -68,10 +72,15 @@ oasgames.mdataControllers.controller('HeaderCtrl', [
         * 跳转到登陆页
         * */
         $scope.logout = function () {
-            Http.logout();
-            authentication.delete();
-            $rootScope.$emit('initUserProperty');
-            $location.path('/login');
+            Http.logout(function () {
+                AccountCache.delete();
+                ApplicationCache.delete();
+                ReportCache.delete();
+                ShortcutCache.delete();
+                authentication.delete();
+                $rootScope.$emit('initUserProperty');
+                $location.path('/login');
+            });
         };
 
         // 对外暴漏的登出事件

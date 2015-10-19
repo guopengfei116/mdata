@@ -157,8 +157,8 @@ oasgames.mdataServices.provider('Http', [
                             return this.send('login', data, fn);
                         },
 
-                        logout : function () {
-                            return this.send('logout');
+                        logout : function (fn) {
+                            return this.send('logout', null, fn);
                         },
 
 

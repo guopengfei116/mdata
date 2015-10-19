@@ -32,6 +32,17 @@ oasgames.mdataServices.factory('ApplicationCache', [
             },
 
             /*
+             * delete account list
+             * */
+            delete : function () {
+                var cache = $cacheFactory.get('application');
+                if(cache) {
+                    cache.remove('list');
+                }
+                return true;
+            },
+
+            /*
              * add application list item
              * @return {Boole} 添加结果
              * */

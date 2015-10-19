@@ -61,6 +61,17 @@ oasgames.mdataServices.factory('ShortcutCache', [
             },
 
             /*
+             * delete account list
+             * */
+            delete : function () {
+                var cache = $cacheFactory.get('shortcut');
+                if(cache) {
+                    cache.remove('list');
+                }
+                return true;
+            },
+
+            /*
              * @method add shortcut list item
              *
              * @* 如果已收藏过这个app下的report，

@@ -32,6 +32,17 @@ oasgames.mdataServices.factory('ReportCache', [
             },
 
             /*
+             * delete account list
+             * */
+            delete : function () {
+                var cache = $cacheFactory.get('report');
+                if(cache) {
+                    cache.remove('list');
+                }
+                return true;
+            },
+
+            /*
              * add report list item
              * @* 如果appid不存在则直接push-data，存在，则比较app下的reportid，存在则替换，不存在则push
              * @param {Object} data

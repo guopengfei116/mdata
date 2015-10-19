@@ -8,14 +8,14 @@
             <search></search>
         </div>
     </section>
-    <dl class="container container-app-{{ appIndex }}" ng-init="appIndex = $index" ng-repeat="app in viewData" appid="{{app.appid}}">
+    <dl class="container container-app-{{ appIndex }}" ng-init="appIndex = $index" ng-repeat="app in viewData | orderBy:'appname'" appid="{{app.appid}}">
         <dt class="row row-title">
             <ul>
                 <li class="row_column row_column-1"><a href="javascript: void (0);" ng-click="reportsShow[$index] = !reportsShow[$index]">{{ app.appname }}</a></li>
             </ul>
         </dt>
         <dd ng-show="reportsShow[$index]">
-            <ul class="row row-children row-report-{{ $index }}" ng-repeat="report in app.reports">
+            <ul class="row row-children row-report-{{ $index }}" ng-repeat="report in app.reports | orderBy:'report_name'">
                 <li class="row_column row_column-2">
                     <a href="#/report/manage/view/{{ report.id }}">{{ report.report_name }}</a>
                 </li>

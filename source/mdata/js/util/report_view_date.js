@@ -39,10 +39,8 @@ var reportViewDate = function (options) {
         ],
 
         onClick: function(target, cell, date, data) {
-
-            target.val(date.getFullYear() + '-' +
-                (date.getMonth() + 1) + '-' +
-                date.getDate());
+            var dateString = reportViewDate.prototype.dateAmend(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
+            target.val(dateString);
 
             if(data != null) {
                 alert(data.message + '\n' + date);
@@ -69,10 +67,8 @@ var reportViewDate = function (options) {
         selectedDate: new Date(endTime),
 
         onClick: function(target, cell, date, data) {
-
-            target.val(date.getFullYear() + '-' +
-                (date.getMonth() + 1) + '-' +
-                date.getDate());
+            var dateString = reportViewDate.prototype.dateAmend(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate());
+            target.val(dateString);
 
             if(data != null) {
                 alert(data.message + '\n' + date);
@@ -83,6 +79,21 @@ var reportViewDate = function (options) {
 
 reportViewDate.prototype = {
     constructor : reportViewDate,
+
+    /*
+    * @method 修正时间格式，兼容火狐
+    * @patam {String} 2015-1-8
+    * @return {String} 2015-01-08
+    * */
+    dateAmend : function (date) {
+        var elements = date.split('-');
+        for(var i = 0; i < elements.length; i++) {
+            if(elements[i] < 10) {
+                elements[i] = '0' + elements[i];
+            }
+        }
+        return elements.join('-');
+    },
 
     /*
     * @method 获取某月天数，必要时需要传入年份
