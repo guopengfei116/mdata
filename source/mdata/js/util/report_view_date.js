@@ -147,35 +147,46 @@ reportViewDate.prototype = {
         var startDataInput = $(this.o.startDataInputSelector);
         var endDataInput = $(this.o.endDataInputSelector);
         var tempMonth, endTempMonth, startTempDay, endTempDay;
+        var startDate = '', endData = '';
         switch (type) {
             case 0 :
-                startDataInput.val(year + '-' + month + '-' + day);
-                endDataInput.val(year + '-' + month + '-' + day);
+                startDate = this.dateAmend(year + '-' + month + '-' + day);
+                endData = this.dateAmend(year + '-' + month + '-' + day);
+                startDataInput.val(startDate);
+                endDataInput.val(endData);
                 break;
             case 1 :
                 endTempDay = startTempDay = day - 1; // 昨天
-                startDataInput.val(year + '-' + month + '-' + startTempDay);
-                endDataInput.val(year + '-' + month + '-' + endTempDay);
+                startDate = this.dateAmend(year + '-' + month + '-' + startTempDay);
+                endData = this.dateAmend(year + '-' + month + '-' + endTempDay);
+                startDataInput.val(startDate);
+                endDataInput.val(endData);
                 break;
             case 7 :
                 endTempDay = day - 1; // 昨天
                 if(day > 7) {
                     startTempDay = day - 7; // 过去7天
-                    startDataInput.val(year + '-' + month + '-' + startTempDay);
-                    endDataInput.val(year + '-' + month + '-' + endTempDay);
+                    startDate = this.dateAmend(year + '-' + month + '-' + startTempDay);
+                    endData = this.dateAmend(year + '-' + month + '-' + endTempDay);
+                    startDataInput.val(startDate);
+                    endDataInput.val(endData);
                 }else {
                     tempMonth = month - 1;
                     startTempDay = this.getMonthIsDay(tempMonth) + day - 7; // 当月天数小于7天的部分，从上月总天数中扣除
-                    startDataInput.val(year + '-' + tempMonth + '-' + startTempDay);
-                    endDataInput.val(year + '-' + month + '-' + endTempDay);
+                    startDate = this.dateAmend(year + '-' + tempMonth + '-' + startTempDay);
+                    endData = this.dateAmend(year + '-' + month + '-' + endTempDay);
+                    startDataInput.val(startDate);
+                    endDataInput.val(endData);
                 }
                 break;
             case '7L' :
                 if(day > (6 + week)) {
                     startTempDay = day - (6 + week); // 周一
                     endTempDay = day - week;  // 周日
-                    startDataInput.val(year + '-' + month + '-' + startTempDay);
-                    endDataInput.val(year + '-' + month + '-' + endTempDay);
+                    startDate = this.dateAmend(year + '-' + month + '-' + startTempDay);
+                    endData = this.dateAmend(year + '-' + month + '-' + endTempDay);
+                    startDataInput.val(startDate);
+                    endDataInput.val(endData);
                 }else {
                     tempMonth = month - 1;
                     startTempDay = this.getMonthIsDay(tempMonth) + day - (6 + week);
@@ -186,29 +197,37 @@ reportViewDate.prototype = {
                         endTempDay = this.getMonthIsDay(tempMonth) + day - week;
                         endTempMonth = month - 1;
                     }
-                    startDataInput.val(year + '-' + tempMonth + '-' + startTempDay);
-                    endDataInput.val(year + '-' + endTempMonth + '-' + endTempDay);
+                    startDate = this.dateAmend(year + '-' + tempMonth + '-' + startTempDay);
+                    endData = this.dateAmend(year + '-' + endTempMonth + '-' + endTempDay);
+                    startDataInput.val(startDate);
+                    endDataInput.val(endData);
                 }
                 break;
             case 30 :
                 endTempDay = day - 1; // 昨天
                 if(day > 30) {
                     startTempDay = day - 30; // 过去30天
-                    startDataInput.val(year + '-' + month + '-' + startTempDay);
-                    endDataInput.val(year + '-' + month + '-' + endTempDay);
+                    startDate = this.dateAmend(year + '-' + month + '-' + startTempDay);
+                    endData = this.dateAmend(year + '-' + month + '-' + endTempDay);
+                    startDataInput.val(startDate);
+                    endDataInput.val(endData);
                 }else {
                     tempMonth = month - 1;
                     startTempDay = this.getMonthIsDay(tempMonth) + day - 30;
-                    startDataInput.val(year + '-' + tempMonth + '-' + startTempDay);
-                    endDataInput.val(year + '-' + month + '-' + endTempDay);
+                    startDate = this.dateAmend(year + '-' + tempMonth + '-' + startTempDay);
+                    endData = this.dateAmend(year + '-' + month + '-' + endTempDay);
+                    startDataInput.val(startDate);
+                    endDataInput.val(endData);
                 }
                 break;
             case '30L' :
                 tempMonth = month - 1; // 上月
                 startTempDay = 1;  // 月初天数
                 endTempDay = this.getMonthIsDay(tempMonth); // 月底天数
-                startDataInput.val(year + '-' + tempMonth + '-' + startTempDay);
-                endDataInput.val(year + '-' + tempMonth + '-' + endTempDay);
+                startDate = this.dateAmend(year + '-' + tempMonth + '-' + startTempDay);
+                endData = this.dateAmend(year + '-' + tempMonth + '-' + endTempDay);
+                startDataInput.val(startDate);
+                endDataInput.val(endData);
                 break;
         }
     }
