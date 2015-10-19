@@ -6,6 +6,35 @@
 oasgames.mdataServices.factory('ShortcutCache', [
     '$cacheFactory',
     function ($cacheFactory) {
+
+        /*
+         * @method 判断收藏列表是否已存在某app
+         * @return {Array || false} 存在返回一个数组，包含app对象和app的位置，不存在返回null
+         * */
+        function appIsExistShortcut(shortcuts, appId) {
+            for(var i = 0; i < shortcuts.length; i++) {
+                if(shortcuts[i].appid == appId) {
+                    return [shortcuts[i], i];
+                }
+            }
+
+            return null;
+        }
+
+        /*
+         * @method 判断收藏列表是否已存在某report
+         * @return {Object || false} 存在返回一个数组，包含report对象和report的位置，不存在返回null
+         * */
+        function reportIsExistShortcut(app, reportId) {
+            for(var i = 0; i < app.reports.length; i++) {
+                if(app.reports[i].id == reportId) {
+                    return [app.reports[i], i];
+                }
+            }
+
+            return false;
+        }
+
         return {
 
             /*
@@ -32,40 +61,77 @@ oasgames.mdataServices.factory('ShortcutCache', [
             },
 
             /*
-             * add shortcut list item
+             * @method add shortcut list item
+             *
+             * @* 如果已收藏过这个app下的report，
+             * @* 则push新收藏的report到app['reports']，
+             * @* 否则新建一个app体系
+             *
              * @return {Boole} 添加结果
              * */
-            addItem : function (data) {
+            addItem : function (report, app) {
                 var listCache = this.get();
-                if(!listCache || !data || !data['uid']) {
+                if(!listCache || !report || !report.id || !app || !app.appid) {
                     return false;
                 }
-                for(var i = listCache.length - 1; i >= 0; i--) {
-                    if(data['uid'] == listCache[i]['uid']) {
-                        listCache.splice(i, 1, data);
+
+                try {
+                    var appExitInfo = appIsExistShortcut(listCache, app.appid);
+                    var tempApp = appExitInfo && appExitInfo[0];
+                    if(tempApp) {
+                        if(!reportIsExistShortcut(tempApp, report.id)) {
+                            tempApp.reports.push(report);
+                            return true;
+                        }
+                    }else {
+                        // 修改app的reports属性会造成连锁影响
+                        tempApp = {};
+                        tempApp.appid = app.appid;
+                        tempApp.appname = app.appname;
+                        tempApp.reports = [];
+                        tempApp.reports.push(report);
+                        listCache.push(tempApp);
                         return true;
                     }
+                }catch (e) {
+                    console.log(e);
+                    return false;
                 }
-                listCache.push(data);
-                return true;
             },
 
             /*
-             * delete shortcut list item
+             * @method delete shortcut list item
+             *
+             * @* 如果app下只有一个report，
+             * @* 则删除这个app，
+             * @* 否则删除report，
+             *
              * @return {Boole} 删除结果
              * */
-            deleteItem : function (uid) {
+            deleteItem : function (report, app) {
                 var listCache = this.get();
                 if(!listCache || !uid) {
                     return false;
                 }
-                for(var i = listCache.length - 1; i >= 0; i--) {
-                    if(uid == listCache[i]['uid']) {
-                        listCache.splice(i, 1);
+
+                try {
+                    var appExitInfo = appIsExistShortcut(listCache, app.appid);
+                    var tempApp = appExitInfo && appExitInfo[0];
+                    if(tempApp.reports.length == 1) {
+                        listCache.splice(appExitInfo[1], 1);
                         return true;
                     }
+
+                    var reportExitInfo = tempApp && reportIsExistShortcut(tempApp, report.id);
+                    var tempReport = reportExitInfo && reportExitInfo[0];
+                    if(tempReport) {
+                        tempApp.reports.splice(reportExitInfo[1], 1);
+                        return true;
+                    }
+                }catch (e) {
+                    console.log(e);
+                    return false;
                 }
-                return false;
             }
         }
     }

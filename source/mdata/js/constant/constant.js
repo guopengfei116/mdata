@@ -65,10 +65,9 @@ oasgames.mdataConstant.constant("API_CONFIG", {
 
 /*
 * 设置跨域请求方式
+* 三个可选项：'message'  'jsonp'  'http'
 * */
-oasgames.mdataConstant.constant("CROSS_ORIGIN_METHOD", {
-    jsonp : false
-});
+oasgames.mdataConstant.constant("CROSS_ORIGIN_METHOD", "http");
 
 
 /*

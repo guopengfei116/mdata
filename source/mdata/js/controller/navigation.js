@@ -138,6 +138,10 @@ oasgames.mdataControllers.controller('navigationCtrl', [
                         tempApp.reports.push(report);
                         $scope.shortcuts.push(tempApp);
                     }
+
+                    console.log($scope.shortcuts);
+                    console.log(shortcutListCache);
+                    console.log(shortcutListCache === $scope.shortcuts);
                 });
 
                 /*

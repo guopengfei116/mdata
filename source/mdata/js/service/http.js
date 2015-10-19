@@ -15,8 +15,11 @@ oasgames.mdataServices.provider('Http', [
             * get api method
             * */
             getMethod : function (type) {
-                if(CROSS_ORIGIN_METHOD.jsonp) {
-                    return 'JSONP'
+                switch (CROSS_ORIGIN_METHOD) {
+                    case 'message':
+                        return 'MESSAGE';
+                    case 'jsonp':
+                        return 'JSONP';
                 }
 
                 for(var i = this.get.length - 1; i >= 0; i--) {
@@ -35,9 +38,10 @@ oasgames.mdataServices.provider('Http', [
             },
 
             $get : [
+                '$q',
                 '$http',
                 'ApiCtrl',
-                function ($http, ApiCtrl) {
+                function ($q, $http, ApiCtrl) {
                     var self = this;
                     return {
 
@@ -67,18 +71,46 @@ oasgames.mdataServices.provider('Http', [
 
                         messageSend : function (method, url, data) {
                             var iframe = window.document.createElement('iframe');
-                            iframe.src = '';
-                            $('body').append(iframe);
+                            $(iframe).attr('src', '').appendTo('body');
                             var data = {
                                 method : method,
                                 url : url,
                                 data : data,
                                 message : 'ajax'
                             };
-                            console.log(JSON.stringify(data));
+
+                            var defer = $q.defer();
+                            var promise = defer.promise;
+                            var returnData = null;
+                            var callbacks = [];
+                            promise.then(function () {
+                                for(var i = 0; i < callbacks.length; i++) {
+                                    callbacks[i](returnData.data);
+                                }
+                            }, function () {
+                                if(returnData.code == 403) {
+                                    Ui.alert('Failure');
+                                }
+                            });
+                            promise.success = function (fn) {
+                                callbacks.push(fn);
+                            };
+
+                            $(window).bind('message', function (e) {
+                                data = e.data? e.data : {};
+                                returnData = JSON.parse(data);
+                                if(returnData && returnData.code == 200) {
+                                    defer.resolve();
+                                }else {
+                                    defer.reject();
+                                }
+                            });
+
                             if(iframe.contentWindow.postMessage) {
                                 iframe.contentWindow.postMessage(JSON.stringify(data), '*');
                             }
+
+                            return promise;
                         },
 
 
@@ -97,13 +129,7 @@ oasgames.mdataServices.provider('Http', [
                             if(data && typeof data !== 'object') {
                                 throw Error('Http Data Illegal');
                             }
-                            var data2 = {
-                                method : method,
-                                url : url,
-                                data : data,
-                                message : 'ajax'
-                            };
-                            console.log(JSON.stringify(data2));
+
                             if(method === 'GET') {
                                 xhrPromise = this.getSend(url, data);
                             }else if(method === 'POST') {
