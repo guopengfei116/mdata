@@ -277,7 +277,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 result.date = $('.select-date').data('value');
 
                 Http.reportSave(result, function (data) {
-                    result.id = data.id || result.id;
+                    result.id = data.reportId || result.id;
                     Ui.alert('success', function () {
                         $scope.$apply(function () {
                             $location.path('/report/manage/view/' + result.id);
