@@ -65,6 +65,22 @@ oasgames.mdataServices.provider('Http', [
                             return $http.jsonp(url, data);
                         },
 
+                        messageSend : function (method, url, data) {
+                            var iframe = window.document.createElement('iframe');
+                            iframe.src = '';
+                            $('body').append(iframe);
+                            var data = {
+                                method : method,
+                                url : url,
+                                data : data,
+                                message : 'ajax'
+                            };
+                            console.log(JSON.stringify(data));
+                            if(iframe.contentWindow.postMessage) {
+                                iframe.contentWindow.postMessage(JSON.stringify(data), '*');
+                            }
+                        },
+
 
                         /*
                          * 公共方法
@@ -81,13 +97,21 @@ oasgames.mdataServices.provider('Http', [
                             if(data && typeof data !== 'object') {
                                 throw Error('Http Data Illegal');
                             }
-
+                            var data2 = {
+                                method : method,
+                                url : url,
+                                data : data,
+                                message : 'ajax'
+                            };
+                            console.log(JSON.stringify(data2));
                             if(method === 'GET') {
                                 xhrPromise = this.getSend(url, data);
-                            }else if(method === 'POST'){
+                            }else if(method === 'POST') {
                                 xhrPromise = this.postSend(url, data);
-                            }else if(method === 'JSONP'){
+                            }else if(method === 'JSONP') {
                                 xhrPromise = this.jsonpSend(url, data);
+                            }else if(method === 'MESSAGE') {
+                                xhrPromise = this.messageSend(method, url, data);
                             }
 
                             xhrPromise.success(function (result) {
@@ -233,8 +257,8 @@ oasgames.mdataServices.provider('Http', [
                         /*
                          * log interface method
                          * */
-                        systemLog : function (data, fn) {
-                            return this.send('checkReportName', data, fn);
+                        systemLog : function (fn) {
+                            return this.send('systemLog', null, fn);
                         }
                     }
                 }

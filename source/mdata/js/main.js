@@ -33,6 +33,7 @@ oasgames.mdataServices = angular.module('mdataServices', ['ngResource']);
 require('./service/account_cache.js');
 require('./service/application_cache.js');
 require('./service/report_cache.js');
+require('./service/shortcut_cache.js');
 require('./service/filter.js');
 require('./service/frame.js');
 require('./service/get_api.js');
