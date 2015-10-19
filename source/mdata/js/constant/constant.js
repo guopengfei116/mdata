@@ -82,6 +82,8 @@ oasgames.mdataConstant.constant("API_METHOD", {
         'userAppList',
         'systemLog',
         'reports',
+        'reportCreate',
+        'reportUpdate',
         'reportDel',
         'shortcuts',
         'guestUser'
@@ -98,8 +100,6 @@ oasgames.mdataConstant.constant("API_METHOD", {
         'userDelete',
         'reportView',
         'reportSave',
-        'reportCreate',
-        'reportUpdate',
         'reportDuplicate',
         'checkReportName',
         'shortcutAdd',
