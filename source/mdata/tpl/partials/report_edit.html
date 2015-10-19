@@ -228,12 +228,12 @@
         </div>
         <span class="red-star">*</span>
     </valuegroup>
-    <cascadechoice class="field-common-guest" select-data="guestUsers" selected-data="selectedGuestUids" flag-data="guestUserValue"  flag-data-key="uid">
+    <cascadechoice class="field-common-guest" select-data="guestUsers" selected-data="selectedGuestUids" flag-data="guestUserValue"  flag-data-key="uid" search-model="reportGuestSearch">
         <legend class="field-title-com">Report Guest</legend>
         <div>
             <div class="select select-host select-btn recombination-input" required-warn="please fill out the Guest User">
                 <div class="select_main">
-                    <input class="select_main_textarea" type="text" value="">
+                    <input class="select_main_textarea select_target" type="text" value="" placeholder="Username" ng-model="reportGuestSearch">
                     <button class="select_main_btn select_target">
                         <i class="select_main_btn_icon"></i>
                     </button>
@@ -241,7 +241,7 @@
                 <ul class="select_content">
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
-                    <li class="select_content_list" ng-repeat="guestUser in guestUsers | exclude:selectedGuestUids:'uid' | orderBy:'username' ">
+                    <li class="select_content_list" ng-repeat="guestUser in guestUsers | exclude:selectedGuestUids:'uid' | filter:{username: reportGuestSearch} | orderBy:'username' ">
                         <a class="select_content_list_value" data-value="{{ guestUser }}">{{ guestUser.username }}</a>
                     </li>
                 </ul>

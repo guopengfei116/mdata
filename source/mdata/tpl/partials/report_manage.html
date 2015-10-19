@@ -15,7 +15,7 @@
             </ul>
         </dt>
         <dd ng-show="reportsShow[$index]">
-            <ul class="row row-report-{{ $index }}" ng-repeat="report in app.reports">
+            <ul class="row row-children row-report-{{ $index }}" ng-repeat="report in app.reports">
                 <li class="row_column row_column-2">
                     <a href="#/report/manage/view/{{ report.id }}">{{ report.report_name }}</a>
                 </li>

@@ -115,15 +115,14 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
         (function () {
 
             var exportExcel = function () {
+                var blob = new Blob( getVal(), {type: "text/plain;charset=utf8"} );
+                var fileName = 'MData-' + $scope.reportSourceData.appname + '-' + $scope.reportSourceData.report_name + '-' +
+                    $scope.reportSourceData.date_begin + '-' + $scope.reportSourceData.date_end + '.xlsx';
+
                 var FileSaveAs = require('FileSaveAs').saveAs;
-                FileSaveAs(
-                    new Blob(
-                        getVal(),
-                        {type: "text/plain;charset=utf8"}
-                    ),
-                    'ReportTable.xls'
-                );
+                FileSaveAs(blob, fileName);
             };
+
             var getVal = function () {
                 var result = [], val = "\ufeff";   // \ufeff防止utf8 bom防止中文乱码
                 var dataSource = $scope.reportSourceData['table_list'];
@@ -160,6 +159,7 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
                 result.push(val);
                 return result;
             };
+
             $scope.reportExport = function () {
                 exportExcel();
             };

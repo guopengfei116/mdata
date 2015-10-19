@@ -35,7 +35,7 @@
             </div>
         <span class="red-star">*</span>
     </fieldset>
-    <cascadechoice select-data="accountsData" selected-data="selectedAccountuids" flag-data="appSourceData['appadmin']" flag-data-key="uid" cache="true">
+    <cascadechoice select-data="accountsData" selected-data="selectedAccountuids" flag-data="appSourceData['appadmin']" flag-data-key="uid" cache="true" search-model="reportAdminSearch">
         <legend class="field-title-com">Report Admin</legend>
         <div>
             <div class="select select-host select-btn">
@@ -62,7 +62,7 @@
             </span>
         </div>
     </cascadechoice>
-    <cascadechoice select-data="accountsData" selected-data="selectedAccountuids" flag-data="appSourceData['appuser']" flag-data-key="uid" cache="true">
+    <cascadechoice select-data="accountsData" selected-data="selectedAccountuids" flag-data="appSourceData['appuser']" flag-data-key="uid" cache="true" search-model="reportViewerSearch">
         <legend class="field-title-com">Report Viewer</legend>
         <div>
             <div class="select select-host select-btn">

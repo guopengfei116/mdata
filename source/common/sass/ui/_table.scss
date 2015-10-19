@@ -13,6 +13,9 @@
                 cursor: pointer;
             }
         }
+        &-children {
+            padding-left: rem(30);
+        }
         &-color-interlaced {
             &:nth-child(2n) {
                 background-color: #f9f9f9;
