@@ -9,25 +9,29 @@ oasgames.mdataServices.factory('ValueGroup', [
         return {
             semantic : function (value, separator, valueList) {
                 var values = value.split(separator);
-                var valueType = this.getValueType(values[1]) || '';
-                var format = this.getValueFormat(values[2], valueList) || '';
                 var valueArithmetic = '', valueArithmeticIndex = 3, value = '';
 
                 // 如果拥有format值，那么运算符值所在的位置将向后挪一位
+                var format = this.getValueFormat(values[2], valueList) || '';
                 if(format) {
                     valueArithmeticIndex++;
                 }
 
                 // 如果valueArithmetic值为Null，那么不展示这个值
-                var valueArithmetic = this.getValueArithmetic(values[valueArithmeticIndex]) || '';
+                var valueArithmetic  = this.getValueArithmetic(values[valueArithmeticIndex]) || '';
                 if(valueArithmetic === 'Null') {
                     valueArithmetic = '';
                 }
 
-                for(var i = 1; i < values.length; i++) {
-                    value += values[i];
+                //值转换
+                values[1] = this.getValueType(values[1]) || '';
+                values[valueArithmeticIndex] = valueArithmetic;
+
+                for(var i = 2; i < values.length; i++) {
+                    value += values[i] + ' ';
                 }
-                return values[0] + '=(' + value + ')';
+
+                return values[0] + '(' + values[1] + ')' + '=' + value;
             },
 
             /*

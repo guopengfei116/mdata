@@ -113,7 +113,7 @@
         </div>
         <div class="textarea">
             <span class="flag flag-icon" ng-repeat="filter in reportSourceData['reportData']['filter']">
-                <i class="flag-text" data-value="{{ filter }}">{{ filter }}</i>
+                <i class="flag-text" data-value="{{ filter }}">{{ filter.split('#@DELIMITER@#').join('') }}</i>
                 <i class="flag-icon_delete iconfont icon-close" data-value="{{ filter }}"></i>
             </span>
         </div>

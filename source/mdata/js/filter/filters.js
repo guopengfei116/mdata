@@ -44,14 +44,15 @@ oasgames.mdataFilter.filter('slice', [
 
 /*
  *  @value_group 值转换
- *  @param {String} valueGroup
+ *  @param {String} separator 分隔符
+ *  @param {Array} valueList report可选的value列表
  * */
-oasgames.mdataFilter.filter('slice', [
-    function () {
-        return function (text, valueGroup, separator, valueList) {
-            if(text) {
-                return text.slice(start);
-            }
+oasgames.mdataFilter.filter('ValueGroupSemantic', [
+    'ValueGroup',
+    function (ValueGroup) {
+        return function (text, separator, valueList) {
+            console.log(arguments);
+            return ValueGroup.semantic(text, separator, valueList);
         }
     }
 ]);
