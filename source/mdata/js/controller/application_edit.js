@@ -109,7 +109,8 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
             /*
              * 提交
              * 创建提交的数据中id为空，
-             * 编辑提交的数据不为空
+             * 编辑提交的数据不为空，
+             * 如果缓存为开启状态则缓存数据，如果缓存失败则关闭缓存
              * */
             $scope.submit = function () {
 
@@ -140,10 +141,10 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                     result.appid = $scope.appId || data.appid;
                     result.appadmin = $(".field-account").data('cacheValue');
                     result.appuser = $(".field-account").next().data('cacheValue');
-                    if(ApplicationCache.addItem(result)) {
-                        $rootScope.applicationListCache = true;
-                    }else {
-                        $rootScope.applicationListCache = false;
+                    if($rootScope.applicationListCache) {
+                        if(!ApplicationCache.addItem(result)) {
+                            $rootScope.applicationListCache = false;
+                        }
                     }
                     Ui.alert('success', function () {
                         $scope.$apply(function () {

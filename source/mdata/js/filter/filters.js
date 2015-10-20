@@ -29,7 +29,8 @@ oasgames.mdataFilter.filter('capitalize', [
 
 /*
  *  @filter 截取数组
- *  @param {Number} start 截取字符串的起始位置
+ *  @param {Number} start 截取数组的起始位置
+ *  @return {Array} 新数组
  * */
 oasgames.mdataFilter.filter('slice', [
     function () {
@@ -37,6 +38,21 @@ oasgames.mdataFilter.filter('slice', [
             if(text) {
                 return text.slice(start);
             }
+        }
+    }
+]);
+
+/*
+ *  @value_group 值转换
+ *  @param {String} separator 分隔符
+ *  @param {Array} valueList report可选的value列表
+ * */
+oasgames.mdataFilter.filter('ValueGroupSemantic', [
+    'ValueGroup',
+    function (ValueGroup) {
+        return function (text, separator, valueList) {
+            console.log(arguments);
+            return ValueGroup.semantic(text, separator, valueList);
         }
     }
 ]);

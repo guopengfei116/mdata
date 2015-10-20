@@ -7,41 +7,39 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
     '$rootScope',
     '$scope',
     '$route',
-    '$http',
     '$location',
-    '$cacheFactory',
     'REPORT_DATE_RANGE',
     'REPORT_DIMENSION',
     'FILTER',
     'FILTER_COMPUTE_SIGN',
     'VALUE_TYPE',
     'VALUE_ARITHMETIC',
-    'ApiCtrl',
     'MdataVerify',
+    'ReportCache',
     'Http',
-    function ($rootScope, $scope, $route, $http, $location, $cacheFactory, reportDateRanges, reportDimensions, filters, filterComputeSigns, valueTypes, valueArithmetics, ApiCtrl, MdataVerify, Http) {
+    function ($rootScope, $scope, $route, $location, REPORT_DATE_RANGE, REPORT_DIMENSION, FILTER, FILTER_COMPUTE_SIGN, VALUE_TYPE, VALUE_ARITHMETIC, MdataVerify, ReportCache, Http) {
 
         /*
         * 常量
         * */
         (function () {
             // 日期范围可选列表-常量
-            $scope.reportDateRanges = reportDateRanges;
+            $scope.reportDateRanges = REPORT_DATE_RANGE;
 
             // dimension可选列表-常量
-            $scope.reportDimensions = reportDimensions;
+            $scope.reportDimensions = REPORT_DIMENSION;
 
             // report_filter可选列表-常量
-            $scope.filters = filters;
+            $scope.filters = FILTER;
 
             // report_filter支持的运算符-常量
-            $scope.filterComputeSigns = filterComputeSigns;
+            $scope.filterComputeSigns = FILTER_COMPUTE_SIGN;
 
             // report_value支持的类型-常量
-            $scope.valueTypes = valueTypes;
+            $scope.valueTypes = VALUE_TYPE;
 
             // report_value支持的算法-常量
-            $scope.valueArithmetics = valueArithmetics;
+            $scope.valueArithmetics = VALUE_ARITHMETIC;
         })();
 
         // 当前编辑的reportId
@@ -152,7 +150,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 // 已选的date值
                 $scope.selectedDateValue = $scope.reportSourceData['reportData']['date'] || '';
                 if($scope.selectedDateValue) {
-                    $scope.selectedDateValue = reportDateRanges[$scope.selectedDateValue];
+                    $scope.selectedDateValue = $scope.reportDateRanges[$scope.selectedDateValue];
                 }
             }
         })();
@@ -278,6 +276,11 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
 
                 Http.reportSave(result, function (data) {
                     result.id = data.reportId || result.id;
+                    if($rootScope.reportListCache) {
+                        if(!ReportCache.addItem(result)) {
+                            $rootScope.reportListCache = false;
+                        }
+                    }
                     Ui.alert('success', function () {
                         $scope.$apply(function () {
                             $location.path('/report/manage/view/' + result.id);

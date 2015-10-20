@@ -113,7 +113,7 @@
         </div>
         <div class="textarea">
             <span class="flag flag-icon" ng-repeat="filter in reportSourceData['reportData']['filter']">
-                <i class="flag-text" data-value="{{ filter }}">{{ filter }}</i>
+                <i class="flag-text" data-value="{{ filter }}">{{ filter.split('#@DELIMITER@#').join('') }}</i>
                 <i class="flag-icon_delete iconfont icon-close" data-value="{{ filter }}"></i>
             </span>
         </div>
@@ -124,7 +124,7 @@
             <input class="fieldset-text-com field-text-column recombination-input" type="text" placeholder="Value Name" required-warn="please fill out the Value Name"/>
             <div class="select select-host select-btn-column recombination-input" required-warn="please fill out the Value Type">
                 <div class="select_main">
-                    <p class="select_main_text select_target"></p>
+                    <input class="select_main_text select_target" disabled="disabled" type="text" placeholder="Value Type" />
                     <button class="select_main_btn select_target">
                         <i class="select_main_btn_icon"></i>
                     </button>
