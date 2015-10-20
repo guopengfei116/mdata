@@ -29,11 +29,26 @@ oasgames.mdataFilter.filter('capitalize', [
 
 /*
  *  @filter 截取数组
- *  @param {Number} start 截取字符串的起始位置
+ *  @param {Number} start 截取数组的起始位置
+ *  @return {Array} 新数组
  * */
 oasgames.mdataFilter.filter('slice', [
     function () {
         return function (text, start) {
+            if(text) {
+                return text.slice(start);
+            }
+        }
+    }
+]);
+
+/*
+ *  @value_group 值转换
+ *  @param {String} valueGroup
+ * */
+oasgames.mdataFilter.filter('slice', [
+    function () {
+        return function (text, valueGroup, separator, valueList) {
             if(text) {
                 return text.slice(start);
             }

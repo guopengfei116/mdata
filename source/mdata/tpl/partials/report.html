@@ -42,7 +42,7 @@
         <span class="field-title-com report-title">Value</span>
         <ul class="inline-block cf">
             <li class="left" ng-repeat="valueObj in reportSourceData.values">
-                <span class="flag tooltip-host" data-tooltip-position="tc" data-tooltip-info="{{ valueObj.groupValue.split('#@DELIMITER@#').join('') }}">{{ valueObj.value_name }}</span>
+                <span class="flag tooltip-host" data-tooltip-position="tc" data-tooltip-info="{{ valueObj.groupValue.split('#@DELIMITER@#').join('') | uppercase }}">{{ valueObj.value_name }}</span>
             </li>
         </ul>
     </fieldset>
