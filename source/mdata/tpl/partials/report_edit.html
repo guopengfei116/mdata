@@ -48,7 +48,7 @@
         <legend class="field-title-com">Describe</legend>
         <textarea class="fieldset-text-com report-describe" placeholder="Input massage..." ng-model="reportSourceData['reportData']['describe']"></textarea>
     </fieldset>
-    <recombination class="field-common-dimension" separator="|" maxlength="2" recombination-data="reportSourceData['reportData']['dimension']">
+    <recombination class="field-common-dimension" separator="#@DELIMITER@#" maxlength="2" recombination-data="reportSourceData['reportData']['dimension']">
         <legend class="field-title-com">Dimension</legend>
         <div class="recombination-menu">
             <div class="select select-host select-btn recombination-input" required-warn="please fill out the Dimension">
@@ -61,15 +61,15 @@
                 <ul class="select_content">
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
-                    <li class="select_content_list" ng-repeat="reportDimension in reportDimensions ">
+                    <li class="select_content_list" ng-repeat="reportDimension in reportDimensions">
                         <a class="select_content_list_value" data-value="{{ reportDimension.value }}">{{ reportDimension.dimension }}</a>
                     </li>
                 </ul>
             </div>
             <button class="button add-select">add</button>
         </div>
-        <div class="textarea">
-            <span class="flag flag-icon" ng-repeat="dimension in reportSourceData['reportData']['dimension']">
+        <div class="textarea dimension-sortable">
+            <span class="flag flag-icon" ng-repeat="dimension in reportSourceData['reportData']['dimension']" on-Finish-Render-Dimension>
                 <i class="flag-text" data-value="{{ dimension }}">{{ dimension }}</i>
                 <i class="flag-icon_delete iconfont icon-close" data-value="{{ dimension }}"></i>
             </span>

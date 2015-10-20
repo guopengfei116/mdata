@@ -27,6 +27,7 @@ oasgames.mdataDirective.directive('valuegroup', [
                 * */
                 $scope.changeOperation = function (val) {
                     var $valueGroup2 = element.find('.value-group2');
+                    console.log(val);
                     if(val == 0) {
                         $valueGroup2.find('.recombination-input').removeClass('recombination-input');
                         $valueGroup2.hide();
@@ -182,7 +183,10 @@ oasgames.mdataDirective.directive('valuegroup', [
                         $flag.css('bakcgrountColor', '#65c178');
                         element.find('.add-select').hide();
 
-                        function initForms () {
+                        // 表单初始化
+                        (function initForms () {
+                            $scope.initForms();
+
                             var vals = val.split(separator);
                             console.log(vals);
                             var $tempInput = null;
@@ -203,7 +207,7 @@ oasgames.mdataDirective.directive('valuegroup', [
 
                                 // 运算符，如果是string类型，则证明是上一个value值的子项，需要++获取运算符的值
                                 if(valMark == 3) {
-                                    if(typeof vals[valMark] == 'string') {
+                                    if(vals[valMark] && typeof vals[valMark] == 'string') {
                                         valMark++;
                                     }
                                     $scope.changeOperation(vals[valMark]);
@@ -220,10 +224,7 @@ oasgames.mdataDirective.directive('valuegroup', [
 
                                 valMark++;
                             }
-                        }
-
-                        $scope.initForms();
-                        initForms();
+                        })();
 
                         var echo = new Echo(
                             val,

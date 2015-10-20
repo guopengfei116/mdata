@@ -183,6 +183,24 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
             });
         }
 
+        // dimension拖拽
+        $scope.$on('dimensionRenderFinished', function (e) {
+            var sortableContainer = $('.dimension-sortable');
+            sortableContainer.sortable().bind('sortupdate', function () {
+                var flagText = sortableContainer.find('.flag-text');
+
+                // 重构resultValue值
+                console.log($scope.reportSourceData['reportData']['dimension']);
+                flagText.each(function (i, e) {
+                    var val = $(this).data('value');
+                    $scope.reportSourceData['reportData']['dimension'][i] = val;
+                });
+                console.log($scope.reportSourceData['reportData']['dimension']);
+
+                $('.field-common-dimension').data('value', $scope.reportSourceData['reportData']['dimension']);
+            });
+        });
+
         // 事件处理、表单效验
         (function () {
             $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
