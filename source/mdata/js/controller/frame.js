@@ -38,15 +38,13 @@ oasgames.mdataControllers.controller('PageFrameCtrl', [
 oasgames.mdataControllers.controller('HeaderCtrl', [
     '$rootScope',
     '$scope',
-    '$http',
     '$location',
-    'ApiCtrl',
     'Http',
     'AccountCache',
     'ApplicationCache',
     'ReportCache',
     'ShortcutCache',
-    function ($rootScope, $scope, $http, $location, ApiCtrl, Http, AccountCache, ApplicationCache, ReportCache, ShortcutCache) {
+    function ($rootScope, $scope, $location, Http, AccountCache, ApplicationCache, ReportCache, ShortcutCache) {
 
         // 用户信息，注意登陆页面时会获取不到
         $scope.authority = $rootScope.user['authority'];

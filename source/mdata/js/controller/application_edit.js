@@ -6,25 +6,20 @@ var tooltip = require('Tooltip');
 oasgames.mdataControllers.controller('ApplicationEditCtrl', [
     '$rootScope',
     '$scope',
-    '$cacheFactory',
     '$route',
-    '$http',
     '$location',
     'PROCESSOR',
     'TIME_ZONE',
-    'Account',
-    'Filter',
     'MdataVerify',
-    'ApiCtrl',
     'ApplicationCache',
     'Http',
-    function ($rootScope, $scope, $cacheFactory, $route, $http, $location, processors, timeZone, Account, Filter, MdataVerify, ApiCtrl, ApplicationCache, Http) {
+    function ($rootScope, $scope, $route, $location, PROCESSOR, TIME_ZONE, MdataVerify, ApplicationCache, Http) {
 
         // processor可选列表-常量
-        $scope.processors = processors;
+        $scope.processors = PROCESSOR;
 
         // 时区可选列表-常量
-        $scope.timeZones = timeZone;
+        $scope.timeZones = TIME_ZONE;
 
         // 所有的account列表
         $scope.accountsData = [];

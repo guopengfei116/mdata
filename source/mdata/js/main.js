@@ -73,6 +73,7 @@ oasgames.mdataControllers = angular.module('mdataControllers', []);
 require('./controller/frame.js');
 require('./controller/navigation.js');
 require('./controller/login.js');
+require('./controller/change_password.js');
 require('./controller/applications.js');
 require('./controller/application_edit.js');
 require('./controller/accounts.js');

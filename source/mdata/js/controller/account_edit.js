@@ -6,16 +6,12 @@ var tooltip = require('Tooltip');
 oasgames.mdataControllers.controller('AccountEditCtrl', [
     '$rootScope',
     '$scope',
-    '$cacheFactory',
     '$route',
-    '$http',
     '$location',
-    'Application',
     'MdataVerify',
-    'ApiCtrl',
     'AccountCache',
     'Http',
-    function ($rootScope, $scope, $cacheFactory, $route, $http, $location, Application, MdataVerify, ApiCtrl, AccountCache, Http) {
+    function ($rootScope, $scope, $route, $location, MdataVerify, AccountCache, Http) {
 
         // 所有的app列表
         $scope.appsData = [];

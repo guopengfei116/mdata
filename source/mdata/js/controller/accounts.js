@@ -5,14 +5,12 @@
 oasgames.mdataControllers.controller('AccountManageCtrl', [
     '$rootScope',
     '$scope',
-    '$http',
     'CACHE_SETTINGS',
     'Filter',
     'OrderHandler',
-    'ApiCtrl',
     'AccountCache',
     'Http',
-    function ($rootScope, $scope, $http, CACHE_SETTINGS, Filter, OrderHandler, ApiCtrl, AccountCache, Http) {
+    function ($rootScope, $scope, CACHE_SETTINGS, Filter, OrderHandler, AccountCache, Http) {
 
         // 定义default数据
         $scope.searchPlaceholder = 'Search Name Email...';
