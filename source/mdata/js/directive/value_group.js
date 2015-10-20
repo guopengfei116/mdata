@@ -235,13 +235,16 @@ oasgames.mdataDirective.directive('valuegroup', [
 
                                 // 更新复合表单值
                                 if(val != newVal) {
+                                    console.log($scope.resultValue);
                                     for(var i = 0; i < $scope.resultValue.length; i++) {
                                         if($scope.resultValue[i] == val) {
+                                            console.log(i);
                                             $scope.resultValue[i] = newVal;
                                             element.data('value', $scope.resultValue);
                                             break;
                                         }
                                     }
+                                    console.log($scope.resultValue);
                                     $flag.find('.flag-text').data('value', newVal).text(newVal.split(separator)[0]);
                                     $flag.find('.flag-icon_delete').data('value', newVal);
                                 }
