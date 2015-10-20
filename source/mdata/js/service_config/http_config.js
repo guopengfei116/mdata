@@ -9,6 +9,7 @@ oasgames.mdataServicesConfig.config([
         // header 默认值
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
         $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded, charset=UTF-8';
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded, charset=UTF-8';
 
         // request 默认数据处理函数
         $httpProvider.defaults.transformRequest = function(data){

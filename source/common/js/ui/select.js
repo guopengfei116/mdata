@@ -76,7 +76,7 @@ $.extend(Select.prototype, {
 
             $select.data('value', val).toggleClass('select-active');
             $select.find(self.textarea).val($this.text());
-            $select.find(self.text).text($this.text());
+            $select.find(self.text).text($this.text()).val($this.text());
         });
 
         // text change
@@ -113,8 +113,12 @@ $.extend(Select.prototype, {
                 return;
             }
             var $host = $looks.parent(self.host);
+            var hostOuterHeight = $host.outerHeight();
+            if(!hostOuterHeight) {
+                return true;
+            }
             $looks.css({
-                top: $host.outerHeight() + o.offset,
+                top: hostOuterHeight + o.offset,
                 left: 0
             }).attr('init', true);
         });
