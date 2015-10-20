@@ -76,7 +76,8 @@ $.extend(Select.prototype, {
 
             $select.data('value', val).toggleClass('select-active');
             $select.find(self.textarea).val($this.text());
-            $select.find(self.text).text($this.text()).val($this.text());
+            $select.find('input' + self.text).val($this.text());
+            $select.find(self.text).text($this.text());
         });
 
         // text change

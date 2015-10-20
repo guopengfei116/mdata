@@ -160,10 +160,14 @@ Echo.prototype = {
     selectEcho : function (select, val) {
         var $select = $(select);
         var $text = $select.find('.select_main_text');
+        var $textInput = $select.find('input.select_main_text');
         var $textarea = $select.find('.select_main_textarea');
 
         if($text.length) {
             $text.text(val);
+        }
+        if($textInput.length) {
+            $textInput.val(val);
         }
         if($textarea.length) {
             $textarea.val(val);

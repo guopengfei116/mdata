@@ -4,7 +4,8 @@
  * @* 所有表单的值都按照key-value的形式进行存储，提交key，展示value
  * */
 oasgames.mdataDirective.directive('valuegroup', [
-    function () {
+    'ValueGroup',
+    function (ValueGroup) {
         return {
             restrict: 'E',
             replace: true,
@@ -187,10 +188,9 @@ oasgames.mdataDirective.directive('valuegroup', [
                         (function initForms () {
                             $scope.initForms();
 
+                            var $tempInput = null, valMark = 2, tempFormat = '';
                             var vals = val.split(separator);
                             console.log(vals);
-                            var $tempInput = null;
-                            var valMark = 2;
 
                             if(!vals || !vals.length) {
                                 return;
@@ -205,9 +205,10 @@ oasgames.mdataDirective.directive('valuegroup', [
                                     continue;
                                 }
 
-                                // 运算符，如果是string类型，则证明是上一个value值的子项，需要++获取运算符的值
+                                // 如果拥有format值，那么运算符值所在的位置将向后挪一位
                                 if(valMark == 3) {
-                                    if(vals[valMark] && typeof vals[valMark] == 'string') {
+                                    var tempFormat = ValueGroup.getValueFormat(vals[2], $scope.valueList);
+                                    if(tempFormat) {
                                         valMark++;
                                     }
                                     $scope.changeOperation(vals[valMark]);
