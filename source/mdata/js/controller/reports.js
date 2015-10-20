@@ -5,14 +5,12 @@
 oasgames.mdataControllers.controller('reportManageCtrl', [
     '$rootScope',
     '$scope',
-    '$http',
-    '$cacheFactory',
-    'ApiCtrl',
+    'CACHE_SETTINGS',
     'Filter',
     'ReportCache',
     'ShortcutCache',
     'Http',
-    function ($rootScope, $scope, $http, $cacheFactory, ApiCtrl, Filter, ReportCache, ShortcutCache, Http) {
+    function ($rootScope, $scope, CACHE_SETTINGS, Filter, ReportCache, ShortcutCache, Http) {
 
         // 权限
         $scope.authority = $rootScope.user['authority'];
@@ -187,7 +185,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
 
             $scope.loadReports = function () {
                 var reportListCache = ReportCache.get();
-                if(reportListCache && $rootScope.reportListCache) {
+                if(reportListCache && $rootScope.reportListCache && CACHE_SETTINGS.reportListCache) {
                     $scope.sourceData = reportListCache;
                     $scope.viewData = reportListCache;
                 }else {
