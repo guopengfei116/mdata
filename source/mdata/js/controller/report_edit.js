@@ -207,7 +207,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                         Http.checkReportName({
                             'appId' : app_id,
                             'report_name' : report_name
-                        }).success(function () {
+                        }).success(function (result) {
                             if(result && result.code == 200) {
                                 flag = 0;
                             }else {

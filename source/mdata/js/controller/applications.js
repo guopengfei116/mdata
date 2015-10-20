@@ -62,7 +62,7 @@ oasgames.mdataControllers.controller('ApplicationManageCtrl', [
         (function () {
             // 删除app
             $scope.delete = function (appId) {
-                Ui.alert('请联系系统管理员进行删除app操作');
+                Ui.alert('Please contact your administrator to remove app.');
             };
         })();
     }
