@@ -6,15 +6,13 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
     '$rootScope',
     '$scope',
     '$route',
-    '$http',
     'REPORT_DATE_RANGE',
-    'ApiCtrl',
     'OrderHandler',
     'Http',
-    function ($rootScope, $scope, $route, $http, reportDateRanges, ApiCtrl, OrderHandler, Http) {
+    function ($rootScope, $scope, $route, REPORT_DATE_RANGE, OrderHandler, Http) {
 
         // report日期范围
-        $scope.reportDateRanges = reportDateRanges;
+        $scope.reportDateRanges = REPORT_DATE_RANGE;
 
         // 当前report的数据
         $scope.reportSourceData = {};

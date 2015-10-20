@@ -4,14 +4,10 @@
  * */
 oasgames.mdataControllers.controller('systemLogCtrl', [
     '$scope',
-    '$http',
-    '$cacheFactory',
-    '$timeout',
-    'ApiCtrl',
     'Filter',
     'OrderHandler',
     'Http',
-    function ($scope, $http, $cacheFactory, $timeout, ApiCtrl, Filter, OrderHandler, Http) {
+    function ($scope, Filter, OrderHandler, Http) {
 
         // 定义default数据
         $scope.searchPlaceholder = 'Search Account Operation...';

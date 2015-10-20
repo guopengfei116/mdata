@@ -5,13 +5,10 @@
 oasgames.mdataControllers.controller('navigationCtrl', [
     '$rootScope',
     '$scope',
-    '$cacheFactory',
-    '$http',
     '$location',
-    'ApiCtrl',
     'ShortcutCache',
     'Http',
-    function ($rootScope, $scope, $cacheFactory, $http, $location, ApiCtrl, ShortcutCache, Http) {
+    function ($rootScope, $scope, $location, ShortcutCache, Http) {
 
         // 权限
         $scope.authority = $rootScope.user['authority'];
