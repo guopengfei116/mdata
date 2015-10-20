@@ -14,9 +14,10 @@
 		background:#eeeeee;
 	}
 	.report-describe{
-		display: inline-block;
-	    margin-left: 152px;
-	    margin-top: -18px;
+		width:664px; 
+		height:44px;
+		padding:10px;
+		text-indent:0px; 
 	}
 	.field-report{
 		margin-bottom:12px;
@@ -28,6 +29,14 @@
 		width:152px; 
 		display:inline-block;
 		margin-bottom:0px; 
+	}
+	.report-title-describe{
+		float:left; 
+		display:block;
+	}
+	.report-describe-show{
+		display: block;
+    	margin-left: 152px;
 	}
 	.report-table{
 		.container{
