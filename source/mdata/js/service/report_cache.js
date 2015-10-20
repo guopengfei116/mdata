@@ -46,10 +46,9 @@ oasgames.mdataServices.factory('ReportCache', [
              * add report list item
              * @* 如果appid不存在则直接push-data，存在，则比较app下的reportid，存在则替换，不存在则push
              * @param {Object} data
-             * @param {Number} reportid
              * @return {Boole} 添加结果
              * */
-            addItem : function (reportid, data) {
+            addItem : function (data) {
                 var listCache = this.get();
                 if(!listCache || !data || !reportid || !data['appid']) {
                     return false;
@@ -58,7 +57,7 @@ oasgames.mdataServices.factory('ReportCache', [
                     for(var i = listCache.length - 1; i >= 0; i--) {
                         if(data['appid'] == listCache[i]['appid']) {
                             for(var j = listCache[i]['reports'].length - 1; j >= 0; j--) {
-                                if(reportid === listCache[i]['reports'][j]['id']) {
+                                if(data['id'] === listCache[i]['reports'][j]['id']) {
                                     listCache[i]['reports'].splice(j, 1, data['reports'][0]);
                                     return true;
                                 }
@@ -72,7 +71,13 @@ oasgames.mdataServices.factory('ReportCache', [
                     console.log(e);
                     return false;
                 }
-                listCache.push(data);
+
+                listCache.push({
+                    permission : 1,  //能够创建report，则权限至少为1
+                    appname : data.appname,
+                    appid : data.appid,
+                    reports : [data]
+                });
                 return true;
             },
 
