@@ -22,7 +22,7 @@ oasgames.mdataServices.factory('ShortcutCache', [
         }
 
         /*
-         * @method 判断收藏列表是否已存在某report
+         * @method 判断收藏的某app中是否已存在某report
          * @return {Object || false} 存在返回一个数组，包含report对象和report的位置，不存在返回null
          * */
         function reportIsExistShortcut(app, reportId) {
@@ -121,7 +121,7 @@ oasgames.mdataServices.factory('ShortcutCache', [
              * */
             deleteItem : function (report, app) {
                 var listCache = this.get();
-                if(!listCache || !uid) {
+                if(!listCache || !report || !report.id || !app || !app.appid) {
                     return false;
                 }
 

@@ -2,8 +2,8 @@
 * 配置测试或线上环境
 * */
 oasgames.mdataConstant.constant("RUN_TIME_SYSTEM", {
-    online : true,
-    domain : true
+    'online' : true,
+    'domain' : true
 });
 
 
@@ -11,7 +11,7 @@ oasgames.mdataConstant.constant("RUN_TIME_SYSTEM", {
  * 接口
  * */
 oasgames.mdataConstant.constant("API_CONFIG", {
-    "online" : {
+    'online' : {
         'userAuth' : '/isLogin',
         'login' : '/site/login',
         'logout' : '/site/logout',
@@ -41,7 +41,7 @@ oasgames.mdataConstant.constant("API_CONFIG", {
         'shortcutDel' : '/report/favorite-del',
         'guestUser' : '/report/guest-user'
     },
-    "local" : {
+    'local' : {
         'userAuth' : '/isLogin',
         'login' : '/mdata/js/login.json',
         'logout' : '/mdata/js/logout.json',
@@ -74,7 +74,7 @@ oasgames.mdataConstant.constant("CROSS_ORIGIN_METHOD", "http");
  * 接口对应的method
  * */
 oasgames.mdataConstant.constant("API_METHOD", {
-    get : [
+    'get' : [
         'logout',
         'appIndex',
         'appUserList',
@@ -88,7 +88,7 @@ oasgames.mdataConstant.constant("API_METHOD", {
         'shortcuts',
         'guestUser'
     ],
-    post : [
+    'post' : [
         'login',
         'changePaw',
         'checkPaw',
@@ -121,18 +121,28 @@ oasgames.mdataConstant.constant("AUTHORITY", {
     }
 });
 
+
+/*
+ * 配置左侧导航栏中的收藏列表默认展示状态
+ * */
+oasgames.mdataConstant.constant("SHORTCUT_DEFAULT_STATUS", {
+    'app' : false,
+    'report' : false
+});
+
+
 /*
  * 缓存开关、缓存时间(分钟)
  * */
 oasgames.mdataConstant.constant("CACHE_SETTINGS", {
-    applicationListCache : true,
-    applicationListCacheTime : 20,
-    accountListCache : true,
-    accountListCacheTime : 20,
-    reportListCache : true,
-    reportListCacheTime : 20,
-    shortcutListCache : true,
-    shortcutListCacheTime : 20
+    'applicationListCache' : true,
+    'applicationListCacheTime' : 20,
+    'accountListCache' : true,
+    'accountListCacheTime' : 20,
+    'reportListCache' : true,
+    'reportListCacheTime' : 20,
+    'shortcutListCache' : true,
+    'shortcutListCacheTime' : 20
 });
 
 /*
