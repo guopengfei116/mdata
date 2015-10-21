@@ -66,6 +66,8 @@ oasgames.mdataControllers.controller('navigationCtrl', [
                         data = [];
                     }
                     ShortcutCache.set(data);
+                    shortcutListCache = ShortcutCache.get();
+                    console.log(shortcutListCache === data);
                     $scope.shortcuts = data;
                     init();
                 });
