@@ -76,7 +76,6 @@ oasgames.mdataDirective.directive('recombination', [
                         // add值
                         $scope.recombinationData.push(val);
                         $scope.upRecombinationData($scope.recombinationData);
-
                         $scope.$apply();
                     });
 
@@ -104,47 +103,41 @@ oasgames.mdataDirective.directive('recombination', [
                         var val = $(this).data('value');
                         var $flag = $(this).parent('.flag');
 
-                        // 隐藏添加按钮，变化样式
-                        $flag.css('bakcgrountColor', '#65c178');
-                        element.find('.add-select').hide();
+                        var echo = new Echo({
+                            value : val,
+                            separator : separator,
+                            domScope : element,
 
-                        var echo = new Echo(
-                            val,
-                            separator,
-                            element,
+                            // 隐藏添加按钮，变化样式
+                            before : function () {
+                                $flag.css('backgroundColor', '#65c178').siblings().css('backgroundColor', '#12afcb');
+                                element.find('.add-select').hide();
+                            },
 
-                            /*
-                            * 成功回调函数，
-                            * 如果新值为空或不变则不做任何处理
-                            * */
-                            function (newVal) {
+                            complete : function () {
+                                $flag.css('backgroundColor', '#12afcb');
+                                element.find('.add-select').show();
+                            },
 
+                            //如果新值为空或不变则不做任何处理
+                            success : function (newVal) {
                                 if(!newVal) {
                                     newVal = val;
                                 }
                                 if(val != newVal) {
                                     for(var i = 0; i < $scope.recombinationData.length; i++) {
                                         if($scope.recombinationData[i] == val) {
+                                            console.log($scope.recombinationData);
+                                            console.log($scope.recombinationData[i]);
                                             $scope.recombinationData[i] = newVal;
                                             $scope.upRecombinationData($scope.recombinationData);
                                             break;
                                         }
                                     }
-                                    $flag.find('.flag-text').data('value', newVal).text(newVal);
-                                    $flag.find('.flag-icon_delete').data('value', newVal);
+                                    $scope.$apply();
                                 }
-
-                                // 恢复样式
-                                $flag.css('bakcgrountColor', '#12afcb');
-                                element.find('.add-select').show();
-
-                                $scope.$apply();
-                            },
-                            function () {
-                                $flag.css('bakcgrountColor', '#12afcb');
-                                element.find('.add-select').show();
                             }
-                        );
+                        });
                     });
                 });
             },

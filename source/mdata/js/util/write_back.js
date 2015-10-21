@@ -7,20 +7,26 @@
  * @* echo会按照'.recombination-input'的数量进行分割value并按照顺序回写值
  * @* 回写时会添加确定与取消两个按钮到'.recombination-menu'里
  * */
-var Echo = function (value, separator, domScope) {
+var Echo = function (option, value, separator, domScope) {
+    var o = {
+        value : '',               // 复合值的字符串
+        separator : '',           // 分隔符
+        domScope : '',            // dom作用域
+        before : function(){},    // 初始化之前执行的函数
+        complete : function(){},  // 回调执行完毕后执行的函数
+        success : function(){},   // 确定按钮回调
+        failure : function(){}    // 取消按钮或确定按钮执行失败后执行的回调
+    };
 
-    // 复合值的字符串
-    this.value = value;
+    $.extend(o, option);
 
-    // 分隔符
-    this.separator = separator;
-
-    // dom祖类
-    this.domScope = domScope;
-
-    // 回调
-    this.success = arguments[arguments.length - 2];
-    this.failure = arguments[arguments.length - 1];
+    this.value = o.value;
+    this.separator = o.separator;
+    this.domScope = o.domScope;
+    this.before = o.before;
+    this.complete = o.complete;
+    this.success = o.success;
+    this.failure = o.failure;
 
     // 初始化
     this.init();
@@ -49,35 +55,46 @@ Echo.prototype = {
             throw new Error('value字段分割与要求的长度不相符');
         }
 
+        this.before();
+
+        // 如果当前已经是echo状态，那么清除上一次实例创建的事件，重新进行创建
+        if($domScope.find('.echo-button').length) {
+            self.destroy();
+        }
+
         // 数据回写
-        this.setValue($echoForms, values);
+        self.setValue($echoForms, values);
 
         // 事件绑定
         self.bind();
     },
 
-    // 销毁操作痕迹
-    destroy : function () {
+    destroyEvent : function () {
         var self = this;
         var $domScope = $(this.domScope);
-        var $echoForms = $domScope.find(this.inputSelector);
-
         $domScope.find('.echo-button').remove();
         $domScope.off('click', '.echo-button-check');
         $domScope.off('click', '.echo-button-close');
+    },
+
+    destroyForm : function () {
+        var self = this;
+        var $domScope = $(this.domScope);
+        var $echoForms = $domScope.find(this.inputSelector);
         this.setValue($echoForms);
+    },
+
+    // 销毁操作痕迹
+    destroy : function () {
+        var self = this;
+        self.destroyEvent();
+        self.destroyForm();
     },
 
     // echo确定和取消按钮
     bind : function () {
         var self = this;
         var $domScope = $(this.domScope);
-
-
-        // 防止重复添加
-        if($domScope.find('.echo-button').length) {
-            return;
-        }
 
         // 添加echo操作按钮
         $domScope.find(this.btnWrapSelector).append(this.btnTemplate);
@@ -88,10 +105,11 @@ Echo.prototype = {
             var newVal = self.getValue($echoForms, self.separator);
             self.success(newVal);
             self.destroy();
-
+            self.complete();
         }).on('click', '.echo-button-close', function () {
             self.failure('');
             self.destroy();
+            self.complete();
         })
     },
 

@@ -180,17 +180,11 @@ oasgames.mdataDirective.directive('valuegroup', [
                         var val = $(this).data('value');
                         var $flag = $(this).parent('.flag');
 
-                        // 隐藏添加按钮，变化样式
-                        $flag.css('bakcgrountColor', '#65c178');
-                        element.find('.add-select').hide();
-
                         // 表单初始化
                         (function initForms () {
                             $scope.initForms();
-
-                            var $tempInput = null, valMark = 2, tempFormat = '';
+                            var valMark = 2, tempFormat = '';
                             var vals = val.split(separator);
-                            console.log(vals);
 
                             if(!vals || !vals.length) {
                                 return;
@@ -227,37 +221,40 @@ oasgames.mdataDirective.directive('valuegroup', [
                             }
                         })();
 
-                        var echo = new Echo(
-                            val,
-                            separator,
-                            element,
-                            function (newVal) {
+                        var echo = new Echo({
+                            value : val,
+                            separator : separator,
+                            domScope : element,
 
-                                // 更新复合表单值
+                            // 隐藏添加按钮，变化样式
+                            before : function(){
+                                $flag.css('backgroundColor', '#65c178').siblings().css('backgroundColor', '#12afcb');
+                                element.find('.add-select').hide();
+                            },
+
+                            complete : function(){
+                                $flag.css('backgroundColor', '#12afcb');
+                                element.find('.add-select').show();
+                            },
+
+                            //如果新值为空或不变则不做任何处理
+                            success : function(newVal){
+                                if(!newVal) {
+                                    newVal = val;
+                                }
                                 if(val != newVal) {
-                                    console.log($scope.resultValue);
                                     for(var i = 0; i < $scope.resultValue.length; i++) {
                                         if($scope.resultValue[i] == val) {
-                                            console.log(i);
                                             $scope.resultValue[i] = newVal;
                                             element.data('value', $scope.resultValue);
                                             break;
                                         }
                                     }
-                                    console.log($scope.resultValue);
                                     $flag.find('.flag-text').data('value', newVal).text(newVal.split(separator)[0]);
                                     $flag.find('.flag-icon_delete').data('value', newVal);
                                 }
-
-                                // 恢复样式
-                                $flag.css('bakcgrountColor', '#12afcb');
-                                element.find('.add-select').show();
-                            },
-                            function () {
-                                $flag.css('bakcgrountColor', '#12afcb');
-                                element.find('.add-select').show();
                             }
-                        );
+                        });
                     });
 
                     // 拖拽
