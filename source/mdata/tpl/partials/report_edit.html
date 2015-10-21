@@ -118,7 +118,7 @@
             </span>
         </div>
     </recombination>
-    <valuegroup class="field-common-value" separator="#@DELIMITER@#" maxlength="20" value-list="valueList" flag-data="reportSourceData['reportData']['values']">
+    <valuegroup class="field-common-value" separator="#@DELIMITER@#" maxlength="20" pattern="^(\w)+$" value-list="valueList" flag-data="reportSourceData['reportData']['values']">
         <legend class="field-title-com">Value Group</legend>
         <div class="recombination-menu">
             <input class="fieldset-text-com field-text-column recombination-input" type="text" placeholder="Value Name" required-warn="please fill out the Value Name"/>

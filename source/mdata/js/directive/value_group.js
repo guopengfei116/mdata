@@ -21,6 +21,7 @@ oasgames.mdataDirective.directive('valuegroup', [
             link: function ($scope, element, attr) {
                 var separator = attr.separator;
                 var maxlength = attr.maxlength || null;
+                var pattern = attr.pattern;
                 var Echo = require('Echo');
 
                 /*
@@ -28,7 +29,6 @@ oasgames.mdataDirective.directive('valuegroup', [
                 * */
                 $scope.changeOperation = function (val) {
                     var $valueGroup2 = element.find('.value-group2');
-                    console.log(val);
                     if(val == 0) {
                         $valueGroup2.find('.recombination-input').removeClass('recombination-input');
                         $valueGroup2.hide();
@@ -70,6 +70,42 @@ oasgames.mdataDirective.directive('valuegroup', [
                     }else {
                         $valueGroup.find('.fieldset-text-com').addClass('recombination-input').attr('placeholder', format).show();
                     }
+                };
+
+                /*
+                 * @method 检测value第一个值的正确性
+                 * @param {String} newVal 要检测的新值
+                 * @param {String} oldVal 新值的前身，在重复检测时，新值不会与旧值进行比较
+                 * */
+                $scope.nameVerify = function (newVal, oldVal) {
+                    var oldVal = oldVal || '', nameReg = null, result = false;
+                    var valName = newVal.split(separator)[0];
+
+                    for(var i = 0; i < $scope.resultValue.length; i++) {
+                        if(oldVal === $scope.resultValue[i]) {
+                            continue;
+                        }
+                        if(valName === $scope.resultValue[i].split(separator)[0]) {
+                            Ui.alert('Name can not repeat');
+                            return false;
+                        }
+                    }
+
+                    if(pattern) {
+                        try {
+                            nameReg = new RegExp(pattern);
+                            result = nameReg.test(valName);
+                            if(!result) {
+                                Ui.alert('The name of the format error');
+                                return false;
+                            }
+                        }catch (e) {
+                            console.log('value_group pattern error');
+                            return false;
+                        }
+                    }
+
+                    return true;
                 };
 
                 /*
@@ -130,12 +166,8 @@ oasgames.mdataDirective.directive('valuegroup', [
                         }
 
                         // name重复效验
-                        var valName = val.split(separator)[0];
-                        for(var i = 0; i < $scope.resultValue.length; i++) {
-                            if(valName === $scope.resultValue[i].split(separator)[0]) {
-                                Ui.alert('name can not repeat');
-                                return;
-                            }
+                        if(!$scope.nameVerify(val)) {
+                            return;
                         }
 
                         // add值
@@ -243,6 +275,9 @@ oasgames.mdataDirective.directive('valuegroup', [
                                     newVal = val;
                                 }
                                 if(val != newVal) {
+                                    if(!$scope.nameVerify(newVal, val)) {
+                                        return;
+                                    }
                                     for(var i = 0; i < $scope.resultValue.length; i++) {
                                         if($scope.resultValue[i] == val) {
                                             $scope.resultValue[i] = newVal;
