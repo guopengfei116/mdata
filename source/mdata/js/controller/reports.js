@@ -333,12 +333,12 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
         // 删除report
         (function () {
             $scope.delete = function (reportId, appId) {
-                Ui.confirm('确定要删除这个report吗', function () {
+                Ui.confirm('Do you want to delete this report?', function () {
                     Http.reportDel({
                         reportId : reportId
                     }, function () {
                         ReportCache.deleteItem(reportId, appId);
-                        Ui.alert('删除成功');
+                        Ui.alert('Delete successful');
                     });
                 });
             };
