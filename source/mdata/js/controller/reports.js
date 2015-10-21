@@ -61,6 +61,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                 var shortcutListCache = ShortcutCache.get();
                 if(shortcutListCache && $rootScope.shortcutListCache) {
                     reportShortcutIdList = shortcutListCache;
+                    processor();
                 }else {
                     Http.shortcuts(function (data) {
                         // 如果无收藏列表，则初始化一个空数组
@@ -122,7 +123,6 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
             bind : function () {
                 var self = this;
                 $scope.shortcutChange = function (report, app) {
-                    console.log(22222);
                     var reportId = report.id;
                     var appId = app.appid;
 
@@ -188,6 +188,9 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                 if(reportListCache && $rootScope.reportListCache && CACHE_SETTINGS.reportListCache) {
                     $scope.sourceData = reportListCache;
                     $scope.viewData = reportListCache;
+                    $scope.upReportsListShow();  // 初始化展示状态
+                    $scope.setReportPermission();  // 记录report权限
+                    Shortcuts.init();  // 初始化收藏标记
                 }else {
                     Http.reports(function (data) {
                         if(!data) {
@@ -327,6 +330,20 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
             };
         })();
 
+        // 删除report
+        (function () {
+            $scope.delete = function (reportId, appId) {
+                Ui.confirm('确定要删除这个report吗', function () {
+                    Http.reportDel({
+                        reportId : reportId
+                    }, function () {
+                        ReportCache.deleteItem(reportId, appId);
+                        Ui.alert('删除成功');
+                    });
+                });
+            };
+        })();
+
         /*
          * @暴漏的搜索处理函数
          * @param {String} searchVal
@@ -386,19 +403,5 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
             $scope.upReportsListShow(matchedApps);
             $scope.viewData = matchedApps;
         };
-
-        // 删除report
-        (function () {
-            $scope.delete = function (reportId, appId) {
-                Ui.confirm('确定要删除这个report吗', function () {
-                    Http.reportDel({
-                        reportId : reportId
-                    }, function () {
-                        ReportCache.deleteItem(reportId, appId);
-                        Ui.alert('删除成功');
-                    });
-                });
-            };
-        })();
     }
 ]);
