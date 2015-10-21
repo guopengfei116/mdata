@@ -15,6 +15,8 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
 
         //密码是否正确 1是不正确
         var pswFlag = 1;
+        //ajax 提交一次请求
+        var ajaxFlag = false;
 
         //错误提示
         $scope.showError = function(type, pError) {
@@ -131,8 +133,11 @@ oasgames.mdataControllers.controller('MdataChangePasswordCtrl', [
 
             //验证通过、新旧密码不一致并且新密码相同
             if($scope['cPaw'].$valid) {
+                if(ajaxFlag) return false;
+                ajaxFlag = true;
                 Http.changePaw($scope.userPassword, function () {
                     Ui.alert('success', function () {
+                        ajaxFlag = false;
                         $scope.$emit('logout');
                     });
                 });
