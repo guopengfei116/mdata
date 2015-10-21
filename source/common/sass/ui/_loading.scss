@@ -1,9 +1,19 @@
 .Loading {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
     &_mask {
         @include mask(9999);
     }
     &_icon {
-        z-index: 10001;
-        @include panel(10001, 20rem, 20rem);
+        opacity: 0.6;
+        width: 100%;
+        height: 100%;
+        img {
+            width: 100%;
+            height: 100%;
+        }
     }
 }

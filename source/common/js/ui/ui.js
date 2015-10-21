@@ -149,9 +149,13 @@ Ui.prototype = {
                 Loading.looks.hide();
             }
         };
-        return function () {
+        return function (handle) {
             if(Loading.initialized) {
-                Loading.show();
+                if(handle) {
+                    Loading.hide();
+                }else {
+                    Loading.show();
+                }
             }else {
                 Loading.init();
                 this.loading();

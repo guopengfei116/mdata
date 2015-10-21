@@ -28,6 +28,7 @@ oasgames.mdataServicesConfig.config([
                 * 添加token认证信息
                 * */
                 'request':function(config){
+                    Ui.loading();
                     if(config && config.headers) {
                         config.crossDomain = true;
                         config.useXDomain = true;
@@ -35,7 +36,6 @@ oasgames.mdataServicesConfig.config([
                         config.headers['Content-Type'] = 'application/x-www-form-urlencoded, charset=UTF-8';
                         config.headers['MDATA-KEY'] = authentication.get('token');
                     }
-                    Ui.loading();
                     return config;
                 },
 
@@ -43,6 +43,7 @@ oasgames.mdataServicesConfig.config([
                 * response公共部分统一处理
                 * */
                 'response':function(resp){
+                    Ui.loading(true);
                     var statusCode = '';
                     if(resp && resp.data && typeof resp.data === 'object') {
                         statusCode = resp.data.code;
@@ -65,6 +66,7 @@ oasgames.mdataServicesConfig.config([
                  * request错误统一处理
                  * */
                 'requestError':function(rejection){
+                    Ui.loading(true);
                     console.log(rejection);
                     return rejection;
                 },
@@ -73,6 +75,7 @@ oasgames.mdataServicesConfig.config([
                  * response错误统一处理
                  * */
                 'responseError':function(rejection){
+                    Ui.loading(true);
                     var matchedApi = [], urlSummary = '';
                     if(rejection) {
                         var matchedApi = rejection.config.url.match(/api.mdata.com\/(.+)$/);
