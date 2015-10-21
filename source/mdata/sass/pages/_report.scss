@@ -62,7 +62,7 @@
 			}
 		}
 	}
-	.report-email,.report-export{
+	.report-email, .report-export{
 		padding:7px 12px;
 		color:#ffffff;
 		font-size:12px;
@@ -73,6 +73,7 @@
 		margin-right:10px;
 	}
 	.report-export{
+		cursor: pointer;
 		@include inline-block();
 		background:#22baa0;
 	}
