@@ -128,6 +128,11 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 if(!$scope.appDataList) {
                     $scope.appDataList = [];
                 }
+                // 可选的app列表的部分数据
+                $scope.appDataListInApp = [];
+                for(var i = 0; i < $scope.appDataList.length; i++) {
+                    $scope.appDataListInApp.push($scope.appDataList[i]['app']);
+                }
                 // report关联的app数据
                 if(!$scope.appData) {
                     $scope.appData = {};

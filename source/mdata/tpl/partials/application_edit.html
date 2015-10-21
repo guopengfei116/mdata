@@ -118,13 +118,9 @@
         <span class="red-star">*</span>
     </recombination>
     <fieldset class="field-common">
-        <span class="button-group page-btns" ng-click="submit()" ng-if="appSourceData.appid">
-            <button class="button button-save-plus"><i class="iconfont icon-plus"></i></button>
-            <button class="button button-save">Save</button>
-        </span>
-        <span class="button-group page-btns" ng-click="submit()" ng-if="!appSourceData.appid">
-            <button class="button button-create-plus"><i class="iconfont icon-plus"></i></button>
-            <button class="button button-create">Create</button>
+        <span class="button-group page-btns" ng-click="submit()">
+            <button class="button " ng-class="{'button-create-plus':!appId, 'button-save-plus':appId}"><i class="iconfont icon-plus"></i></button>
+            <button class="button " ng-class="{'button-create':!appId, 'button-save':appId}">{{ appId? 'Save' : 'Create'}}</button>
         </span>
         <span class="button-group" ng-click="cancel()">
             <button class="button button-cancel-minus"><i class="iconfont icon-small"></i></button>

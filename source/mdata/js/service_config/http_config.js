@@ -35,6 +35,7 @@ oasgames.mdataServicesConfig.config([
                         config.headers['Content-Type'] = 'application/x-www-form-urlencoded, charset=UTF-8';
                         config.headers['MDATA-KEY'] = authentication.get('token');
                     }
+                    Ui.loading();
                     return config;
                 },
 

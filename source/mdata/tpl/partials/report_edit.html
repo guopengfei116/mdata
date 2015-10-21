@@ -25,8 +25,8 @@
                 <ul class="select_content">
                     <li class="select_content_arrow"></li>
                     <li class="select_content_arrow select_content_arrow-mask"></li>
-                    <li class="select_content_list" ng-repeat="appData in appDataList ">
-                        <a class="select_content_list_value select_content_list_value-select-app" data-value="{{ appData.app.appid }}">{{ appData.app.name }}</a>
+                    <li class="select_content_list" ng-repeat="appData in appDataListInApp | orderBy:'name' ">
+                        <a class="select_content_list_value select_content_list_value-select-app" data-value="{{ appData.appid }}">{{ appData.name }}</a>
                     </li>
                 </ul>
             </div>
@@ -275,8 +275,8 @@
     </fieldset>
     <fieldset class="field-common">
         <span class="button-group page-btns" ng-click="submit()">
-            <button class="button button-create-plus"><i class="iconfont icon-plus"></i></button>
-            <button class="button button-create">Create</button>
+            <button class="button " ng-class="{'button-create-plus':!reportId, 'button-save-plus':reportId}"><i class="iconfont icon-plus"></i></button>
+            <button class="button " ng-class="{'button-create':!reportId, 'button-save':reportId}">{{ reportId? 'Save' : 'Create'}}</button>
         </span>
         <span class="button-group" ng-click="cancel()">
             <button class="button button-cancel-minus"><i class="iconfont icon-small"></i></button>

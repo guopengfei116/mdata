@@ -127,6 +127,37 @@ Ui.prototype = {
             }
         }
     })(),
+    loading: (function () {
+        var Loading = {
+            initialized: false,
+            looks: null,
+            init: function () {
+                var tpl =
+                    '<div class="Loading">' +
+                        '<section class="Loading_mask"></section>' +
+                        '<section class="Loading_icon">' +
+                            '<img src="/mdata/img/loading.gif" />' +
+                        '</section>' +
+                    '</div>';
+                Loading.looks = $(tpl).hide().appendTo('body');
+                Loading.initialized = true;
+            },
+            show: function () {
+                Loading.looks.show();
+            },
+            hide: function () {
+                Loading.looks.hide();
+            }
+        };
+        return function () {
+            if(Loading.initialized) {
+                Loading.show();
+            }else {
+                Loading.init();
+                this.loading();
+            }
+        }
+    })(),
     uSetPosition:  function (target, self, position, offset) {
         if(arguments.length != 4) {
             return;
@@ -222,5 +253,6 @@ Ui.prototype = {
 * */
 Ui.alert = Ui.prototype.alert;
 Ui.confirm = Ui.prototype.confirm;
+Ui.loading = Ui.prototype.loading;
 
 module.exports = Ui;

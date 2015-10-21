@@ -1,0 +1,9 @@
+.Loading {
+    &_mask {
+        @include mask(9999);
+    }
+    &_icon {
+        z-index: 10001;
+        @include panel(10001, 20rem, 20rem);
+    }
+}
