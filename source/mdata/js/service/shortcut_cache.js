@@ -5,7 +5,8 @@
  * */
 oasgames.mdataServices.factory('ShortcutCache', [
     '$cacheFactory',
-    function ($cacheFactory) {
+    'CacheControl',
+    function ($cacheFactory, CacheControl) {
 
         /*
          * @method 判断收藏列表是否已存在某app
@@ -44,12 +45,16 @@ oasgames.mdataServices.factory('ShortcutCache', [
                     cache = $cacheFactory('shortcut');
                 }
                 cache.put('list', data);
+                CacheControl.refresh('shortcut');
             },
 
             /*
              * get shortcut list
              * */
             get : function () {
+                if(CacheControl.isExpiration('shortcut')) {
+                    return null;
+                }
                 var cache = $cacheFactory.get('shortcut'),
                     listCache = null;
                 if(cache && cache.get('list')) {

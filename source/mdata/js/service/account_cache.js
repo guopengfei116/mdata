@@ -5,7 +5,8 @@
  * */
 oasgames.mdataServices.factory('AccountCache', [
     '$cacheFactory',
-    function ($cacheFactory) {
+    'CacheControl',
+    function ($cacheFactory, CacheControl) {
         return {
 
             /*
@@ -17,12 +18,16 @@ oasgames.mdataServices.factory('AccountCache', [
                     cache = $cacheFactory('account');
                 }
                 cache.put('list', data);
+                CacheControl.refresh('account');
             },
 
             /*
              * get account list
              * */
             get : function () {
+                if(CacheControl.isExpiration('account')) {
+                    return null;
+                }
                 var cache = $cacheFactory.get('account'),
                     listCache = null, listSetTime = '';
                 if(cache) {

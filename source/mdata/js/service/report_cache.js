@@ -5,7 +5,8 @@
  * */
 oasgames.mdataServices.factory('ReportCache', [
     '$cacheFactory',
-    function ($cacheFactory) {
+    'CacheControl',
+    function ($cacheFactory, CacheControl) {
         return {
 
             /*
@@ -17,12 +18,16 @@ oasgames.mdataServices.factory('ReportCache', [
                     cache = $cacheFactory('report');
                 }
                 cache.put('list', data);
+                CacheControl.refresh('report');
             },
 
             /*
              * get report list
              * */
             get : function () {
+                if(CacheControl.isExpiration('report')) {
+                    return null;
+                }
                 var cache = $cacheFactory.get('report'),
                     listCache = null;
                 if(cache && cache.get('list')) {

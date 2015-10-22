@@ -48,9 +48,13 @@ oasgames.mdataServices.factory('CacheControl', [
                 }
                 recordingTime = cache.get(type);
                 expirationTime = this.getConfigName(type) * 60 * 1000 + recordingTime;
-                if(expirationTime > currentTime) {
-
+                console.log(recordingTime);
+                console.log(expirationTime);
+                console.log(currentTime);
+                if(expirationTime < currentTime) {
+                    return true;
                 }
+                return false;
             }
         }
     }
