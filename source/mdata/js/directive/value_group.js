@@ -108,6 +108,12 @@ oasgames.mdataDirective.directive('valuegroup', [
                     return true;
                 };
 
+                // 销毁填写痕迹
+                $scope.destroy = function () {
+                    var $echoForms = element.find(Echo.prototype.inputSelector);
+                    Echo.prototype.setValue($echoForms);
+                };
+
                 /*
                 * 表单样式初始化
                 * */
@@ -173,11 +179,11 @@ oasgames.mdataDirective.directive('valuegroup', [
                         // add值
                         $scope.resultValue.push(val);
                         $scope.flagData.push({
-                            value_name : valName,
+                            value_name : val.split(separator)[0],
                             groupValue : val
                         });
                         element.data('value', $scope.resultValue);
-
+                        $scope.destroy();
                         $scope.$apply();
                     });
 
@@ -269,7 +275,10 @@ oasgames.mdataDirective.directive('valuegroup', [
                                 element.find('.add-select').show();
                             },
 
-                            //如果新值为空或不变则不做任何处理
+                            /*
+                            * 如果新值为空或不变则不做任何处理,
+                            * 如果值做了改变，则直接操作dom修改显示值比更新flagData效率要快
+                            * */
                             success : function(newVal){
                                 if(!newVal) {
                                     newVal = val;

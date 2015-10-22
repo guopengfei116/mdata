@@ -163,8 +163,6 @@ oasgames.mdataDirective.directive('recombination', [
                                     }
                                     for(var i = 0; i < $scope.recombinationData.length; i++) {
                                         if($scope.recombinationData[i] == val) {
-                                            console.log($scope.recombinationData);
-                                            console.log($scope.recombinationData[i]);
                                             $scope.recombinationData[i] = newVal;
                                             $scope.upRecombinationData($scope.recombinationData);
                                             break;
