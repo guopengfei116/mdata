@@ -25,7 +25,11 @@
         },
 
         get : function (key) {
-            return this.cookie.getCookie(this.cookieKey[key]);
+            var value = this.cookie.getCookie(this.cookieKey[key]);
+            if(value === 'undefined') {
+                value = null;
+            }
+            return value;
         },
 
         delete : function () {
