@@ -274,11 +274,11 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                         '</li>' +
                     '</ul>';
                 var $duplicateReport = $('.container-app-' + appIndex + ' .row-report-' + $index);
-                $duplicateReport.after(tpl);
+                var $duplicateEdit = $(tpl);
+                $duplicateReport.after($duplicateEdit);
 
                 // 绑定duplicate编辑事件
-                var $duplicateEdit = $(tpl);
-                $('.report-manage').on('click', '.confirm-report-duplicate', function () {
+                $duplicateEdit.on('click', '.confirm-report-duplicate', function () {
                     var newReportName = $(this).parents(".row-report-duplicate").find(".input-report-duplicate").val();
                     var appId = $(this).parents(".container").attr("appid");
                     var reportNameValFliter = /^[\u4e00-\u9fa5a-zA-Z0-9]+$/;                
@@ -290,23 +290,24 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                         Ui.alert('Name Only accepts English letters and numbers');
                         return;
                     }
+                    console.log('copy');
                     $scope.$broadcast('requestDuplicate', reportId, newReportName, appId);
-                    clearDuplicateEdit($(this).parents('.row-report-duplicate'));                   
-                    
+                    clearDuplicateEdit();
                 });
 
-                $('.report-manage').on('click', '.cancel-report-duplicate', function () {
-                    clearDuplicateEdit($(this).parents('.row-report-duplicate'));
+                $duplicateEdit.on('click', '.cancel-report-duplicate', function () {
+                    clearDuplicateEdit();
                 });
 
-                $('.report-manage').on('click', '.icon-duplicate', function () {
+                $duplicateEdit.on('click', '.icon-duplicate', function () {
                     $(this).siblings('.input-report-duplicate').val("");
                 });
 
-                function clearDuplicateEdit (delReport) {
-                    delReport.remove();
-                    delReport.off("click", '.confirm-report-duplicate');
-                    delReport.off("click", '.cancel-report-duplicate');
+                function clearDuplicateEdit () {
+                    $duplicateEdit.remove();
+                    $duplicateEdit.off("click", '.confirm-report-duplicate');
+                    $duplicateEdit.off("click", '.icon-duplicate');
+                    $duplicateEdit.off("click", '.cancel-report-duplicate');
                 }
             };
 
