@@ -20,7 +20,7 @@ oasgames.mdataServices.factory('CacheControl', [
                     report : reportListCacheTime,
                     shortcut : shortcutListCacheTime
                 };
-                return config[type];
+                return CACHE_SETTINGS[config[type]];
             },
 
             /*
