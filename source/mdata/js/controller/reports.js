@@ -178,25 +178,6 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
         * */
         (function () {
 
-            $scope.loadReports = function () {
-                var reportListCache = ReportCache.get();
-                if(reportListCache && $rootScope.reportListCache && CACHE_SETTINGS.reportListCache) {
-                    $scope.sourceData = reportListCache;
-                    $scope.viewData = reportListCache;
-                    $scope.upReportsListShow();  // 初始化展示状态
-                    $scope.setReportPermission();  // 记录report权限
-                    Shortcuts.init();  // 初始化收藏标记
-                }else {
-                    Http.reports(function (data) {
-                        $scope.sourceData = data;
-                        $scope.viewData = data;
-                        $scope.upReportsListShow();  // 初始化展示状态
-                        $scope.setReportPermission();  // 记录report权限
-                        Shortcuts.init();  // 初始化收藏标记
-                    });
-                }
-            };
-
             /*
              * 更新report列表的展示状态，
              * 一个app时展开，多个app时合并列表
@@ -212,7 +193,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                         $scope.reportsShow[i] = true;
                     }
                 }
-            }
+            };
 
             /*
             * 更新report权限记录表
@@ -229,9 +210,38 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                         $scope.createAppAuthority = true;
                     }
                 }
-            }
+            };
 
-            $scope.loadReports();
+            /*
+             * 页面初始化
+             * */
+            $scope.pageInit = function (data) {
+                $scope.sourceData = data;
+                $scope.viewData = data;
+                $scope.upReportsListShow();  // 初始化展示状态
+                $scope.setReportPermission();  // 记录report权限
+                Shortcuts.init();  // 初始化收藏标记
+            };
+
+            /*
+             * load report数据
+             * */
+            $scope.loadReports = function () {
+                Http.reports(function (data) {
+                    $scope.pageInit(data);
+                });
+            };
+
+            /*
+            * 缓存获取report数据，
+            * 获取不到则重新load
+            * */
+            var reportListCache = ReportCache.get();
+            if(reportListCache && $rootScope.reportListCache && CACHE_SETTINGS.reportListCache) {
+                $scope.pageInit(reportListCache);
+            }else {
+                $scope.loadReports();
+            }
         })();
 
         // report复制
