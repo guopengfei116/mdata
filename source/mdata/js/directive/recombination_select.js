@@ -158,7 +158,7 @@ oasgames.mdataDirective.directive('recombination', [
                                     newVal = val;
                                 }
                                 if(val != newVal) {
-                                    if(!$scope.nameVerify(val)) {
+                                    if(!$scope.nameVerify(newVal, val)) {
                                         return;
                                     }
                                     for(var i = 0; i < $scope.recombinationData.length; i++) {
