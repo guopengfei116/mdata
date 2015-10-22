@@ -69,7 +69,9 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 initAppData();
             }
 
-            // 编辑Report时获取某report的数据
+            /*
+            * 编辑Report时获取某report的数据
+            * */
             function initReportData (reportId) {
                 Http.reportUpdate({
                     reportId : reportId
@@ -162,6 +164,16 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
 
         // 选择application
         (function () {
+            // getGuestUser数据
+            function upGuestUserData (data) {
+                Http.guestUser(data, function (data) {
+                    $scope.guestUsers = data;
+                });
+            }
+
+            /*
+            * 根据选择的appId更新valueList和guestUser
+            * */
             $('.report-page').on('click', '.select_content_list_value-select-app', function () {
                 $scope.selectedAppId = $(this).data('value');
                 $scope.$apply(function () {
@@ -169,8 +181,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                         console.log('无法更新valueList，selectedAppId：' + $scope.selectedAppId + ',appDataList：' + $scope.appDataList);
                         return;
                     }
-
-                    // 根据选择的appId更新valueList
+                    upGuestUserData({ appid : $scope.selectedAppId });
                     for(var i = 0; i < $scope.appDataList.length; i++) {
                         if($scope.selectedAppId == $scope.appDataList[i]['app'].appid) {
                             $scope.valueList = $scope.appDataList[i]['val_list'];
@@ -180,13 +191,6 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 });
             });
         })();
-
-        // getGuestUser数据
-        function upGuestUserData () {
-            Http.guestUser(function (data) {
-                $scope.guestUsers = data;
-            });
-        }
 
         // dimension拖拽
         $scope.$on('dimensionRenderFinished', function (e) {

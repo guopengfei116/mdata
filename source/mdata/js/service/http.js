@@ -327,8 +327,8 @@ oasgames.mdataServices.provider('Http', [
                             return this.send('reportDel', data, fn);
                         },
 
-                        guestUser : function (fn) {
-                            return this.send('guestUser', null, fn);
+                        guestUser : function (data, fn) {
+                            return this.send('guestUser', data, fn);
                         },
 
                         checkReportName : function (data, fn) {

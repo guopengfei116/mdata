@@ -4,9 +4,6 @@
     top: 0;
     right: 0;
     bottom: 0;
-    &_mask {
-        @include mask(9999);
-    }
     &_icon {
         @include opacity();
         width: 100%;
