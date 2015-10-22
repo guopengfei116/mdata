@@ -33,7 +33,7 @@ oasgames.mdataServicesConfig.config([
                         config.crossDomain = true;
                         config.useXDomain = true;
                         config.xhrFields = {'withCredentials': true};
-                        config.headers['Content-Type'] = 'application/x-www-form-urlencoded, charset=UTF-8';
+                        config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
                         config.headers['MDATA-KEY'] = authentication.get('token');
                     }
                     return config;
