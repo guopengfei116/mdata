@@ -15,10 +15,10 @@ oasgames.mdataServices.factory('CacheControl', [
              * */
             getConfigName : function (type) {
                 var config = {
-                    application : applicationListCacheTime,
-                    account : accountListCacheTime,
-                    report : reportListCacheTime,
-                    shortcut : shortcutListCacheTime
+                    application : 'applicationListCacheTime',
+                    account : 'accountListCacheTime',
+                    report : 'reportListCacheTime',
+                    shortcut : 'shortcutListCacheTime'
                 };
                 return CACHE_SETTINGS[config[type]];
             },
@@ -47,10 +47,10 @@ oasgames.mdataServices.factory('CacheControl', [
                     return true;
                 }
                 recordingTime = cache.get(type);
+                if(!recordingTime) {
+                    return true;
+                }
                 expirationTime = this.getConfigName(type) * 60 * 1000 + recordingTime;
-                console.log(recordingTime);
-                console.log(expirationTime);
-                console.log(currentTime);
                 if(expirationTime < currentTime) {
                     return true;
                 }

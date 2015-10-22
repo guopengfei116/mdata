@@ -91,11 +91,6 @@ oasgames.mdataControllers.controller('navigationCtrl', [
                 init();
             }else {
                 Http.shortcuts(function (data) {
-                    // 如果无收藏列表，则初始化一个空数组
-                    if(!data) {
-                        data = [];
-                    }
-                    ShortcutCache.set(data);
                     $scope.shortcuts = data;
                     init();
                 });

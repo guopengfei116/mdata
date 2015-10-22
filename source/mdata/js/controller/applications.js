@@ -24,7 +24,6 @@ oasgames.mdataControllers.controller('ApplicationManageCtrl', [
             $scope.viewData = appListCache;
         }else {
             Http.appIndex(function (data) {
-                ApplicationCache.set(data);
                 $scope.sourceData = data;
                 $scope.viewData = data;
             });

@@ -24,7 +24,6 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
             $scope.viewData = accountListCache;
         }else {
             Http.userIndex(function (data) {
-                AccountCache.set(data);
                 $scope.sourceData = data;
                 $scope.viewData = data;
             });

@@ -6,7 +6,12 @@
 oasgames.mdataServices.provider('Http', [
     'API_METHOD',
     'CROSS_ORIGIN_METHOD',
-    function (API_METHOD, CROSS_ORIGIN_METHOD) {
+    'CACHE_SETTINGS',
+    'ApplicationCache',
+    'AccountCache',
+    'ReportCache',
+    'ShortcutCache',
+    function (API_METHOD, CROSS_ORIGIN_METHOD, CACHE_SETTINGS, ApplicationCache, AccountCache, ReportCache, ShortcutCache) {
         return {
             get : API_METHOD.get,
             post : API_METHOD.post,
@@ -164,12 +169,25 @@ oasgames.mdataServices.provider('Http', [
 
                         /*
                         * application interface method
+                        * 如果获取application列表数据，则会依据配置进行缓存
                         * */
                         appIndex : function () {
+                            var callBack = null;
                             if(arguments.length == 1) {
-                                return this.send('appIndex', null, arguments[0]);
+                                callBack = arguments[0];
+                                if(CACHE_SETTINGS.applicationListCache) {
+                                    callBack = function (data) {
+                                        if(!data) {
+                                            data = [];
+                                        }
+                                        ApplicationCache.set(data);
+                                        arguments[0](data);
+                                    }
+                                }
+                                return this.send('appIndex', null, callBack);
+                            }else {
+                                return this.send('appIndex', arguments[0], arguments[1]);
                             }
-                            return this.send('appIndex', arguments[0], arguments[1]);
                         },
 
                         appUserList : function (fn) {
@@ -187,10 +205,22 @@ oasgames.mdataServices.provider('Http', [
 
                         /*
                          * account interface method
+                         * 如果获取account列表数据，则会依据配置进行缓存
                          * */
                         userIndex : function () {
+                            var callBack = null;
                             if(arguments.length == 1) {
-                                return this.send('userIndex', null, arguments[0]);
+                                callBack = arguments[0];
+                                if(CACHE_SETTINGS.accountListCache) {
+                                    callBack = function (data) {
+                                        if(!data) {
+                                            data = [];
+                                        }
+                                        AccountCache.set(data);
+                                        arguments[0](data);
+                                    }
+                                }
+                                return this.send('userIndex', null, callBack);
                             }
                             return this.send('userIndex', arguments[0], arguments[1]);
                         },
@@ -226,9 +256,20 @@ oasgames.mdataServices.provider('Http', [
 
                         /*
                          * shortcut interface method
+                         * 并依据配置进行缓存
                          * */
                         shortcuts : function (fn) {
-                            return this.send('shortcuts', null, fn);
+                            var callBack = fn;
+                            if(CACHE_SETTINGS.shortcutListCache) {
+                                callBack = function (data) {
+                                    if(!data) {
+                                        data = [];
+                                    }
+                                    ShortcutCache.set(data);
+                                    fn(data);
+                                }
+                            }
+                            return this.send('shortcuts', null, callBack);
                         },
 
                         shortcutAdd : function (data, fn) {
@@ -242,9 +283,20 @@ oasgames.mdataServices.provider('Http', [
 
                         /*
                          * report interface method
+                         * 并依据配置进行缓存
                          * */
                         reports : function (fn) {
-                            return this.send('reports', null, fn);
+                            var callBack = fn;
+                            if(CACHE_SETTINGS.reportListCache) {
+                                callBack = function (data) {
+                                    if(!data) {
+                                        data = [];
+                                    }
+                                    ReportCache.set(data);
+                                    fn(data);
+                                }
+                            }
+                            return this.send('reports', null, callBack);
                         },
 
                         reportView : function (data, fn) {

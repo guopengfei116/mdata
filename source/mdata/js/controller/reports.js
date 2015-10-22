@@ -64,11 +64,6 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                     processor();
                 }else {
                     Http.shortcuts(function (data) {
-                        // 如果无收藏列表，则初始化一个空数组
-                        if(!data) {
-                            data = [];
-                        }
-                        ShortcutCache.set(data);
                         reportShortcutIdList = data;
                         processor();
                     });
@@ -193,10 +188,6 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                     Shortcuts.init();  // 初始化收藏标记
                 }else {
                     Http.reports(function (data) {
-                        if(!data) {
-                            data = [];
-                        }
-                        ReportCache.set(data);
                         $scope.sourceData = data;
                         $scope.viewData = data;
                         $scope.upReportsListShow();  // 初始化展示状态
