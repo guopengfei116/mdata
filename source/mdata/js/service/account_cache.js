@@ -24,11 +24,11 @@ oasgames.mdataServices.factory('AccountCache', [
              * */
             get : function () {
                 var cache = $cacheFactory.get('account'),
-                    listCache = null;
-                if(cache && cache.get('list')) {
+                    listCache = null, listSetTime = '';
+                if(cache) {
                     listCache = cache.get('list');
-                    return listCache;
                 }
+                return listCache
             },
 
             /*

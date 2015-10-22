@@ -17,7 +17,6 @@ oasgames.mdataServices.factory('ShortcutCache', [
                     return [shortcuts[i], i];
                 }
             }
-
             return null;
         }
 
@@ -31,7 +30,6 @@ oasgames.mdataServices.factory('ShortcutCache', [
                     return [app.reports[i], i];
                 }
             }
-
             return false;
         }
 
@@ -56,8 +54,8 @@ oasgames.mdataServices.factory('ShortcutCache', [
                     listCache = null;
                 if(cache && cache.get('list')) {
                     listCache = cache.get('list');
-                    return listCache;
                 }
+                return listCache;
             },
 
             /*

@@ -34,11 +34,11 @@ oasgames.mdataApp.run([
             }
         });
 
-        // 页面初始化时初始化用户属性
-        $rootScope.$emit('initUserProperty');
-
         // 切换页面时权限认证
         $rootScope.$on('$routeChangeStart', function (event, next, current) {
+
+            // 页面初始化时初始化用户属性
+            $rootScope.$emit('initUserProperty');
 
             $('.tooltip').remove(':not(.common)');
 

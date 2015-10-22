@@ -27,8 +27,8 @@ oasgames.mdataServices.factory('ApplicationCache', [
                     listCache = null;
                 if(cache && cache.get('list')) {
                     listCache = cache.get('list');
-                    return listCache;
                 }
+                return listCache;
             },
 
             /*
