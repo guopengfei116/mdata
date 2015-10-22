@@ -290,7 +290,6 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                         Ui.alert('Name Only accepts English letters and numbers');
                         return;
                     }
-                    console.log('copy');
                     $scope.$broadcast('requestDuplicate', reportId, newReportName, appId);
                     clearDuplicateEdit();
                 });
