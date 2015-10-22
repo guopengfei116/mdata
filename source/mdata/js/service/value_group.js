@@ -13,6 +13,7 @@ oasgames.mdataServices.factory('ValueGroup', [
 
                 // 如果拥有format值，那么运算符值所在的位置将向后挪一位
                 var format = this.getValueFormat(values[2], valueList) || '';
+
                 if(format) {
                     valueArithmeticIndex++;
                 }
@@ -65,7 +66,7 @@ oasgames.mdataServices.factory('ValueGroup', [
 
                 for(var i = 0; i < VALUE_ARITHMETIC.length; i++) {
                     if(VALUE_ARITHMETIC[i]['value'] === value) {
-                        return VALUE_TYPE[i]['arithmetic'];
+                        return VALUE_ARITHMETIC[i]['arithmetic'];
                     }
                 }
 

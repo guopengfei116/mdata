@@ -118,11 +118,11 @@
             </span>
         </div>
     </recombination>
-    <valuegroup class="field-common-value" separator="#@DELIMITER@#" maxlength="20" pattern="^(\w)+$" value-list="valueList" flag-data="reportSourceData['reportData']['values']">
+    <valuegroup class="field-common-value" separator="#@DELIMITER@#" maxlength="20" pattern="^(\w|[\u4e00-\u9fa5])+$" value-list="valueList" flag-data="reportSourceData['reportData']['values']">
         <legend class="field-title-com">Value Group</legend>
         <div class="recombination-menu">
             <input class="fieldset-text-com field-text-column recombination-input" type="text" placeholder="Value Name" required-warn="please fill out the Value Name"/>
-            <div class="select select-host select-btn-column recombination-input" required-warn="please fill out the Value Type">
+            <div class="select select-host select-value-type select-btn-column recombination-input" required-warn="please fill out the Value Type">
                 <div class="select_main">
                     <input class="select_main_text select_target" disabled="disabled" type="text" placeholder="Value Type" />
                     <button class="select_main_btn select_target">
@@ -170,7 +170,7 @@
                 </div>
                 <input class="fieldset-text-com field-text-column recombination-input" type="text" value="" placeholder="" required-warn="please fill out the complete"/>
             </section>
-            <div class="select select-host select-btn-column recombination-input" required-warn="please fill out the Value Operator">
+            <div class="select select-host select-value-arithmetic select-btn-column recombination-input" required-warn="please fill out the Value Arithmetic">
                 <div class="select_main">
                     <input class="select_main_text select_target" disabled="disabled" type="text" placeholder="Arithmetic" />
                     <button class="select_main_btn select_target">

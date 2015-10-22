@@ -42,7 +42,7 @@
         <span class="field-title-com report-title">Value</span>
         <ul class="inline-block cf">
             <li class="left" ng-repeat="valueObj in reportSourceData.values">
-                <span class="flag tooltip-host" data-tooltip-position="tc" data-tooltip-info="{{ valueObj.groupValue | ValueGroupSemantic:'#@DELIMITER@#':reportSourceData['value_list'] }}">{{ valueObj.value_name }}</span>
+                <span class="flag tooltip-host" data-tooltip-position="tc" data-tooltip-info="{{ valueObj.groupValue | ValueGroupSemantic:'#@DELIMITER@#':reportSourceData['val_list'] }}">{{ valueObj.value_name }}</span>
             </li>
         </ul>
     </fieldset>
@@ -88,7 +88,7 @@
             <dt class="row row-title row-color-interlaced">
                 <ul class="cf">
                     <li class="row_column row_column-{{ reportSourceData['table_list'][0].length }}"
-                        ng-repeat="titles in reportSourceData['table_list'][0]" ng-click="changeSort('reportTable', $index)">{{ titles }}</li>
+                        ng-repeat="titles in reportSourceData['table_list'][0]" ng-click="changeSort('reportTable', $index + '')">{{ titles }}</li>
                 </ul>
             </dt>
             <dd class="row row-color-interlaced"  ng-init="index = $index">

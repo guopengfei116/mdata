@@ -138,7 +138,6 @@ oasgames.mdataDirective.directive('valuegroup', [
 
                     console.log("begin valueGroup resultValue");
                     console.log($scope.resultValue);
-                    console.log("end valueGroup resultValue");
 
                     // 添加未编辑时的初始值
                     element.data('value', $scope.resultValue);
@@ -275,6 +274,17 @@ oasgames.mdataDirective.directive('valuegroup', [
                                 element.find('.add-select').show();
                             },
 
+                            echoSuccess : function () {
+                                var $valueTypeInput = $('.select-value-type').find('.select_main_text');
+                                var $valueArithmeticInput = $('.select-value-arithmetic').find('.select_main_text');
+                                var valueTypeVal = $valueTypeInput.val();
+                                var valueArithmeticVal = $valueArithmeticInput.val();
+                                var valueType = ValueGroup.getValueType(valueTypeVal);
+                                var valueArithmetic = ValueGroup.getValueArithmetic(valueArithmeticVal);
+                                $valueTypeInput.val(valueType);
+                                $valueArithmeticInput.val(valueArithmetic);
+                            },
+
                             /*
                             * 如果新值为空或不变则不做任何处理,
                             * 如果值做了改变，则直接操作dom修改显示值比更新flagData效率要快
@@ -351,7 +361,6 @@ oasgames.mdataDirective.directive('valuegroup', [
 
                         console.log("begin valueGroup valueList");
                         console.log($scope.valueList);
-                        console.log("end valueGroup valueList");
 
                         $scope.valueListInit = true;
                         $scope.$broadcast('bind');
@@ -372,7 +381,6 @@ oasgames.mdataDirective.directive('valuegroup', [
 
                         console.log("begin valueGroup flagData");
                         console.log($scope.flagData);
-                        console.log("end valueGroup flagData");
 
                         // 初始化结果值
                         var flagData = $scope.flagData;

@@ -191,7 +191,6 @@ oasgames.mdataDirective.directive('recombination', [
 
                         console.log("begin recombinationData");
                         console.log($scope.recombinationData);
-                        console.log("end recombinationData");
 
                         $scope.$emit('recombinationDataInitFinish', $scope.recombinationData);
                         recombinationDataWatchCancel();

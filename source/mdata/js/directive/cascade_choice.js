@@ -43,7 +43,6 @@ oasgames.mdataDirective.directive('cascadechoice', [
 
                     console.log("begin flagData");
                     console.log($scope.flagData);
-                    console.log("end flagData");
 
                     var flagData = $scope.flagData;
                     for(var i = 0; i < flagData.length; i++) {
@@ -68,7 +67,6 @@ oasgames.mdataDirective.directive('cascadechoice', [
 
                     console.log("begin selectData");
                     console.log($scope.selectData);
-                    console.log("end selectData");
 
                     selectDataInit = true;
                     $scope.$broadcast('bind');
@@ -88,7 +86,6 @@ oasgames.mdataDirective.directive('cascadechoice', [
 
                     console.log("begin selectedData");
                     console.log($scope.selectedData);
-                    console.log("end selectedData");
 
                     selectedDataInit = true;
                     $scope.$broadcast('bind');
@@ -106,7 +103,6 @@ oasgames.mdataDirective.directive('cascadechoice', [
 
                     console.log("begin resultValue");
                     console.log($scope.resultValue);
-                    console.log("end resultValue");
 
                     // 添加未编辑时的初始值
                     element.data('value', $scope.resultValue);

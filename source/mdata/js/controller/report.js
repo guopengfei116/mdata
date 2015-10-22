@@ -26,53 +26,56 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
         // report权限
         $scope.permission = $rootScope.user['authority'] == 1 ? 1 : $rootScope.reportPermission && $rootScope.reportPermission[$scope.reportId];
 
-        // 日期组件
-        var dataInstance = null;
-
-        // get report数据
-        Http.reportView({
-            reportId : $scope.reportId
-        }, function (data) {
-            $scope.reportSourceData = data;
-
-            // 初始化日期插件
-            var dataComponent = require('reportViewDate');
-            var config = {}, tempConfig = {};
-            tempConfig.startTime = $scope.reportSourceData['date_begin'];
-            tempConfig.endTime = $scope.reportSourceData['date_end'];
-
-            // time == null
-            for(var timeK in tempConfig) {
-                if(tempConfig[timeK]) {
-                    config[timeK] = parseInt(tempConfig[timeK]) * 1000; // 服务端传回数值为秒
-                }
-            }
-            dataInstance = new dataComponent(config);
-        });
-
-        // 排序数据模型
-        $scope.sort = {
-            reportTable : {
-                filter : '',
-                orderKey : 0,
-                isDownOrder : false
-            }
-        };
-
-        // 修改排序规则
-        $scope.changeSort = function (type, orderKey) {
-            OrderHandler.change($scope.sort, type, orderKey);
-        };
-
-        // 日期select与input联动更新
+        /*
+         * get report数据
+         * 初始化日期插件
+         * */
         (function () {
-            $('.select-data').on('click', '.select_content_list_value', function () {
-                var val = $(this).data('value');
-                dataInstance.changeData(val);
+            var dataInstance = null;
+            Http.reportView({
+                reportId : $scope.reportId
+            }, function (data) {
+                $scope.reportSourceData = data;
+                var dataComponent = require('reportViewDate');
+                var config = {}, tempConfig = {};
+                tempConfig.startTime = $scope.reportSourceData['date_begin'];
+                tempConfig.endTime = $scope.reportSourceData['date_end'];
+                for(var timeK in tempConfig) {
+                    if(tempConfig[timeK]) { // time == null
+                        config[timeK] = parseInt(tempConfig[timeK]) * 1000; // 服务端传回数值为秒
+                    }
+                }
+                dataInstance = new dataComponent(config);
             });
+
+            // 日期select与input联动更新
+            (function () {
+                $('.select-data').on('click', '.select_content_list_value', function () {
+                    var val = $(this).data('value');
+                    dataInstance.changeData(val);
+                });
+            })();
         })();
 
-        // load report
+        /*
+        * 排序数据模型和方法
+        * */
+        (function () {
+            $scope.sort = {
+                reportTable : {
+                    filter : '',
+                    orderKey : '0',
+                    isDownOrder : false
+                }
+            };
+            $scope.changeSort = function (type, orderKey) {
+                OrderHandler.change($scope.sort, type, orderKey);
+            };
+        })();
+
+        /*
+        * load report
+        * */
         (function () {
 
             /*
@@ -109,9 +112,10 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
             };
         })();
 
-        // export Excel
+        /*
+        * export Excel
+        * */
         (function () {
-
             var exportExcel = function () {
                 var blob = new Blob( getVal(), {type: "text/plain;charset=utf8"} );
                 var beginDate = new Date($scope.reportSourceData.date_begin * 1000);

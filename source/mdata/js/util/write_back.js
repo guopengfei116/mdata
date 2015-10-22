@@ -7,13 +7,14 @@
  * @* echo会按照'.recombination-input'的数量进行分割value并按照顺序回写值
  * @* 回写时会添加确定与取消两个按钮到'.recombination-menu'里
  * */
-var Echo = function (option, value, separator, domScope) {
+var Echo = function (option) {
     var o = {
         value : '',               // 复合值的字符串
         separator : '',           // 分隔符
         domScope : '',            // dom作用域
         before : function(){},    // 初始化之前执行的函数
         complete : function(){},  // 回调执行完毕后执行的函数
+        echoSuccess : null,       // 回写完毕后执行的函数
         success : function(){},   // 确定按钮回调
         failure : function(){}    // 取消按钮或确定按钮执行失败后执行的回调
     };
@@ -25,6 +26,7 @@ var Echo = function (option, value, separator, domScope) {
     this.domScope = o.domScope;
     this.before = o.before;
     this.complete = o.complete;
+    this.echoSuccess = o.echoSuccess;
     this.success = o.success;
     this.failure = o.failure;
 
@@ -172,6 +174,8 @@ Echo.prototype = {
                 self.textEcho(this, values[i] || "");
             }
         });
+
+        self.echoSuccess && self.echoSuccess();
     },
 
     // 自定义select组件回写
