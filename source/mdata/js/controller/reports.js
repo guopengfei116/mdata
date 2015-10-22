@@ -287,22 +287,22 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                         return;
                     }
                     $scope.$broadcast('requestDuplicate', reportId, newReportName, appId);
-                    clearDuplicateEdit();                   
+                    clearDuplicateEdit($(this).parents('.row-report-duplicate'));                   
                     
                 });
 
                 $('.report-manage').on('click', '.cancel-report-duplicate', function () {
-                    clearDuplicateEdit();
+                    clearDuplicateEdit($(this).parents('.row-report-duplicate'));
                 });
 
                 $('.report-manage').on('click', '.icon-duplicate', function () {
                     $(this).siblings('.input-report-duplicate').val("");
                 });
 
-                function clearDuplicateEdit () {
-                    $('.row-report-duplicate').remove();
-                    $(".report-manage").off("click", '.confirm-report-duplicate');
-                    $(".report-manage").off("click", '.cancel-report-duplicate');
+                function clearDuplicateEdit (delReport) {
+                    delReport.remove();
+                    delReport.off("click", '.confirm-report-duplicate');
+                    delReport.off("click", '.cancel-report-duplicate');
                 }
             };
 

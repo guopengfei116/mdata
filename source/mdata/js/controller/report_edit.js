@@ -208,51 +208,31 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
 
         // 事件处理、表单效验
         (function () {
-            $scope.tooltip = new tooltip({'position':'rc'}).getNewTooltip();
             //判断report_name重复 1为重复
             var flag = 0;
 
             //表单失去焦点时错误提示
-            $scope.blur = function(type, $errors){
-                if(type == "reportName"){
-                    if(MdataVerify.blur(type, $errors, $scope)){
+            $scope.blur = function(){
+                //验证report name是否重复  
+                var report_name = $scope.reportSourceData['reportData']['report_name'];
+                if($scope.reportName === report_name) {
+                    flag = 0;
+                    return;
+                }
+                var app_id = $scope.selectedAppId || $scope.reportSourceData['reportData']['appid'];
 
-                        //验证report name是否重复  
-                        var report_name = $scope.reportSourceData['reportData']['report_name'];
-                        if($scope.reportName === report_name) {
-                            flag = 0;
-                            return;
-                        }
-                        var app_id = $scope.selectedAppId || $scope.reportSourceData['reportData']['appid'];
-
-                        Http.checkReportName({
-                            'appId' : app_id,
-                            'report_name' : report_name
-                        }).success(function (result) {
-                            if(result && result.code == 200) {
-                                flag = 0;
-                            }else {
-                                flag = 1;
-                                $scope[type + 'Error'] = true;
-                                $scope.tooltip.errorType = type;
-                                $scope.tooltip.setContent(result.msg);
-                                $scope.tooltip.setPosition('.fieldset-' + type, $scope.tooltip.toolTipLooks);
-                                $scope.tooltip.toolTipLooks.css({'color': 'rgba(255, 0, 0, 0.7)'});
-                                $scope.tooltip.show();
-                            }
-                        });
+                Http.checkReportName({
+                    'appId' : app_id,
+                    'report_name' : report_name
+                }).success(function (result) {
+                    if(result && result.code == 200) {
+                        flag = 0;
+                    }else {
+                        flag = 1;                        
                     }
-                }
-                MdataVerify.blur(type, $errors, $scope);                
+                });              
             };
 
-            //表单焦点时清除错误提示
-            $scope.focus = function (type) {
-                $scope[type + 'Error'] = false;
-                if($scope.tooltip.errorType == type) {
-                    $scope.tooltip.hide();
-                }
-            };
 
             /*
             * 编辑提交
@@ -269,6 +249,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 if(!MdataVerify.submit('reportName', $scope["reportFrom"]["reportName"].$error, $scope)){
                     return false;
                 }
+                $scope.blur();
 
                 //判断name重复
                 if(flag == 1){
