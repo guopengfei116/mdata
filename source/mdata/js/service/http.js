@@ -6,12 +6,7 @@
 oasgames.mdataServices.provider('Http', [
     'API_METHOD',
     'CROSS_ORIGIN_METHOD',
-    'CACHE_SETTINGS',
-    'ApplicationCache',
-    'AccountCache',
-    'ReportCache',
-    'ShortcutCache',
-    function (API_METHOD, CROSS_ORIGIN_METHOD, CACHE_SETTINGS, ApplicationCache, AccountCache, ReportCache, ShortcutCache) {
+    function (API_METHOD, CROSS_ORIGIN_METHOD) {
         return {
             get : API_METHOD.get,
             post : API_METHOD.post,
@@ -46,7 +41,12 @@ oasgames.mdataServices.provider('Http', [
                 '$q',
                 '$http',
                 'ApiCtrl',
-                function ($q, $http, ApiCtrl) {
+                'CACHE_SETTINGS',
+                'ApplicationCache',
+                'AccountCache',
+                'ReportCache',
+                'ShortcutCache',
+                function ($q, $http, ApiCtrl, CACHE_SETTINGS, ApplicationCache, AccountCache, ReportCache, ShortcutCache) {
                     var self = this;
                     return {
 
@@ -172,17 +172,19 @@ oasgames.mdataServices.provider('Http', [
                         * 如果获取application列表数据，则会依据配置进行缓存
                         * */
                         appIndex : function () {
-                            var callBack = null;
+                            var callBack = null, paramCallBack = null;
                             if(arguments.length == 1) {
-                                callBack = arguments[0];
                                 if(CACHE_SETTINGS.applicationListCache) {
+                                    paramCallBack = arguments[0];
                                     callBack = function (data) {
                                         if(!data) {
                                             data = [];
                                         }
                                         ApplicationCache.set(data);
-                                        arguments[0](data);
+                                        paramCallBack(data);
                                     }
+                                }else {
+                                    callBack = arguments[0];
                                 }
                                 return this.send('appIndex', null, callBack);
                             }else {
@@ -208,17 +210,19 @@ oasgames.mdataServices.provider('Http', [
                          * 如果获取account列表数据，则会依据配置进行缓存
                          * */
                         userIndex : function () {
-                            var callBack = null;
+                            var callBack = null, paramCallBack = null;
                             if(arguments.length == 1) {
-                                callBack = arguments[0];
                                 if(CACHE_SETTINGS.accountListCache) {
+                                    paramCallBack = arguments[0];
                                     callBack = function (data) {
                                         if(!data) {
                                             data = [];
                                         }
                                         AccountCache.set(data);
-                                        arguments[0](data);
+                                        paramCallBack(data);
                                     }
+                                }else {
+                                    callBack = arguments[0];
                                 }
                                 return this.send('userIndex', null, callBack);
                             }

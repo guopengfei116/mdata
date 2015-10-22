@@ -51,7 +51,6 @@ oasgames.mdataFilter.filter('ValueGroupSemantic', [
     'ValueGroup',
     function (ValueGroup) {
         return function (text, separator, valueList) {
-            console.log(arguments);
             return ValueGroup.semantic(text, separator, valueList);
         }
     }
