@@ -245,7 +245,10 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
              * @param {Number} $index  复制的report列表dom对象的index值
              * */
             $scope.reportCopyEvent = function (reportId, reportName, appIndex, $index) {
-
+                //每次只能复制一个
+                if($(".row-report-duplicate") && $(".row-report-duplicate").length > 0){ 
+                    return;
+                }
                 // add编辑模板
                 var tpl =
                     '<ul class="row row-report-duplicate">' +
@@ -316,6 +319,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                     'reportId' : reportId,
                     'report_name' : newReportName
                 }, function () {
+                    Ui.alert('Copy successful');
                     $scope.loadReports();
                 });
             };
