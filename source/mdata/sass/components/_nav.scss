@@ -79,6 +79,11 @@
                     position: relative;
                     padding: rem(14) 0;
                     background-color: #263246;
+                    p {
+                        @include ellipsis();
+                        margin-left: rem(24);
+                        width: rem(140);
+                    }
                     &_arrow {
                         @include prefix(transition, all 0.5s);
                         position: absolute;
@@ -99,6 +104,10 @@
                         color: #899dc1;
                         &:hover {
                             color: #fff;
+                        }
+                        a{
+                            @include inline-block();
+                            @include ellipsis();
                         }
                     }
                 }
