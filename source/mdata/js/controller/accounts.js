@@ -16,6 +16,7 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
         $scope.searchPlaceholder = 'Search Name Email...';
         $scope.sourceData = [];
         $scope.viewData = [];
+        $scope.searchVal = '';
 
         // getAccount列表数据
         var accountListCache = AccountCache.get();
@@ -31,6 +32,7 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
 
         // 搜索自定义处理函数
         $scope.searchHandler = function (searchVal) {
+            $scope.searchVal = searchVal;
             $scope.viewData = Filter($scope.sourceData, {nickname : searchVal, username : searchVal});
         };
 
@@ -64,6 +66,7 @@ oasgames.mdataControllers.controller('AccountManageCtrl', [
                     username : username
                 }, function () {
                     AccountCache.deleteItem(accountId);
+                    $scope.searchHandler($scope.searchVal);
                     Ui.alert('success');
                 });
             });
