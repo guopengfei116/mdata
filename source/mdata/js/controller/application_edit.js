@@ -105,7 +105,8 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
              * 提交
              * 创建提交的数据中id为空，
              * 编辑提交的数据不为空，
-             * 如果缓存为开启状态则缓存数据，如果缓存失败则关闭缓存
+             * 如果缓存为开启状态则缓存数据，如果缓存失败则关闭缓存,
+             * 修改reportListCache为false，触发reportList刷新列表
              * */
             $scope.submit = function () {
 
@@ -141,6 +142,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                             $rootScope.applicationListCache = false;
                         }
                     }
+                    $rootScope.reportListCache = false;
                     Ui.alert('success', function () {
                         $scope.$apply(function () {
                             $location.path('/application/manage');

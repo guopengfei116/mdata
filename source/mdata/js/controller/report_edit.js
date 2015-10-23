@@ -293,7 +293,6 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                         if(!ReportCache.addItem(result)) {
                             $rootScope.reportListCache = false;
                         }
-                        console.log($rootScope.reportListCache);
                     }
                     Ui.alert('success', function () {
                         $scope.$apply(function () {
