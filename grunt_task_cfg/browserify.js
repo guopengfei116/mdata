@@ -16,7 +16,8 @@ exports.options = {
         'Echo': gruntProject.src + '/mdata/js/util/write_back.js',
         'reportViewDate': gruntProject.src + '/mdata/js/util/report_view_date.js',
         'Cookie': gruntProject.src + '/mdata/js/util/cookie.js',
-        'Authentication': gruntProject.src + '/mdata/js/util/Authentication.js'
+        'Authentication': gruntProject.src + '/mdata/js/util/Authentication.js',
+        'PostMessage': gruntProject.src + '/mdata/js/util/PostMessage.js'
     }
 };
 
