@@ -147,7 +147,7 @@ oasgames.mdataConstant.constant("CACHE_SETTINGS", {
     'accountListCacheTime' : 20,
     'reportListCache' : true,
     'reportListCacheTime' : 20,
-    'shortcutListCache' : true,
+    'shortcutListCache' : false,
     'shortcutListCacheTime' : 20
 });
 

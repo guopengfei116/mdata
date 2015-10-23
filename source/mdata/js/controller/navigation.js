@@ -77,10 +77,25 @@ oasgames.mdataControllers.controller('navigationCtrl', [
              * */
             function bind () {
                 $rootScope.$on('addShortcut', function (event, report, app) {
-                    ShortcutCache.addItem(report, app);
+                    if($rootScope.shortcutListCache) {
+                        ShortcutCache.addItem(report, app);
+                    }else {
+                        upShortcuts();
+                    }
                 });
                 $rootScope.$on('cancelShortcut', function (event, report, app) {
-                    ShortcutCache.deleteItem(report, app);
+                    if($rootScope.shortcutListCache) {
+                        ShortcutCache.deleteItem(report, app);
+                    }else {
+                        upShortcuts();
+                    }
+                });
+            }
+
+            function upShortcuts () {
+                Http.shortcuts(function (data) {
+                    $scope.shortcuts = data;
+                    init();
                 });
             }
 
