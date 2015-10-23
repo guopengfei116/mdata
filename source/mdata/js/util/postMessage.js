@@ -6,7 +6,11 @@
     var root = this;
     var PostMessage = function (option) {
         this.o = {
-            pageUrl : ''
+            "pageUrl" : '',
+            "url" : '',
+            "method" : '',
+            "data" : null,
+            "token" : {"MDATA-KEY" : require('Cookie').getCookie('MDATA-KEY')}
         };
         $.extend(this.o, option);
         this.init();

@@ -10326,15 +10326,16 @@
 	 };
 
 	 /*
-	 * event.data格式 { method : method, url : url, data : data, message : 'ajax', type : 'type' };
+	 * event.data格式 { method : method, url : url, data : data, message : 'ajax', type : 'type', token : 'MDATA-KEY' };
 	 * */
 	 window.addEventListener("message", function( event ) {
 		 try {
 			 var data = JSON.parse(event.data);
 			 $.ajax({
 				 type: data.method,
-				 url: data.url ,
-				 data: data.data ,
+				 url: data.url,
+				 data: data.data,
+				 headers: data.token,
 				 success: function(resultData){
 					 var result = {};
 					 result.type = data.type;
