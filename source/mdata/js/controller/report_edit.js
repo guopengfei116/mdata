@@ -215,24 +215,38 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
             //判断report_name重复 1为重复
             var flag = 1;
 
+            function checkNameIsChange(reportName) {
+                return $scope.reportName === reportName;
+            }
+
             /*
             * @method reportName表单验证
-            * @* 1.验证app是否选取
-            * @* 2.验证reportName是否填写
-            * @* 3.接口验证
             * */
             $scope.blur = function(type, $errors){
                 if(MdataVerify.blur(type, $errors, $scope)){
-                    var app_id = $scope.selectedAppId || $scope.reportSourceData['reportData']['appid'];
-                    if(!app_id) {
-                        Ui.alert('Application Name must not be empty');
+                    var report_name = $scope.reportSourceData['reportData']['report_name'];
+
+                    // 空效验
+                    if(!report_name) {
+                        Ui.alert('ReportName must not be empty');
                         return;
                     }
-                    var report_name = $scope.reportSourceData['reportData']['report_name'];
-                    if($scope.reportName === report_name) {
+
+                    // 编辑模式下验证report_name是否和编辑之前的值相同，相同不做判断
+                    if($scope.reportId && checkNameIsChange(report_name)) {
                         flag = 0;
                         return;
                     }
+
+                    // 创建模式下验证application是否已经填写
+                    if(!$scope.reportId) {
+                        var app_id = $scope.selectedAppId || $scope.reportSourceData['reportData']['appid'];
+                        if(!app_id) {
+                            Ui.alert('Application Name must not be empty');
+                            return;
+                        }
+                    }
+
                     Http.checkReportName({
                         'appId' : app_id,
                         'report_name' : report_name
@@ -260,6 +274,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
 
                 //判断Report Name
                 if(!MdataVerify.submit('reportName', $scope["reportFrom"]["reportName"].$error, $scope)){
+                    console.log('Report Name Error');
                     return false;
                 }
 
@@ -267,6 +282,11 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 if($.trim( $('.field-common-value').data('value')) == ""){
                      Ui.alert("Value group must not be empty");
                      return;
+                }
+
+                // 编辑模式下验证report_name是否和编辑之前的值相同，相同则认为正确
+                if($scope.reportId && checkNameIsChange(report_name)) {
+                    flag = 0;
                 }
 
                 //判断name重复
