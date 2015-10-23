@@ -115,6 +115,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
              * 创建提交的数据中id为空，
              * 编辑提交的数据不为空
              * 如果缓存为开启状态则缓存数据，如果缓存失败则关闭缓存
+             * 修改accountListCache为false，触发accountList刷新列表
              * */
             $scope.submit = function () {
                 //判断邮箱
@@ -153,6 +154,7 @@ oasgames.mdataControllers.controller('AccountEditCtrl', [
                             $rootScope.accountListCache = false;
                         }
                     }
+                    $rootScope.applicationListCache = false;
                     Ui.alert('success', function () {
                         $scope.$apply(function () {
                             $location.path('/account/manage');

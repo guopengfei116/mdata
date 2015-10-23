@@ -87,7 +87,7 @@ oasgames.mdataServices.provider('Http', [
                         messageSend : function (method, url, data) {
                             var defer = $q.defer();
                             var promise = defer.promise;
-                            var callbacks = [];
+                            var callbacks = [], resultData = null;
 
                             // 构建一个success方法供外界使用
                             promise.success = function (fn) {
@@ -97,14 +97,9 @@ oasgames.mdataServices.provider('Http', [
                             // 在成功之后依次调用callbacks里的fn
                             promise.then(function () {
                                 for(var i = 0; i < callbacks.length; i++) {
-                                    callbacks[i](returnData.data);
-                                }
-                            }, function () {
-                                if(returnData.code == 403) {
-                                    Ui.alert('Failure');
+                                    callbacks[i](resultData.data);
                                 }
                             });
-
 
                             var PostMessage = require('PostMessage');
                             var postMessage = new PostMessage({
@@ -112,10 +107,13 @@ oasgames.mdataServices.provider('Http', [
                                 method : method,
                                 url : url,
                                 data : data,
-                                callback : function (data) {
+                                callback : function (result) {
+                                    console.log(result);
+                                    resultData = result;
                                     defer.resolve()
                                 }
                             });
+                            postMessage.send();
 
                             return promise;
                         },

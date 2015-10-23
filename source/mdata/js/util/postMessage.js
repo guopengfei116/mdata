@@ -14,17 +14,30 @@
 
     $.extend(PostMessage.prototype, {
         initialized : false,
+        iframeLoad : false,
+        iframeLoadFn : function(){},
 
         /*
          * @method 初始化iframe
+         * 第一次添加iframe时监听load事件
          * */
         init : function () {
+            var self = this;
+
             if(PostMessage.prototype.initialized) {
                 return;
             }
-            this.prototype.initialized = true;
+            PostMessage.prototype.initialized = true;
+
             var $iframe = $('<iframe id="postMessage"></iframe>');
-            $iframe.attr('src', this.o.pageUrl).css('display', 'hidden').appendTo('body');
+
+            $iframe.bind('load', function () {
+                PostMessage.prototype.iframeLoad = true;
+                self.iframeLoadFn();
+                console.log('iframe load');
+            });
+
+            $iframe.attr('src', this.o.pageUrl).css('display', 'none').appendTo('body');
         },
 
         /*
@@ -42,20 +55,23 @@
                 }else if(data.code == 403) {
 
                 }
-
-                self.o.callback(data);
+                console.log(e);
+                //self.o.callback(data);
             });
         },
 
         /*
          * @method 发送消息
          * */
-        send : function (fn) {
-            var iframe = document.getElementById('postMessage');
-            if(iframe.contentWindow.postMessage) {
-                this.listening();
-                iframe.contentWindow.postMessage(JSON.stringify(this.o), '*');
+        send : function () {
+            if(!this.iframeLoad) {
+                this.iframeLoadFn = this.send;
+                return;
             }
+            var iframe = document.getElementById('postMessage');
+            console.log(iframe);
+            //this.listening();
+            iframe.contentWindow.postMessage($.param(this.o), '*');
         }
     });
 
