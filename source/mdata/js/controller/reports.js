@@ -32,6 +32,9 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
         // 用户权限
         $scope.userPermission = $rootScope.user['authority'];
 
+        // 记录当前搜索词
+        $scope.searchVal = '';
+
         /*
         * 收藏对象，
         * 列表五角星初始化，
@@ -349,6 +352,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
                         reportId : reportId
                     }, function () {
                         ReportCache.deleteItem(reportId, appId);
+                        $scope.searchHandler($scope.searchVal);
                         $scope.$emit('cancelShortcut', report, app);
                         Ui.alert('Delete successful');
                     });
@@ -361,7 +365,7 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
          * @param {String} searchVal
          * */
         $scope.searchHandler = function (searchVal) {
-
+            $scope.searchVal = searchVal;
             // 依据appName匹配到的apps
             var matchedApps = Filter($scope.sourceData, {appname : searchVal});
             // 未匹配到的apps
