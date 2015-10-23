@@ -34,7 +34,7 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                 $scope[errorCtl[i]] = false;
             }
         };
-        $(".main-login input").keypress(function(e) {
+        $(".main-login input").keydown(function(e) {
             if(e.keyCode == 13){
                 $scope.submit();
             }   
