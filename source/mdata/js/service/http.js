@@ -11,10 +11,19 @@ oasgames.mdataServices.provider('Http', [
             get : API_METHOD.get,
             post : API_METHOD.post,
 
+            isIE9 : function () {
+                return "msDoNotTrack" in window.navigator;
+            },
+
             /*
-            * get api method
+            * @method get api method，通过常量获取，如果常量为http，则进一步区分get与post
+            * @* 因为ie9不支持XHQ2,所以使用postMessage
             * */
             getMethod : function (type) {
+                if(this.isIE9()) {
+                    return 'MESSAGE';
+                }
+
                 switch (CROSS_ORIGIN_METHOD) {
                     case 'message':
                         return 'MESSAGE';
