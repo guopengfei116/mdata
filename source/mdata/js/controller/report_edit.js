@@ -221,28 +221,30 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
             * @* 2.验证reportName是否填写
             * @* 3.接口验证
             * */
-            $scope.blur = function(){
-                var app_id = $scope.selectedAppId || $scope.reportSourceData['reportData']['appid'];
-                if(!app_id) {
-                    Ui.alert('Application Name must not be empty');
-                    return;
-                }
-                var report_name = $scope.reportSourceData['reportData']['report_name'];
-                if($scope.reportName === report_name) {
-                    flag = 0;
-                    return;
-                }
-                Http.checkReportName({
-                    'appId' : app_id,
-                    'report_name' : report_name
-                }).success(function (result) {
-                    if(result && result.code == 200) {
-                        flag = 0;
-                    }else {
-                        flag = 1;
-                        Ui.alert("Report Name Repeat!");
+            $scope.blur = function(type, $errors){
+                if(MdataVerify.blur(type, $errors, $scope)){
+                    var app_id = $scope.selectedAppId || $scope.reportSourceData['reportData']['appid'];
+                    if(!app_id) {
+                        Ui.alert('Application Name must not be empty');
+                        return;
                     }
-                });
+                    var report_name = $scope.reportSourceData['reportData']['report_name'];
+                    if($scope.reportName === report_name) {
+                        flag = 0;
+                        return;
+                    }
+                    Http.checkReportName({
+                        'appId' : app_id,
+                        'report_name' : report_name
+                    }).success(function (result) {
+                        if(result && result.code == 200) {
+                            flag = 0;
+                        }else {
+                            flag = 1;
+                            Ui.alert("Report Name Repeat!");
+                        }
+                    });
+                }
             };
 
             /*
