@@ -263,17 +263,17 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                     return false;
                 }
 
-                //判断name重复
-                if(flag == 1){
-                    return false;
-                }
-
                 //判断Column
                 if($.trim( $('.field-common-value').data('value')) == ""){
                      Ui.alert("Value group must not be empty");
                      return;
                 }
 
+                //判断name重复
+                if(flag == 1){
+                    return false;
+                }
+                
                 // 提交数据
                 var result = {};
                 result.appid = $scope.selectedAppId;
