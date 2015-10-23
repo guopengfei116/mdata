@@ -107,6 +107,11 @@ oasgames.mdataServices.provider('Http', [
                                 callbacks.push(fn);
                             };
 
+                            // 构建一个error方法供外界使用
+                            promise.error = function (fn) {
+                                callbacks.push(fn);
+                            };
+
                             // 在成功之后依次调用callbacks里的fn
                             promise.then(function () {
                                 for(var i = 0; i < callbacks.length; i++) {
