@@ -213,18 +213,25 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
         // 事件处理、表单效验
         (function () {
             //判断report_name重复 1为重复
-            var flag = 0;
+            var flag = 1;
 
-            //表单失去焦点时错误提示
+            /*
+            * @method reportName表单验证
+            * @* 1.验证app是否选取
+            * @* 2.验证reportName是否填写
+            * @* 3.接口验证
+            * */
             $scope.blur = function(){
-                //验证report name是否重复  
+                var app_id = $scope.selectedAppId || $scope.reportSourceData['reportData']['appid'];
+                if(!app_id) {
+                    Ui.alert('Application Name must not be empty');
+                    return;
+                }
                 var report_name = $scope.reportSourceData['reportData']['report_name'];
                 if($scope.reportName === report_name) {
                     flag = 0;
                     return;
                 }
-                var app_id = $scope.selectedAppId || $scope.reportSourceData['reportData']['appid'];
-
                 Http.checkReportName({
                     'appId' : app_id,
                     'report_name' : report_name
@@ -232,11 +239,11 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                     if(result && result.code == 200) {
                         flag = 0;
                     }else {
-                        flag = 1;                        
+                        flag = 1;
+                        Ui.alert("Report Name Repeat!");
                     }
-                });              
+                });
             };
-
 
             /*
             * 编辑提交
@@ -253,11 +260,9 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 if(!MdataVerify.submit('reportName', $scope["reportFrom"]["reportName"].$error, $scope)){
                     return false;
                 }
-                $scope.blur();
 
                 //判断name重复
                 if(flag == 1){
-                    Ui.alert("Report Name Repeat!");
                     return false;
                 }
 
@@ -288,6 +293,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                         if(!ReportCache.addItem(result)) {
                             $rootScope.reportListCache = false;
                         }
+                        console.log($rootScope.reportListCache);
                     }
                     Ui.alert('success', function () {
                         $scope.$apply(function () {
