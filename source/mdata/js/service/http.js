@@ -12,7 +12,7 @@ oasgames.mdataServices.provider('Http', [
             post : API_METHOD.post,
 
             isIE9 : function () {
-                return "msDoNotTrack" in window.navigator;
+                return navigator.userAgent.indexOf("MSIE 9.0")>0 && window.innerWidth;
             },
 
             /*
