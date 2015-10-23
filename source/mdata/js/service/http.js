@@ -51,11 +51,12 @@ oasgames.mdataServices.provider('Http', [
                 '$http',
                 'ApiCtrl',
                 'CACHE_SETTINGS',
+                'AJAX_AGENT_PAGE',
                 'ApplicationCache',
                 'AccountCache',
                 'ReportCache',
                 'ShortcutCache',
-                function ($q, $http, ApiCtrl, CACHE_SETTINGS, ApplicationCache, AccountCache, ReportCache, ShortcutCache) {
+                function ($q, $http, ApiCtrl, CACHE_SETTINGS, AJAX_AGENT_PAGE, ApplicationCache, AccountCache, ReportCache, ShortcutCache) {
                     var self = this;
                     return {
 
@@ -84,45 +85,35 @@ oasgames.mdataServices.provider('Http', [
                         },
 
                         messageSend : function (method, url, data) {
-                            var iframe = window.document.createElement('iframe');
-                            $(iframe).attr('src', '').appendTo('body');
-                            var data = {
-                                method : method,
-                                url : url,
-                                data : data,
-                                message : 'ajax'
-                            };
-
                             var defer = $q.defer();
                             var promise = defer.promise;
-                            var returnData = null;
-                            var callbacks = [];
-                            promise.then(function () {
-                                for(var i = 0; i < callbacks.length; i++) {
-                                    callbacks[i](returnData.data);
-                                }
-                            }, function () {
-                                if(returnData.code == 403) {
-                                    Ui.alert('Failure');
-                                }
-                            });
+                            var callbacks = [], resultData = null;
+
+                            // 构建一个success方法供外界使用
                             promise.success = function (fn) {
                                 callbacks.push(fn);
                             };
 
-                            $(window).bind('message', function (e) {
-                                data = e.data? e.data : {};
-                                returnData = JSON.parse(data);
-                                if(returnData && returnData.code == 200) {
-                                    defer.resolve();
-                                }else {
-                                    defer.reject();
+                            // 在成功之后依次调用callbacks里的fn
+                            promise.then(function () {
+                                for(var i = 0; i < callbacks.length; i++) {
+                                    callbacks[i](resultData.data);
                                 }
                             });
 
-                            if(iframe.contentWindow.postMessage) {
-                                iframe.contentWindow.postMessage(JSON.stringify(data), '*');
-                            }
+                            var PostMessage = require('PostMessage');
+                            var postMessage = new PostMessage({
+                                pageUrl : AJAX_AGENT_PAGE,
+                                method : method,
+                                url : url,
+                                data : data,
+                                callback : function (result) {
+                                    console.log(result);
+                                    resultData = result;
+                                    defer.resolve()
+                                }
+                            });
+                            postMessage.send();
 
                             return promise;
                         },

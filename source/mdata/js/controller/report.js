@@ -108,6 +108,8 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
                     date_end : new Date($('#reportEndDate').val()).getTime() / 1000
                 }, function (data) {
                     $scope.reportSourceData['table_list'] = data['table_list'];
+                    $scope.reportSourceData['date_begin'] = data['date_begin'];
+                    $scope.reportSourceData['date_end'] = data['date_end'];
                 });
             };
         })();
@@ -118,8 +120,8 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
         (function () {
             var exportExcel = function () {
                 var blob = new Blob( getVal(), {type: "text/plain;charset=utf8"} );
-                var beginDate = new Date($scope.reportSourceData.date_begin * 1000);
-                var endDate = new Date($scope.reportSourceData.date_begin * 1000);
+                var beginDate = new Date($scope.reportSourceData['date_begin'] * 1000);
+                var endDate = new Date($scope.reportSourceData['date_end'] * 1000);
                 beginDate = beginDate.getFullYear() + ':' + (beginDate.getMonth() + 1) + ':' + beginDate.getDate();
                 endDate = endDate.getFullYear() + ':' + (endDate.getMonth() + 1) + ':' + endDate.getDate();
                 var fileName = 'MData-' + $scope.reportSourceData.appname + '-' + $scope.reportSourceData.report_name + '-' +

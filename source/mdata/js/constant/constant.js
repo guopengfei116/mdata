@@ -71,7 +71,13 @@ oasgames.mdataConstant.constant("CROSS_ORIGIN_METHOD", "http");
 
 
 /*
- * 接口对应的method
+ * message方式时iframe打开的页面url
+ * */
+oasgames.mdataConstant.constant("AJAX_AGENT_PAGE", "http://post.mdata.com:9800/mdata/tpl/ajax.html");
+
+
+/*
+ * http方式时接口对应的method
  * */
 oasgames.mdataConstant.constant("API_METHOD", {
     'get' : [
