@@ -237,16 +237,14 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                         flag = 0;
                         return;
                     }
-
+                    var app_id = $scope.selectedAppId || $scope.reportSourceData['reportData']['appid'];
                     // 创建模式下验证application是否已经填写
                     if(!$scope.reportId) {
-                        var app_id = $scope.selectedAppId || $scope.reportSourceData['reportData']['appid'];
                         if(!app_id) {
                             Ui.alert('Application Name must not be empty');
                             return;
                         }
                     }
-
                     Http.checkReportName({
                         'appId' : app_id,
                         'report_name' : report_name
