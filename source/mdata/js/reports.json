@@ -3,38 +3,80 @@
   "code" : 200,
   "data" : [
     {
-      "appId" : 12,
-      "appName" : "ddg",
+      "appname" : "ddg",
+      "appid" : 1,
+      "permission" : 1,
+      "admin_uid" : "28",
+      "user_uid" : "",
+      "guest_uid" : "25",
       "reports" : [
         {
-          "id" : 23,
-          "name" : "report1"
+          "id" : 11,
+          "report_name" : "report1"
         },
         {
-          "id" : 45,
-          "name" : "report2"
+          "id" : 22,
+          "report_name" : "hgjfg"
         },
         {
-          "id" : 76,
-          "name" : "report3"
+          "id" : 33,
+          "report_name" : "report3"
+        },
+        {
+          "id" : 111,
+          "report_name" : "cddgs"
         }
       ]
     },
     {
-      "appId" : 15,
-      "appName" : "pig",
+      "appname" : "pig",
+      "appid" : 15,
+      "permission" : 3,
+      "admin_uid" : "28",
+      "user_uid" : "",
+      "guest_uid" : "25",
       "reports" : [
         {
-          "id" : 23,
-          "name" : "report1"
+          "id" : 44,
+          "report_name" : "nrd"
         },
         {
-          "id" : 45,
-          "name" : "report2"
+          "id" : 55,
+          "report_name" : "awzx"
         },
         {
-          "id" : 76,
-          "name" : "report3"
+          "id" : 444,
+          "report_name" : "sewd"
+        },
+        {
+          "id" : 555,
+          "report_name" : "nk"
+        }
+      ]
+    },
+    {
+      "appname" : "cu",
+      "appid" : 28,
+      "permission" : 2,
+      "admin_uid" : "28",
+      "user_uid" : "",
+      "guest_uid" : "25",
+      "reports" : [
+        {
+          "id" : 666,
+          "report_name" : "nrd"
+        },
+        {
+          "id" : 777,
+          "report_name" : "awzx"
+        },
+        {
+          "id" : 66,
+          "report_name" : "sewd"
+        },
+        {
+          "id" : 77,
+          "report_name" : "nk"
         }
       ]
     }

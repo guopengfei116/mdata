@@ -18,7 +18,7 @@ exports.import = {
         {
             expand: true,
             cwd: gruntProject.src,
-            src: '*/tpl/*.html',
+            src: ['*/tpl/*.html', '*.html'],
             dest: gruntProject.prd
         }
     ]

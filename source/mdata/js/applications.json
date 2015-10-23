@@ -2,16 +2,54 @@
   "code" : 200,
   "data" : [
     {
-      "name" : "you",
-      "id" : "12",
-      "users" : [
+      "appname" : "you",
+      "appid" : "12",
+      "appadmin" : [
         {
-          "name" : "jon",
-          "email" : "1@1.com",
-          "id" : "12"
+          "nickname" : "bibi",
+          "username" : "1@1.com",
+          "uid" : "12"
         },
         {
-          "name" : "jon",
+          "nickname" : "join",
+          "username" : "1@1.com",
+          "uid" : "12"
+        },
+        {
+          "nickname" : "saxi",
+          "username" : "1@1.com",
+          "uid" : "12"
+        }
+      ],
+      "appuser" : [
+        {
+          "nickname" : "baode",
+          "username" : "4@4.com",
+          "uid" : "444"
+        },
+        {
+          "nickname" : "zirke",
+          "username" : "1@1.com",
+          "uid" : "128"
+        },
+        {
+          "nickname" : "jon",
+          "username" : "1dfg@1d.com",
+          "uid" : "18"
+        },
+        {
+          "nickname" : "saxi",
+          "username" : "aa@mv.com",
+          "uid" : "132"
+        }
+      ]
+    },
+    {
+      "appname" : "gaga",
+      "appid" : "123",
+      "appadmin" : [
+        {
+          "name" : "zirke",
           "email" : "1@1.com",
           "id" : "12"
         },
@@ -21,25 +59,35 @@
           "id" : "12"
         }
       ],
-      "reports" : [
+      "appuser" : [
         {
           "name" : "baode",
-          "id" : "44",
+          "email" : "4@4.com",
           "app" : "444"
+        },
+        {
+          "name" : "jon",
+          "email" : "1@1.com",
+          "id" : "128"
+        },
+        {
+          "name" : "zirke",
+          "email" : "1dfg@1d.com",
+          "id" : "18"
+        },
+        {
+          "name" : "jon",
+          "email" : "aa@mv.com",
+          "id" : "132"
         }
       ]
     },
     {
-      "name" : "fei",
-      "id" : "198",
-      "users" : [
+      "appname" : "feuf",
+      "appid" : "88",
+      "appadmin" : [
         {
-          "name" : "jon",
-          "email" : "1@1.com",
-          "id" : "12"
-        },
-        {
-          "name" : "jon",
+          "name" : "saxi",
           "email" : "1@1.com",
           "id" : "12"
         },
@@ -49,25 +97,35 @@
           "id" : "12"
         }
       ],
-      "reports" : [
+      "appuser" : [
         {
-          "name" : "bao",
-          "id" : "11",
-          "app" : "111"
+          "name" : "baode",
+          "email" : "4@4.com",
+          "app" : "444"
+        },
+        {
+          "name" : "saxi",
+          "email" : "1@1.com",
+          "id" : "128"
+        },
+        {
+          "name" : "jon",
+          "email" : "1dfg@1d.com",
+          "id" : "18"
+        },
+        {
+          "name" : "saxi",
+          "email" : "aa@mv.com",
+          "id" : "132"
         }
       ]
     },
     {
-      "name" : "guo",
-      "id" : "46412",
-      "users" : [
+      "appname" : "pp",
+      "appid" : "99",
+      "appadmin" : [
         {
-          "name" : "jon",
-          "email" : "1@1.com",
-          "id" : "12"
-        },
-        {
-          "name" : "jon",
+          "name" : "saxi",
           "email" : "1@1.com",
           "id" : "12"
         },
@@ -77,11 +135,64 @@
           "id" : "12"
         }
       ],
-      "reports" : [
+      "appuser" : [
         {
-          "name" : "baoDS",
-          "id" : "33",
-          "app" : "333"
+          "name" : "baode",
+          "email" : "4@4.com",
+          "app" : "444"
+        },
+        {
+          "name" : "jon",
+          "email" : "1@1.com",
+          "id" : "128"
+        },
+        {
+          "name" : "nene",
+          "email" : "1dfg@1d.com",
+          "id" : "18"
+        },
+        {
+          "name" : "dle",
+          "email" : "aa@mv.com",
+          "id" : "132"
+        }
+      ]
+    },
+    {
+      "appname" : "ndfdfgf",
+      "appid" : "1237",
+      "appadmin" : [
+        {
+          "name" : "sasdfxi",
+          "email" : "sdfd1@1.com",
+          "id" : "1ds2"
+        },
+        {
+          "name" : "jon",
+          "email" : "1@1.com",
+          "id" : "11242"
+        }
+      ],
+      "appuser" : [
+        {
+          "name" : "baode",
+          "email" : "4@4.com",
+          "app" : "4444"
+        },
+        {
+          "name" : "fsd",
+          "email" : "1@1.com",
+          "id" : "17728"
+        },
+        {
+          "name" : "nesdfne",
+          "email" : "1fddfg@1d.com",
+          "id" : "13458"
+        },
+        {
+          "name" : "dle",
+          "email" : "asdfa@mv.com",
+          "id" : "13542"
         }
       ]
     }

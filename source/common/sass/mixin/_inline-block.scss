@@ -1,4 +1,4 @@
-@mixin inline-block($vertical:baseline) {
+@mixin inline-block($vertical:middle) {
 	display : inline-block;
 	vertical-align: $vertical;
 	@if $browser-pc and $prefix-for-lte7{

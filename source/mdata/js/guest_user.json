@@ -1,0 +1,31 @@
+{
+    "msg" : "success",
+    "code" : 200,
+    "data" : [
+        {
+            "nickname" : "o",
+            "username" : "b@a.com",
+            "uid" : 8888
+        },
+        {
+            "nickname" : "hb",
+            "username" : "a@a.com",
+            "uid" : 567
+        },
+        {
+            "nickname" : "g",
+            "username" : "d@d.com",
+            "uid" : 908
+        },
+        {
+            "nickname" : "d",
+            "username" : "c@c.com",
+            "uid" : 456
+        },
+        {
+            "nickname" : "special",
+            "username" : "special@special.com",
+            "uid" : 7758521
+        }
+    ]
+}

@@ -2,89 +2,208 @@
   "code" : 200,
   "data" : [
     {
-      "name" : "a",
-      "email" : "a@a.com",
-      "id" : 321,
+      "nickname" : "o",
+      "username" : "b@a.com",
+      "uid" : 8888,
       "as_report_admin" : [
         {
-          "name" : "report1",
-          "id" : "123"
+          "appname" : "fdsfsff",
+          "appid" : "123"
         },
         {
-          "name" : "report2",
-          "id" : "124"
+          "appname" : "report2",
+          "appid" : "124"
         },
         {
-          "name" : "report3",
-          "id" : "125"
+          "appname" : "avcsedf",
+          "appid" : "125"
         }
       ],
       "as_report_viewer" : [
         {
-          "name" : "report4",
-          "id" : "126"
+          "appname" : "report4",
+          "appid" : "126"
         },
         {
-          "name" : "report5",
-          "id" : "127"
+          "appname" : "ndfdfgf",
+          "appid" : "127"
         }
       ]
     },
     {
-      "name" : "b",
-      "email" : "b@b.com",
-      "id" : 567,
+      "nickname" : "hb",
+      "username" : "a@a.com",
+      "uid" : 567,
       "as_report_admin" : [
         {
-          "name" : "report1",
-          "id" : "123"
+          "appname" : "vcbc",
+          "appid" : "123"
         },
         {
-          "name" : "report2",
-          "id" : "124"
+          "appname" : "wqeds",
+          "appid" : "124"
         },
         {
-          "name" : "report3",
-          "id" : "125"
+          "appname" : "jhgjg",
+          "appid" : "125"
         }
       ],
       "as_report_viewer" : [
         {
-          "name" : "report4",
-          "id" : "126"
+          "appname" : "report4",
+          "appid" : "126"
         },
         {
-          "name" : "report5",
-          "id" : "127"
+          "appname" : "bdfgdf",
+          "appid" : "127"
         }
       ]
     },
     {
-      "name" : "c",
-      "email" : "c@c.com",
-      "id" : 908,
+      "nickname" : "g",
+      "username" : "d@d.com",
+      "uid" : 908,
       "as_report_admin" : [
         {
-          "name" : "report1",
-          "id" : "123"
+          "appname" : "qqqqq",
+          "appid" : "123"
         },
         {
-          "name" : "report2",
-          "id" : "124"
+          "appname" : "aaaaaa",
+          "appid" : "124"
         },
         {
-          "name" : "report3",
-          "id" : "125"
+          "appname" : "ddddd",
+          "appid" : "125"
         }
       ],
       "as_report_viewer" : [
         {
-          "name" : "report4",
-          "id" : "126"
+          "appname" : "ccccc",
+          "appid" : "126"
         },
         {
-          "name" : "report5",
-          "id" : "127"
+          "appname" : "yyyyyy",
+          "appid" : "127"
+        },
+        {
+          "appname" : "kkkk",
+          "appid" : "127"
+        },
+        {
+          "appname" : "6546",
+          "appid" : "127"
+        }
+      ]
+    },
+    {
+      "nickname" : "d",
+      "username" : "c@c.com",
+      "uid" : 456,
+      "as_report_admin" : [
+        {
+          "appname" : "qqqqq",
+          "appid" : "123"
+        },
+        {
+          "appname" : "aaaaaa",
+          "appid" : "124"
+        },
+        {
+          "appname" : "ddddd",
+          "appid" : "125"
+        }
+      ],
+      "as_report_viewer" : [
+        {
+          "appname" : "ccccc",
+          "appid" : "126"
+        },
+        {
+          "appname" : "yyyyyy",
+          "appid" : "127"
+        },
+        {
+          "appname" : "kkkk",
+          "appid" : "127"
+        },
+        {
+          "appname" : "6546",
+          "appid" : "127"
+        }
+      ]
+    },
+    {
+      "nickname" : "b",
+      "username" : "b@c.com",
+      "uid" : 369,
+      "as_report_admin" : [
+        {
+          "appname" : "qqqqq",
+          "appid" : "123"
+        },
+        {
+          "appname" : "aaaaaa",
+          "appid" : "124"
+        },
+        {
+          "appname" : "ddddd",
+          "appid" : "125"
+        }
+      ],
+      "as_report_viewer" : [
+        {
+          "appname" : "ccccc",
+          "appid" : "126"
+        },
+        {
+          "appname" : "yyyyyy",
+          "appid" : "127"
+        },
+        {
+          "appname" : "kkkk",
+          "appid" : "127"
+        },
+        {
+          "appname" : "6546",
+          "appid" : "127"
+        }
+      ]
+    },
+    {
+      "nickname" : "ppp",
+      "username" : "ppppp@a.com",
+      "uid" : 321,
+      "as_report_admin" : [
+        {
+          "appname" : "hqqqqq",
+          "appid" : "123"
+        },
+        {
+          "appname" : "haaaaaa",
+          "appid" : "124"
+        },
+        {
+          "appname" : "hddddd",
+          "appid" : "125"
+        }
+      ],
+      "as_report_viewer" : [
+        {
+          "appname" : "cchccc",
+          "appid" : "126"
+        },
+        {
+          "appname" : "yyyyyhy",
+          "appid" : "127"
+        },
+        {
+          "appname" : "kkkmk",
+          "appid" : "127"
+        },
+        {
+          "appname" : "6546",
+          "appid" : "127"
         }
       ]
     }

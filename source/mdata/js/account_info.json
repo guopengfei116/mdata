@@ -1,0 +1,33 @@
+{
+  "msg" : "",
+  "code" : 200,
+  "data" : {
+    "username" : "3@4.com",
+    "nickname" : "fsf",
+    "password" : "fsdfsda",
+    "as_report_admin" : [
+      {
+        "appname" : "you",
+        "appid" : "12"
+      },
+      {
+        "appname" : "gaga",
+        "appid" : "123"
+      },
+      {
+        "appname" : "feuf",
+        "appid" : "88"
+      }
+    ],
+    "as_report_viewer" : [
+      {
+        "appname" : "pp",
+        "appid" : "99"
+      },
+      {
+        "appname" : "ndfdfgf",
+        "appid" : "1237"
+      }
+    ]
+  }
+}

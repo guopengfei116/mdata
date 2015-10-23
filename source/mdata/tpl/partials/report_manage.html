@@ -1,33 +1,38 @@
-<section class="cf">
-    <div class="left button-group">
-        <a href="#/report/manage/create" class="button button-create-plus">+</a>
-        <a href="#/report/manage/create" class="button button-create">Create Report</a>
-    </div>
-    <div class="form-tool right">
-        <form novalidate name="searchForm">
-            <fieldset class="fieldset">
-                <input class="fieldset_text" name="searchInput" ng-model="searchTerms" type="text" required>
-                <button class="fieldset_button iconfont icon-search" ng-click="submit()"></button>
-            </fieldset>
-        </form>
-    </div>
-</section>
-<dl class="container" ng-repeat="reportGroup in dataReports.data">
-    <dt class="row row-title">
-        <ul>
-            <li class="row_column row_column-2"><a href="javascript: void (0);">{{ reportGroup.appName }}</a></li>
-            <li class="row_column row_column-2"><i class="iconfont icon-collection"></i></li>
-        </ul>
-    </dt>
-    <dd class="row" ng-repeat="report in reportGroup.reports">
-        <ul>
-            <li class="row_column row_column-2"><a href="#/report/view/{{ report.id }}">{{ report.name }}</a></li>
-            <li class="row_column row_column-2">
-                <span class="iconfont icon-report tooltip-host" data-tooltip-position="bc" data-tooltip-info="Duplicate"></span>
-                <span class="iconfont icon-edit tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></span>
-                <span class="iconfont icon-delete tooltip-host" data-tooltip-position="bc" data-tooltip-info="Delete"></span>
-                <span class="iconfont icon-shortcuts tooltip-host" data-tooltip-position="bc" data-tooltip-info="Shortcut"></span>
-            </li>
-        </ul>
-    </dd>
-</dl>
+<article class="report-manage">
+    <section class="cf">
+        <div class="left button-group" ng-if="createAppAuthority || authority < 2">
+            <a href="#/report/manage/create" class="button button-create-plus"><i class="iconfont icon-plus"></i></a>
+            <a href="#/report/manage/create" class="button button-create">Create Report</a>
+        </div>
+        <div class="form-tool right">
+            <search></search>
+        </div>
+    </section>
+    <dl class="container container-app-{{ appIndex }}" ng-init="appIndex = $index" ng-repeat="app in viewData | orderBy:'appname'" appid="{{app.appid}}">
+        <dt class="row row-title">
+            <ul>
+                <li class="row_column row_column-1"><a href="javascript: void (0);" ng-click="reportsShow[$index] = !reportsShow[$index]">{{ app.appname }}</a></li>
+            </ul>
+        </dt>
+        <dd ng-show="reportsShow[$index]">
+            <ul class="row row-children row-report-{{ $index }}" ng-repeat="report in app.reports | orderBy:'report_name'">
+                <li class="row_column row_column-2">
+                    <a href="#/report/manage/view/{{ report.id }}">{{ report.report_name }}</a>
+                </li>
+                <li class="row_column row_column-2">
+                    <span ng-if="userPermission < 2 || app.permission < 2" ng-click="reportCopyEvent(report.id, report.report_name, appIndex, $index)"
+                          class="iconfont icon-copy tooltip-host" data-tooltip-position="bc" data-tooltip-info="Duplicate"></span>
+
+                    <a ng-if="userPermission < 2 || app.permission < 2" href="#/report/manage/edit/{{ report.id }}"
+                       class="iconfont icon-edit tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></a>
+
+                    <span ng-if="userPermission < 2 || app.permission < 2" ng-click="delete(report, app)"
+                          class="iconfont icon-delete tooltip-host" data-tooltip-position="bc" data-tooltip-info="Delete" ></span>
+
+                    <span ng-click="shortcutChange(report, app)" ng-class="{ 'icon-collection-unchecked' : !reportsShortcutStatus[report.id], 'icon-collection-checked' : reportsShortcutStatus[report.id] }"
+                          class="iconfont tooltip-host" data-tooltip-position="bc" data-tooltip-info="Shortcut"></span>
+                </li>
+            </ul>
+        </dd>
+    </dl>
+</article>

@@ -1,0 +1,35 @@
+.report-manage {
+    .row-title {
+        .iconfont {
+            font-weight: normal;
+        }
+    }
+    .row_column:last-of-type {
+        text-align: right;
+    }
+    .container {
+        .iconfont {
+            color: #8facd2;
+            margin: 0 16px;
+        }
+    }
+    .report-duplicate-wrap{
+        width:191px;
+        height:24px;
+        padding:0 3px;
+        border:1px solid #aaaaaa;
+    }
+    .input-report-duplicate{
+        width:171px;
+        height:24px;
+        line-height:24px;
+    }
+    .container{
+        .icon-duplicate{
+            margin:0px;
+        }
+        .icon-duplicate:hover{
+            background:#d9dfe4;
+        }
+    }
+}

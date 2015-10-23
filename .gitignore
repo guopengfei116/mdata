@@ -1,0 +1,11 @@
+
+*.log
+
+node_modules/
+debug/
+production/
+.sass-cache/
+bower_components/
+.idea/
+.DS_store
+root.key

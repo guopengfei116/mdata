@@ -1,45 +1,44 @@
-<section class="cf">
-    <div class="left button-group">
-        <a href="#/application/manage/create" class="button button-create-plus">+</a>
-        <a href="#/application/manage/create" class="button button-create">Create</a>
-    </div>
-    <div class="form-tool right">
-        <form novalidate name="searchForm">
-            <fieldset class="fieldset">
-                <input class="fieldset_text" name="searchInput" ng-model="searchTerms" type="text" required>
-                <button class="fieldset_button iconfont icon-search" ng-click="submit()"></button>
-            </fieldset>
-        </form>
-    </div>
-</section>
-<dl class="container">
-    <dt class="row row-title">
-        <ul>
-            <li class="row_column row_column-5">App Name</li>
-            <li class="row_column row_column-5">App ID</li>
-            <li class="row_column row_column-5">Report Admin</li>
-            <li class="row_column row_column-5">Report Viewer</li>
-            <li class="row_column row_column-5">Manage</li>
-        </ul>
-    </dt>
-    <dd class="row row-color-interlaced" ng-repeat="app in dataApps.data">
-        <ul>
-            <li class="row_column row_column-5">{{ app.name }}</li>
-            <li class="row_column row_column-5">{{ app.id }}</li>
-            <li class="row_column row_column-5">
-                <span ng-repeat="user in app.users">
-                    <a href="#/account/manage/edit/{{ user.id }}">{{ user.email }}</a>
-                </span>
-            </li>
-            <li class="row_column row_column-5">
-                <span ng-repeat="report in app.reports">
-                    <a href="#/report/view/{{ report.id }}">{{ report.name }}</a>
-                </span>
-            </li>
-            <li class="row_column row_column-5">
-                <i class="iconfont icon-edit tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></i>
-                <i class="iconfont icon-delete tooltip-host" data-tooltip-position="bc" data-tooltip-info="Delete"></i>
-            </li>
-        </ul>
-    </dd>
-</dl>
+<article class="app-page app-manage">
+    <section class="cf">
+        <div class="left button-group">
+            <a href="#/application/manage/create" class="button button-create-plus"><i class="iconfont icon-plus"></i></a>
+            <a href="#/application/manage/create" class="button button-create">Create</a>
+        </div>
+        <div class="form-tool right">
+            <search></search>
+        </div>
+    </section>
+    <dl class="container">
+        <dt class="row row-title">
+            <ul>
+                <li class="row_column row_column-5" ng-click="changeSort('appList', 'appname')">App Name</li>
+                <li class="row_column row_column-5" ng-click="changeSort('appList', 'appid')">App ID</li>
+                <li class="row_column row_column-5" >Report Admin</li>
+                <li class="row_column row_column-5" >Report Viewer</li>
+                <li class="row_column row_column-5">Manage</li>
+            </ul>
+        </dt>
+        <dd class="row row-color-interlaced" ng-repeat="app in viewData | orderBy:sort.appList.orderKey:sort.appList.isDownOrder ">
+            <ul>
+                <li class="row_column row_column-5">{{ app.appname? app.appname : '-' }}</li>
+                <li class="row_column row_column-5">{{ app.appid }}</li>
+                <li class="row_column row_column-5">
+                    <span ng-if="app['appadmin'].length == 0">-</span>
+                    <span ng-repeat="user in app['appadmin'] | orderBy:sort.adminUsers.orderKey:sort.adminUsers.isDownOrder ">
+                        {{ user.nickname }}
+                    </span>
+                </li>
+                <li class="row_column row_column-5">
+                    <span ng-if="app['appuser'].length == 0">-</span>
+                    <span ng-repeat="user in app['appuser'] | orderBy:sort.viewerUsers.orderKey:sort.viewerUsers.isDownOrder ">
+                        {{ user.nickname }}
+                    </span>
+                </li>
+                <li class="row_column row_column-5">
+                    <a href="#/application/manage/edit/{{ app.appid }}" class="iconfont icon-edit tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></a>
+                    <i class="iconfont icon-delete tooltip-host" data-tooltip-position="bc" data-tooltip-info="Delete" ng-click="delete(app.appid)"></i>
+                </li>
+            </ul>
+        </dd>
+    </dl>
+</article>

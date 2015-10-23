@@ -1,0 +1,110 @@
+{
+  "msg": "",
+  "code": 200,
+  "data": {
+    "id": 4,
+    "report_name": "nonono",
+    "appid": 1,
+    "appname": "ddg",
+    "describe": "nimei",
+    "dimension": [
+      "ip",
+      "uuid",
+      "ccd"
+    ],
+    "filter": [
+      "ip=192",
+      "uuid=1",
+      "dd=1"
+    ],
+    "values": [
+      "status|age",
+      "createrole|create",
+      "unique_count|install",
+      "unique_count|visit",
+      "zhuanhuanlv"
+    ],
+    "date_begin": 1442246400000,
+    "date_end": 1443528179500,
+    "create_time": 1442246400000,
+    "table_list": [
+      [
+        "Date",
+        "ip",
+        "uuid",
+        "status age",
+        "creeate",
+        "install uni",
+        "visituni",
+        "转化率",
+        "pay_count"
+      ],
+      {
+        "Date" : "Total",
+        "ip" : "-",
+        "uuid" : "-",
+        "status age" : "8",
+        "creeate" : "8",
+        "install uni" : "3",
+        "visituni" : "1",
+        "转化率" : "1",
+        "pay_count" : "0"
+      },
+      [
+        "20150915",
+        "10.1.9.148",
+        "uid",
+        "1.00",
+        1,
+        null,
+        null,
+        false,
+        null
+      ],
+      [
+        "20150912",
+        "10.1.9.148",
+        "uid",
+        "1.00",
+        1,
+        null,
+        null,
+        false,
+        null
+      ],
+      [
+        "20150915",
+        "10.1.9.148",
+        "uid",
+        "1.00",
+        1,
+        null,
+        null,
+        false,
+        null
+      ],
+      [
+        "20150918",
+        "10.1.9.148",
+        "1234",
+        null,
+        null,
+        1,
+        1,
+        1,
+        null
+      ],
+      [
+        "20150919",
+        "10.1.9.148",
+        "asfsdfasdf",
+        null,
+        null,
+        1,
+        null,
+        false,
+        null
+      ]
+    ]
+  }
+}

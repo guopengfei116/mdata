@@ -1,0 +1,90 @@
+<form class="account-page" name="accountForm" novalidate>
+    <fieldset class="field-common">
+        <legend class="field-title-com">Email</legend>
+        <input class="fieldset-text-com  fieldset-email" type="text" name="email" ng-model="accountSourceData.username"
+               required ng-pattern="/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/" ng-blur="blur('email', accountForm.email.$error)"
+               ng-focus="focus('email')" ng-class="{'account-email': accountEmail}" ng-disabled="accountEmail">
+        <span class="red-star" ng-class="{'account-red-start': accountEmail}">*</span>
+    </fieldset>
+    <fieldset class="field-common">
+        <legend class="field-title-com">Name</legend>
+        <input class="fieldset-text-com fieldset-accountName" autocomplete="off" type="text" name="accountName" ng-model="accountSourceData.nickname"  required ng-pattern="/^[\u4e00-\u9fa5a-zA-Z0-9]+$/" ng-blur="blur('accountName', accountForm.accountName.$error)"   ng-focus="focus('accountName')" >
+        <span class="red-star">*</span>
+    </fieldset>
+    <fieldset class="field-common" ng-if="accountEmail">
+        <legend class="field-title-com">Password</legend>
+        <input class="fieldset-text-com fieldset-acountPassword" autocomplete="off" type="password" ng-model="accountSourceData.password" name="acountPassword" ng-pattern="/^[a-zA-Z0-9]{6,20}$/" ng-blur="blur('acountPassword', accountForm.acountPassword.$error)"  ng-focus="focus('acountPassword')" onpaste="return false;" >
+    </fieldset>
+    <fieldset class="field-common" ng-if="!accountEmail">
+        <legend class="field-title-com">Password</legend>
+        <input class="fieldset-text-com fieldset-acountPassword" autocomplete="off" type="password" ng-model="accountSourceData.password" name="acountPassword" required ng-pattern="/^[a-zA-Z0-9]{6,20}$/"  ng-blur="blur('acountPassword', accountForm.acountPassword.$error)"  ng-focus="focus('acountPassword')" onpaste="return false;" >
+        <span class="red-star" ng-class="{'account-red-start': accountEmail}">*</span>
+    </fieldset>
+    <legend class="field-title-com account-authority">Authority</legend>
+    <section>
+        <cascadechoice select-data="appsData" selected-data="selectedAppids" flag-data="accountSourceData['reportAdmin']" flag-data-key="appid" cache="true" search-model="reportAdminSearch">
+            <legend class="field-title-account">As Report Admin</legend>
+            <div>
+                <div class="select select-host select-btn">
+                    <div class="select_main">
+                        <input class="select_main_textarea select_target" type="text" value="" placeholder="Application" ng-model="reportAdminSearch">
+                        <button class="select_main_btn select_target">
+                            <i class="select_main_btn_icon"></i>
+                        </button>
+                    </div>
+                    <ul class="select_content">
+                        <li class="select_content_arrow"></li>
+                        <li class="select_content_arrow select_content_arrow-mask"></li>
+                        <li class="select_content_list" ng-repeat="app in appsData | exclude:selectedAppids:'appid' | filter:{appname: reportAdminSearch} | orderBy:'appname' ">
+                            <a class="select_content_list_value" data-value="{{ app }}">{{ app.appname }}</a>
+                        </li>
+                    </ul>
+                </div>
+                <button class="button add-select">add</button>
+            </div>
+            <div class="textarea">
+                <span class="flag flag-icon" ng-repeat="app in accountSourceData['reportAdmin']">
+                    {{ app.appname }}
+                    <i class="flag-icon_delete iconfont icon-close" data-value="{{ app.appid }}"></i>
+                </span>
+            </div>
+        </cascadechoice>
+        <cascadechoice select-data="appsData" selected-data="selectedAppids" flag-data="accountSourceData['reportViewer']"  flag-data-key="appid" cache="true" search-model="reportViewerSearch">
+            <legend class="field-title-account">As Report Viewer</legend>
+            <div>
+                <div class="select select-host select-btn">
+                    <div class="select_main">
+                        <input class="select_main_textarea select_target" type="text" value="" placeholder="Application" ng-model="reportViewerSearch">
+                        <button class="select_main_btn select_target">
+                            <i class="select_main_btn_icon"></i>
+                        </button>
+                    </div>
+                    <ul class="select_content">
+                        <li class="select_content_arrow"></li>
+                        <li class="select_content_arrow select_content_arrow-mask"></li>
+                        <li class="select_content_list" ng-repeat=" app in appsData | exclude:selectedAppids:'appid' | filter:{appname: reportViewerSearch} | orderBy:'appname' ">
+                            <a class="select_content_list_value" data-value="{{ app }}">{{ app.appname }}</a>
+                        </li>
+                    </ul>
+                </div>
+                <button class="button add-select">add</button>
+            </div>
+            <div class="textarea">
+                <span class="flag flag-icon" ng-repeat="app in accountSourceData['reportViewer']">
+                    {{ app.appname }}
+                    <i class="flag-icon_delete iconfont icon-close" data-value="{{ app.appid }}"></i>
+                </span>
+            </div>
+        </cascadechoice>
+    </section>
+    <fieldset class="field-common">
+        <span class="button-group page-btns" ng-click="submit()">
+            <button class="button " ng-class="{'button-create-plus':!accountEmail, 'button-save-plus':accountEmail}"><i class="iconfont icon-plus"></i></button>
+            <button class="button " ng-class="{'button-create':!accountEmail, 'button-save':accountEmail}">{{ accountEmail? 'Save' : 'Create'}}</button>
+        </span>
+        <span class="button-group" ng-click="cancel()">
+            <button class="button button-cancel-minus"><i class="iconfont icon-small"></i></button>
+            <button class="button button-cancel">Cancel</button>
+        </span>
+    </fieldset>
+</form>

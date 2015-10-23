@@ -1,15 +1,15 @@
-{
-  "email" : "3@4.com",
-  "name" : "fsf",
-  "password" : "fsdfsda",
-  "authority" : {
-    "admin" : [
-      "appId1",
-      "appId2"
+﻿{
+  "msg" : "success",
+  "code" : 200,
+  "data" : {
+    "username" : "3@4.com",
+    "nickname" : "fsf",
+    "password" : "fsdfsda",
+    "admin_app_id" : [
+      777,17067,34712,4184,8422,89
     ],
-    "viewer" : [
-      "appId3",
-      "appId4"
+    "user_app_id" : [
+      7177,175067,347142,41884,841222,1289
     ]
   }
 }
