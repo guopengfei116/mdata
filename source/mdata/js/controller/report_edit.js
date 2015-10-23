@@ -271,6 +271,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
 
                 //判断name重复
                 if(flag == 1){
+                    Ui.alert("Report Name Repeat!");
                     return false;
                 }
                 
