@@ -10322,6 +10322,7 @@
 	  * */
 	 var send = function (data) {
 		 var data = JSON.stringify(data);
+		 console.log(data);
 		 top.postMessage(data, "*");
 	 };
 
@@ -10339,7 +10340,7 @@
 				 success: function(resultData){
 					 var result = {};
 					 result.type = data.type;
-					 result.data = data.resultData;
+					 result.data = resultData;
 					 send(result);
 				 },
 				 error: function(){
