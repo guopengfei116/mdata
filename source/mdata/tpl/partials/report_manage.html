@@ -26,7 +26,7 @@
                     <a ng-if="userPermission < 2 || app.permission < 2" href="#/report/manage/edit/{{ report.id }}"
                        class="iconfont icon-edit tooltip-host" data-tooltip-position="bc" data-tooltip-info="Edit"></a>
 
-                    <span ng-if="userPermission < 2 || app.permission < 2" ng-click="delete(report.id, app.appid)"
+                    <span ng-if="userPermission < 2 || app.permission < 2" ng-click="delete(report, app)"
                           class="iconfont icon-delete tooltip-host" data-tooltip-position="bc" data-tooltip-info="Delete" ></span>
 
                     <span ng-click="shortcutChange(report, app)" ng-class="{ 'icon-collection-unchecked' : !reportsShortcutStatus[report.id], 'icon-collection-checked' : reportsShortcutStatus[report.id] }"

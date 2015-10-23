@@ -116,9 +116,9 @@ oasgames.mdataServices.factory('ShortcutCache', [
             /*
              * @method delete shortcut list item
              *
-             * @* 如果app下只有一个report，
-             * @* 则删除这个app，
-             * @* 否则删除report，
+             * @* 查找shortcut对应的app
+             * @* 查找app对应的report
+             * @* 如果app下只有一个report，则删除这个app，否则删除report
              *
              * @return {Boole} 删除结果
              * */
@@ -131,14 +131,15 @@ oasgames.mdataServices.factory('ShortcutCache', [
                 try {
                     var appExitInfo = appIsExistShortcut(listCache, app.appid);
                     var tempApp = appExitInfo && appExitInfo[0];
-                    if(tempApp.reports.length == 1) {
-                        listCache.splice(appExitInfo[1], 1);
-                        return true;
-                    }
 
                     var reportExitInfo = tempApp && reportIsExistShortcut(tempApp, report.id);
                     var tempReport = reportExitInfo && reportExitInfo[0];
+
                     if(tempReport) {
+                        if(tempApp.reports.length == 1) {
+                            listCache.splice(appExitInfo[1], 1);
+                            return true;
+                        }
                         tempApp.reports.splice(reportExitInfo[1], 1);
                         return true;
                     }

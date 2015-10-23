@@ -335,14 +335,21 @@ oasgames.mdataControllers.controller('reportManageCtrl', [
             };
         })();
 
-        // 删除report
+        /*
+        * @method delete report
+        * 更新report列表
+        * 更新report收藏列表
+        * */
         (function () {
-            $scope.delete = function (reportId, appId) {
+            $scope.delete = function (report, app) {
+                var reportId = report.id;
+                var appId = app.appid;
                 Ui.confirm('Do you want to delete this report?', function () {
                     Http.reportDel({
                         reportId : reportId
                     }, function () {
                         ReportCache.deleteItem(reportId, appId);
+                        $scope.$emit('cancelShortcut', report, app);
                         Ui.alert('Delete successful');
                     });
                 });
