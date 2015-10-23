@@ -114,7 +114,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                     return;
                 }
 
-                var timezone = $(".field-app-zone .app-zone").data('value');
+                var timezone = $(".field-app-zone .app-zone").data('value') || $scope.appSourceData['timezone'];
                 if(!timezone) {
                     Ui.alert("Timezone must not be empty");
                     return;
