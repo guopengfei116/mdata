@@ -114,6 +114,12 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
                     return;
                 }
 
+                var timezone = $(".field-app-zone .app-zone").data('value');
+                if(!timezone) {
+                    Ui.alert("Timezone must not be empty");
+                    return;
+                }
+
                 if($.trim($(".field-account").next().next().data('value')) == ""){
                     Ui.alert("Processor must not be empty");
                     return;
@@ -121,7 +127,7 @@ oasgames.mdataControllers.controller('ApplicationEditCtrl', [
 
                 // 提交数据
                 var result = {}, subMethod = 'appCreate';
-                result.timezone = $(".field-app-zone .app-zone").data('value');
+                result.timezone = timezone;
                 if($scope.appId) {
                     subMethod = 'appUpdate';
                     result.appid = $scope.appId;
