@@ -19,6 +19,7 @@ oasgames.mdataServices.provider('Http', [
             * xhq方式请求接口时使用的method
             * */
             getHttpMethod : function (type) {
+                console.log(type);
                 for(var i = this.get.length - 1; i >= 0; i--) {
                     if(type === this.get[i]) {
                         return 'GET';
@@ -42,7 +43,8 @@ oasgames.mdataServices.provider('Http', [
                 if(this.isIE9()) {
                     return 'MESSAGE';
                 }
-
+console.log(type);
+console.log(this.getHttpMethod(type));
                 switch (CROSS_ORIGIN_METHOD) {
                     case 'message':
                         return 'MESSAGE';
@@ -139,7 +141,8 @@ oasgames.mdataServices.provider('Http', [
                             var xhrPromise = null;
                             var url = ApiCtrl.get(type);
                             var method = self.getMethod(type);
-
+console.log(url);
+console.log(method);
                             if(!url || !method) {
                                 throw Error('Interface Not found');
                             }
