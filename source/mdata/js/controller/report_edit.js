@@ -285,7 +285,7 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
                 }
 
                 // 编辑模式下验证report_name是否和编辑之前的值相同，相同则认为正确
-                if($scope.reportId && checkNameIsChange(report_name)) {
+                if($scope.reportId && checkNameIsChange($scope.reportSourceData['reportData']['report_name'])) {
                     flag = 0;
                 }
 
