@@ -108,6 +108,12 @@
 		margin-right:10px;
 		width:120px;
 	}
+	.report-name{
+		@include ellipsis(150px);
+	    display: inline-block;
+	    height: 20px;
+	    vertical-align: middle;
+	}
 }
 
 .report{
