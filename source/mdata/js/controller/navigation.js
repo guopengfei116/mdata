@@ -95,7 +95,7 @@ oasgames.mdataControllers.controller('navigationCtrl', [
             function upShortcuts () {
                 Http.shortcuts(function (data) {
                     $scope.shortcuts = data;
-                    init();
+                    //init();
                 });
             }
 
