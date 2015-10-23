@@ -49,18 +49,23 @@
          * */
         listening : function () {
             var self = this;
-            $(window).bind('message', function (e) {
-                var data = e.data? e.data : {};
+            window.addEventListener('message', function (e) {
+                try {
+                    var data = e.data? e.data : {};
 
-                if(data.code == 500) {
+                    if(data.code == 500) {
 
-                }else if(data.code == 401) {
+                    }else if(data.code == 401) {
 
-                }else if(data.code == 403) {
+                    }else if(data.code == 403) {
 
+                    }
+
+                    data = JSON.parse(data);
+                    self.o.callback(data);
+                }catch (e) {
+                    console.log('接受message data error');
                 }
-                console.log(e);
-                //self.o.callback(data);
             });
         },
 
