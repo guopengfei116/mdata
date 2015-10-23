@@ -39,12 +39,23 @@
     }
     .shortcuts {
         text-align: center;
+        &-active {
+            .shortcuts_title_arrow {
+                @include prefix(transform, rotate(180deg));
+            }
+            .shortcuts_title {
+                background-color: #2b384e;
+                color: #fff;
+            }
+            .shortcuts_apps {
+                display: block;
+            }
+        }
         &_title {
             @include prefix(transition, all 0.5s);
             cursor: pointer;
             position: relative;
             padding: rem(14) 0 rem(30) 0;
-            background-color: #2b384e;
             font-weight: bold;
             font-size: 14px;
             .iconfont {
@@ -123,17 +134,6 @@
                         display: block;
                     }
                 }
-            }
-        }
-        &-active {
-            .shortcuts_title_arrow {
-                @include prefix(transform, rotate(180deg));
-            }
-            .shortcuts_title {
-                color: #fff;
-            }
-            .shortcuts_apps {
-                display: block;
             }
         }
     }

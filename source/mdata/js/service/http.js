@@ -16,6 +16,25 @@ oasgames.mdataServices.provider('Http', [
             },
 
             /*
+            * xhq方式请求接口时使用的method
+            * */
+            getHttpMethod : function (type) {
+                for(var i = this.get.length - 1; i >= 0; i--) {
+                    if(type === this.get[i]) {
+                        return 'GET';
+                    }
+                }
+
+                for(var i = this.post.length - 1; i >= 0; i--) {
+                    if(type === this.post[i]) {
+                        return 'POST';
+                    }
+                }
+
+                return null;
+            },
+
+            /*
             * @method get api method，通过常量获取，如果常量为http，则进一步区分get与post
             * @* 因为ie9不支持XHQ2,所以使用postMessage
             * */
@@ -29,18 +48,8 @@ oasgames.mdataServices.provider('Http', [
                         return 'MESSAGE';
                     case 'jsonp':
                         return 'JSONP';
-                }
-
-                for(var i = this.get.length - 1; i >= 0; i--) {
-                    if(type === this.get[i]) {
-                        return 'GET';
-                    }
-                }
-
-                for(var i = this.post.length - 1; i >= 0; i--) {
-                    if(type === this.post[i]) {
-                        return 'POST';
-                    }
+                    case 'xhq':
+                        return this.getHttpMethod(type);
                 }
 
                 return null;
@@ -85,6 +94,10 @@ oasgames.mdataServices.provider('Http', [
                         },
 
                         messageSend : function (method, url, data) {
+                            if(!method || !url) {
+                                throw Error('MessageSend Data Error');
+                            }
+
                             var defer = $q.defer();
                             var promise = defer.promise;
                             var callbacks = [], resultData = null;
@@ -142,7 +155,7 @@ oasgames.mdataServices.provider('Http', [
                             }else if(method === 'JSONP') {
                                 xhrPromise = this.jsonpSend(url, data);
                             }else if(method === 'MESSAGE') {
-                                xhrPromise = this.messageSend(method, url, data);
+                                xhrPromise = this.messageSend(self.getHttpMethod(type), url, data);
                             }
 
                             xhrPromise.success(function (result) {

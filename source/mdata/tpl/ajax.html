@@ -10317,39 +10317,42 @@
  <body>
 	 <script type="text/JavaScript">
 
-		 //event 参数中有 data 属性，就是父窗口发送过来的数据
-	 window.addEventListener("message", function( event ) {
-		 var data = event.data;
+	 /*
+	  * @method 发送数据给父window
+	  * */
+	 var send = function (data) {
+		 var data = JSON.stringify(data);
+		 top.postMessage(data, "*");
+	 };
 
-		 console.log(event);
-		 console.log(data);
-		 // 把父窗口发送过来的数据显示在子窗口中
-		 //	event格式 { method : method, url : url, data : data, message : 'ajax', type : 'type' };
-		 $.ajax({
-			 type: data.method,
-			 url: data.url ,
-			 data: data.data ,
-			 success: function(resultData){
-				 var result = {};
-				 result.type = data.type;
-				 result.data = data.resultData;
-				 window.parent.postMessage(
-						 result,
-						 "*"
-				 );
-			 },
-			 error: function(){
-				 var result = {};
-				 result.type = data.type;
-				 result.data = {
-					 code:'500'
-				 };
-				 top.postMessage(
-						 result,
-						 "*"
-				 );
-			 }
-		 });
+	 /*
+	 * event.data格式 { method : method, url : url, data : data, message : 'ajax', type : 'type' };
+	 * */
+	 window.addEventListener("message", function( event ) {
+		 try {
+			 var data = JSON.parse(event.data);
+			 $.ajax({
+				 type: data.method,
+				 url: data.url ,
+				 data: data.data ,
+				 success: function(resultData){
+					 var result = {};
+					 result.type = data.type;
+					 result.data = data.resultData;
+					 send(result);
+				 },
+				 error: function(){
+					 var result = {};
+					 result.type = data.type;
+					 result.data = {
+						 code:'500'
+					 };
+					 send(result);
+				 }
+			 });
+		 }catch (e) {
+			console.log(e);
+		 }
 	 }, false );
 	 </script>
  </body> 

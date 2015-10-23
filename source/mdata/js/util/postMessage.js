@@ -61,7 +61,15 @@
         },
 
         /*
+         * @method 获取格式化后的数据
+         * */
+        getStringifyData : function () {
+            return JSON.stringify(this.o);
+        },
+
+        /*
          * @method 发送消息
+         * 如果iframe未load完成，则添加iframeLoadFn方法，等待load后再调用
          * */
         send : function () {
             if(!this.iframeLoad) {
@@ -69,9 +77,8 @@
                 return;
             }
             var iframe = document.getElementById('postMessage');
-            console.log(iframe);
-            //this.listening();
-            iframe.contentWindow.postMessage($.param(this.o), '*');
+            this.listening();
+            iframe.contentWindow.postMessage(this.getStringifyData(), '*');
         }
     });
 
