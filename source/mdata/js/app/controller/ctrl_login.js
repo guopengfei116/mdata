@@ -85,9 +85,9 @@ oasgames.mdataPanelControllers.controller('MdataLoginCtrl', [
 oasgames.mdataPanelControllers.controller('MdataChangePasswordCtrl', [
     '$scope',
     function ($scope) {
-        $scope.tooltip = new Tooltip({'position':'rc'}).getNewTooltip();
-        // $scope.tooltipNew = new Tooltip({'position':'rc'}).getNewTooltip();
-        // $scope.tooltipAgain = new Tooltip({'position':'rc'}).getNewTooltip();
+        $scope.tpassword = new Tooltip({'position':'rc'}).getNewTooltip();
+        $scope.tnewPassword = new Tooltip({'position':'rc'}).getNewTooltip();
+        $scope.treNewPassword = new Tooltip({'position':'rc'}).getNewTooltip();
         //表单失去焦点时错误验证
         $scope.blur = function (type, $errors) {
             var errorInfo = {
@@ -107,13 +107,12 @@ oasgames.mdataPanelControllers.controller('MdataChangePasswordCtrl', [
 
             for(var $error in $errors) {
                 if($errors[$error]) {
-                    console.log($error +"!!!"+type);
                     $scope[type + 'Error'] = true;
-                    $scope.tooltip.errorType = type;
-                    $scope.tooltip.setContent(errorInfo[type][$error]);
-                    $scope.tooltip.setPosition('.fieldset-' + type, $scope.tooltip.toolTipLooks);
-                    $scope.tooltip.toolTipLooks.css({'color': 'rgba(255, 0, 0, 0.7)'});
-                    $scope.tooltip.show();
+                    $scope['t'+type].errorType = type;
+                    $scope['t'+type].setContent(errorInfo[type][$error]);
+                    $scope['t'+type].setPosition('.fieldset-' + type, $scope['t'+type].toolTipLooks);
+                    $scope['t'+type].toolTipLooks.css({'color': 'rgba(255, 0, 0, 0.7)'});
+                    $scope['t'+type].show();
                     return;
                 }
             }
