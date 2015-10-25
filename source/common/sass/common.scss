@@ -10,14 +10,6 @@
 
 
 /*
-    base-style
-*/
-@import "util/_base";
-@import "util/_normalize";
-@import "util/_reset";
-
-
-/*
     functions
 */
 @import "function/_direction-reverse";
@@ -65,6 +57,14 @@
 
 
 /*
+    base-style
+*/
+@import "util/_base";
+@import "util/_normalize";
+@import "util/_reset";
+
+
+/*
     component-ui
 */
 @import "ui/_alert";
@@ -74,6 +74,7 @@
 @import "ui/_dropdown";
 @import "ui/_flag";
 @import "ui/_form";
+@import "ui/_loading";
 //@import "ui/_panel";
 //@import "ui/_radio";
 @import "ui/_select";

@@ -1,10 +1,14 @@
-[
-  "normalevent",
-  "retention",
-  "dau",
-  "wau",
-  "mau",
-  "dailystatus",
-  "payment",
-  "loss"
-]
+{
+  "msg" : "success",
+  "code" : 200,
+  "data" : [
+    "normalevent",
+    "retention",
+    "dau",
+    "wau",
+    "mau",
+    "dailystatus",
+    "payment",
+    "loss"
+  ]
+}

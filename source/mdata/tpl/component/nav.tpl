@@ -1,4 +1,4 @@
-<nav class="nav" ng-controller="navigationCtrl" ng-if="!outlineHide">
+<nav class="nav" ng-controller="navigationCtrl" ng-if="outlineShow && logined" ng-show="outlineShow && logined">
     <ul class="nav_list">
         <li class="nav_list_item" ng-if="authority == 1" ng-class="{'nav_list_item-active' : page == 'application'}">
             <a href="#/application/manage">
@@ -34,12 +34,12 @@
         <dd class="shortcuts_apps">
             <dl class="shortcuts_apps_app" ng-repeat="shortcut in shortcuts" ng-class="{'shortcuts_apps_app-active' : reportsShow[$index]}">
                 <dt class="shortcuts_apps_app_title" ng-click="reportsShow[$index] = !reportsShow[$index]">
-                    <p>{{ shortcut.app.name }}</p>
+                    <p>{{ shortcut.appname }}</p>
                     <i class="shortcuts_apps_app_title_arrow iconfont icon-arrow-small-up"></i>
                 </dt>
                 <dd class="shortcuts_apps_app_report">
                     <ul>
-                        <li ng-repeat="report in shortcut.reports" ng-style="{color : currentReportId == report.id ? '#fff' : 'inherit'}"><a href="#/report/view/{{ report.id }}">{{ report.name }}</a></li>
+                        <li ng-repeat="report in shortcut.reports" ng-style="{color : currentReportId == report.id ? '#fff' : 'inherit'}"><a href="#/report/manage/view/{{ report.id }}">{{ report.report_name }}</a></li>
                     </ul>
                 </dd>
             </dl>

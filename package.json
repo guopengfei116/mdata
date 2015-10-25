@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "description": "香港绿洲",
   "repository": {
-     "type": "git",
-     "url": "https://github.com/guopengfei1992/mdata.git"
+    "type": "git",
+    "url": "https://github.com/guopengfei1992/mdata.git"
   },
   "license": "BSD-3-Clause",
   "projectCfg": {
@@ -16,6 +16,7 @@
   "devDependencies": {
     "angular": "^1.4.3",
     "grunt": "^0.4.5",
+    "grunt-browserify": "^4.0.1",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-compress": "^0.13.0",
     "grunt-contrib-concat": "^0.5.0",

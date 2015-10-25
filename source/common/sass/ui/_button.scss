@@ -1,6 +1,9 @@
 .button {
     &-group {
         font-size: 0;
+        .iconfont {
+            font-size: inherit;
+        }
     }
     @include prefix(transition, all 0.4s );
     cursor: pointer;
@@ -19,6 +22,15 @@
             background-color: darken(#12afcb, 10%);
         }
     }
+    &-save-plus {
+        border-color: #109db6;
+        background-color: #109db6;
+        height: 1.5em;
+        &:active {
+            border-color: darken(#109db6, 10%);
+            background-color: darken(#109db6, 10%);
+        }
+    }
     &-cancel {
         border-color: #999999;
         background-color: #999999;
@@ -27,17 +39,10 @@
             background-color: darken(#999999, 10%);
         }
     }
-    &-save-plus {
-        border-color: #109db6;
-        background-color: #109db6;
-        &:active {
-            border-color: darken(#109db6, 10%);
-            background-color: darken(#109db6, 10%);
-        }
-    }
     &-cancel-minus {
         border-color: #868686;
         background-color: #868686;
+        height: 1.5em;
         &:active {
             border-color: darken(#868686, 10%);
             background-color: darken(#868686, 10%);
@@ -52,11 +57,12 @@
         }
     }
     &-create-plus {
-        border-color: #1ea78f;
-        background-color: #1ea78f;
+        border-color: #1a9f88;
+        background-color: #1a9f88;
+        height: 1.5em;
         &:active {
-            border-color: darken(#1ea78f, 10%);
-            background-color: darken(#1ea78f, 10%);
+            border-color: darken(#1a9f88, 10%);
+            background-color: darken(#1a9f88, 10%);
         }
     }
 }

@@ -1,0 +1,77 @@
+.field-common{
+	margin-bottom:20px;
+}
+
+.fieldset-text-com{
+    height: 32px; 
+    width: 284px; 
+    border: 1px solid #dce1e4;
+    text-indent:10px;
+    box-shadow:none;
+}
+
+.field-title-com{
+    color: #4e5e6a; 
+    font-family: $lucida-grande;
+    line-height: $base-line-height;
+    font-weight:bold;
+    margin-bottom:6px;
+    font-size:12px;
+}
+
+.textarea{
+	min-height:54px;
+	border: 1px solid #dce1e4;
+	display:block; 
+	padding:7px 6px;
+    margin-top:10px;
+    .flag {
+        margin: 2px;
+    }
+}
+
+.red-star{
+    color:red;
+    margin-left:5px;
+}
+
+.page-btns{
+     margin-right:20px;
+}
+
+.select-btn{
+    width:268px;
+    .select_main {
+        &_p{
+            font-size:12px;
+            color:#666666;
+        }
+    }
+    &-small {
+        width: 168px;
+    }
+}
+
+.button {
+    &-check, &-close{
+        padding: 0 7px;
+        height: 34px;
+        line-height:34px;
+        background-color: #65c178;
+        border-radius: 4px;
+        border: none;
+    }
+    &-close{
+        background-color: #dc6060;
+    }
+}
+
+.icon-check,.icon-close{
+    font-size:20px;
+}
+
+input{
+    vertical-align: middle;
+}
+
+

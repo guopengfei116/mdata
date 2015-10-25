@@ -1,19 +1,18 @@
-<!doctype html>
-<html ng-app="mdataPanelApp">
+﻿<!doctype html>
+<html ng-app="mdataApp">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link href="../../mdata/sass/index.css" rel="stylesheet"/>
-        <script src="../../common/js/common.js"></script>
+        <link href="/mdata/sass/index.css" rel="stylesheet"/>
+        <script src="/mdata/js/main.js"></script>
     </head>
     <body ng-controller="PageFrameCtrl">
         <!-- @import /mdata/tpl/component/header.tpl -->
         <!-- @import /mdata/tpl/component/nav.tpl -->
-        <article class="main img-cover" ng-class="{'main-login': islogin, 'main-other': outlineHide}">
+        <article class="main img-cover" ng-class="{'main-login': !logined, 'main-other': !outlineShow && logined}">
             <!-- @import /mdata/tpl/component/main_header.tpl -->
             <section class="main_content">
                 <div class="main_content-wrap ng-view"></div>
             </section>
         </article>
-        <script src="../../mdata/js/app.js"></script>
     </body>
 </html>

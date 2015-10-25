@@ -1,0 +1,154 @@
+{
+  "msg": "",
+  "code": 200,
+  "data": {
+    "appDataList" : {
+      "app" : {
+        "appid" : 1540934756,
+        "name" : "sed",
+        "status_count" : 2,
+        "status_fields" : [
+          "age",
+          "create"
+        ],
+        "timezone" : "Asia/Shanghai",
+        "info_count" : 0,
+        "info_fields" : [
+
+        ],
+        "last_user_import_time" : 1442892537,
+        "redshift_node" : "md50",
+        "_class" : "MDAppInfo"
+      },
+      "val_list" : {
+        "status" : {
+          "format" : "property"
+        },
+        "createrole" : {
+          "format" : "property"
+        },
+        "dstatus" : {
+          "format" : "property"
+        },
+        "dau" : {
+          "format" : ""
+        },
+        "dnu" : {
+          "format" : ""
+        },
+        "dou" : {
+          "format" : ""
+        },
+        "dau_all" : {
+          "format":""
+        },
+        "dnu_all" : {
+          "format":""
+        },
+        "dou_all" : {
+          "format":""
+        },
+        "sum" : {
+          "format":"event|property"
+        },
+        "count" : {
+          "format":"event"
+        },
+        "unique_count":{
+          "format":"event"
+        },
+        "max":{
+          "format":"event|property"
+        },
+        "min":{
+          "format":"event|property"
+        },
+        "pay_sum":{
+          "format":"property"
+        },
+        "pay_count":{
+          "format":"property"
+        },
+        "pay_unique_count":{
+          "format":"property"
+        },
+        "retention":{
+          "format":"new_user,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13,d14,d15,d16,d17,d18,d19,d20,d21,d22,d23,d24,d25,d26,d27,d28,d29,d30,in4d,after4d,in7d,after7d,w2,w3,w4,in2w,after2w,m2,m3,m4,m5,m6,in1m,after1m,in6m,after6m"
+        }
+      }
+    },
+    "reportData" : {
+      "id" : 4,
+      "appid" : 3423432,
+      "appname" : "sed",
+      "report_name" : "test",
+      "describe" : "sssss",
+      "date_begin" : 1442480984,
+      "date_end" : 1442480984,
+      "create_time" : 1442480984,
+      "dimension" : [
+        "id",
+        "uuid"
+      ],
+      "filter" : [
+        "id|=|1",
+        "ip|+|1"
+      ],
+      "values" : [
+        {
+          "value_name" : "status age",
+          "groupValue" : "status age#@DELIMITER@#0#@DELIMITER@#status#@DELIMITER@#age#@DELIMITER@#0"
+        },
+        { "value_name":"creeate",
+          "groupValue":"creeate#@DELIMITER@#0#@DELIMITER@#createrole#@DELIMITER@#create#@DELIMITER@#0"
+        },
+        { "value_name":"install uni",
+          "groupValue":"install uni#@DELIMITER@#0#@DELIMITER@#unique_count#@DELIMITER@#install#@DELIMITER@#0"
+        },
+        { "value_name":"visituni",
+          "groupValue":"visituni#@DELIMITER@#0#@DELIMITER@#unique_count#@DELIMITER@#visit#@DELIMITER@#0"
+        },
+        { "value_name":"转化率",
+          "groupValue":"转化率#@DELIMITER@#0#@DELIMITER@#unique_count#@DELIMITER@#install#@DELIMITER@#4#@DELIMITER@#unique_count#@DELIMITER@#visit"
+        },
+        { "value_name":"pay_count",
+          "groupValue":"pay_count#@DELIMITER@#0#@DELIMITER@#pay_sum#@DELIMITER@#pay_count#@DELIMITER@#0"
+        }
+      ],
+      "guestUserValue" : [
+        {
+          "nickname" : "o",
+          "username" : "b@a.com",
+          "uid" : 8888
+        },
+        {
+          "nickname" : "hb",
+          "username" : "a@a.com",
+          "uid" : 567
+        }
+      ]
+    },
+    "guestUser" : [
+      {
+        "nickname" : "o",
+        "username" : "b@a.com",
+        "uid" : 8888
+      },
+      {
+        "nickname" : "hb",
+        "username" : "a@a.com",
+        "uid" : 567
+      },
+      {
+        "nickname" : "g",
+        "username" : "d@d.com",
+        "uid" : 908
+      },
+      {
+        "nickname" : "d",
+        "username" : "c@c.com",
+        "uid" : 456
+      }
+    ]
+  }
+}
