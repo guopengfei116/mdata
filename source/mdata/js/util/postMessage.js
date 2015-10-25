@@ -10,7 +10,8 @@
             "url" : '',
             "method" : '',
             "data" : null,
-            "token" : {"MDATA-KEY" : require('Cookie').getCookie('MDATA-KEY')}
+            "token" : {"MDATA-KEY" : require('Cookie').getCookie('MDATA-KEY')},
+            "callback" : function(){}
         };
         $.extend(this.o, option);
         this.init();
@@ -33,6 +34,8 @@
             }
             PostMessage.prototype.initialized = true;
 
+            self.listening();
+
             var $iframe = $('<iframe id="postMessage"></iframe>');
 
             $iframe.bind('load', function () {
@@ -45,28 +48,45 @@
         },
 
         /*
-         * @method 消息处理
+         * @method 主window事件监听
          * */
         listening : function () {
             var self = this;
             window.addEventListener('message', function (e) {
-                try {
-                    var data = e.data? e.data : {};
+                var data = e.data;
 
-                    if(data.code == 500) {
-
-                    }else if(data.code == 401) {
-
-                    }else if(data.code == 403) {
-
-                    }
-
-                    data = JSON.parse(data);
-                    self.o.callback(data);
-                }catch (e) {
-                    console.log('接受message data error');
+                if(!data) {
+                    throw Error('There is no data');
                 }
+
+                self.processData(data);
             });
+        },
+
+        /*
+        * @method 预处理主window收到的数据
+        * */
+        processData : function (sourceData) {
+            try {
+                var data = JSON.parse(data);
+
+                if(data.code == 500) {
+
+                }else if(data.code == 401) {
+
+                }else if(data.code == 403) {
+
+                }
+
+                var type = data.type;
+                /*for(var i = 0; i < this[type].length; i++) {
+                    this[type](data);
+                }*/
+
+                this.o.callback(data);
+            }catch (e) {
+                console.log('message data parse error');
+            }
         },
 
         /*
@@ -86,7 +106,6 @@
                 return;
             }
             var iframe = document.getElementById('postMessage');
-            this.listening();
             iframe.contentWindow.postMessage(this.getStringifyData(), '*');
         }
     });

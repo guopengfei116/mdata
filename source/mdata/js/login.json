@@ -2,6 +2,7 @@
    "msg" : "success",
    "code" : 200,
    "data" : {
-      "authority" : "1"
+      "authority" : "1",
+      "token" : "123456789"
    }
 }

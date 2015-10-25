@@ -1,0 +1,26 @@
+{
+  "msg" : "success",
+  "code" : 200,
+  "data" : [
+     {
+      "nickname": "meide",
+      "username": "1@1.com",
+      "uid": 333
+    },
+    {
+      "nickname": "meide1",
+      "username": "1@11.com",
+      "uid": 3331
+    },
+    {
+      "nickname": "meide2",
+      "username": "1@12.com",
+      "uid": 3332
+    },
+    {
+      "nickname": "meide3",
+      "username": "1@13.com",
+      "uid": 3333
+    }
+  ]
+}
