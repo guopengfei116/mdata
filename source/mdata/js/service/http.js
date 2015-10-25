@@ -114,8 +114,9 @@ oasgames.mdataServices.provider('Http', [
 
                             // 在成功之后依次调用callbacks里的fn
                             promise.then(function () {
+                                console.log(callbacks);
                                 for(var i = 0; i < callbacks.length; i++) {
-                                    callbacks[i](resultData.data);
+                                    callbacks[i](resultData);
                                 }
                             });
 
@@ -126,7 +127,6 @@ oasgames.mdataServices.provider('Http', [
                                 url : url,
                                 data : data,
                                 callback : function (result) {
-                                    console.log(result);
                                     resultData = result;
                                     defer.resolve()
                                 }
@@ -165,6 +165,7 @@ oasgames.mdataServices.provider('Http', [
 
                             xhrPromise.success(function (result) {
                                 if(result && result.code == 200) {
+                                    console.log(result);
                                     fn && typeof fn === 'function' && fn(result.data);
                                 }
                             });

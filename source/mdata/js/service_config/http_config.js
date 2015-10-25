@@ -48,17 +48,18 @@ oasgames.mdataServicesConfig.config([
                     if(resp && resp.data && typeof resp.data === 'object') {
                         statusCode = resp.data.code;
                     }
+
                     if(statusCode == 401) {
-                        console.log(resp);
                         Ui.alert(resp.data.msg, function () {
                             authentication.delete();
                             window.location.hash = '#/login';
                         });
-                        return resp;
                     }
-                    if(statusCode == 403){
+                    else if(statusCode == 403){
                         Ui.alert(resp.data.msg);
                     }
+
+                    console.log(resp);
                     return resp;
                 },
 
@@ -76,9 +77,9 @@ oasgames.mdataServicesConfig.config([
                  * */
                 'responseError':function(rejection){
                     Ui.loading(true);
-                    var matchedApi = [], urlSummary = '';
+                    var matchedApi = null, urlSummary = '';
                     if(rejection) {
-                        var matchedApi = rejection.config.url.match(/api.mdata.com\/(.+)$/);
+                        matchedApi = rejection.config.url.match(/api.mdata.com\/(.+)$/);
                         if(matchedApi.length && matchedApi[1]) {
                             urlSummary = matchedApi[1];
                         }

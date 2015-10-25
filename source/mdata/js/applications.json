@@ -49,34 +49,34 @@
       "appid" : "123",
       "appadmin" : [
         {
-          "name" : "zirke",
+          "nickname" : "zirke",
           "email" : "1@1.com",
           "id" : "12"
         },
         {
-          "name" : "jon",
+          "nickname" : "jon",
           "email" : "1@1.com",
           "id" : "12"
         }
       ],
       "appuser" : [
         {
-          "name" : "baode",
+          "nickname" : "baode",
           "email" : "4@4.com",
           "app" : "444"
         },
         {
-          "name" : "jon",
+          "nickname" : "jon",
           "email" : "1@1.com",
           "id" : "128"
         },
         {
-          "name" : "zirke",
+          "nickname" : "zirke",
           "email" : "1dfg@1d.com",
           "id" : "18"
         },
         {
-          "name" : "jon",
+          "nickname" : "jon",
           "email" : "aa@mv.com",
           "id" : "132"
         }
@@ -87,34 +87,34 @@
       "appid" : "88",
       "appadmin" : [
         {
-          "name" : "saxi",
+          "nickname" : "saxi",
           "email" : "1@1.com",
           "id" : "12"
         },
         {
-          "name" : "jon",
+          "nickname" : "jon",
           "email" : "1@1.com",
           "id" : "12"
         }
       ],
       "appuser" : [
         {
-          "name" : "baode",
+          "nickname" : "baode",
           "email" : "4@4.com",
           "app" : "444"
         },
         {
-          "name" : "saxi",
+          "nickname" : "saxi",
           "email" : "1@1.com",
           "id" : "128"
         },
         {
-          "name" : "jon",
+          "nickname" : "jon",
           "email" : "1dfg@1d.com",
           "id" : "18"
         },
         {
-          "name" : "saxi",
+          "nickname" : "saxi",
           "email" : "aa@mv.com",
           "id" : "132"
         }
@@ -125,34 +125,34 @@
       "appid" : "99",
       "appadmin" : [
         {
-          "name" : "saxi",
+          "nickname" : "saxi",
           "email" : "1@1.com",
           "id" : "12"
         },
         {
-          "name" : "jon",
+          "nickname" : "jon",
           "email" : "1@1.com",
           "id" : "12"
         }
       ],
       "appuser" : [
         {
-          "name" : "baode",
+          "nickname" : "baode",
           "email" : "4@4.com",
           "app" : "444"
         },
         {
-          "name" : "jon",
+          "nickname" : "jon",
           "email" : "1@1.com",
           "id" : "128"
         },
         {
-          "name" : "nene",
+          "nickname" : "nene",
           "email" : "1dfg@1d.com",
           "id" : "18"
         },
         {
-          "name" : "dle",
+          "nickname" : "dle",
           "email" : "aa@mv.com",
           "id" : "132"
         }
@@ -163,34 +163,34 @@
       "appid" : "1237",
       "appadmin" : [
         {
-          "name" : "sasdfxi",
+          "nickname" : "sasdfxi",
           "email" : "sdfd1@1.com",
           "id" : "1ds2"
         },
         {
-          "name" : "jon",
+          "nickname" : "jon",
           "email" : "1@1.com",
           "id" : "11242"
         }
       ],
       "appuser" : [
         {
-          "name" : "baode",
+          "nickname" : "baode",
           "email" : "4@4.com",
           "app" : "4444"
         },
         {
-          "name" : "fsd",
+          "nickname" : "fsd",
           "email" : "1@1.com",
           "id" : "17728"
         },
         {
-          "name" : "nesdfne",
+          "nickname" : "nesdfne",
           "email" : "1fddfg@1d.com",
           "id" : "13458"
         },
         {
-          "name" : "dle",
+          "nickname" : "dle",
           "email" : "asdfa@mv.com",
           "id" : "13542"
         }

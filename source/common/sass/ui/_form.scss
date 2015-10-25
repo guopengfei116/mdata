@@ -130,11 +130,10 @@
         }
     }
 }
-.change{
+.change {
     width:285px; 
-    $-field{
-
-
+    &-field {
+        width: 100%;
     }
     
 }
