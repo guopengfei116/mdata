@@ -100,24 +100,36 @@ oasgames.mdataServices.provider('Http', [
 
                             var defer = $q.defer();
                             var promise = defer.promise;
-                            var callbacks = [], resultData = null;
+                            var successCallbacks = [], errorCallbacks = [];
 
                             // 构建一个success方法供外界使用
                             promise.success = function (fn) {
-                                callbacks.push(fn);
+                                successCallbacks.push(fn);
+                                return promise;
                             };
 
                             // 构建一个error方法供外界使用
                             promise.error = function (fn) {
-                                callbacks.push(fn);
+                                errorCallbacks.push(fn);
+                                return promise;
                             };
 
-                            // 在成功之后依次调用callbacks里的fn
-                            promise.then(function () {
-                                console.log(callbacks);
-                                for(var i = 0; i < callbacks.length; i++) {
-                                    callbacks[i](resultData);
+                            promise.url = url;
+
+                            /*
+                            * 成功之后依次调用successCallbacks里的fn
+                            * 失败之后依次调用errorCallbacks里的fn
+                            * */
+                            promise.then(function (result) {
+                                for(var i = 0; i < successCallbacks.length; i++) {
+                                    successCallbacks[i](result);
                                 }
+                            }, function () {
+                                for(var i = 0; i < errorCallbacks.length; i++) {
+                                    errorCallbacks[i](result);
+                                }
+                            }).finally(function () {
+                                // 必须执行
                             });
 
                             var PostMessage = require('PostMessage');
@@ -127,8 +139,8 @@ oasgames.mdataServices.provider('Http', [
                                 url : url,
                                 data : data,
                                 callback : function (result) {
-                                    resultData = result;
-                                    defer.resolve()
+                                    console.log(promise.url + '数据已成功返回');
+                                    defer.resolve(result);
                                 }
                             });
                             postMessage.send();

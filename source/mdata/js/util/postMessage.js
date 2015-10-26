@@ -23,18 +23,19 @@
         iframeLoadFn : function(){},
 
         /*
-         * @method 初始化iframe
-         * 第一次添加iframe时监听load事件
+         * @method 初始化
+         * @* 添加监听
+         * @* 如果页面不存在iframe则创建一个iframe，并监听load事件，防止第一次在iframe未load时调用send方法
          * */
         init : function () {
             var self = this;
+
+            self.listening();
 
             if(PostMessage.prototype.initialized) {
                 return;
             }
             PostMessage.prototype.initialized = true;
-
-            self.listening();
 
             var $iframe = $('<iframe id="postMessage"></iframe>');
 
@@ -52,7 +53,9 @@
          * */
         listening : function () {
             var self = this;
-            window.addEventListener('message', function (e) {
+            var handler = function (e) {
+                window.removeEventListener('message', handler, false);
+
                 var data = e.data;
 
                 if(!data) {
@@ -60,7 +63,8 @@
                 }
 
                 self.processData(data);
-            });
+            };
+            window.addEventListener('message', handler, false);
         },
 
         /*
@@ -70,8 +74,6 @@
         * @* 401打回登录页面
         * */
         processData : function (sourceData) {
-            Ui.loading(true);
-
             try {
                 var sourceData = JSON.parse(sourceData);
                 var data = sourceData.data;
@@ -82,6 +84,8 @@
                 if(matchedApi && matchedApi.length && matchedApi[1]) {
                     urlSummary = matchedApi[1];
                 }
+
+                Ui.loading(true);
 
                 if(data.code == 500) {
                     Ui.alert('Network connection error, Error url: ' + urlSummary);
@@ -101,6 +105,7 @@
                     */
                 }
             }catch (e) {
+                Ui.loading(true);
                 console.log('message data parse error');
             }
         },
