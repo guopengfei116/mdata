@@ -124,7 +124,7 @@ oasgames.mdataServices.provider('Http', [
                                 for(var i = 0; i < successCallbacks.length; i++) {
                                     successCallbacks[i](result);
                                 }
-                            }, function () {
+                            }, function (result) {
                                 for(var i = 0; i < errorCallbacks.length; i++) {
                                     errorCallbacks[i](result);
                                 }
@@ -141,6 +141,10 @@ oasgames.mdataServices.provider('Http', [
                                 callback : function (result) {
                                     console.log(promise.url + '数据已成功返回');
                                     defer.resolve(result);
+                                },
+                                error : function (result) {
+                                    console.log(promise.url + '获取数据失败');
+                                    defer.reject(result);
                                 }
                             });
                             postMessage.send();
@@ -177,7 +181,6 @@ oasgames.mdataServices.provider('Http', [
 
                             xhrPromise.success(function (result) {
                                 if(result && result.code == 200) {
-                                    console.log(result);
                                     fn && typeof fn === 'function' && fn(result.data);
                                 }
                             });

@@ -11,7 +11,8 @@
             "method" : '',
             "data" : null,
             "token" : {"MDATA-KEY" : require('Cookie').getCookie('MDATA-KEY')},
-            "callback" : function(){}
+            "callback" : function(){},
+            "error" : function(){}
         };
         $.extend(this.o, option);
         this.init();
@@ -89,14 +90,19 @@
 
                 if(data.code == 500) {
                     Ui.alert('Network connection error, Error url: ' + urlSummary);
-                } else if(data.code == 403) {
+                    this.o.error(data);
+                }
+                else if(data.code == 403) {
                     Ui.alert(data.msg);
-                } else if(data.code == 401) {
+                    this.o.callback(data);
+                }
+                else if(data.code == 401) {
                     Ui.alert(data.msg, function () {
                         authentication.delete();
                         window.location.hash = '#/login';
                     });
-                } else {
+                }
+                else {
                     this.o.callback(data);
                     /*
                     for(var i = 0; i < this[type].length; i++) {

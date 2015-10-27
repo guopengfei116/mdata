@@ -78,7 +78,7 @@ oasgames.mdataConstant.constant("API_CONFIG", {
 * 设置跨域请求方式
 * 三个可选项：'message'  'jsonp'  'xhq'
 * */
-oasgames.mdataConstant.constant("CROSS_ORIGIN_METHOD", "message");
+oasgames.mdataConstant.constant("CROSS_ORIGIN_METHOD", "xhq");
 
 
 /*
@@ -86,7 +86,7 @@ oasgames.mdataConstant.constant("CROSS_ORIGIN_METHOD", "message");
  * 本地url："http://post.mdata.com:9800/mdata/tpl/ajax.html"
  * 线上url："http://api.mdata.com/ie9.html"
  * */
-oasgames.mdataConstant.constant("AJAX_AGENT_PAGE", "http://post.mdata.com:9800/mdata/tpl/ajax.html");
+oasgames.mdataConstant.constant("AJAX_AGENT_PAGE", "http://api.mdata.com/ie9.html");
 
 
 /*
