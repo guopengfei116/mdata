@@ -11,7 +11,7 @@
     "taskCfgPath": "grunt_task_cfg",
     "src": "source",
     "prdDest": "debug",
-    "depDest": "../front_end"
+    "depDest": "online"
   },
   "devDependencies": {
     "angular": "^1.4.3",
