@@ -84,9 +84,9 @@ oasgames.mdataConstant.constant("CROSS_ORIGIN_METHOD", "xhq");
 /*
  * message方式时iframe打开的页面url
  * 本地url："http://post.mdata.com:9800/mdata/tpl/ajax.html"
- * 线上url："http://api.mdata.com/ie9.html"
+ * 线上url："http://api.mdata.cool/ie9.html"
  * */
-oasgames.mdataConstant.constant("AJAX_AGENT_PAGE", "http://api.mdata.com/ie9.html");
+oasgames.mdataConstant.constant("AJAX_AGENT_PAGE", "http://api.mdata.cool/ie9.html");
 
 
 /*
