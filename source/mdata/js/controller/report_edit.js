@@ -19,6 +19,8 @@ oasgames.mdataControllers.controller('reportEditCtrl', [
     'Http',
     function ($rootScope, $scope, $route, $location, REPORT_DATE_RANGE, REPORT_DIMENSION, FILTER, FILTER_COMPUTE_SIGN, VALUE_TYPE, VALUE_ARITHMETIC, MdataVerify, ReportCache, Http) {
 
+        $scope.tooltip = tooltip;
+
         /*
         * 常量
         * */
