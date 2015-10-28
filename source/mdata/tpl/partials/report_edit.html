@@ -42,7 +42,7 @@
     <fieldset class="field-common">
         <legend class="field-title-com">Report Name</legend>
         <input class="fieldset-text-com fieldset-reportName" type="text" name="reportName" ng-model="reportSourceData['reportData']['report_name']"
-               required ng-pattern="/^.+$/"  ng-blur="blur('reportName',reportFrom.reportName.$error)" />
+               required ng-pattern="/^(\w|[\u4e00-\u9fa5])(\w|[\u4e00-\u9fa5]|\s)*(\w|[\u4e00-\u9fa5])$/"  ng-blur="blur('reportName',reportFrom.reportName.$error)" />
         <span class="red-star">*</span>
     </fieldset>
     <fieldset class="field-common">
@@ -119,7 +119,7 @@
             </span>
         </div>
     </recombination>
-    <valuegroup class="field-common-value" separator="#@DELIMITER@#" maxlength="20" pattern="^(\w|[\u4e00-\u9fa5])+$" value-list="valueList" flag-data="reportSourceData['reportData']['values']">
+    <valuegroup class="field-common-value" separator="#@DELIMITER@#" maxlength="20" pattern="^(\w|[\u4e00-\u9fa5])(\w|[\u4e00-\u9fa5]|\s)*(\w|[\u4e00-\u9fa5])$" value-list="valueList" flag-data="reportSourceData['reportData']['values']">
         <legend class="field-title-com">Value Group</legend>
         <div class="recombination-menu">
             <input class="fieldset-text-com field-text-column recombination-input" type="text" placeholder="Value Name" required-warn="please fill out the Value Name"/>

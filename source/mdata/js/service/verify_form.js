@@ -40,6 +40,7 @@ oasgames.mdataServices.factory('MdataVerify', [
             blur : function(type, $errors, $scope){
                 var self = this;
                 if(!$errors) {
+                    $scope.tooltip.hide();
                     return true;
                 }
                 for(var $error in $errors) {
@@ -54,6 +55,7 @@ oasgames.mdataServices.factory('MdataVerify', [
                     }
                 }
                 $scope[type + 'Error'] = false;
+                $scope.tooltip.hide();
                 return true;
             },
             submit : function(type, $errors, $scope){
