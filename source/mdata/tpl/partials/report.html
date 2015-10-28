@@ -99,8 +99,11 @@
                     </li>
                 </ul>
                 <ul class="cf" ng-repeat="values in reportSourceData['table_list'] | slice:2 | orderBy:sort.reportTable.orderKey:sort.reportTable.isDownOrder">
-                    <li class="row_column row_column-{{ reportSourceData['table_list'][0].length }}" ng-repeat="value in values track by $index">
-                        <a>{{ value }}</a>
+                    <li class="row_column row_column-{{ reportSourceData['table_list'][0].length }}" ng-repeat="value in values track by $index ">
+                        <div ng-if="(value | stringInArr).length > 1" ng-repeat="item in (value | stringInArr) track by $index">
+                            <p>{{ item }}</p>
+                        </div>
+                        <a ng-if="(value | stringInArr).length <= 1">{{ value? value  : value === 0? 0 : '-' }}</a>
                     </li>
                 </ul>
             </dd>

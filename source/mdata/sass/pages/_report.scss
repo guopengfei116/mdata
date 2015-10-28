@@ -40,6 +40,9 @@
 	}
 	.report-table{
 		.container{
+			& > dd > ul {
+				border-top:1px solid #dddddd;
+			}
 			.row-title{				
 				border-top:1px solid #dddddd;
 				border-bottom:3px solid #dddddd;
@@ -48,11 +51,14 @@
 			.row{
 				padding:0px;
 				border-right:1px solid #dddddd;
+				border-left: 1px solid #dddddd;
 			}
 			li{
 				padding: rem(14);
-				height:46px;
-				border-left: 1px solid #dddddd;
+				height: 100%;
+				&:not(:nth-child(1)) {
+					border-left: 1px solid #dddddd;
+				}
 			}
 			.row-color-interlaced:nth-child(2n+1){
 				background-color: #f9f9f9;

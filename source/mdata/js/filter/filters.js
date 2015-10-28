@@ -56,6 +56,24 @@ oasgames.mdataFilter.filter('ValueGroupSemantic', [
     }
 ]);
 
+/*
+ *  @字符串转换为数组
+ *  @param {String} separator 分隔符, 默认为'#@DELIMITER@#'
+ *  @param {Array} 通过分隔符得到的数组
+ * */
+oasgames.mdataFilter.filter('stringInArr', [
+    function (separator) {
+        var separator = separator || '#@DELIMITER@#';
+        return function (text) {
+            if(typeof text === 'string') {
+                return text.split(separator);
+            }else {
+                return '1';
+            }
+        }
+    }
+]);
+
 
 /*
  * @filter 通过遍历每个对象，判断其属性{key}是否满足{vals}里的任意一个值，满足则过滤掉该对象
