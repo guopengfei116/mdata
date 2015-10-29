@@ -23,7 +23,7 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
         // 当前编辑的reportId
         $scope.reportId = $route.current.params.reportId;
 
-        // report权限
+        // report权限，优先获取管理员权限和report列表缓存的权限
         $scope.permission = $rootScope.user['authority'] == 1 ? 1 : $rootScope.reportPermission && $rootScope.reportPermission[$scope.reportId];
 
         /*
@@ -35,6 +35,7 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
             Http.reportView({
                 reportId : $scope.reportId
             }, function (data) {
+                $scope.permission = $scope.permission? $scope.permission : data.permissions;
                 $scope.reportSourceData = data;
                 var dataComponent = require('reportViewDate');
                 var config = {}, tempConfig = {};

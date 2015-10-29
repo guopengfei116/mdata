@@ -93,11 +93,12 @@ module.exports = function (grunt) {
     /*
     *  开发模式任务，通过运行 grunt production 命令调用。构建流程：
     *  1、清楚调试代码目录
-    *  2、合并js --> 调试目录
+    *  2、合并js --> 调试目录  // 如果使用了commonJs规范编写js，则不需要运行此任务
     *  3、构建html --> 调试目录
     *  4、合成雪碧图 --> 调试目录(scss文件被生产到源开发目录，所以开发时可以预先使用)
     *  5、解析sass --> 调试目录
     *  6、剩余未操作文件复制 --> 调试目录
+    *  7、合并使用commonJs规范编写的js代码，可以在代码级别定义不同js模块的执行顺序 --> 调试目录
     * */
     grunt.registerTask('production', ['clean', 'string-replace', 'sass', 'copy', 'browserify']);
 
