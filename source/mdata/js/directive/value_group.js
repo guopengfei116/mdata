@@ -220,42 +220,30 @@ oasgames.mdataDirective.directive('valuegroup', [
                         // 表单初始化
                         (function initForms () {
                             $scope.initForms();
-                            var valMark = 2, tempFormat = '';
-                            var vals = val.split(separator);
+                            var valueArithmetic = '', valueArithmeticIndex = 3, valueGroup2Index = 4, vals = '';
+                            vals = val.split(separator);
 
                             if(!vals || !vals.length) {
                                 return;
                             }
 
-                            while(valMark < vals.length) {
+                            // 如果拥有format值，那么运算符值和第二组表单第一个值所在的位置将向后挪一位
+                            var format = ValueGroup.getValueFormat(vals[2], $scope.valueList) || '';
 
-                                // 第一个value
-                                if(valMark == 2) {
-                                    $scope.changeValueGroup(element.find('.value-group1'), vals[valMark]);
-                                    valMark++;
-                                    continue;
-                                }
-
-                                // 如果拥有format值，那么运算符值所在的位置将向后挪一位
-                                if(valMark == 3) {
-                                    var tempFormat = ValueGroup.getValueFormat(vals[2], $scope.valueList);
-                                    if(tempFormat) {
-                                        valMark++;
-                                    }
-                                    $scope.changeOperation(vals[valMark]);
-                                    valMark++;
-                                    continue;
-                                }
-
-                                // 第二个value
-                                if(valMark == 4 || valMark == 5) {
-                                    $scope.changeValueGroup(element.find('.value-group2'), vals[valMark]);
-                                    valMark++;
-                                    continue;
-                                }
-
-                                valMark++;
+                            if(format) {
+                                valueArithmeticIndex++;
+                                valueGroup2Index++;
                             }
+
+                            // 依据第一组表单第一个值确定第一组表单第二个值形态
+                            $scope.changeValueGroup(element.find('.value-group1'), vals[2]);
+
+                            // 依据运算符确定第二组表单形态
+                            $scope.changeOperation(vals[valueArithmeticIndex]);
+
+                            // 依据第二组表单第一个值确定第二组表单第二个值形态
+                            $scope.changeValueGroup(element.find('.value-group2'), vals[valueGroup2Index]);
+
                         })();
 
                         var echo = new Echo({
