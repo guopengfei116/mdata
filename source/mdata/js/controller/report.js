@@ -37,6 +37,8 @@ oasgames.mdataControllers.controller('reportViewCtrl', [
             }, function (data) {
                 $scope.permission = $scope.permission? $scope.permission : data.permissions;
                 $scope.reportSourceData = data;
+
+                // 初始化view页日期插件
                 var dataComponent = require('reportViewDate');
                 var config = {}, tempConfig = {};
                 tempConfig.startTime = $scope.reportSourceData['date_begin'];

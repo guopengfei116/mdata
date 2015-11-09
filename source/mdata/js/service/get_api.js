@@ -9,7 +9,7 @@ oasgames.mdataServices.provider('ApiCtrl', [
     function (RUN_TIME_SYSTEM, API_CONFIG) {
         return {
             API : RUN_TIME_SYSTEM.online ? API_CONFIG.online : API_CONFIG.local,
-            localhost : RUN_TIME_SYSTEM.domain ? 'http://api.mdata.cool' : '',
+            localhost : RUN_TIME_SYSTEM.domain ? RUN_TIME_SYSTEM.domain : '',
             setApi : function (name, url) {
                 this.API[name] = url;
             },

@@ -65,6 +65,13 @@ oasgames.mdataControllers.controller('MdataLoginCtrl', [
                     //初始化用户属性
                     $rootScope.$emit('initUserProperty');
                     $rootScope.$emit('$routeChangeStart');
+
+                    //初始化意见反馈
+                    initSuggest({
+                        channel : 'YUNPANEL',
+                        email : 'zhangshumei@oasgames.com',
+                        name : '张淑媚'
+                    });
                 });
             }
         }

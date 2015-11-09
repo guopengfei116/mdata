@@ -1,9 +1,11 @@
 /*
-* 配置测试或线上环境
+* 配置测试或线上环境,以及接口域名
+* 测试环境接口域名 http://api.mdata.com
+* 线上环境接口域名 http://api.mdata.cool
 * */
 oasgames.mdataConstant.constant("RUN_TIME_SYSTEM", {
     'online' : true,
-    'domain' : true
+    'domain' : 'http://api.mdata.cool'
 });
 
 
